@@ -1,22 +1,21 @@
 /* ───────────────────────────────────────────────
    ノブナガ・ファイル｜基本スタイル
-   世界観：古文書のような「生成りの紙 × 墨 × 朱印」。
-   派手さより史料の"格"。朱は 朱印状 の朱＝根拠の象徴として1色だけ使う。
+   世界観：生成りの紙 × 墨 × 朱印 × 金地。派手さより史料の"格"。
    ─────────────────────────────────────────────── */
 
 :root {
-  /* 和紙・墨・朱の最小パレット */
-  --washi:      #f3efe6;  /* 生成りの紙（背景） */
-  --washi-deep: #e9e3d6;  /* 一段沈めた紙 */
-  --sumi:       #23201c;  /* 墨（本文） */
-  --sumi-soft:  #57514a;  /* 淡い墨（補助） */
-  --shu:        #a11414;  /* 朱（アクセント：根拠が固い印） */
-  --rule:       #c9c0b0;  /* 罫線 */
+  --washi:      #f3efe6;
+  --washi-deep: #e9e3d6;
+  --sumi:       #23201c;
+  --sumi-soft:  #57514a;
+  --shu:        #a11414;
+  --rule:       #c9c0b0;
 
   --font-mincho: "Noto Serif JP", "Yu Mincho", "Hiragino Mincho ProN", serif;
   --font-gothic: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
 
-  --measure: 44rem;
+  --measure: 75rem;   /* デスクトップのシェル幅（フルHD最適化） */
+  --prose: 44rem;     /* 本文の読みやすい行長 */
 }
 
 * { box-sizing: border-box; }
@@ -28,15 +27,19 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  background:
-    /* 紙の繊維感をうっすら */
-    repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(0,0,0,.012) 28px),
-    var(--washi);
+  background: var(--washi);
   color: var(--sumi);
   font-family: var(--font-gothic);
   font-size: 17px;
   line-height: 1.85;
   -webkit-font-smoothing: antialiased;
+}
+
+/* 金地の和柄（唐紙）を画面いっぱいに一枚敷く。固定・非反復なので継ぎ目が出ない。 */
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: -1;
+  background: url('/images/wa-pattern.webp') center / cover no-repeat;
+  opacity: .45;
 }
 
 a { color: var(--shu); text-decoration: none; }
@@ -46,7 +49,6 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
 .wrap { max-width: var(--measure); margin-inline: auto; padding-inline: 1.25rem; }
 
-/* ── ヘッダー ── */
 .site-head {
   border-bottom: 3px double var(--sumi);
   background: var(--washi);
@@ -63,21 +65,18 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .brand .en { display:block; font-size:.62rem; letter-spacing:.34em; color:var(--sumi-soft); font-family:var(--font-gothic); }
 .site-nav a { color: var(--sumi); font-size: .9rem; }
 
-/* ── フッター ── */
 .site-foot {
   margin-top: 4rem; border-top: 1px solid var(--rule);
   background: var(--washi-deep);
 }
 .site-foot .wrap { padding-block: 2rem; color: var(--sumi-soft); font-size: .82rem; }
 
-/* ── 見出し ── */
 h1, h2, h3 { font-family: var(--font-mincho); line-height: 1.4; }
 .eyebrow {
   font-family: var(--font-gothic); font-size: .72rem; letter-spacing: .3em;
-  color: var(--shu); text-transform: none; margin: 0 0 .4rem;
+  color: var(--shu); margin: 0 0 .4rem;
 }
 
-/* ── 出典タグ ── */
 .src-kind {
   display:inline-block; font-size:.68rem; font-weight:700;
   padding:.05em .5em; border-radius:2px; letter-spacing:.08em;

@@ -2,9 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Seal from '../../components/Seal.astro';
 import { episodes, getEpisode } from '../../data/episodes.js';
-import { SOURCE_KIND } from '../../data/rubric.js';
 
-// 静的生成：episodes.js の全 slug 分のページを書き出す。
 export function getStaticPaths() {
   return episodes.map((ep) => ({ params: { slug: ep.slug } }));
 }
@@ -18,7 +16,7 @@ const desc = ep.lead.slice(0, 110);
 
 <BaseLayout title={`${ep.title}｜ノブナガ・ファイル`} description={desc}>
   <article class="wrap ep">
-    <p class="ep-back"><a href="/">← 年表へ戻る</a></p>
+    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
 
     <p class="eyebrow">{ep.dateLabel}</p>
     <h1 class="ep-title">{ep.title}</h1>
@@ -31,7 +29,6 @@ const desc = ep.lead.slice(0, 110);
     <h2 class="ep-h2">検証</h2>
     <p class="ep-note">
       信憑性度は「その主張を支える史料の近さ」の目安です（5＝同時代の一次史料、1＝史料に根拠なし）。
-      真偽の断定ではありません。
     </p>
 
     <ol class="points">
@@ -56,12 +53,12 @@ const desc = ep.lead.slice(0, 110);
       ))}
     </ol>
 
-    <p class="ep-back ep-back-btm"><a href="/">← 年表へ戻る</a></p>
+    <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
   </article>
 </BaseLayout>
 
 <style>
-  .ep { padding-block: 2.4rem 1rem; }
+  .ep { padding-block: 2.4rem 1rem; max-width: var(--prose); }
   .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
   .ep-title { font-size: clamp(1.5rem, 4.5vw, 2.2rem); margin: .2rem 0 1.4rem; }
 
