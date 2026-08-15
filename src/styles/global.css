@@ -1,0 +1,90 @@
+/* ───────────────────────────────────────────────
+   ノブナガ・ファイル｜基本スタイル
+   世界観：古文書のような「生成りの紙 × 墨 × 朱印」。
+   派手さより史料の"格"。朱は 朱印状 の朱＝根拠の象徴として1色だけ使う。
+   ─────────────────────────────────────────────── */
+
+:root {
+  /* 和紙・墨・朱の最小パレット */
+  --washi:      #f3efe6;  /* 生成りの紙（背景） */
+  --washi-deep: #e9e3d6;  /* 一段沈めた紙 */
+  --sumi:       #23201c;  /* 墨（本文） */
+  --sumi-soft:  #57514a;  /* 淡い墨（補助） */
+  --shu:        #a11414;  /* 朱（アクセント：根拠が固い印） */
+  --rule:       #c9c0b0;  /* 罫線 */
+
+  --font-mincho: "Noto Serif JP", "Yu Mincho", "Hiragino Mincho ProN", serif;
+  --font-gothic: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
+
+  --measure: 44rem;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  margin: 0;
+  background:
+    /* 紙の繊維感をうっすら */
+    repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(0,0,0,.012) 28px),
+    var(--washi);
+  color: var(--sumi);
+  font-family: var(--font-gothic);
+  font-size: 17px;
+  line-height: 1.85;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--shu); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+:focus-visible { outline: 2px solid var(--shu); outline-offset: 2px; }
+
+.wrap { max-width: var(--measure); margin-inline: auto; padding-inline: 1.25rem; }
+
+/* ── ヘッダー ── */
+.site-head {
+  border-bottom: 3px double var(--sumi);
+  background: var(--washi);
+}
+.site-head .wrap {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 1rem; padding-block: 1rem; flex-wrap: wrap;
+}
+.brand {
+  font-family: var(--font-mincho);
+  font-weight: 700; font-size: 1.5rem; letter-spacing: .06em;
+  color: var(--sumi);
+}
+.brand .en { display:block; font-size:.62rem; letter-spacing:.34em; color:var(--sumi-soft); font-family:var(--font-gothic); }
+.site-nav a { color: var(--sumi); font-size: .9rem; }
+
+/* ── フッター ── */
+.site-foot {
+  margin-top: 4rem; border-top: 1px solid var(--rule);
+  background: var(--washi-deep);
+}
+.site-foot .wrap { padding-block: 2rem; color: var(--sumi-soft); font-size: .82rem; }
+
+/* ── 見出し ── */
+h1, h2, h3 { font-family: var(--font-mincho); line-height: 1.4; }
+.eyebrow {
+  font-family: var(--font-gothic); font-size: .72rem; letter-spacing: .3em;
+  color: var(--shu); text-transform: none; margin: 0 0 .4rem;
+}
+
+/* ── 出典タグ ── */
+.src-kind {
+  display:inline-block; font-size:.68rem; font-weight:700;
+  padding:.05em .5em; border-radius:2px; letter-spacing:.08em;
+  border:1px solid currentColor;
+}
+.src-一次 { color:#a11414; }
+.src-編纂 { color:#b2542e; }
+.src-後代 { color:#8a6d2f; }
+.src-軍記 { color:#6f6a63; }
+.src-創作 { color:#9a938a; }

@@ -1,0 +1,48 @@
+---
+// 信憑性度を「朱印」に見立てて押すスタンプ。サイトの看板ビジュアル。
+// 濃いほど史料が固い＝朱が濃く、薄いほど根拠が弱い＝朱が退色する。
+import { rubricOf } from '../data/rubric.js';
+
+const { rating = 3, size = 'md' } = Astro.props;
+const r = rubricOf(rating);
+const stars = '\u2605'.repeat(rating) + '\u2606'.repeat(5 - rating);
+---
+
+<span class={`seal seal-${size}`} data-rating={rating} title={r.short}>
+  <span class="seal-rating">信憑{rating}</span>
+  <span class="seal-label">{r.label}</span>
+  <span class="seal-stars" aria-hidden="true">{stars}</span>
+</span>
+
+<style>
+  .seal {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.1em;
+    border: 2px solid var(--seal-ink);
+    border-radius: 4px;
+    color: var(--seal-ink);
+    background: var(--seal-bg);
+    font-family: var(--font-mincho);
+    line-height: 1.1;
+    text-align: center;
+    /* 押印のわずかな傾きと擦れ */
+    transform: rotate(-3deg);
+    box-shadow: inset 0 0 0 1px var(--seal-ink);
+  }
+  .seal-md { width: 5.2em; height: 5.2em; padding: 0.3em; }
+  .seal-sm { width: 4.2em; height: 4.2em; padding: 0.2em; font-size: 0.85rem; }
+
+  .seal-rating { font-size: 0.72em; letter-spacing: 0.08em; }
+  .seal-label  { font-size: 1.25em; font-weight: 700; }
+  .seal-stars  { font-size: 0.7em; letter-spacing: 0.05em; }
+
+  /* 信憑性度に応じて朱の濃さを変える（固い＝濃い、弱い＝退色） */
+  .seal[data-rating='5'] { --seal-ink:#a11414; --seal-bg:rgba(161,20,20,.06); }
+  .seal[data-rating='4'] { --seal-ink:#b23a2e; --seal-bg:rgba(178,58,46,.05); }
+  .seal[data-rating='3'] { --seal-ink:#9a7d3a; --seal-bg:rgba(154,125,58,.05); }
+  .seal[data-rating='2'] { --seal-ink:#8a8580; --seal-bg:rgba(138,133,128,.05); }
+  .seal[data-rating='1'] { --seal-ink:#a9a29a; --seal-bg:rgba(169,162,154,.04); }
+</style>
