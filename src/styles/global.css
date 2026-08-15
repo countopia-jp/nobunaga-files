@@ -35,13 +35,6 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* 金地の和柄（唐紙）を画面いっぱいに一枚敷く。固定・非反復なので継ぎ目が出ない。 */
-body::before {
-  content: ''; position: fixed; inset: 0; z-index: -1;
-  background: url('/images/wa-pattern.webp') center / cover no-repeat;
-  opacity: .45;
-}
-
 a { color: var(--shu); text-decoration: none; }
 a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
