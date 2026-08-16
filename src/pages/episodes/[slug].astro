@@ -12,9 +12,22 @@ const ep = getEpisode(slug);
 if (!ep) return Astro.redirect('/404');
 
 const desc = ep.lead.slice(0, 110);
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('/images/og-image.jpg', Astro.site);
 ---
 
 <BaseLayout title={`${ep.title}｜ノブナガ・ファイル`} description={desc}>
+  <script type="application/ld+json" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: ep.title,
+    description: desc,
+    inLanguage: 'ja',
+    image: ogImage.toString(),
+    mainEntityOfPage: canonical.toString(),
+    author: { '@type': 'Organization', name: 'ノブナガ・ファイル' },
+    publisher: { '@type': 'Organization', name: 'ノブナガ・ファイル' },
+  })} />
   <article class="wrap ep">
     <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
 
