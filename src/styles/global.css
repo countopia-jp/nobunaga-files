@@ -63,6 +63,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   color: var(--sumi);
 }
 .brand .en { display:block; font-size:.62rem; letter-spacing:.34em; color:var(--sumi-soft); font-family:var(--font-gothic); }
+.site-nav { display: flex; gap: 1.6rem; }
 .site-nav a { color: var(--sumi); font-size: .9rem; }
 
 .site-foot {
