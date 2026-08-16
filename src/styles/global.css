@@ -35,6 +35,13 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* 生成りの和紙の紙質を一枚敷く（無地・柄なし）。固定・cover で継ぎ目なし。 */
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: -1;
+  background: var(--washi) url('/images/washi-bg.webp') center / cover no-repeat;
+  opacity: .85;
+}
+
 a { color: var(--shu); text-decoration: none; }
 a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
