@@ -106,14 +106,25 @@ const portraits = timelessEpisodes();
       <p class="explore-lead">個々の逸話の外側にある、信長を調べるための土台。</p>
     </div>
 
-    <a class="ex-feature" href="/kuromaku/">
-      <span class="ex-badge">特集</span>
-      <span class="ex-feature-title">本能寺の変 — 黒幕は、いたのか</span>
-      <span class="ex-feature-desc">
-        四国説・足利義昭説・単独犯行説・怨恨説・朝廷説ほか、提起されてきた八つの説を、
-        根拠となる史料の近さで並べる。それぞれの弱いところも併記。
-      </span>
-    </a>
+    <div class="ex-features">
+      <a class="ex-feature" href="/kuromaku/">
+        <span class="ex-badge">特集</span>
+        <span class="ex-feature-title">本能寺の変 — 黒幕は、いたのか</span>
+        <span class="ex-feature-desc">
+          四国説・足利義昭説・単独犯行説・怨恨説・朝廷説ほか、提起されてきた八つの説を、
+          根拠となる史料の近さで並べる。それぞれの弱いところも併記。
+        </span>
+      </a>
+
+      <a class="ex-feature" href="/meigen/">
+        <span class="ex-badge">特集</span>
+        <span class="ex-feature-title">名言・名台詞 — その言葉は、どこから来たか</span>
+        <span class="ex-feature-desc">
+          「是非に及ばず」「敵は本能寺にあり」「鳴かぬなら」「であるか」。
+          有名さと出典の近さは、まったく比例しない。
+        </span>
+      </a>
+    </div>
 
     <ul class="ex-grid">
       <li><a href="/nenpyo/">
@@ -232,10 +243,14 @@ const portraits = timelessEpisodes();
   .explore-title { font-size: 1.5rem; margin: 0 0 .3rem; }
   .explore-lead { margin: 0; color: var(--sumi-soft); font-size: .9rem; }
 
+  .ex-features {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.1rem;
+    margin-bottom: 1.1rem;
+  }
   .ex-feature {
-    display: block; position: relative;
+    display: block; position: relative; height: 100%;
     border: 1px solid var(--rule); border-left: 3px solid var(--shu);
-    background: var(--washi); padding: 1.1rem 1.2rem; margin-bottom: 1.1rem;
+    background: var(--washi); padding: 1.1rem 1.2rem;
     color: inherit; transition: transform .15s ease, box-shadow .15s ease;
   }
   .ex-feature:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(120,90,20,.16); text-decoration: none; }
@@ -271,5 +286,6 @@ const portraits = timelessEpisodes();
   @media (max-width: 900px) {
     .ep-grid { grid-template-columns: 1fr; }
     .ex-grid { grid-template-columns: 1fr; }
+    .ex-features { grid-template-columns: 1fr; }
   }
 </style>
