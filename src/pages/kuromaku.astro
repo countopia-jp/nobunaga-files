@@ -1,0 +1,178 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Seal from '../components/Seal.astro';
+import { premises, theories } from '../data/kuromaku.js';
+
+const sorted = [...theories].sort((a, b) => b.rating - a.rating);
+---
+<BaseLayout
+  title="本能寺の変・黒幕説の検証 — 八つの説を出典で並べる｜ノブナガ・ファイル"
+  description="本能寺の変で明智光秀を動かしたのは誰か。四国説・足利義昭説・単独犯行説・怨恨説・朝廷説・秀吉黒幕説など、提起されてきた説を出典と信憑性度で並べ、それぞれの根拠と弱点を示す。"
+>
+  <article class="wrap kuromaku">
+    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+
+    <p class="eyebrow">本能寺の変</p>
+    <h1 class="km-title">黒幕は、いたのか</h1>
+    <p class="km-lead">
+      明智光秀が信長を討ったことは動かない。<strong>なぜ討ったのか</strong>が分からない。
+      四百年のあいだに数え切れないほどの説が立てられ、いまも増え続けている。
+      ここでは主な説を、根拠となる史料の近さで並べる。
+      ある説が上に来るのは、それが正しいからではなく、
+      <strong>より近い史料が支えている</strong>からである。
+    </p>
+
+    <section class="km-premise">
+      <h2 class="km-premise-title">読む前に — 三つの前提</h2>
+      {premises.map((p, i) => (
+        <div class="pm">
+          <p class="pm-num">{i + 1}</p>
+          <div>
+            <h3 class="pm-title">{p.title}</h3>
+            <p class="pm-desc">{p.desc}</p>
+          </div>
+        </div>
+      ))}
+    </section>
+
+    <h2 class="km-sec-title">提起されてきた説</h2>
+
+    {sorted.map((t) => (
+      <section class="th">
+        <div class="th-head">
+          <div class="th-headtext">
+            <h3 class="th-name">{t.name}</h3>
+            <p class="th-verdict">{t.verdict}</p>
+          </div>
+          <div class="th-seal"><Seal rating={t.rating} size="sm" /></div>
+        </div>
+
+        <p class="th-summary">{t.summary}</p>
+
+        <div class="th-cols">
+          <div class="th-col">
+            <h4 class="th-col-title">根拠</h4>
+            <ul class="th-list">
+              {t.grounds.map((g) => (
+                <li>
+                  <p class="g-head">
+                    <span class="g-kind">{g.kind}</span>
+                    <span class="g-label">{g.label}</span>
+                  </p>
+                  <p class="g-note">{g.note}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="th-col">
+            <h4 class="th-col-title th-col-title--weak">弱いところ</h4>
+            <ul class="th-list th-list--weak">
+              {t.counters.map((c) => <li><p class="g-note">{c}</p></li>)}
+            </ul>
+          </div>
+        </div>
+      </section>
+    ))}
+
+    <p class="km-foot">
+      新しい史料が出れば順番は入れ替わる。
+      四国説がいま上に来ているのは、2014年に石谷家文書が公表されたからであって、
+      それ以前は同じ説が状況証拠の域を出なかった。
+      黒幕説の一覧とは、<strong>現時点でどこまで史料が届いているかの記録</strong>にすぎない。
+      決着を求めて読むと、必ず裏切られる。
+    </p>
+
+    <p class="km-related">
+      関連：<a href="/episodes/honnoji/">本能寺の変（検証ファイル）</a>
+      <span class="km-sep">｜</span>
+      <a href="/kashin/">家臣一覧</a>
+      <span class="km-sep">｜</span>
+      <a href="/shiryo/">文献一覧</a>
+    </p>
+
+    <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .kuromaku { max-width: 54rem; padding-block: 2rem 3rem; }
+  .ep-back { margin: 0 0 1rem; }
+  .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
+  .ep-back-btm { margin-top: 2.4rem; }
+
+  .km-title { font-size: clamp(1.7rem, 5vw, 2.5rem); margin: .2rem 0 1rem; }
+  .km-lead { color: var(--sumi-soft); line-height: 1.9; margin: 0 0 2.4rem; }
+  .km-lead strong { color: var(--shu); }
+
+  .km-premise {
+    border: 1px solid var(--rule); border-left: 3px solid var(--sumi);
+    background: var(--washi); padding: 1.1rem 1.2rem .6rem; margin-bottom: 2.6rem;
+  }
+  .km-premise-title {
+    font-size: 1.05rem; margin: 0 0 .9rem; padding-bottom: .4rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .pm { display: flex; gap: .9rem; margin-bottom: .9rem; }
+  .pm-num {
+    flex-shrink: 0; margin: 0; width: 1.9em; height: 1.9em;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-mincho); font-size: .9rem;
+    border: 1px solid var(--shu); color: var(--shu); border-radius: 50%;
+  }
+  .pm-title { font-size: .96rem; margin: 0 0 .2rem; line-height: 1.5; }
+  .pm-desc { margin: 0; font-size: .85rem; line-height: 1.8; color: var(--sumi-soft); }
+
+  .km-sec-title {
+    font-size: 1.3rem; margin: 0 0 1.2rem; padding-bottom: .4rem;
+    border-bottom: 3px double var(--sumi);
+  }
+
+  .th {
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); padding: 1.1rem 1.2rem; margin-bottom: 1.2rem;
+  }
+  .th-head { display: flex; align-items: flex-start; gap: 1rem; }
+  .th-headtext { flex: 1; min-width: 0; }
+  .th-name { font-size: 1.15rem; margin: 0; line-height: 1.5; }
+  .th-verdict {
+    margin: .2rem 0 0; font-size: .8rem; color: var(--shu);
+    font-family: var(--font-mincho);
+  }
+  .th-seal { flex-shrink: 0; }
+  .th-summary { margin: .8rem 0 1rem; font-size: .92rem; line-height: 1.9; }
+
+  .th-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+  .th-col-title {
+    font-size: .82rem; margin: 0 0 .5rem; padding-bottom: .25rem;
+    font-family: var(--font-mincho); letter-spacing: .08em;
+    border-bottom: 1px solid var(--shu); color: var(--shu);
+  }
+  .th-col-title--weak { border-bottom-color: var(--rule); color: var(--sumi-soft); }
+
+  .th-list { list-style: none; margin: 0; padding: 0; }
+  .th-list li { margin-bottom: .7rem; }
+  .th-list--weak li {
+    padding-left: .8rem; border-left: 2px solid var(--rule);
+  }
+  .g-head { margin: 0 0 .2rem; display: flex; align-items: baseline; gap: .5rem; flex-wrap: wrap; }
+  .g-kind {
+    font-family: var(--font-mincho); font-size: .68rem; flex-shrink: 0;
+    border: 1px solid var(--rule); background: var(--washi-deep);
+    padding: .05em .5em; border-radius: 2px;
+  }
+  .g-label { font-family: var(--font-mincho); font-size: .88rem; color: var(--sumi); }
+  .g-note { margin: 0; font-size: .8rem; line-height: 1.8; color: var(--sumi-soft); }
+
+  .km-foot {
+    margin: 2.4rem 0 0; padding-top: 1.2rem; border-top: 3px double var(--sumi);
+    font-size: .9rem; color: var(--sumi-soft); line-height: 1.95;
+  }
+  .km-foot strong { color: var(--shu); }
+  .km-related { margin: 1.2rem 0 0; font-size: .84rem; }
+  .km-sep { color: var(--rule); margin: 0 .5em; }
+
+  @media (max-width: 700px) {
+    .th-cols { grid-template-columns: 1fr; gap: 1rem; }
+    .th-head { flex-direction: column; gap: .6rem; }
+  }
+</style>
