@@ -23,6 +23,7 @@ export const retainers = [
     people: [
       {
         name: '織田信忠',
+        mon: 'oda',
         yomi: 'のぶただ',
         role: '嫡男・織田家家督',
         desc:
@@ -33,6 +34,7 @@ export const retainers = [
       },
       {
         name: '織田信雄',
+        mon: 'oda',
         yomi: 'のぶかつ',
         role: '次男・伊勢北畠家を継ぐ',
         desc:
@@ -42,6 +44,7 @@ export const retainers = [
       },
       {
         name: '織田信孝',
+        mon: 'oda',
         yomi: 'のぶたか',
         role: '三男・伊勢神戸家を継ぐ',
         desc:
@@ -51,6 +54,7 @@ export const retainers = [
       },
       {
         name: '織田信包',
+        mon: 'oda',
         yomi: 'のぶかね',
         role: '信長の弟・伊勢の押さえ',
         desc: '伊勢上野・安濃津を任された。お市とその娘たちを庇護したとも伝わる。',
@@ -58,6 +62,7 @@ export const retainers = [
       },
       {
         name: '織田長益（有楽斎）',
+        mon: 'oda',
         yomi: 'ながます',
         role: '信長の弟・のち茶人',
         desc:
@@ -67,6 +72,7 @@ export const retainers = [
       },
       {
         name: '津田信澄',
+        mon: 'oda',
         yomi: 'のぶすみ',
         role: '甥（信行の子）・近江大溝',
         desc:
@@ -107,6 +113,7 @@ export const retainers = [
       },
       {
         name: '明智光秀',
+        mon: 'akechi',
         sources: [
           { label: '兼見卿記', kind: '一次', note: '親交のあった吉田兼見の日記に、変の前後の動きが残る' },
           { label: '土橋重治宛 光秀書状', kind: '一次', note: '変の10日後の直筆書状。原本が確認されている' },
@@ -131,6 +138,7 @@ export const retainers = [
       },
       {
         name: '丹羽長秀',
+        mon: 'sujikai',
         yomi: 'ながひで',
         role: '若狭・普請奉行',
         desc:
@@ -185,6 +193,7 @@ export const retainers = [
       },
       {
         name: '前田利家',
+        mon: 'umebachi',
         yomi: 'としいえ',
         role: '母衣衆・のち能登',
         desc:
@@ -194,6 +203,7 @@ export const retainers = [
       },
       {
         name: '佐々成政',
+        mon: 'meyui',
         yomi: 'なりまさ',
         role: '越中',
         desc: '黒母衣衆から身を起こし、柴田勝家の与力として越中を任された。',

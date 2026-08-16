@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { enemies, enemyStats, OUTCOME, houimou } from '../data/enemies.js';
+import Mon from '../components/Mon.astro';
 import { getEpisode } from '../data/episodes.js';
 
 const shortTitle = (slug) => {
@@ -11,6 +12,20 @@ const shortTitle = (slug) => {
 
 const stats = enemyStats();
 const outcomes = Object.entries(OUTCOME);
+
+// ── 敵対期間チャート（自作SVG・データから生成） ──
+const rows = enemies.flatMap((g) =>
+  g.forces.filter((f) => f.from && f.to).map((f) => ({ ...f, group: g.group }))
+);
+const Y0 = 1550, Y1 = 1583;
+const PADL = 132, PADR = 16, PADT = 26, ROW = 19;
+const W = 720, plotW = W - PADL - PADR;
+const H = PADT + rows.length * ROW + 16;
+const x = (y) => PADL + ((y - Y0) / (Y1 - Y0)) * plotW;
+const BAND = {
+  5: '#a11414', 4: '#b23a2e', 3: '#9a7d3a', 2: '#6f6a63', 1: '#8a8580',
+};
+const ticks = [1550, 1555, 1560, 1565, 1570, 1575, 1580, 1582];
 ---
 <BaseLayout
   title="信長の敵対勢力一覧 — 誰と戦い、どう決着したか｜ノブナガ・ファイル"
@@ -42,6 +57,42 @@ const outcomes = Object.entries(OUTCOME);
       </p>
     </div>
 
+    <figure class="tk-chart">
+      <figcaption class="tk-chart-cap">
+        敵対した期間 — 縦に並べると、常に複数の正面を抱えていたことが見える
+      </figcaption>
+      <svg viewBox={`0 0 ${W} ${H}`} role="img"
+        aria-label="信長の敵対勢力それぞれが敵対していた期間を、1550年から1583年の横軸に帯で示した図">
+        {ticks.map((t) => (
+          <g>
+            <line x1={x(t)} y1={PADT - 12} x2={x(t)} y2={H - 12}
+              stroke="#c9c0b0" stroke-width="1" stroke-dasharray="2 3" />
+            <text x={x(t)} y={PADT - 16} text-anchor="middle"
+              font-size="10" fill="#57514a">{t}</text>
+          </g>
+        ))}
+        {rows.map((r, i) => {
+          const y = PADT + i * ROW;
+          const w = Math.max(x(r.to) - x(r.from), 3);
+          return (
+            <g>
+              <text x={PADL - 8} y={y + 8} text-anchor="end" font-size="10.5" fill="#23201c">
+                {r.name.length > 11 ? r.name.slice(0, 10) + '…' : r.name}
+              </text>
+              <rect x={x(r.from)} y={y} width={w} height={11} rx="1.5"
+                fill={BAND[OUTCOME[r.outcome].rank]} opacity="0.85" />
+            </g>
+          );
+        })}
+        <line x1={x(1582)} y1={PADT - 12} x2={x(1582)} y2={H - 12}
+          stroke="#a11414" stroke-width="1.5" />
+      </svg>
+      <p class="tk-chart-note">
+        赤系ほど滅亡、灰色は決着しないまま終わった相手。右端の朱線が本能寺の変（天正10年）。
+        期間は主要な敵対の始まりと終わりを目安として示したもので、断続的な交戦や和睦の期間も含んでいる。
+      </p>
+    </figure>
+
     {enemies.map((g) => (
       <section class="tk-sec">
         <h2 class="tk-sec-title">{g.group}</h2>
@@ -51,7 +102,10 @@ const outcomes = Object.entries(OUTCOME);
           {g.forces.map((f) => (
             <li class="fc">
               <div class="fc-head">
-                <h3 class="fc-name">{f.name}</h3>
+                <h3 class="fc-name">
+                  {f.mon && <span class="fc-mon"><Mon name={f.mon} size={26} title={`${f.name}の家紋（図案）`} /></span>}
+                  <span>{f.name}</span>
+                </h3>
                 <span class={`oc oc-${OUTCOME[f.outcome].rank}`}>{f.outcome}</span>
               </div>
               <p class="fc-meta">
@@ -131,6 +185,20 @@ const outcomes = Object.entries(OUTCOME);
   .oc-2 { --o-ink:#57514a; --o-bg:rgba(87,81,74,.04); }
   .oc-1 { --o-ink:#8a8580; --o-bg:rgba(138,133,128,.05); }
 
+  .tk-chart {
+    margin: 0 0 2.6rem; padding: 1rem 1.1rem;
+    border: 1px solid var(--rule); border-left: 3px solid var(--sumi);
+    background: var(--washi);
+  }
+  .tk-chart-cap {
+    font-family: var(--font-mincho); font-size: .95rem; font-weight: 700;
+    margin-bottom: .8rem; line-height: 1.5;
+  }
+  .tk-chart svg { width: 100%; height: auto; display: block; }
+  .tk-chart-note {
+    margin: .8rem 0 0; font-size: .76rem; color: var(--sumi-soft); line-height: 1.75;
+  }
+
   .tk-sec { margin-bottom: 2.8rem; }
   .tk-sec-title {
     font-size: 1.25rem; margin: 0 0 .5rem; padding-bottom: .4rem;
@@ -153,7 +221,11 @@ const outcomes = Object.entries(OUTCOME);
     display: flex; align-items: baseline; justify-content: space-between;
     gap: .7rem; flex-wrap: wrap;
   }
-  .fc-name { font-size: 1.08rem; margin: 0; line-height: 1.45; }
+  .fc-name {
+    font-size: 1.08rem; margin: 0; line-height: 1.45;
+    display: flex; align-items: center; gap: .5rem;
+  }
+  .fc-mon { flex-shrink: 0; color: #8a6d1f; }
   .fc-meta {
     margin: .15rem 0 .5rem; font-size: .74rem; color: var(--sumi-soft);
     font-family: var(--font-gothic);

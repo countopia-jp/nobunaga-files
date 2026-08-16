@@ -23,6 +23,8 @@ export const enemies = [
     forces: [
       {
         name: '織田信友（清洲織田氏）',
+        from: 1552,
+        to: 1554,
         base: '尾張・清洲',
         period: '〜天文23年（1554）',
         outcome: '滅亡',
@@ -31,6 +33,8 @@ export const enemies = [
       },
       {
         name: '織田信賢（岩倉織田氏）',
+        from: 1556,
+        to: 1559,
         base: '尾張・岩倉',
         period: '〜永禄2年（1559）',
         outcome: '滅亡',
@@ -39,6 +43,9 @@ export const enemies = [
       },
       {
         name: '今川義元',
+        from: 1555,
+        to: 1560,
+        mon: 'hikiryo',
         base: '駿河・遠江・三河',
         period: '〜永禄3年（1560）',
         outcome: '滅亡',
@@ -50,6 +57,8 @@ export const enemies = [
       },
       {
         name: '斎藤義龍・龍興',
+        from: 1556,
+        to: 1567,
         base: '美濃・稲葉山',
         period: '〜永禄10年（1567）',
         outcome: '滅亡',
@@ -59,6 +68,8 @@ export const enemies = [
       },
       {
         name: '北畠具教',
+        from: 1569,
+        to: 1576,
         base: '伊勢',
         period: '永禄12年（1569）〜天正4年（1576）',
         outcome: '離反のち滅亡',
@@ -74,6 +85,9 @@ export const enemies = [
     forces: [
       {
         name: '三好三人衆',
+        from: 1568,
+        to: 1573,
+        mon: 'sankaibishi',
         base: '摂津・河内・阿波',
         period: '永禄11年（1568）〜天正元年（1573）',
         outcome: '滅亡',
@@ -82,6 +96,9 @@ export const enemies = [
       },
       {
         name: '六角義賢（承禎）・義治',
+        from: 1568,
+        to: 1582,
+        mon: 'meyui',
         base: '南近江・観音寺城',
         period: '永禄11年（1568）〜',
         outcome: '決着せず',
@@ -90,6 +107,9 @@ export const enemies = [
       },
       {
         name: '足利義昭',
+        from: 1572,
+        to: 1582,
+        mon: 'hikiryo',
         base: '京都 → 備後・鞆',
         period: '元亀年間〜天正10年（1582）',
         outcome: '追放',
@@ -100,6 +120,8 @@ export const enemies = [
       },
       {
         name: '松永久秀',
+        from: 1572,
+        to: 1577,
         base: '大和・信貴山',
         period: '元亀年間・天正5年（1577）',
         outcome: '離反のち滅亡',
@@ -109,6 +131,8 @@ export const enemies = [
       },
       {
         name: '波多野秀治',
+        from: 1575,
+        to: 1579,
         base: '丹波・八上城',
         period: '天正3年（1575）〜天正7年（1579）',
         outcome: '滅亡',
@@ -119,6 +143,8 @@ export const enemies = [
       },
       {
         name: '別所長治',
+        from: 1578,
+        to: 1580,
         base: '播磨・三木城',
         period: '天正6年（1578）〜天正8年（1580）',
         outcome: '離反のち滅亡',
@@ -135,6 +161,9 @@ export const enemies = [
     forces: [
       {
         name: '浅井長政',
+        from: 1570,
+        to: 1573,
+        mon: 'kikkou3',
         base: '北近江・小谷城',
         period: '元亀元年（1570）〜天正元年（1573）',
         outcome: '離反のち滅亡',
@@ -146,6 +175,9 @@ export const enemies = [
       },
       {
         name: '朝倉義景',
+        from: 1570,
+        to: 1573,
+        mon: 'mokkou3',
         base: '越前・一乗谷',
         period: '元亀元年（1570）〜天正元年（1573）',
         outcome: '滅亡',
@@ -155,6 +187,9 @@ export const enemies = [
       },
       {
         name: '武田信玄・勝頼',
+        from: 1572,
+        to: 1582,
+        mon: 'takeda',
         base: '甲斐・信濃',
         period: '元亀3年（1572）〜天正10年（1582）',
         outcome: '滅亡',
@@ -166,6 +201,8 @@ export const enemies = [
       },
       {
         name: '上杉謙信・景勝',
+        from: 1576,
+        to: 1582,
         base: '越後・北陸',
         period: '天正4年（1576）〜天正10年（1582）',
         outcome: '決着せず',
@@ -175,6 +212,9 @@ export const enemies = [
       },
       {
         name: '毛利輝元',
+        from: 1576,
+        to: 1582,
+        mon: 'mori',
         base: '安芸ほか中国地方',
         period: '天正4年（1576）〜天正10年（1582）',
         outcome: '決着せず',
@@ -183,6 +223,8 @@ export const enemies = [
       },
       {
         name: '長宗我部元親',
+        from: 1581,
+        to: 1582,
         base: '土佐・阿波',
         period: '天正9年（1581）〜天正10年（1582）',
         outcome: '決着せず',
@@ -200,6 +242,8 @@ export const enemies = [
     forces: [
       {
         name: '石山本願寺（顕如）',
+        from: 1570,
+        to: 1580,
         base: '摂津・大坂',
         period: '元亀元年（1570）〜天正8年（1580）',
         outcome: '降伏・退去',
@@ -210,6 +254,8 @@ export const enemies = [
       },
       {
         name: '比叡山延暦寺',
+        from: 1570,
+        to: 1571,
         base: '近江・比叡山',
         period: '元亀元年（1570）〜元亀2年（1571）',
         outcome: '滅亡',
@@ -221,6 +267,8 @@ export const enemies = [
       },
       {
         name: '長島一向一揆',
+        from: 1571,
+        to: 1574,
         base: '伊勢・長島',
         period: '元亀2年（1571）〜天正2年（1574）',
         outcome: '滅亡',
@@ -229,6 +277,8 @@ export const enemies = [
       },
       {
         name: '越前一向一揆',
+        from: 1574,
+        to: 1575,
         base: '越前',
         period: '天正2年（1574）〜天正3年（1575）',
         outcome: '滅亡',
@@ -237,6 +287,8 @@ export const enemies = [
       },
       {
         name: '雑賀衆',
+        from: 1577,
+        to: 1582,
         base: '紀伊・雑賀',
         period: '天正5年（1577）〜',
         outcome: '決着せず',

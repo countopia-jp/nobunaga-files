@@ -92,3 +92,11 @@ h1, h2, h3 { font-family: var(--font-mincho); line-height: 1.4; }
 .site-foot .foot-nav { margin: .3rem 0 .6rem; }
 .site-foot .foot-nav a { color: var(--sumi); }
 .site-foot .foot-sep { color: var(--rule); margin: 0 .5rem; }
+
+/* フッターの図版クレジット */
+.foot-img {
+  margin: .5rem 0 0;
+  font-size: .74rem;
+  color: var(--sumi-soft);
+  line-height: 1.7;
+}

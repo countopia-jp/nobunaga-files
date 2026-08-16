@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { retainers, retainerStats, FATE, kashinSources } from '../data/retainers.js';
+import Mon from '../components/Mon.astro';
 import { getEpisode } from '../data/episodes.js';
 
 const shortTitle = (slug) => {
@@ -52,7 +53,8 @@ const fates = Object.entries(FATE);
             <li class="pr">
               <div class="pr-head">
                 <h3 class="pr-name">
-                  {p.name}
+                  {p.mon && <span class="pr-mon"><Mon name={p.mon} size={24} title={`${p.name}の家紋（図案）`} /></span>}
+                  <span>{p.name}</span>
                   <span class="pr-yomi">{p.yomi}</span>
                 </h3>
                 <span class={`fate fate-${FATE[p.fate].rank}`}>{p.fate}</span>
@@ -189,7 +191,11 @@ const fates = Object.entries(FATE);
     display: flex; align-items: baseline; justify-content: space-between;
     gap: .7rem; flex-wrap: wrap;
   }
-  .pr-name { font-size: 1.1rem; margin: 0; line-height: 1.4; }
+  .pr-name {
+    font-size: 1.1rem; margin: 0; line-height: 1.4;
+    display: flex; align-items: center; gap: .45rem; flex-wrap: wrap;
+  }
+  .pr-mon { flex-shrink: 0; color: #8a6d1f; }
   .pr-yomi {
     font-family: var(--font-gothic); font-size: .68rem; font-weight: 400;
     color: var(--sumi-soft); margin-left: .5em;
