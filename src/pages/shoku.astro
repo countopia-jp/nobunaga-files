@@ -1,0 +1,226 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Seal from '../components/Seal.astro';
+import { facts, claims, context } from '../data/food.js';
+import { getEpisode } from '../data/episodes.js';
+
+const shortTitle = (slug) => {
+  const ep = getEpisode(slug);
+  if (!ep) return slug;
+  return ep.title.split('——')[0].trim();
+};
+---
+<BaseLayout
+  title="信長の食事と好物 — 何を食べていたのか｜ノブナガ・ファイル"
+  description="織田信長の食事について、同時代の記録で確かめられることと、江戸期の逸話集が出どころの話を分けて示す。砂糖と金平糖の贈答、安土の家康饗応膳、そして「水くさい」の逸話まで、出典と信憑性度を添えて検証する。"
+>
+  <article class="wrap shoku">
+    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+
+    <p class="eyebrow">風俗・暮らし</p>
+    <h1 class="f-title">信長は、何を食べていたか</h1>
+    <p class="f-lead">
+      『信長公記』は、信長が何を食べたかをほとんど書かない。
+      合戦と儀礼の記録であって、献立の記録ではないからである。
+      そのため「信長の好物」として語られる話の大半は、
+      <strong>百年以上あとの江戸期の本</strong>を出どころとしている。
+      ここでは、記録で確かめられることと、後から生まれた話を分けて並べる。
+    </p>
+
+    <section class="f-sec">
+      <h2 class="f-sec-title">記録で確かめられること</h2>
+      <p class="f-sec-lead">
+        同時代の史料に、食にまつわる信長の姿が現れる場面はごく限られている。その全部がここに収まる程度しかない。
+      </p>
+
+      {facts.map((f) => (
+        <div class="fact">
+          <div class="fact-head">
+            <h3 class="fact-title">{f.title}</h3>
+            <span class="fact-when">{f.when}</span>
+          </div>
+          <p class="fact-src">出典：{f.source}</p>
+          <p class="fact-desc">{f.desc}</p>
+          {f.caution && (
+            <p class="fact-caution"><span class="c-label">注意</span>{f.caution}</p>
+          )}
+          {f.episodes && f.episodes.length > 0 && (
+            <p class="fact-eps">
+              {f.episodes.map((slug) => (
+                <a href={`/episodes/${slug}/`}>{shortTitle(slug)} →</a>
+              ))}
+            </p>
+          )}
+        </div>
+      ))}
+    </section>
+
+    <section class="f-sec">
+      <h2 class="f-sec-title">語られている話と、その出どころ</h2>
+      <p class="f-sec-lead">
+        信憑性度は真偽の断定ではなく、その話を支える史料の近さを示す。
+      </p>
+
+      {claims.map((c) => (
+        <div class="claim">
+          <div class="claim-head">
+            <div class="claim-headtext">
+              <h3 class="claim-title">{c.claim}</h3>
+              <p class="claim-verdict">{c.verdict}</p>
+            </div>
+            <div class="claim-seal"><Seal rating={c.rating} size="sm" /></div>
+          </div>
+          <p class="claim-desc">{c.desc}</p>
+          {c.sources && (
+            <ul class="claim-sources">
+              {c.sources.map((s) => (
+                <li>
+                  <span class="cs-kind">{s.kind}</span>
+                  <span class="cs-label">{s.label}</span>
+                  <span class="cs-note">{s.note}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+          {c.caution && (
+            <p class="claim-caution"><span class="c-label">注意</span>{c.caution}</p>
+          )}
+          {c.episodes && c.episodes.length > 0 && (
+            <p class="claim-eps">
+              {c.episodes.map((slug) => (
+                <a href={`/episodes/${slug}/`}>{shortTitle(slug)} →</a>
+              ))}
+            </p>
+          )}
+        </div>
+      ))}
+    </section>
+
+    <section class="f-sec">
+      <h2 class="f-sec-title">当時の食事そのもの</h2>
+      <p class="f-sec-lead">
+        信長個人ではなく、この時代の食がどうだったか。逸話を読むときの物差しになる。
+      </p>
+      <ul class="ctx-grid">
+        {context.map((c) => (
+          <li class="ctx">
+            <h3 class="ctx-title">{c.title}</h3>
+            <p class="ctx-desc">{c.desc}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <p class="f-foot">
+      食の逸話は、その人物の像を一言で決めてしまう力を持つ。
+      「水くさい」の一言で信長は田舎者になり、金平糖ひと瓶で新しもの好きの甘党になる。
+      だが記録に残っているのは、砂糖が三千斤届いたこと、瓶に入った菓子が贈られたこと、
+      そして出陣の朝に立ったまま食べたこと——それだけである。
+      <strong>残りは、後の世が味付けした分</strong>だと考えたほうがいい。
+    </p>
+
+    <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .shoku { max-width: 52rem; padding-block: 2rem 3rem; }
+  .ep-back { margin: 0 0 1rem; }
+  .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
+  .ep-back-btm { margin-top: 2.4rem; }
+
+  .f-title { font-size: clamp(1.6rem, 4.5vw, 2.3rem); margin: .2rem 0 1rem; }
+  .f-lead { color: var(--sumi-soft); line-height: 1.9; margin: 0 0 2.4rem; }
+  .f-lead strong { color: var(--shu); }
+
+  .f-sec { margin-bottom: 2.8rem; }
+  .f-sec-title {
+    font-size: 1.25rem; margin: 0 0 .5rem; padding-bottom: .4rem;
+    border-bottom: 2px solid var(--sumi); line-height: 1.5;
+  }
+  .f-sec-lead {
+    margin: 0 0 1.2rem; font-size: .86rem; color: var(--sumi-soft); line-height: 1.8;
+  }
+
+  .c-label {
+    font-family: var(--font-mincho); color: var(--shu);
+    margin-right: .6em; font-size: .77rem;
+  }
+
+  .fact {
+    border: 1px solid var(--rule); border-left: 3px solid #b8912f;
+    background: var(--washi); padding: .9rem 1.1rem; margin-bottom: .9rem;
+  }
+  .fact-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: .8rem; flex-wrap: wrap;
+  }
+  .fact-title { font-size: 1.05rem; margin: 0; line-height: 1.5; }
+  .fact-when {
+    font-family: var(--font-mincho); font-size: .82rem; color: var(--sumi-soft);
+    white-space: nowrap;
+  }
+  .fact-src {
+    margin: .15rem 0 .5rem; font-size: .76rem; color: var(--shu);
+    font-family: var(--font-gothic);
+  }
+  .fact-desc { margin: 0; font-size: .9rem; line-height: 1.85; }
+  .fact-caution, .claim-caution {
+    margin: .55rem 0 0; font-size: .8rem; line-height: 1.75; color: var(--sumi-soft);
+    background: var(--washi-deep); padding: .45rem .7rem;
+  }
+  .fact-eps, .claim-eps { margin: .5rem 0 0; font-size: .78rem; }
+  .fact-eps a, .claim-eps a { margin-right: .7em; }
+
+  .claim {
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); padding: 1rem 1.1rem; margin-bottom: 1rem;
+  }
+  .claim-head { display: flex; align-items: flex-start; gap: 1rem; }
+  .claim-headtext { flex: 1; min-width: 0; }
+  .claim-title { font-size: 1.05rem; margin: 0; line-height: 1.55; }
+  .claim-verdict {
+    margin: .2rem 0 0; font-size: .78rem; color: var(--shu);
+    font-family: var(--font-mincho);
+  }
+  .claim-seal { flex-shrink: 0; }
+  .claim-desc { margin: .7rem 0 0; font-size: .9rem; line-height: 1.85; }
+
+  .claim-sources { list-style: none; margin: .7rem 0 0; padding: 0; }
+  .claim-sources li {
+    display: flex; align-items: baseline; gap: .5rem; flex-wrap: wrap;
+    font-size: .78rem; color: var(--sumi-soft); line-height: 1.7;
+    padding: .3rem 0; border-top: 1px dotted var(--rule);
+  }
+  .cs-kind {
+    font-family: var(--font-mincho); font-size: .7rem;
+    border: 1px solid var(--rule); background: var(--washi-deep);
+    padding: .05em .5em; border-radius: 2px; flex-shrink: 0;
+  }
+  .cs-label { font-family: var(--font-mincho); color: var(--sumi); }
+
+  .ctx-grid {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: .9rem;
+  }
+  .ctx {
+    border: 1px solid var(--rule); background: var(--washi);
+    padding: .8rem 1rem;
+  }
+  .ctx-title {
+    font-size: .98rem; margin: 0 0 .3rem; line-height: 1.5;
+    padding-bottom: .3rem; border-bottom: 1px dotted var(--rule);
+  }
+  .ctx-desc { margin: 0; font-size: .85rem; line-height: 1.8; color: var(--sumi-soft); }
+
+  .f-foot {
+    margin: 2.4rem 0 0; padding-top: 1.2rem; border-top: 3px double var(--sumi);
+    font-size: .88rem; color: var(--sumi-soft); line-height: 1.9;
+  }
+  .f-foot strong { color: var(--shu); }
+
+  @media (max-width: 700px) {
+    .ctx-grid { grid-template-columns: 1fr; }
+    .claim-head { flex-direction: column; gap: .6rem; }
+  }
+</style>
