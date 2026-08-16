@@ -1,0 +1,170 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { bibliography, bibliographyStats, KIND } from '../data/bibliography.js';
+import { getEpisode } from '../data/episodes.js';
+
+const shortTitle = (slug) => {
+  const ep = getEpisode(slug);
+  if (!ep) return slug;
+  return ep.title.split('——')[0].trim();
+};
+
+const stats = bibliographyStats();
+const kinds = Object.entries(KIND);
+---
+<BaseLayout
+  title="信長に関する文献一覧 — 史料と研究書｜ノブナガ・ファイル"
+  description="織田信長を調べるための史料と本の一覧。同時代の文書・日記から、『信長公記』、江戸期の軍記物、逸話の出どころとなった随筆、そして現代の研究書までを、信長からの距離の順に並べ、それぞれの性格と使うときの注意を添える。"
+>
+  <article class="wrap biblio">
+    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+
+    <p class="eyebrow">文献一覧</p>
+    <h1 class="b-title">信長は、どの本に書いてあるか</h1>
+    <p class="b-lead">
+      検証はいつでも「どの本に書いてあるか」に行き着く。
+      その<strong>どの本</strong>を、信長からの距離の順に並べた。
+      同時代の文書と日記から始まり、『信長公記』、江戸期の軍記物、
+      有名な逸話の出どころとなった随筆、そして現代の研究書まで。
+      それぞれの性格と、使うときに気をつける点を添えてある。
+    </p>
+
+    <div class="b-legend">
+      <p class="b-legend-title">種別の見方 — 上ほど信長に近い</p>
+      {kinds.map(([name, k]) => (
+        <p class="b-legend-row">
+          <span class={`kind kind-${k.rank}`}>{name}</span>
+          <span>{k.note}</span>
+        </p>
+      ))}
+      <p class="b-legend-note">
+        全 {stats.items} 点（うち同時代の一次史料 {stats.primary} 点）。
+        種別は真偽の判定ではなく、信長との距離の目安。
+      </p>
+    </div>
+
+    {bibliography.map((sec) => (
+      <section class="b-sec">
+        <h2 class="b-sec-title">{sec.section}</h2>
+        <p class="b-sec-lead">{sec.lead}</p>
+
+        {sec.items.map((it) => (
+          <div class="src">
+            <div class="src-head">
+              <h3 class="src-title">
+                {it.url
+                  ? <a href={it.url} target="_blank" rel="noopener noreferrer">{it.title}</a>
+                  : it.title}
+              </h3>
+              <span class={`kind kind-${KIND[it.kind].rank}`}>{it.kind}</span>
+            </div>
+            <p class="src-meta">{it.author}<span class="src-sep">／</span>{it.when}</p>
+            <p class="src-desc">{it.desc}</p>
+            {it.caution && (
+              <p class="src-caution"><span class="src-caution-label">注意</span>{it.caution}</p>
+            )}
+            {it.episodes && it.episodes.length > 0 && (
+              <p class="src-eps">
+                <span class="src-eps-label">この文献が関わる検証</span>
+                {it.episodes.map((slug) => (
+                  <a class="src-ep" href={`/episodes/${slug}/`}>{shortTitle(slug)}</a>
+                ))}
+              </p>
+            )}
+          </div>
+        ))}
+      </section>
+    ))}
+
+    <p class="b-foot">
+      ここに挙げた本は、信長を調べるうえで避けて通れないものに絞ってある。
+      信長からの距離が遠いからといって価値がないわけではない。
+      軍記物や随筆は、史実の証拠にはならないかわりに、
+      <strong>その話がいつ誰の手で生まれたか</strong>を教えてくれる。
+      通説の出どころを突き止める作業は、いつもそちら側の本から始まる。
+    </p>
+
+    <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .biblio { max-width: 56rem; padding-block: 2rem 3rem; }
+  .ep-back { margin: 0 0 1rem; }
+  .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
+  .ep-back-btm { margin-top: 2.4rem; }
+
+  .b-title { font-size: clamp(1.6rem, 4.5vw, 2.3rem); margin: .2rem 0 1rem; }
+  .b-lead { color: var(--sumi-soft); line-height: 1.9; margin: 0 0 1.8rem; }
+  .b-lead strong { color: var(--shu); }
+
+  .b-legend {
+    border: 1px solid var(--rule); border-left: 3px solid #b8912f;
+    background: var(--washi); padding: .9rem 1.1rem; margin-bottom: 2.6rem;
+  }
+  .b-legend-title {
+    margin: 0 0 .6rem; font-family: var(--font-mincho); font-weight: 700; font-size: .95rem;
+  }
+  .b-legend-row {
+    margin: 0 0 .3rem; display: flex; align-items: center; gap: .6rem;
+    font-size: .82rem; color: var(--sumi-soft);
+  }
+  .b-legend-note {
+    margin: .7rem 0 0; padding-top: .6rem; border-top: 1px dotted var(--rule);
+    font-size: .78rem; color: var(--sumi-soft); line-height: 1.7;
+  }
+
+  .kind {
+    flex-shrink: 0; min-width: 3.6em; text-align: center;
+    font-family: var(--font-mincho); font-size: .72rem; letter-spacing: .06em;
+    padding: .15em .6em; border-radius: 2px; white-space: nowrap;
+    border: 1px solid var(--k-ink); color: var(--k-ink); background: var(--k-bg);
+  }
+  .kind-5 { --k-ink:#a11414; --k-bg:rgba(161,20,20,.07); }
+  .kind-4 { --k-ink:#b23a2e; --k-bg:rgba(178,58,46,.06); }
+  .kind-3 { --k-ink:#9a7d3a; --k-bg:rgba(154,125,58,.06); }
+  .kind-2 { --k-ink:#8a8580; --k-bg:rgba(138,133,128,.06); }
+  .kind-0 { --k-ink:#57514a; --k-bg:rgba(87,81,74,.04); }
+
+  .b-sec { margin-bottom: 2.6rem; }
+  .b-sec-title {
+    font-size: 1.25rem; margin: 0 0 .5rem; padding-bottom: .4rem;
+    border-bottom: 2px solid var(--sumi); line-height: 1.5;
+  }
+  .b-sec-lead {
+    margin: 0 0 1.2rem; font-size: .86rem; color: var(--sumi-soft); line-height: 1.8;
+  }
+
+  .src {
+    border: 1px solid var(--rule); border-left: 3px solid #b8912f;
+    background: var(--washi); padding: .9rem 1.1rem; margin-bottom: .9rem;
+  }
+  .src-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: .8rem; flex-wrap: wrap;
+  }
+  .src-title { font-size: 1.05rem; margin: 0; line-height: 1.5; }
+  .src-meta {
+    margin: .15rem 0 .5rem; font-size: .76rem; color: var(--sumi-soft);
+    font-family: var(--font-gothic);
+  }
+  .src-sep { margin: 0 .4em; color: var(--rule); }
+  .src-desc { margin: 0; font-size: .9rem; line-height: 1.85; }
+  .src-caution {
+    margin: .55rem 0 0; font-size: .8rem; line-height: 1.75; color: var(--sumi-soft);
+    background: var(--washi-deep); padding: .45rem .7rem;
+  }
+  .src-caution-label {
+    font-family: var(--font-mincho); color: var(--shu);
+    margin-right: .6em; font-size: .78rem;
+  }
+  .src-eps { margin: .55rem 0 0; font-size: .78rem; }
+  .src-eps-label { color: var(--sumi-soft); margin-right: .5em; }
+  .src-ep { margin-right: .5em; }
+
+  .b-foot {
+    margin: 2.4rem 0 0; padding-top: 1.2rem; border-top: 3px double var(--sumi);
+    font-size: .88rem; color: var(--sumi-soft); line-height: 1.9;
+  }
+  .b-foot strong { color: var(--shu); }
+</style>
