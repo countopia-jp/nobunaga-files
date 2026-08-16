@@ -1,0 +1,175 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { sites, siteStats, RESIDUE } from '../data/sites.js';
+import { getEpisode } from '../data/episodes.js';
+
+const shortTitle = (slug) => {
+  const ep = getEpisode(slug);
+  if (!ep) return slug;
+  return ep.title.split('——')[0].trim();
+};
+
+const stats = siteStats();
+const residues = Object.entries(RESIDUE);
+---
+<BaseLayout
+  title="信長の史跡・資料館・跡地 — たずねる場所の一覧｜ノブナガ・ファイル"
+  description="織田信長ゆかりの史跡、資料館、城跡、古戦場、墓所を地域別に紹介する。現地に何が残っているか（遺構・寺社・展示施設・復元・石碑のみ）を種別で示し、場所の比定に議論があるものはその旨を明記する。"
+>
+  <article class="wrap shiseki">
+    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+
+    <p class="eyebrow">史跡・資料館</p>
+    <h1 class="s-title">行ってみると、何が残っているか</h1>
+    <p class="s-lead">
+      信長ゆかりの地をたずねると、石垣が丸ごと残っている場所もあれば、
+      住宅地に石碑が一本立っているだけの場所もある。
+      同じ「跡地」でも、そこにあるものはまるで違う。
+      この一覧では、行く前に<strong>何が残っているか</strong>が分かるようにした。
+      場所そのものに議論があるものは、そう書いてある。
+    </p>
+
+    <div class="s-legend">
+      <p class="s-legend-title">残っているものの種別</p>
+      {residues.map(([name, r]) => (
+        <p class="s-legend-row">
+          <span class={`res res-${r.rank}`}>{name}</span>
+          <span>{r.note}</span>
+        </p>
+      ))}
+      <p class="s-legend-note">
+        全 {stats.places} か所（遺構が残るもの {stats.ruins} か所、展示施設 {stats.museums} か所）。
+        開館日・拝観時間・入場料は変わるため、訪ねる前に各施設の案内で確認を。
+      </p>
+    </div>
+
+    {sites.map((r) => (
+      <section class="s-sec">
+        <h2 class="s-sec-title">{r.region}</h2>
+        <p class="s-sec-lead">{r.lead}</p>
+
+        <ul class="s-grid">
+          {r.places.map((p) => (
+            <li class="sp">
+              <div class="sp-head">
+                <h3 class="sp-name">{p.name}</h3>
+                <span class={`res res-${RESIDUE[p.residue].rank}`}>{p.residue}</span>
+              </div>
+              <p class="sp-place">{p.place}</p>
+              <p class="sp-desc">{p.desc}</p>
+              {p.caution && (
+                <p class="sp-caution"><span class="sp-caution-label">注意</span>{p.caution}</p>
+              )}
+              {p.episodes && p.episodes.length > 0 && (
+                <p class="sp-eps">
+                  {p.episodes.map((slug) => (
+                    <a href={`/episodes/${slug}/`}>{shortTitle(slug)} →</a>
+                  ))}
+                </p>
+              )}
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+
+    <p class="s-foot">
+      古戦場や「跡地」の多くは、江戸期以降に建てられた石碑を手がかりに比定されている。
+      碑が立っていることと、そこが現場であることは同じではない。
+      それでも現地に立つ価値は失われない。
+      <strong>地形は動かない</strong>からである。
+      桶狭間の起伏、金ヶ崎の尾根、安土山の高さ——史料の記述が現実的かどうかは、
+      結局その場所に立ってみないと分からない。
+    </p>
+
+    <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .shiseki { max-width: 62rem; padding-block: 2rem 3rem; }
+  .ep-back { margin: 0 0 1rem; }
+  .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
+  .ep-back-btm { margin-top: 2.4rem; }
+
+  .s-title { font-size: clamp(1.6rem, 4.5vw, 2.3rem); margin: .2rem 0 1rem; }
+  .s-lead { color: var(--sumi-soft); line-height: 1.9; margin: 0 0 1.8rem; max-width: 46rem; }
+  .s-lead strong { color: var(--shu); }
+
+  .s-legend {
+    border: 1px solid var(--rule); border-left: 3px solid #b8912f;
+    background: var(--washi); padding: .9rem 1.1rem; margin-bottom: 2.6rem;
+  }
+  .s-legend-title {
+    margin: 0 0 .6rem; font-family: var(--font-mincho); font-weight: 700; font-size: .95rem;
+  }
+  .s-legend-row {
+    margin: 0 0 .3rem; display: flex; align-items: center; gap: .6rem;
+    font-size: .82rem; color: var(--sumi-soft);
+  }
+  .s-legend-note {
+    margin: .7rem 0 0; padding-top: .6rem; border-top: 1px dotted var(--rule);
+    font-size: .78rem; color: var(--sumi-soft); line-height: 1.8;
+  }
+
+  .res {
+    flex-shrink: 0; text-align: center; min-width: 5.4em;
+    font-family: var(--font-mincho); font-size: .7rem; letter-spacing: .04em;
+    padding: .15em .6em; border-radius: 2px; white-space: nowrap;
+    border: 1px solid var(--r-ink); color: var(--r-ink); background: var(--r-bg);
+  }
+  .res-5 { --r-ink:#a11414; --r-bg:rgba(161,20,20,.07); }
+  .res-4 { --r-ink:#b23a2e; --r-bg:rgba(178,58,46,.06); }
+  .res-3 { --r-ink:#9a7d3a; --r-bg:rgba(154,125,58,.06); }
+  .res-2 { --r-ink:#57514a; --r-bg:rgba(87,81,74,.04); }
+  .res-1 { --r-ink:#8a8580; --r-bg:rgba(138,133,128,.05); }
+
+  .s-sec { margin-bottom: 2.8rem; }
+  .s-sec-title {
+    font-size: 1.25rem; margin: 0 0 .5rem; padding-bottom: .4rem;
+    border-bottom: 2px solid var(--sumi); line-height: 1.5;
+  }
+  .s-sec-lead {
+    margin: 0 0 1.2rem; font-size: .86rem; color: var(--sumi-soft); line-height: 1.8;
+    max-width: 46rem;
+  }
+
+  .s-grid {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;
+  }
+  .sp {
+    border: 1px solid var(--rule); border-left: 3px solid #b8912f;
+    background: var(--washi); padding: .9rem 1.1rem;
+  }
+  .sp-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: .7rem; flex-wrap: wrap;
+  }
+  .sp-name { font-size: 1.05rem; margin: 0; line-height: 1.45; }
+  .sp-place {
+    margin: .15rem 0 .5rem; font-size: .76rem; color: var(--sumi-soft);
+    font-family: var(--font-gothic);
+  }
+  .sp-desc { margin: 0; font-size: .88rem; line-height: 1.8; }
+  .sp-caution {
+    margin: .55rem 0 0; font-size: .79rem; line-height: 1.75; color: var(--sumi-soft);
+    background: var(--washi-deep); padding: .45rem .7rem;
+  }
+  .sp-caution-label {
+    font-family: var(--font-mincho); color: var(--shu);
+    margin-right: .6em; font-size: .77rem;
+  }
+  .sp-eps { margin: .5rem 0 0; font-size: .78rem; }
+  .sp-eps a { margin-right: .7em; }
+
+  .s-foot {
+    margin: 2.4rem 0 0; padding-top: 1.2rem; border-top: 3px double var(--sumi);
+    font-size: .88rem; color: var(--sumi-soft); line-height: 1.9;
+  }
+  .s-foot strong { color: var(--shu); }
+
+  @media (max-width: 900px) {
+    .s-grid { grid-template-columns: 1fr; }
+  }
+</style>
