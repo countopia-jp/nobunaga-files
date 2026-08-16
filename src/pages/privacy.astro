@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const updated = '2026年8月';
+---
+<BaseLayout
+  title="プライバシーポリシー・免責事項｜ノブナガ・ファイル"
+  description="ノブナガ・ファイルのプライバシーポリシーおよび免責事項。当サイトの内容は運営者独自の調査・検証によるもので、諸説あり、正確性を保証するものではありません。"
+>
+  <article class="wrap doc">
+    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+    <h1 class="doc-title">プライバシーポリシー・免責事項</h1>
+
+    <section class="doc-sec">
+      <h2>免責事項</h2>
+      <p>
+        本サイト「ノブナガ・ファイル」に掲載する内容は、運営者が公開されている史料などをもとに、
+        <strong>独自に調査・検証したもの</strong>です。歴史上の出来事の解釈には諸説があり、
+        当サイトが示す見立て（信憑性度）や解説は、<strong>あくまで一つの見方</strong>であって、
+        その正確性・完全性を保証するものではありません。
+      </p>
+      <p>
+        掲載内容は予告なく変更・修正することがあります。また、当サイトの情報を利用したことによって
+        生じたいかなる損害についても、運営者は<strong>一切の責任を負いかねます</strong>。
+        ご利用は、閲覧者ご自身の判断と責任においてお願いいたします。
+      </p>
+      <p>
+        誤りや異なる見解のご指摘は歓迎いたします。お問い合わせページよりご連絡ください。
+      </p>
+    </section>
+
+    <section class="doc-sec">
+      <h2>著作権について</h2>
+      <p>
+        当サイトが引用する史料の原文（『信長公記』等の古典本文）は、いずれもパブリックドメインに属します。
+        一方、当サイト独自の文章・判定・構成・図版等の著作権は運営者に帰属します。無断での転載・複製はご遠慮ください。
+        引用・参照される場合は、出典として当サイトを明記いただければ幸いです。
+      </p>
+    </section>
+
+    <section class="doc-sec">
+      <h2>個人情報の取り扱い</h2>
+      <p>
+        当サイトでは、お問い合わせフォームのご利用時に、お名前・メールアドレス・お問い合わせ内容をお預かりする場合があります。
+        これらの情報は、お問い合わせへの返信という目的のみに利用し、ご本人の同意なく第三者へ提供することはありません。
+      </p>
+    </section>
+
+    <section class="doc-sec">
+      <h2>アクセス解析・広告・Cookieについて</h2>
+      <p>
+        当サイトでは、アクセス状況の把握や広告配信のために、Cookie（クッキー）を使用する場合があります。
+        Cookieは閲覧者を個人的に特定するものではありません。ブラウザの設定により、Cookieを無効にすることもできます。
+      </p>
+      <p>
+        当サイトが第三者配信の広告サービス（Google AdSense等）を利用する場合、当該事業者がCookieを使用して、
+        閲覧者の興味に応じた広告を表示することがあります。Googleによる広告設定は、Googleの「広告設定」ページから
+        無効にできます。詳しくは各広告事業者のポリシーをご確認ください。
+      </p>
+      <p class="doc-note">
+        ※ 現在、広告・アクセス解析を導入していない場合、この項目は導入時に有効となります。
+      </p>
+    </section>
+
+    <section class="doc-sec">
+      <h2>リンクについて</h2>
+      <p>
+        当サイトへのリンクは原則として自由です。リンク先での内容について、運営者は責任を負いません。
+      </p>
+    </section>
+
+    <p class="doc-updated">制定・最終改定：{updated}</p>
+    <p class="ep-back ep-back-btm"><a href="/contact/">お問い合わせはこちら →</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .doc { padding-block: 2.4rem 1rem; max-width: var(--prose); }
+  .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
+  .doc-title { font-size: clamp(1.5rem, 4.5vw, 2.1rem); margin: .2rem 0 1.8rem; }
+  .doc-sec { margin: 0 0 2rem; }
+  .doc-sec h2 {
+    font-size: 1.2rem; border-bottom: 2px solid var(--sumi);
+    padding-bottom: .3rem; margin: 0 0 .8rem;
+  }
+  .doc-sec p { line-height: 1.95; margin: 0 0 .9rem; }
+  .doc-sec strong { color: var(--shu); }
+  .doc-note { font-size: .84rem; color: var(--sumi-soft); }
+  .doc-updated { font-size: .8rem; color: var(--sumi-soft); margin: 2rem 0 1.5rem; }
+</style>

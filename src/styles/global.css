@@ -87,3 +87,7 @@ h1, h2, h3 { font-family: var(--font-mincho); line-height: 1.4; }
 .src-後代 { color:#8a6d2f; }
 .src-軍記 { color:#6f6a63; }
 .src-創作 { color:#9a938a; }
+
+.site-foot .foot-nav { margin: .3rem 0 .6rem; }
+.site-foot .foot-nav a { color: var(--sumi); }
+.site-foot .foot-sep { color: var(--rule); margin: 0 .5rem; }
