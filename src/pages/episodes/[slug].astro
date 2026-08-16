@@ -61,12 +61,22 @@ const desc = ep.lead.slice(0, 110);
       ))}
     </ol>
 
+    {ep.article && ep.article.length > 0 && (
+      <section class="ep-article">
+        <h2 class="ep-h2">解説</h2>
+        {ep.article.map((para) => <p>{para}</p>)}
+      </section>
+    )}
+
     <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
   </article>
 </BaseLayout>
 
 <style>
   .ep { padding-block: 2.4rem 1rem; max-width: var(--prose); }
+  .ep-article { margin-top: 2.6rem; padding-top: 1.6rem; border-top: 1px solid var(--rule); }
+  .ep-article .ep-h2 { margin-bottom: 1rem; }
+  .ep-article p { margin: 0 0 1.1rem; font-size: 1rem; line-height: 2; color: var(--sumi); }
   .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
   .ep-title { font-size: clamp(1.5rem, 4.5vw, 2.2rem); margin: .2rem 0 1.4rem; }
 
