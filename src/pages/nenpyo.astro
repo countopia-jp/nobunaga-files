@@ -1,0 +1,150 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { chronology, chronologyStats } from '../data/chronology.js';
+
+const stats = chronologyStats();
+---
+<BaseLayout
+  title="織田信長 年表 —『信長公記』の巻立てにそって｜ノブナガ・ファイル"
+  description="織田信長の生涯を年表に。太田牛一『信長公記』は上洛以前の首巻と、永禄11年から天正10年までを一年一巻で記した本記十五巻から成る。その巻立てをそのまま骨格として出来事を並べ、公記に記載のある事項と他史料による補いを区別して示す。"
+>
+  <article class="wrap nenpyo">
+    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+
+    <p class="eyebrow">織田信長 年表</p>
+    <h1 class="n-title">『信長公記』の巻立てに沿って</h1>
+    <p class="n-lead">
+      太田牛一『信長公記』は、上洛以前を記した<strong>首巻</strong>と、
+      永禄十一年（1568）の上洛から天正十年（1582）の本能寺まで
+      <strong>一年を一巻</strong>として編まれた本記十五巻から成る。
+      この年表は、その巻立てをそのまま骨格にしている。
+      どの出来事が『信長公記』のどの巻にあたるかが、そのまま確かめられる形にした。
+    </p>
+
+    <div class="n-legend">
+      <p class="n-legend-row">
+        <span class="tag-koki">公記</span>
+        <span>『信長公記』に記載のある事項</span>
+      </p>
+      <p class="n-legend-row">
+        <span class="tag-sup">補足</span>
+        <span>公記には記載がなく、他の史料で補った事項</span>
+      </p>
+      <p class="n-legend-note">
+        全 {stats.volumes} 巻・{stats.events} 項目（うち公記 {stats.koki} 項目）。
+        月日は巻ごとの記載にもとづく。検証ファイルのある出来事は各項目からたどれる。
+      </p>
+    </div>
+
+    {chronology.map((mk) => (
+      <section class="mk">
+        <header class="mk-head">
+          <span class="mk-badge">{mk.maki}</span>
+          <span class="mk-wa">{mk.wa}</span>
+          <span class="mk-year">{mk.year}</span>
+        </header>
+        {mk.lead && <p class="mk-lead">{mk.lead}</p>}
+        <ol class="mk-events">
+          {mk.events.map((ev) => (
+            <li class="ev">
+              <span class="ev-month">{ev.month}</span>
+              <div class="ev-body">
+                <p class="ev-text">
+                  {ev.text}
+                  {ev.koki
+                    ? <span class="tag-koki">公記</span>
+                    : <span class="tag-sup">補足</span>}
+                </p>
+                {ev.note && <p class="ev-note">{ev.note}</p>}
+                {ev.slug && (
+                  <p class="ev-link">
+                    <a href={`/episodes/${ev.slug}/`}>この出来事を検証する →</a>
+                  </p>
+                )}
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+    ))}
+
+    <p class="n-foot">
+      『信長公記』は信長の側近であった太田牛一が記した一代記で、
+      二次史料でありながら一次史料に準じる扱いを受ける。
+      ただし年次の錯綜など、他の史料によって誤りが指摘される箇所もある。
+      この年表は出来事の所在を示すための地図であって、
+      記載そのものの正しさを保証するものではない。
+    </p>
+
+    <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .nenpyo { max-width: 56rem; padding-block: 2rem 3rem; }
+  .ep-back { margin: 0 0 1rem; }
+  .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
+  .ep-back-btm { margin-top: 2.4rem; }
+
+  .n-title { font-size: clamp(1.6rem, 4.5vw, 2.3rem); margin: .2rem 0 1rem; }
+  .n-lead { color: var(--sumi-soft); line-height: 1.9; margin: 0 0 1.8rem; }
+  .n-lead strong { color: var(--shu); }
+
+  .n-legend {
+    border: 1px solid var(--rule); border-left: 3px solid #b8912f;
+    background: var(--washi); padding: .9rem 1.1rem; margin-bottom: 2.4rem;
+  }
+  .n-legend-row {
+    margin: 0 0 .35rem; display: flex; align-items: center; gap: .6rem;
+    font-size: .86rem; color: var(--sumi-soft);
+  }
+  .n-legend-note {
+    margin: .7rem 0 0; padding-top: .6rem; border-top: 1px dotted var(--rule);
+    font-size: .78rem; color: var(--sumi-soft); line-height: 1.7;
+  }
+
+  .tag-koki, .tag-sup {
+    flex-shrink: 0; font-family: var(--font-gothic); font-size: .64rem;
+    line-height: 1.6; padding: .1em .55em; border-radius: 2px; vertical-align: .12em;
+    white-space: nowrap;
+  }
+  .tag-koki { color: #7a2a1c; border: 1px solid #c08a80; background: #fbf1ee; }
+  .tag-sup  { color: var(--sumi-soft); border: 1px solid var(--rule); background: var(--washi-deep); }
+  .ev-text .tag-koki, .ev-text .tag-sup { margin-left: .5em; }
+
+  .mk { margin-bottom: 2.2rem; }
+  .mk-head {
+    display: flex; align-items: baseline; gap: .8rem; flex-wrap: wrap;
+    border-bottom: 2px solid var(--sumi); padding-bottom: .4rem; margin-bottom: .9rem;
+  }
+  .mk-badge {
+    font-family: var(--font-mincho); font-weight: 700; font-size: 1.15rem;
+    color: var(--washi); background: var(--sumi); padding: .1em .7em; letter-spacing: .08em;
+  }
+  .mk-wa { font-family: var(--font-mincho); font-size: 1.25rem; font-weight: 700; }
+  .mk-year { font-family: var(--font-mincho); font-size: .95rem; color: var(--sumi-soft); }
+  .mk-lead {
+    margin: 0 0 1rem; font-size: .84rem; color: var(--sumi-soft); line-height: 1.8;
+  }
+
+  .mk-events { list-style: none; margin: 0; padding: 0; }
+  .ev {
+    display: grid; grid-template-columns: 7.5rem 1fr; gap: 1rem;
+    padding: .7rem 0; border-bottom: 1px dotted var(--rule);
+  }
+  .ev:last-child { border-bottom: none; }
+  .ev-month {
+    font-family: var(--font-mincho); font-size: .95rem; color: var(--sumi);
+    padding-top: .1rem; letter-spacing: .04em;
+  }
+  .ev-body { min-width: 0; }
+  .ev-text { margin: 0; font-size: .95rem; line-height: 1.8; }
+  .ev-note { margin: .2rem 0 0; font-size: .74rem; color: var(--sumi-soft); }
+  .ev-link { margin: .3rem 0 0; }
+  .ev-link a { font-size: .8rem; }
+
+  @media (max-width: 640px) {
+    .ev { grid-template-columns: 1fr; gap: .2rem; }
+    .ev-month { font-size: .84rem; color: var(--sumi-soft); }
+  }
+</style>
