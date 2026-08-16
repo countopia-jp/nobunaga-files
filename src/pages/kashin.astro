@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { retainers, retainerStats, FATE } from '../data/retainers.js';
+import { retainers, retainerStats, FATE, kashinSources } from '../data/retainers.js';
 import { getEpisode } from '../data/episodes.js';
 
 const shortTitle = (slug) => {
@@ -63,6 +63,20 @@ const fates = Object.entries(FATE);
               {p.myth && (
                 <p class="pr-myth"><span class="pr-myth-label">通説</span>{p.myth}</p>
               )}
+              {p.sources && p.sources.length > 0 && (
+                <div class="pr-src">
+                  <p class="pr-src-label">この人物が出てくる史料</p>
+                  <ul class="pr-src-list">
+                    {p.sources.map((s) => (
+                      <li>
+                        <span class="src-kind">{s.kind}</span>
+                        <span class="src-name">{s.label}</span>
+                        <span class="src-note">{s.note}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
               {p.episodes && p.episodes.length > 0 && (
                 <p class="pr-eps">
                   {p.episodes.map((slug) => (
@@ -75,6 +89,28 @@ const fates = Object.entries(FATE);
         </ul>
       </section>
     ))}
+
+    <section class="ka-sec ka-srcsec">
+      <h2 class="ka-sec-title">家臣団は、どの史料に書かれているか</h2>
+      <p class="ka-sec-lead">
+        この一覧の記述が、どこから来ているかの内訳。
+        信長の家臣団は、秀吉や家康の家臣団に比べて残る史料が少ない分野でもある。
+      </p>
+      {kashinSources.map((s) => (
+        <div class="ks">
+          <div class="ks-head">
+            <h3 class="ks-label">{s.label}</h3>
+            <span class={`fate fate-${s.rank}`}>{s.kind}</span>
+          </div>
+          <p class="ks-author">{s.author}</p>
+          <p class="ks-desc">{s.desc}</p>
+          {s.caution && (
+            <p class="ks-caution"><span class="pr-myth-label">注意</span>{s.caution}</p>
+          )}
+        </div>
+      ))}
+      <p class="ks-more">史料そのものの性格は<a href="/shiryo/">文献一覧</a>にまとめてある。</p>
+    </section>
 
     <p class="ka-foot">
       徳川家康はこの一覧に入れていない。三河の同盟者であって、信長の家臣ではないからである。
@@ -175,6 +211,48 @@ const fates = Object.entries(FATE);
     font-family: var(--font-mincho); color: var(--shu);
     margin-right: .6em; font-size: .76rem;
   }
+  .pr-src {
+    margin: .55rem 0 0; padding: .5rem .7rem;
+    background: var(--washi-deep); border-left: 2px solid #b8912f;
+  }
+  .pr-src-label {
+    margin: 0 0 .3rem; font-size: .7rem; letter-spacing: .06em;
+    font-family: var(--font-mincho); color: var(--shu);
+  }
+  .pr-src-list { list-style: none; margin: 0; padding: 0; }
+  .pr-src-list li {
+    display: flex; align-items: baseline; gap: .45rem; flex-wrap: wrap;
+    font-size: .76rem; line-height: 1.7; color: var(--sumi-soft);
+    padding: .18rem 0;
+  }
+  .src-kind {
+    flex-shrink: 0; font-family: var(--font-mincho); font-size: .66rem;
+    border: 1px solid var(--rule); background: var(--washi);
+    padding: .04em .45em; border-radius: 2px;
+  }
+  .src-name { font-family: var(--font-mincho); color: var(--sumi); }
+
+  .ka-srcsec { margin-top: 3rem; }
+  .ks {
+    border: 1px solid var(--rule); border-left: 3px solid #b8912f;
+    background: var(--washi); padding: .9rem 1.1rem; margin-bottom: .9rem;
+  }
+  .ks-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: .8rem; flex-wrap: wrap;
+  }
+  .ks-label { font-size: 1.05rem; margin: 0; line-height: 1.5; }
+  .ks-author {
+    margin: .15rem 0 .5rem; font-size: .76rem; color: var(--sumi-soft);
+    font-family: var(--font-gothic);
+  }
+  .ks-desc { margin: 0; font-size: .88rem; line-height: 1.82; }
+  .ks-caution {
+    margin: .55rem 0 0; font-size: .79rem; line-height: 1.75; color: var(--sumi-soft);
+    background: var(--washi-deep); padding: .45rem .7rem;
+  }
+  .ks-more { margin: 1rem 0 0; font-size: .82rem; color: var(--sumi-soft); }
+
   .pr-eps { margin: .5rem 0 0; font-size: .78rem; }
   .pr-eps a { margin-right: .7em; }
 
