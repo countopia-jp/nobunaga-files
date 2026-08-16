@@ -42,9 +42,17 @@ const desc = ep.lead.slice(0, 110);
             <ul class="src-list">
               {p.sources.map((s) => (
                 <li class="src">
-                  <span class={`src-kind src-${s.kind}`}>{s.kind}</span>
-                  <span class="src-label">{s.label}</span>
-                  <span class="src-note">{s.note}</span>
+                  <div class="src-head">
+                    <span class={`src-kind src-${s.kind}`}>{s.kind}</span>
+                    <span class="src-label">{s.label}</span>
+                    <span class="src-note">{s.note}</span>
+                  </div>
+                  {s.quote && (
+                    <blockquote class="genbun">
+                      <p>{s.quote}</p>
+                      <cite>—『{s.label}』{s.cite ? `　${s.cite}` : ''}</cite>
+                    </blockquote>
+                  )}
                 </li>
               ))}
             </ul>
@@ -90,16 +98,29 @@ const desc = ep.lead.slice(0, 110);
 
   .src-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .5rem; }
   .src {
-    display: grid; grid-template-columns: auto auto 1fr; gap: .5rem; align-items: baseline;
+    display: flex; flex-direction: column; gap: .5rem;
     font-size: .84rem; background: var(--washi); border: 1px solid var(--rule);
     padding: .5rem .7rem;
   }
+  .src-head { display: grid; grid-template-columns: auto auto 1fr; gap: .5rem; align-items: baseline; }
   .src-label { font-family: var(--font-mincho); font-weight: 700; }
   .src-note { color: var(--sumi-soft); }
+
+  /* 原文引用（該当箇所の原文。PDの古典本文のみ・底本で要確認） */
+  .genbun {
+    margin: 0; padding: .55rem .8rem;
+    border-left: 3px solid var(--shu); background: var(--washi-deep);
+    font-family: var(--font-mincho);
+  }
+  .genbun p { margin: 0; font-size: .95rem; line-height: 1.9; color: var(--sumi); }
+  .genbun cite {
+    display: block; margin-top: .35rem; font-style: normal;
+    font-size: .7rem; color: var(--sumi-soft); font-family: var(--font-gothic);
+  }
 
   @media (max-width: 620px) {
     .point { grid-template-columns: 1fr; gap: .6rem; }
     .point-seal { justify-content: flex-start; }
-    .src { grid-template-columns: 1fr; gap: .2rem; }
+    .src-head { grid-template-columns: 1fr; gap: .2rem; }
   }
 </style>
