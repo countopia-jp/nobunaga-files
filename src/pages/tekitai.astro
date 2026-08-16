@@ -1,0 +1,194 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { enemies, enemyStats, OUTCOME, houimou } from '../data/enemies.js';
+import { getEpisode } from '../data/episodes.js';
+
+const shortTitle = (slug) => {
+  const ep = getEpisode(slug);
+  if (!ep) return slug;
+  return ep.title.split('——')[0].trim();
+};
+
+const stats = enemyStats();
+const outcomes = Object.entries(OUTCOME);
+---
+<BaseLayout
+  title="信長の敵対勢力一覧 — 誰と戦い、どう決着したか｜ノブナガ・ファイル"
+  description="織田信長が戦った相手を、尾張美濃の同族から畿内勢力・各地の大名・宗教勢力まで一覧する。敵対した期間とその決着のつき方を示し、いわゆる信長包囲網の実態にも触れる。"
+>
+  <article class="wrap tekitai">
+    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+
+    <p class="eyebrow">敵対勢力</p>
+    <h1 class="tk-title">信長は、誰と戦ったか</h1>
+    <p class="tk-lead">
+      信長の生涯は、ほぼ切れ目なく戦い続けた二十数年である。
+      ただしそれは一つずつ順番に片づけていったのではない。
+      たいてい<strong>複数の敵と同時に向き合っていた</strong>。
+      誰がいつ敵になり、どう決着したのか——決着の種類ごとに色を分けて並べる。
+    </p>
+
+    <div class="tk-legend">
+      <p class="tk-legend-title">決着の見方</p>
+      {outcomes.map(([name, o]) => (
+        <p class="tk-legend-row">
+          <span class={`oc oc-${o.rank}`}>{name}</span>
+          <span>{o.note}</span>
+        </p>
+      ))}
+      <p class="tk-legend-note">
+        全 {stats.forces} 勢力。うち滅ぼされたもの {stats.destroyed}、
+        敵対したまま本能寺の変を迎えたもの {stats.unresolved}。
+      </p>
+    </div>
+
+    {enemies.map((g) => (
+      <section class="tk-sec">
+        <h2 class="tk-sec-title">{g.group}</h2>
+        <p class="tk-sec-lead">{g.lead}</p>
+
+        <ul class="tk-grid">
+          {g.forces.map((f) => (
+            <li class="fc">
+              <div class="fc-head">
+                <h3 class="fc-name">{f.name}</h3>
+                <span class={`oc oc-${OUTCOME[f.outcome].rank}`}>{f.outcome}</span>
+              </div>
+              <p class="fc-meta">
+                <span class="fc-base">{f.base}</span>
+                <span class="fc-sep">／</span>
+                <span class="fc-period">{f.period}</span>
+              </p>
+              <p class="fc-desc">{f.desc}</p>
+              {f.myth && (
+                <p class="fc-myth"><span class="fc-myth-label">通説</span>{f.myth}</p>
+              )}
+              {((f.episodes && f.episodes.length > 0) || f.link) && (
+                <p class="fc-links">
+                  {f.episodes && f.episodes.map((slug) => (
+                    <a href={`/episodes/${slug}/`}>{shortTitle(slug)} →</a>
+                  ))}
+                  {f.link && <a href={f.link.href}>{f.link.label} →</a>}
+                </p>
+              )}
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+
+    <section class="tk-houi">
+      <h2 class="tk-houi-title">{houimou.title}</h2>
+      {houimou.paragraphs.map((p) => <p class="tk-houi-p">{p}</p>)}
+    </section>
+
+    <p class="tk-foot">
+      離反した家臣——荒木村重、明智光秀——はこの一覧に入れていない。
+      外から攻めてきた敵と、内から叛いた者は、性質が違うからである。
+      彼らについては家臣一覧のほうに置いた。
+      <a href="/kashin/">→ 家臣一覧</a>
+    </p>
+
+    <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .tekitai { max-width: 62rem; padding-block: 2rem 3rem; }
+  .ep-back { margin: 0 0 1rem; }
+  .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
+  .ep-back-btm { margin-top: 2.4rem; }
+
+  .tk-title { font-size: clamp(1.6rem, 4.5vw, 2.3rem); margin: .2rem 0 1rem; }
+  .tk-lead { color: var(--sumi-soft); line-height: 1.9; margin: 0 0 1.8rem; max-width: 46rem; }
+  .tk-lead strong { color: var(--shu); }
+
+  .tk-legend {
+    border: 1px solid var(--rule); border-left: 3px solid #b8912f;
+    background: var(--washi); padding: .9rem 1.1rem; margin-bottom: 2.6rem;
+  }
+  .tk-legend-title {
+    margin: 0 0 .6rem; font-family: var(--font-mincho); font-weight: 700; font-size: .95rem;
+  }
+  .tk-legend-row {
+    margin: 0 0 .3rem; display: flex; align-items: center; gap: .6rem;
+    font-size: .82rem; color: var(--sumi-soft);
+  }
+  .tk-legend-note {
+    margin: .7rem 0 0; padding-top: .6rem; border-top: 1px dotted var(--rule);
+    font-size: .78rem; color: var(--sumi-soft); line-height: 1.8;
+  }
+
+  .oc {
+    flex-shrink: 0; text-align: center; min-width: 6em;
+    font-family: var(--font-mincho); font-size: .7rem; letter-spacing: .04em;
+    padding: .15em .6em; border-radius: 2px; white-space: nowrap;
+    border: 1px solid var(--o-ink); color: var(--o-ink); background: var(--o-bg);
+  }
+  .oc-5 { --o-ink:#a11414; --o-bg:rgba(161,20,20,.07); }
+  .oc-4 { --o-ink:#b23a2e; --o-bg:rgba(178,58,46,.06); }
+  .oc-3 { --o-ink:#9a7d3a; --o-bg:rgba(154,125,58,.06); }
+  .oc-2 { --o-ink:#57514a; --o-bg:rgba(87,81,74,.04); }
+  .oc-1 { --o-ink:#8a8580; --o-bg:rgba(138,133,128,.05); }
+
+  .tk-sec { margin-bottom: 2.8rem; }
+  .tk-sec-title {
+    font-size: 1.25rem; margin: 0 0 .5rem; padding-bottom: .4rem;
+    border-bottom: 2px solid var(--sumi); line-height: 1.5;
+  }
+  .tk-sec-lead {
+    margin: 0 0 1.2rem; font-size: .86rem; color: var(--sumi-soft); line-height: 1.8;
+    max-width: 46rem;
+  }
+
+  .tk-grid {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;
+  }
+  .fc {
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); padding: .9rem 1.1rem;
+  }
+  .fc-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: .7rem; flex-wrap: wrap;
+  }
+  .fc-name { font-size: 1.08rem; margin: 0; line-height: 1.45; }
+  .fc-meta {
+    margin: .15rem 0 .5rem; font-size: .74rem; color: var(--sumi-soft);
+    font-family: var(--font-gothic);
+  }
+  .fc-sep { color: var(--rule); margin: 0 .4em; }
+  .fc-period { font-family: var(--font-mincho); }
+  .fc-desc { margin: 0; font-size: .88rem; line-height: 1.8; }
+  .fc-myth {
+    margin: .55rem 0 0; font-size: .79rem; line-height: 1.75; color: var(--sumi-soft);
+    background: var(--washi-deep); padding: .45rem .7rem;
+  }
+  .fc-myth-label {
+    font-family: var(--font-mincho); color: var(--shu);
+    margin-right: .6em; font-size: .77rem;
+  }
+  .fc-links { margin: .5rem 0 0; font-size: .78rem; }
+  .fc-links a { margin-right: .7em; }
+
+  .tk-houi {
+    border: 1px solid var(--rule); border-left: 3px solid var(--sumi);
+    background: var(--washi); padding: 1.1rem 1.2rem; margin-top: .6rem;
+  }
+  .tk-houi-title {
+    font-size: 1.1rem; margin: 0 0 .7rem; padding-bottom: .4rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .tk-houi-p { margin: 0 0 .8rem; font-size: .89rem; line-height: 1.9; }
+  .tk-houi-p:last-child { margin-bottom: 0; }
+
+  .tk-foot {
+    margin: 2.4rem 0 0; padding-top: 1.2rem; border-top: 3px double var(--sumi);
+    font-size: .88rem; color: var(--sumi-soft); line-height: 1.9;
+  }
+
+  @media (max-width: 900px) {
+    .tk-grid { grid-template-columns: 1fr; }
+  }
+</style>
