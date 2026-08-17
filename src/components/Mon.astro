@@ -16,9 +16,10 @@ const { name, size = 40, title = '' } = Astro.props;
 /* 画像からトレースして SVG 化した家紋。public/images/mon/ に置き、
    CSSマスクで塗るので色は currentColor を継承する。 */
 const TRACED = new Set([
-  'ageha', 'botan', 'futatsukarigane', 'futatsunami', 'katabami7', 'kiri',
-  'mokkou', 'mukaidzuru', 'oshiki3', 'sagarifuji', 'sasarindou',
-  'takenisuzume', 'tsurunomaru', 'tsuta',
+  'ageha', 'botan', 'futatsukarigane', 'futatsunami', 'hanabishi', 'katabami7',
+  'kiri', 'kuginuki', 'mitsuboshi', 'mokkou', 'mokkou3', 'mukaidzuru', 'oda',
+  'oshiki3', 'sagarifuji', 'sasarindou', 'takenisuzume', 'tsurunomaru',
+  'tsuta', 'umebachi',
 ]);
 const isTraced = TRACED.has(name);
 

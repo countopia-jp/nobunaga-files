@@ -23,6 +23,7 @@ export const enemies = [
     forces: [
       {
         name: '織田信友（清洲織田氏）',
+        mon: 'oda',
         from: 1552,
         to: 1554,
         base: '尾張・清洲',
@@ -33,6 +34,7 @@ export const enemies = [
       },
       {
         name: '織田信賢（岩倉織田氏）',
+        mon: 'oda',
         from: 1556,
         to: 1559,
         base: '尾張・岩倉',
@@ -134,6 +136,7 @@ export const enemies = [
       },
       {
         name: '波多野秀治',
+        mon: 'mitsuboshi',
         from: 1575,
         to: 1579,
         base: '丹波・八上城',
@@ -146,6 +149,7 @@ export const enemies = [
       },
       {
         name: '別所長治',
+        mon: 'kuginuki',
         from: 1578,
         to: 1580,
         base: '播磨・三木城',

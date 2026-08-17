@@ -337,6 +337,7 @@ export const retainers = [
       },
       {
         name: '氏家卜全',
+        mon: 'hanabishi',
         yomi: 'ぼくぜん',
         role: '西美濃三人衆',
         desc: '稲葉・安藤とともに織田方に転じた美濃の有力者。',
@@ -345,6 +346,7 @@ export const retainers = [
       },
       {
         name: '安藤守就',
+        mon: 'mokkou3',
         yomi: 'もりなり',
         role: '西美濃三人衆',
         desc: '同じく斎藤氏から転じた美濃衆。',
@@ -384,6 +386,7 @@ export const retainers = [
       },
       {
         name: '筒井順慶',
+        mon: 'umebachi',
         yomi: 'じゅんけい',
         role: '大和',
         desc: '大和の国衆から光秀の与力となり、大和一国を任された。',
