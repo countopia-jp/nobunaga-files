@@ -56,14 +56,6 @@ const ogImage = new URL('/images/og-image.jpg', Astro.site);
           ノブナガ・ファイル
           <span class="en">THE NOBUNAGA FILES</span>
         </a>
-        <nav class="site-nav">
-          <a href="/nenpyo/">年表</a>
-          <a href="/kashin/">家臣</a>
-          <a href="/keizu/">系図</a>
-          <a href="/shiseki/">史跡</a>
-          <a href="/shoku/">食</a>
-          <a href="/shiryo/">文献</a>
-        </nav>
       </div>
     </header>
 
@@ -73,6 +65,41 @@ const ogImage = new URL('/images/og-image.jpg', Astro.site);
 
     <footer class="site-foot">
       <div class="wrap">
+        <nav class="foot-map">
+          <div class="fm-col">
+            <p class="fm-title">検証する</p>
+            <a href="/">検証ファイル一覧</a>
+            <a href="/kuromaku/">本能寺の黒幕説</a>
+            <a href="/meigen/">名言・名台詞</a>
+            <a href="/monjo/">文書を読む</a>
+          </div>
+          <div class="fm-col">
+            <p class="fm-title">たどる</p>
+            <a href="/nenpyo/">年表</a>
+            <a href="/kassen/">合戦データベース</a>
+            <a href="/kyoten/">居城の変遷</a>
+            <a href="/kani/">異名と官位</a>
+          </div>
+          <div class="fm-col">
+            <p class="fm-title">人と勢力</p>
+            <a href="/kashin/">家臣一覧</a>
+            <a href="/tekitai/">敵対勢力一覧</a>
+            <a href="/keizu/">家系図</a>
+          </div>
+          <div class="fm-col">
+            <p class="fm-title">暮らしと文化</p>
+            <a href="/shoku/">食事と好物</a>
+            <a href="/shumi/">趣味・嗜好</a>
+            <a href="/namban/">南蛮との交流</a>
+          </div>
+          <div class="fm-col">
+            <p class="fm-title">調べる</p>
+            <a href="/shiryo/">文献一覧</a>
+            <a href="/shiseki/">史跡・資料館</a>
+            <a href="/yougo/">用語辞典</a>
+          </div>
+        </nav>
+
         <p>
           ノブナガ・ファイル｜通説を鵜呑みにせず、史料の近さで確かめる。
           信憑性度は真偽の断定ではなく、根拠の強さの目安です。
