@@ -1,0 +1,178 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Seal from '../components/Seal.astro';
+import { names, ranks, claims } from '../data/ranks.js';
+import { getEpisode } from '../data/episodes.js';
+
+const shortTitle = (slug) => {
+  const ep = getEpisode(slug);
+  if (!ep) return slug;
+  return ep.title.split('——')[0].trim();
+};
+---
+<BaseLayout
+  title="信長の異名と官位の変遷 — 何者として扱われていたか｜ノブナガ・ファイル"
+  description="吉法師から上総介、権大納言・右近衛大将、右大臣、そして三職推任まで。織田信長の名乗りと官位の変遷を整理し、自称と朝廷の任命の境目、天正6年の辞官の意味を出典とともに検証する。"
+>
+  <article class="wrap kani">
+    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+
+    <p class="eyebrow">異名と官位</p>
+    <h1 class="kn-title">何者として、扱われていたか</h1>
+    <p class="kn-lead">
+      名乗りと官位は、その人物が当時どう扱われていたかの記録である。
+      信長の場合、<strong>自分で名乗ったもの</strong>と<strong>朝廷から与えられたもの</strong>が、
+      ある時点をはさんではっきり分かれる。
+      その境目に、この人物の立場の変化がそのまま出ている。
+    </p>
+
+    <section class="kn-sec">
+      <h2 class="kn-sec-title">名乗りと呼び名</h2>
+      <ul class="nm-list">
+        {names.map((n) => (
+          <li class="nm">
+            <div class="nm-head">
+              <h3 class="nm-name">{n.name}</h3>
+              <span class="nm-kind">{n.kind}</span>
+            </div>
+            <p class="nm-when">{n.when}</p>
+            <p class="nm-desc">{n.desc}</p>
+            {n.episodes && (
+              <p class="nm-eps">
+                {n.episodes.map((s) => <a href={`/episodes/${s}/`}>{shortTitle(s)} →</a>)}
+              </p>
+            )}
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="kn-sec">
+      <h2 class="kn-sec-title">官位の変遷</h2>
+      <p class="kn-sec-lead">
+        朝廷から与えられた官職と位階。信長が公卿に列するのは、長篠の年の暮れである。
+      </p>
+      <ol class="rk-list">
+        {ranks.map((r) => (
+          <li class="rk">
+            <span class="rk-year">{r.year}</span>
+            <div class="rk-body">
+              <h3 class="rk-title">{r.title}</h3>
+              <p class="rk-desc">{r.desc}</p>
+              {r.note && <p class="rk-note">{r.note}</p>}
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="kn-sec">
+      <h2 class="kn-sec-title">語られている話と、その検証</h2>
+      {claims.map((c) => (
+        <div class="claim">
+          <div class="claim-head">
+            <div class="claim-headtext">
+              <h3 class="claim-title">{c.claim}</h3>
+              <p class="claim-verdict">{c.verdict}</p>
+            </div>
+            <div class="claim-seal"><Seal rating={c.rating} size="sm" /></div>
+          </div>
+          <p class="claim-desc">{c.desc}</p>
+        </div>
+      ))}
+    </section>
+
+    <p class="kn-foot">
+      信長は、生涯の最後の四年間を無官で過ごしている。
+      右大臣を辞したまま位階だけを保ち、三職推任にも答えないまま本能寺を迎えた。
+      <strong>何になるかを決めないまま終わった</strong>——
+      信長が最終的に何を目指していたのかという問いに決着がつかないのは、
+      本人が答えを残さなかったからでもある。
+    </p>
+
+    <p class="kn-related">
+      関連：<a href="/episodes/tenka-fubu/">天下布武</a>
+      <span class="kn-sep">｜</span><a href="/kuromaku/">本能寺の黒幕説</a>
+      <span class="kn-sep">｜</span><a href="/nenpyo/">年表</a>
+    </p>
+
+    <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .kani { max-width: 52rem; padding-block: 2rem 3rem; }
+  .ep-back { margin: 0 0 1rem; }
+  .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
+  .ep-back-btm { margin-top: 2.4rem; }
+
+  .kn-title { font-size: clamp(1.7rem, 5vw, 2.4rem); margin: .2rem 0 1rem; }
+  .kn-lead { color: var(--sumi-soft); line-height: 1.9; margin: 0 0 2.4rem; }
+  .kn-lead strong { color: var(--shu); }
+
+  .kn-sec { margin-bottom: 2.8rem; }
+  .kn-sec-title {
+    font-size: 1.25rem; margin: 0 0 .8rem; padding-bottom: .4rem;
+    border-bottom: 2px solid var(--sumi); line-height: 1.5;
+  }
+  .kn-sec-lead { margin: 0 0 1.1rem; font-size: .86rem; color: var(--sumi-soft); line-height: 1.85; }
+
+  .nm-list {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: .9rem;
+  }
+  .nm {
+    border: 1px solid var(--rule); border-left: 3px solid #b8912f;
+    background: var(--washi); padding: .85rem 1rem;
+  }
+  .nm-head { display: flex; align-items: baseline; justify-content: space-between; gap: .6rem; flex-wrap: wrap; }
+  .nm-name { font-size: 1.1rem; margin: 0; line-height: 1.45; letter-spacing: .04em; }
+  .nm-kind {
+    font-family: var(--font-mincho); font-size: .68rem; color: var(--shu);
+    border: 1px solid #c08a80; background: #fbf1ee;
+    padding: .05em .5em; border-radius: 2px; flex-shrink: 0;
+  }
+  .nm-when { margin: .15rem 0 .4rem; font-size: .73rem; color: var(--sumi-soft); font-family: var(--font-gothic); }
+  .nm-desc { margin: 0; font-size: .85rem; line-height: 1.8; }
+  .nm-eps { margin: .4rem 0 0; font-size: .77rem; }
+
+  .rk-list { list-style: none; margin: 0; padding: 0; }
+  .rk {
+    display: grid; grid-template-columns: 10rem 1fr; gap: 1rem;
+    padding: .9rem 0; border-bottom: 1px dotted var(--rule);
+  }
+  .rk:last-child { border-bottom: none; }
+  .rk-year { font-family: var(--font-mincho); font-size: .92rem; padding-top: .15rem; }
+  .rk-body { min-width: 0; }
+  .rk-title { font-size: 1.05rem; margin: 0 0 .3rem; line-height: 1.5; }
+  .rk-desc { margin: 0; font-size: .88rem; line-height: 1.82; }
+  .rk-note {
+    margin: .4rem 0 0; font-size: .79rem; color: var(--sumi-soft); line-height: 1.75;
+    padding-left: .7rem; border-left: 2px solid var(--rule);
+  }
+
+  .claim {
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); padding: 1rem 1.1rem; margin-bottom: 1rem;
+  }
+  .claim-head { display: flex; align-items: flex-start; gap: 1rem; }
+  .claim-headtext { flex: 1; min-width: 0; }
+  .claim-title { font-size: 1.02rem; margin: 0; line-height: 1.55; }
+  .claim-verdict { margin: .2rem 0 0; font-size: .78rem; color: var(--shu); font-family: var(--font-mincho); }
+  .claim-seal { flex-shrink: 0; }
+  .claim-desc { margin: .7rem 0 0; font-size: .89rem; line-height: 1.85; }
+
+  .kn-foot {
+    margin: 2.4rem 0 0; padding-top: 1.2rem; border-top: 3px double var(--sumi);
+    font-size: .9rem; color: var(--sumi-soft); line-height: 1.95;
+  }
+  .kn-foot strong { color: var(--shu); }
+  .kn-related { margin: 1.2rem 0 0; font-size: .84rem; }
+  .kn-sep { color: var(--rule); margin: 0 .5em; }
+
+  @media (max-width: 760px) {
+    .nm-list { grid-template-columns: 1fr; }
+    .rk { grid-template-columns: 1fr; gap: .2rem; }
+    .claim-head { flex-direction: column; gap: .6rem; }
+  }
+</style>

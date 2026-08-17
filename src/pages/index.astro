@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Seal from '../components/Seal.astro';
-import { episodesByYear, timelessEpisodes, ratingRange } from '../data/episodes.js';
+import { episodesByYear, timelessEpisodes } from '../data/episodes.js';
 
 const list = episodesByYear();
 const portraits = timelessEpisodes();
@@ -34,9 +33,12 @@ const portraits = timelessEpisodes();
   </section>
 
   <section class="wrap">
+    <p class="grid-note">
+      各カードの見出しと説明は<strong>語られている通説</strong>です。
+      信憑性度の判定は、それぞれのページの検証項目ごとに示しています。
+    </p>
     <ul class="ep-grid">
       {list.map((ep) => {
-        const { min, max } = ratingRange(ep);
         return (
           <li>
             <a class="ep-card" href={`/episodes/${ep.slug}/`}>
@@ -49,12 +51,8 @@ const portraits = timelessEpisodes();
               <div class="ep-card-foot">
                 <p class="ep-tags">
                   {ep.tags.map((t) => <span class="tag">{t}</span>)}
-                  <span class="ep-count">検証 {ep.points.length}件</span>
                 </p>
-                <div class="ep-seal">
-                  <Seal rating={max} size="sm" />
-                  {min !== max && <span class="tl-spread">信憑 {min}〜{max}</span>}
-                </div>
+                <span class="ep-count">検証 {ep.points.length}件 →</span>
               </div>
             </a>
           </li>
@@ -72,7 +70,6 @@ const portraits = timelessEpisodes();
       </div>
       <ul class="ep-grid">
         {portraits.map((ep) => {
-          const { min, max } = ratingRange(ep);
           return (
             <li>
               <a class="ep-card ep-card--portrait" href={`/episodes/${ep.slug}/`}>
@@ -84,12 +81,8 @@ const portraits = timelessEpisodes();
                 <div class="ep-card-foot">
                   <p class="ep-tags">
                     {ep.tags.map((t) => <span class="tag">{t}</span>)}
-                    <span class="ep-count">検証 {ep.points.length}件</span>
                   </p>
-                  <div class="ep-seal">
-                    <Seal rating={max} size="sm" />
-                    {min !== max && <span class="tl-spread">信憑 {min}〜{max}</span>}
-                  </div>
+                  <span class="ep-count">検証 {ep.points.length}件 →</span>
                 </div>
               </a>
             </li>
@@ -135,6 +128,10 @@ const portraits = timelessEpisodes();
         <span class="ex-title">家臣一覧</span>
         <span class="ex-desc">一門・宿老・側近・降将。誰が何を任され、どう終わったか。</span>
       </a></li>
+      <li><a href="/kassen/">
+        <span class="ex-title">合戦データベース</span>
+        <span class="ex-desc">生涯の主要な戦い36件。相手・結果・『信長公記』の該当巻まで一覧に。</span>
+      </a></li>
       <li><a href="/tekitai/">
         <span class="ex-title">敵対勢力一覧</span>
         <span class="ex-desc">誰と戦い、どう決着したか。滅んだ相手と、決着しないまま終わった相手。</span>
@@ -143,13 +140,33 @@ const portraits = timelessEpisodes();
         <span class="ex-title">家系図</span>
         <span class="ex-desc">維新まで続いた織田家。直系は早く途絶え、四つの大名家が残った。</span>
       </a></li>
+      <li><a href="/kyoten/">
+        <span class="ex-title">居城の変遷</span>
+        <span class="ex-desc">那古野・清洲・小牧山・岐阜・安土。本拠を四度動かした軌跡を地図で。</span>
+      </a></li>
       <li><a href="/shiseki/">
         <span class="ex-title">史跡・資料館</span>
         <span class="ex-desc">行ってみると何が残っているか。遺構か、復元か、石碑一本か。</span>
       </a></li>
+      <li><a href="/namban/">
+        <span class="ex-title">南蛮との交流</span>
+        <span class="ex-desc">宣教師が書き留めた信長と、ローマへ渡って消えた安土山図屏風。</span>
+      </a></li>
+      <li><a href="/kani/">
+        <span class="ex-title">異名と官位</span>
+        <span class="ex-desc">自称の上総介から右大臣まで。そして最後の四年は無官だった。</span>
+      </a></li>
+      <li><a href="/shumi/">
+        <span class="ex-title">趣味・嗜好</span>
+        <span class="ex-desc">相撲・鷹狩・舞・茶の湯。好物と違い、相撲の記録は山ほど残っている。</span>
+      </a></li>
       <li><a href="/shoku/">
         <span class="ex-title">食事と好物</span>
         <span class="ex-desc">記録で確かめられることは、驚くほど少ない。</span>
+      </a></li>
+      <li><a href="/yougo/">
+        <span class="ex-title">用語辞典</span>
+        <span class="ex-desc">与力・撫で斬り・安堵状・一次史料。意味が今と違う語を37語。</span>
       </a></li>
       <li><a href="/shiryo/">
         <span class="ex-title">文献一覧</span>
@@ -230,17 +247,28 @@ const portraits = timelessEpisodes();
     margin: 0; font-size: .86rem; color: var(--sumi-soft); flex: 1;
     display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
   }
-  .ep-card-foot { display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; margin-top: .4rem; }
+  .ep-card-foot {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem; margin-top: .8rem; padding-top: .6rem;
+    border-top: 1px dotted var(--rule);
+  }
   .ep-tags { margin: 0; display: flex; gap: .4rem; align-items: center; flex-wrap: wrap; }
   .tag { font-size: .68rem; color: var(--sumi-soft); border: 1px solid var(--rule); border-radius: 2px; padding: .05em .5em; }
-  .ep-count { font-size: .7rem; color: var(--shu); }
-  .ep-seal { display: flex; flex-direction: column; align-items: center; gap: .2rem; flex-shrink: 0; }
-  .tl-spread { font-size: .62rem; color: var(--sumi-soft); font-family: var(--font-mincho); }
+  .ep-count {
+    font-size: .74rem; color: var(--shu); flex-shrink: 0;
+    font-family: var(--font-mincho); letter-spacing: .03em;
+  }
 
   .portraits { margin-top: 2.4rem; padding-top: 2rem; border-top: 3px double var(--sumi); }
   .portraits-head { margin-bottom: 1.2rem; }
   .portraits-title { font-size: 1.5rem; margin: 0 0 .3rem; }
   .portraits-lead { margin: 0; color: var(--sumi-soft); font-size: .9rem; }
+  .grid-note {
+    margin: 0 0 1rem; padding: .55rem .8rem;
+    border-left: 3px solid var(--shu); background: var(--washi);
+    font-size: .8rem; color: var(--sumi-soft); line-height: 1.75;
+  }
+  .grid-note strong { color: var(--shu); }
 
   .explore { margin-top: 2.6rem; padding-top: 2rem; border-top: 3px double var(--sumi); }
   .explore-head { margin-bottom: 1.2rem; }

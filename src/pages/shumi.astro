@@ -1,0 +1,164 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Seal from '../components/Seal.astro';
+import { themes, claims } from '../data/pastimes.js';
+import { getEpisode } from '../data/episodes.js';
+
+const shortTitle = (slug) => {
+  const ep = getEpisode(slug);
+  if (!ep) return slug;
+  return ep.title.split('——')[0].trim();
+};
+---
+<BaseLayout
+  title="信長の趣味 — 相撲・鷹狩・舞・茶の湯｜ノブナガ・ファイル"
+  description="織田信長が繰り返し催した相撲、生涯続けた鷹狩、人前で舞った幸若舞、そして名物を集めた茶の湯。『信長公記』に残る記録から、信長が何に時間を使ったかを整理し、語られている話は出典とともに検証する。"
+>
+  <article class="wrap shumi">
+    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+
+    <p class="eyebrow">風俗・暮らし</p>
+    <h1 class="sh-title">信長は、何に時間を使ったか</h1>
+    <p class="sh-lead">
+      好物については、記録がほとんど残っていない。
+      ところが<strong>相撲の記録は山ほどある</strong>。
+      この落差は信長の性格というより、
+      『信長公記』が何を書き留める価値があると考えたかを映している。
+      何が記録され、何が記録されなかったか——趣味の一覧は、そのまま史料の性格の一覧でもある。
+    </p>
+
+    {themes.map((t) => (
+      <section class="th">
+        <div class="th-head">
+          <h2 class="th-name">{t.name}</h2>
+          <span class="th-tag">{t.tagline}</span>
+        </div>
+        <p class="th-lead">{t.lead}</p>
+
+        <ul class="rec-list">
+          {t.records.map((r) => (
+            <li>
+              <span class="rec-when">{r.when}</span>
+              <span class="rec-text">{r.text}</span>
+            </li>
+          ))}
+        </ul>
+
+        <p class="th-note">{t.note}</p>
+
+        {t.episodes && (
+          <p class="th-eps">
+            {t.episodes.map((s) => <a href={`/episodes/${s}/`}>{shortTitle(s)} →</a>)}
+          </p>
+        )}
+      </section>
+    ))}
+
+    <section class="sh-claims">
+      <h2 class="sh-claims-title">語られている話と、その検証</h2>
+      {claims.map((c) => (
+        <div class="claim">
+          <div class="claim-head">
+            <div class="claim-headtext">
+              <h3 class="claim-title">{c.claim}</h3>
+              <p class="claim-verdict">{c.verdict}</p>
+            </div>
+            <div class="claim-seal"><Seal rating={c.rating} size="sm" /></div>
+          </div>
+          <p class="claim-desc">{c.desc}</p>
+          {c.episodes && (
+            <p class="claim-eps">
+              {c.episodes.map((s) => <a href={`/episodes/${s}/`}>{shortTitle(s)} →</a>)}
+            </p>
+          )}
+        </div>
+      ))}
+    </section>
+
+    <p class="sh-foot">
+      相撲の記事がこれほど残っているのは、それが単なる娯楽ではなかったからでもある。
+      勝った者はその場で太刀を与えられ、家臣に取り立てられた。
+      家柄によらず一芸で織田家に入れる入口が、年に何度も開かれていたことになる。
+      <strong>趣味の記録が、人材登用の記録でもある</strong>——
+      信長の相撲好きが史料に厚く残った理由は、おそらくそこにある。
+    </p>
+
+    <p class="sh-related">
+      関連：<a href="/shoku/">食事と好物</a>
+      <span class="sh-sep">｜</span><a href="/kashin/">家臣一覧</a>
+      <span class="sh-sep">｜</span><a href="/meigen/">名言・名台詞</a>
+    </p>
+
+    <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .shumi { max-width: 52rem; padding-block: 2rem 3rem; }
+  .ep-back { margin: 0 0 1rem; }
+  .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
+  .ep-back-btm { margin-top: 2.4rem; }
+
+  .sh-title { font-size: clamp(1.7rem, 5vw, 2.4rem); margin: .2rem 0 1rem; }
+  .sh-lead { color: var(--sumi-soft); line-height: 1.9; margin: 0 0 2.4rem; }
+  .sh-lead strong { color: var(--shu); }
+
+  .th { margin-bottom: 2.6rem; }
+  .th-head {
+    display: flex; align-items: baseline; gap: .9rem; flex-wrap: wrap;
+    border-bottom: 2px solid var(--sumi); padding-bottom: .4rem; margin-bottom: .8rem;
+  }
+  .th-name { font-size: 1.5rem; margin: 0; letter-spacing: .06em; }
+  .th-tag { font-size: .8rem; color: var(--shu); font-family: var(--font-mincho); }
+  .th-lead { margin: 0 0 1rem; font-size: .9rem; line-height: 1.9; }
+
+  .rec-list { list-style: none; margin: 0 0 1rem; padding: 0; }
+  .rec-list li {
+    display: grid; grid-template-columns: 9.5rem 1fr; gap: .9rem;
+    padding: .55rem 0; border-bottom: 1px dotted var(--rule);
+    font-size: .86rem; line-height: 1.8;
+  }
+  .rec-list li:last-child { border-bottom: none; }
+  .rec-when { font-family: var(--font-mincho); color: var(--sumi); }
+  .rec-text { color: var(--sumi-soft); }
+
+  .th-note {
+    margin: 0; font-size: .84rem; line-height: 1.8; color: var(--sumi-soft);
+    background: var(--washi); border-left: 3px solid #b8912f;
+    padding: .6rem .9rem;
+  }
+  .th-eps { margin: .5rem 0 0; font-size: .78rem; }
+  .th-eps a { margin-right: .7em; }
+
+  .sh-claims { margin-top: 3rem; }
+  .sh-claims-title {
+    font-size: 1.25rem; margin: 0 0 1rem; padding-bottom: .4rem;
+    border-bottom: 3px double var(--sumi);
+  }
+  .claim {
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); padding: 1rem 1.1rem; margin-bottom: 1rem;
+  }
+  .claim-head { display: flex; align-items: flex-start; gap: 1rem; }
+  .claim-headtext { flex: 1; min-width: 0; }
+  .claim-title { font-size: 1.02rem; margin: 0; line-height: 1.55; }
+  .claim-verdict {
+    margin: .2rem 0 0; font-size: .78rem; color: var(--shu); font-family: var(--font-mincho);
+  }
+  .claim-seal { flex-shrink: 0; }
+  .claim-desc { margin: .7rem 0 0; font-size: .89rem; line-height: 1.85; }
+  .claim-eps { margin: .45rem 0 0; font-size: .78rem; }
+
+  .sh-foot {
+    margin: 2.4rem 0 0; padding-top: 1.2rem; border-top: 3px double var(--sumi);
+    font-size: .9rem; color: var(--sumi-soft); line-height: 1.95;
+  }
+  .sh-foot strong { color: var(--shu); }
+  .sh-related { margin: 1.2rem 0 0; font-size: .84rem; }
+  .sh-sep { color: var(--rule); margin: 0 .5em; }
+
+  @media (max-width: 640px) {
+    .rec-list li { grid-template-columns: 1fr; gap: .15rem; }
+    .claim-head { flex-direction: column; gap: .6rem; }
+  }
+</style>
