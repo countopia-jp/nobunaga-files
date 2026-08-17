@@ -1,0 +1,167 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { groups, closing } from '../data/dedokoro.js';
+
+const total = groups.reduce(
+  (n, g) => n + (g.items?.length ?? 0) + (g.pairs?.length ?? 0) * 2,
+  0
+);
+---
+<BaseLayout
+  title="出どころのない逸話 — 信長像はどう作られたか｜ノブナガ・ファイル"
+  description="織田信長の逸話を四百本あまり集めて分かったこと。史料の裏づけがある核の周囲に、何百もの派生と創作が層をなしている。典拠を示せない逸話を系統ごとに分類し、それぞれがどんな信長像を支えるために生まれたのかを考える。"
+>
+  <article class="wrap dedokoro">
+    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+
+    <p class="eyebrow">人物像の検証</p>
+    <h1 class="dd-title">出どころのない逸話</h1>
+    <p class="dd-lead">
+      信長の逸話を四百本あまり集めて並べてみた。すると構造が見えてきた。
+      中心に、史料の裏づけがある核が数十本ある。
+      その周囲を、核から派生した話が囲む。さらに外側に、核を必要としない創作の層が広がる。
+      <strong>層が外へ行くほど、話は具体的で、鮮やかで、面白くなる。</strong>
+      ここに並べるのは、その外側の {total} 本である。
+    </p>
+
+    <div class="dd-notice">
+      <p>
+        <span class="dd-notice-label">断り</span>
+        これらが事実でないと証明したわけではない。
+        言えるのは<strong>「出どころを示せない」</strong>ということまでで、それ以上ではない。
+        典拠が見つかれば、その話はこのページを出て、しかるべき検証ファイルへ移る。
+      </p>
+    </div>
+
+    {groups.map((g) => (
+      <section class="dg">
+        <h2 class="dg-title">{g.title}</h2>
+        <p class="dg-lead">{g.lead}</p>
+
+        {g.items && (
+          <ul class="dg-list">
+            {g.items.map((t) => <li>{t}</li>)}
+          </ul>
+        )}
+
+        {g.pairs && (
+          <div class="dg-pairs">
+            {g.pairs.map((p) => (
+              <div class="pair">
+                <p class="pair-a">{p.a}</p>
+                <p class="pair-vs">⇕</p>
+                <p class="pair-b">{p.b}</p>
+                <p class="pair-note">{p.note}</p>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {g.core && (
+          <p class="dg-core">
+            <span class="dg-core-label">{g.core.label}</span>
+            <a href={g.core.href}>{g.core.text}</a>
+          </p>
+        )}
+
+        {g.why && <p class="dg-why">{g.why}</p>}
+      </section>
+    ))}
+
+    <section class="dd-closing">
+      <h2 class="dg-title">面白い話ほど、出どころが遠い</h2>
+      {closing.map((p) => <p class="dd-para">{p}</p>)}
+    </section>
+
+    <p class="dd-related">
+      関連：<a href="/meigen/">名言・名台詞（出どころをたどれない言葉）</a>
+      <span class="dd-sep">｜</span><a href="/shiryo/">文献一覧</a>
+      <span class="dd-sep">｜</span><a href="/episodes/utsuke/">「大うつけ」の検証</a>
+    </p>
+
+    <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .dedokoro { max-width: 52rem; padding-block: 2rem 3rem; }
+  .ep-back { margin: 0 0 1rem; }
+  .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
+  .ep-back-btm { margin-top: 2.4rem; }
+
+  .dd-title { font-size: clamp(1.7rem, 5vw, 2.4rem); margin: .2rem 0 1rem; letter-spacing: .04em; }
+  .dd-lead { color: var(--sumi-soft); line-height: 1.95; margin: 0 0 1.4rem; }
+  .dd-lead strong { color: var(--shu); }
+
+  .dd-notice {
+    border: 1px solid var(--rule); border-left: 3px solid var(--sumi);
+    background: var(--washi); padding: .8rem 1rem; margin-bottom: 2.6rem;
+  }
+  .dd-notice p { margin: 0; font-size: .84rem; line-height: 1.85; color: var(--sumi-soft); }
+  .dd-notice strong { color: var(--shu); }
+  .dd-notice-label {
+    font-family: var(--font-mincho); color: var(--shu);
+    margin-right: .7em; font-size: .8rem;
+  }
+
+  .dg { margin-bottom: 3rem; }
+  .dg-title {
+    font-size: 1.3rem; margin: 0 0 .7rem; padding-bottom: .4rem;
+    border-bottom: 2px solid var(--sumi); line-height: 1.5;
+  }
+  .dg-lead { margin: 0 0 1rem; font-size: .9rem; line-height: 1.9; }
+
+  .dg-list { list-style: none; margin: 0 0 1.1rem; padding: 0; }
+  .dg-list li {
+    position: relative; padding: .5rem 0 .5rem 1.6rem;
+    border-bottom: 1px dotted var(--rule);
+    font-size: .89rem; line-height: 1.8; color: var(--sumi-soft);
+  }
+  .dg-list li:last-child { border-bottom: none; }
+  .dg-list li::before {
+    content: '×'; position: absolute; left: .2rem; top: .55rem;
+    font-family: var(--font-mincho); color: #b8b1a7; font-size: .9rem;
+  }
+
+  .dg-pairs { margin-bottom: 1.1rem; }
+  .pair {
+    border: 1px solid var(--rule); background: var(--washi);
+    padding: .9rem 1.1rem; margin-bottom: .8rem;
+  }
+  .pair-a, .pair-b {
+    margin: 0; font-size: .88rem; line-height: 1.8;
+    padding-left: .8rem; border-left: 2px solid #b8912f;
+  }
+  .pair-vs {
+    margin: .35rem 0; font-size: 1rem; color: var(--shu);
+    text-align: center; letter-spacing: .2em;
+  }
+  .pair-note {
+    margin: .6rem 0 0; padding-top: .5rem; border-top: 1px dotted var(--rule);
+    font-size: .8rem; line-height: 1.75; color: var(--sumi-soft);
+  }
+
+  .dg-core {
+    margin: 0 0 1rem; padding: .5rem .8rem;
+    background: var(--washi-deep); font-size: .84rem;
+  }
+  .dg-core-label {
+    font-family: var(--font-mincho); color: var(--shu);
+    margin-right: .7em; font-size: .8rem;
+  }
+
+  .dg-why {
+    margin: 0; font-size: .89rem; line-height: 1.9; color: var(--sumi-soft);
+    background: var(--washi); border-left: 3px solid var(--shu);
+    padding: .8rem 1rem;
+  }
+
+  .dd-closing {
+    margin-top: 3rem; padding-top: 1.4rem; border-top: 3px double var(--sumi);
+  }
+  .dd-closing .dg-title { border-bottom-color: var(--shu); }
+  .dd-para { margin: 0 0 1.1rem; font-size: .92rem; line-height: 2; }
+
+  .dd-related { margin: 2rem 0 0; font-size: .84rem; }
+  .dd-sep { color: var(--rule); margin: 0 .5em; }
+</style>
