@@ -57,6 +57,7 @@ export const enemies = [
       },
       {
         name: '斎藤義龍・龍興',
+        mon: 'futatsunami',
         from: 1556,
         to: 1567,
         base: '美濃・稲葉山',
@@ -68,6 +69,7 @@ export const enemies = [
       },
       {
         name: '北畠具教',
+        mon: 'sasarindou',
         from: 1569,
         to: 1576,
         base: '伊勢',
@@ -120,6 +122,7 @@ export const enemies = [
       },
       {
         name: '松永久秀',
+        mon: 'tsuta',
         from: 1572,
         to: 1577,
         base: '大和・信貴山',
@@ -201,6 +204,7 @@ export const enemies = [
       },
       {
         name: '上杉謙信・景勝',
+        mon: 'takenisuzume',
         from: 1576,
         to: 1582,
         base: '越後・北陸',
@@ -223,6 +227,7 @@ export const enemies = [
       },
       {
         name: '長宗我部元親',
+        mon: 'katabami7',
         from: 1581,
         to: 1582,
         base: '土佐・阿波',
@@ -242,6 +247,7 @@ export const enemies = [
     forces: [
       {
         name: '石山本願寺（顕如）',
+        mon: 'sagarifuji',
         from: 1570,
         to: 1580,
         base: '摂津・大坂',

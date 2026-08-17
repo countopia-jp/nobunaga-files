@@ -41,6 +41,11 @@ const fates = Object.entries(FATE);
         全 {stats.people} 名。うち {stats.myths} 名には、広く知られているが史料の裏づけが弱い話がある。
         該当する人物には<span class="myth-inline">通説</span>の欄を設けた。
       </p>
+      <p class="ka-legend-note ka-legend-mon">
+        名前に添えた家紋は、その人物が用いたと代表的に伝えられるもの。
+        戦国期の武将は複数の紋を使い分けた例が多く、比定そのものに諸説がある。
+        図案は当サイトで作成した。
+      </p>
     </div>
 
     {retainers.map((g) => (
@@ -151,6 +156,7 @@ const fates = Object.entries(FATE);
     margin: .7rem 0 0; padding-top: .6rem; border-top: 1px dotted var(--rule);
     font-size: .78rem; color: var(--sumi-soft); line-height: 1.8;
   }
+  .ka-legend-mon { margin-top: .4rem; padding-top: .5rem; border-top: 1px dotted var(--rule); }
   .myth-inline {
     font-family: var(--font-mincho); color: var(--shu);
     border: 1px solid #c08a80; background: #fbf1ee;

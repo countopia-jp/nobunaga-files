@@ -1,13 +1,26 @@
 ---
 /*
-  家紋コンポーネント｜すべて自作のSVG図案
+  家紋コンポーネント
   ------------------------------------------------
   家紋そのものは中世以来の伝統意匠であり、意匠に著作権は生じない。
-  ここで描いている図形もすべてこのファイル内で生成した自作のもので、
-  外部の画像・フォント・トレース素材は一切使っていない。
-  正確な紋帳の再現ではなく、識別できる程度に単純化した図案である。
+  図案は二種類。
+   ① 単純な幾何形のものは、このファイル内で座標を計算して描いた自作SVG。
+   ② 複雑なものは、生成AIで起こした図案を当サイトでトレースしてSVG化し、
+      public/images/mon/ に置いたもの。CSSマスクで塗るため色は継承される。
+  いずれも外部の素材集や紋帳のトレースは用いていない。
+  なお、戦国期の武将は複数の紋を用いた例が多く、
+  「この人物の紋はこれ」という比定自体に諸説がある。
 */
 const { name, size = 40, title = '' } = Astro.props;
+
+/* 画像からトレースして SVG 化した家紋。public/images/mon/ に置き、
+   CSSマスクで塗るので色は currentColor を継承する。 */
+const TRACED = new Set([
+  'ageha', 'botan', 'futatsukarigane', 'futatsunami', 'katabami7', 'kiri',
+  'mokkou', 'mukaidzuru', 'oshiki3', 'sagarifuji', 'sasarindou',
+  'takenisuzume', 'tsurunomaru', 'tsuta',
+]);
+const isTraced = TRACED.has(name);
 
 const R = (deg) => (deg * Math.PI) / 180;
 const pt = (cx, cy, r, deg) => [cx + r * Math.cos(R(deg)), cy + r * Math.sin(R(deg))];
@@ -46,6 +59,16 @@ const mokkouLobes = (cx, cy, r) =>
 const label = title || name;
 ---
 
+{isTraced && (
+  <span
+    class="mon mon-traced"
+    role={label ? 'img' : 'presentation'}
+    aria-label={label || undefined}
+    style={`--mon-src:url(/images/mon/${name}.svg); width:${size}px; height:${size}px;`}
+  ></span>
+)}
+
+{!isTraced && (
 <svg
   class="mon"
   viewBox="0 0 100 100"
@@ -155,6 +178,25 @@ const label = title || name;
     </g>
   )}
 
+  {name === 'kuyou' && (
+    <g fill="currentColor">
+      <circle cx="50" cy="50" r="17" />
+      {Array.from({ length: 8 }, (_, i) => {
+        const [x, y] = pt(50, 50, 37, -90 + 45 * i);
+        return <circle cx={x} cy={y} r="9.5" />;
+      })}
+    </g>
+  )}
+
+  {name === 'hikiryo3' && (
+    <g>
+      <circle cx="50" cy="50" r="44" fill="none" stroke="currentColor" stroke-width="5" />
+      <rect x="16" y="28" width="68" height="9" fill="currentColor" />
+      <rect x="16" y="45.5" width="68" height="9" fill="currentColor" />
+      <rect x="16" y="63" width="68" height="9" fill="currentColor" />
+    </g>
+  )}
+
   {name === 'tomoe' && (
     <g fill="currentColor">
       <circle cx="50" cy="50" r="44" fill="none" stroke="currentColor" stroke-width="5" />
@@ -167,7 +209,20 @@ const label = title || name;
     </g>
   )}
 </svg>
+)}
 
 <style>
   .mon { display: block; color: inherit; }
+  .mon-traced {
+    display: inline-block;
+    background-color: currentColor;
+    -webkit-mask-image: var(--mon-src);
+    mask-image: var(--mon-src);
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+  }
 </style>

@@ -89,6 +89,7 @@ export const retainers = [
     people: [
       {
         name: '柴田勝家',
+        mon: 'futatsukarigane',
         sources: [
           { label: '信長の発給文書', kind: '一次', note: '北陸方面の指揮を裏づける宛行状・指令が残る' },
           { label: '谷口克広『信長軍の司令官』', kind: '研究', note: '方面軍の編成と部将の序列を扱う' },
@@ -102,6 +103,7 @@ export const retainers = [
       },
       {
         name: '羽柴秀吉',
+        mon: 'kiri',
         yomi: 'ひでよし',
         role: '中国方面軍',
         desc:
@@ -129,6 +131,7 @@ export const retainers = [
       },
       {
         name: '滝川一益',
+        mon: 'mokkou',
         yomi: 'かずます',
         role: '関東方面',
         desc:
@@ -148,6 +151,7 @@ export const retainers = [
       },
       {
         name: '佐久間信盛',
+        mon: 'hikiryo3',
         sources: [
           { label: '信長公記', kind: '一代記', note: '追放にあたって突きつけられた折檻状の内容を記す' },
           { label: '谷口克広『信長と消えた家臣たち』', kind: '研究', note: '失脚・粛清・謀反を主題にした中公新書' },
@@ -185,6 +189,7 @@ export const retainers = [
       },
       {
         name: '池田恒興',
+        mon: 'ageha',
         yomi: 'つねおき',
         role: '摂津・大垣',
         desc: '母が信長の乳母で、乳兄弟として育った。桶狭間から従軍している。',
@@ -270,6 +275,7 @@ export const retainers = [
       },
       {
         name: '森成利（蘭丸）',
+        mon: 'tsurunomaru',
         sources: [
           { label: '信長公記', kind: '一代記', note: '近習としての記述' },
           { label: '谷口克広『信長の親衛隊』', kind: '研究', note: '蘭丸伝説がどう形成されたかを扱う' },
@@ -322,6 +328,7 @@ export const retainers = [
     people: [
       {
         name: '稲葉一鉄',
+        mon: 'oshiki3',
         yomi: 'いってつ',
         role: '西美濃三人衆',
         desc: '斎藤氏の重臣から織田方に転じ、美濃の押さえとなった。',
@@ -346,6 +353,7 @@ export const retainers = [
       },
       {
         name: '松永久秀',
+        mon: 'tsuta',
         yomi: 'ひさひで',
         role: '大和',
         desc:
@@ -356,6 +364,7 @@ export const retainers = [
       },
       {
         name: '荒木村重',
+        mon: 'botan',
         yomi: 'むらしげ',
         role: '摂津',
         desc: '摂津一国を任される厚遇を受けながら、天正6年に叛いた。',
@@ -365,6 +374,7 @@ export const retainers = [
       },
       {
         name: '細川藤孝（幽斎）',
+        mon: 'kuyou',
         yomi: 'ふじたか',
         role: '丹後',
         desc:
@@ -384,6 +394,7 @@ export const retainers = [
       },
       {
         name: '蒲生氏郷',
+        mon: 'mukaidzuru',
         yomi: 'うじさと',
         role: '近江日野',
         desc:
