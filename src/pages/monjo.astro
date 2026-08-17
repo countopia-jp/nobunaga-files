@@ -1,0 +1,201 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { sekkanjo, notYet } from '../data/documents.js';
+---
+<BaseLayout
+  title="佐久間信盛折檻状 全文 — 十九ヶ条を原文と現代語訳で｜ノブナガ・ファイル"
+  description="天正八年、織田信長が宿老・佐久間信盛に突きつけた十九ヶ条の折檻状。『信長公記』巻十三所収の全文を、条ごとに原文と現代語訳で読む。信長の自筆と記される、家臣への評価が本人の言葉で残る稀有な文書。"
+>
+  <article class="wrap monjo">
+    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+
+    <p class="eyebrow">文書を読む</p>
+    <h1 class="mj-title">{sekkanjo.title}</h1>
+    <p class="mj-meta">
+      <span>{sekkanjo.date}</span>
+      <span class="mj-sep">／</span>
+      <span>{sekkanjo.source}</span>
+    </p>
+    <p class="mj-lead">{sekkanjo.lead}</p>
+
+    <div class="mj-base">
+      <span class="mj-base-label">底本</span>
+      <a href={sekkanjo.baseUrl} target="_blank" rel="noopener noreferrer">{sekkanjo.base}</a>
+      <span class="mj-base-note">
+        原文は底本のまま、句読点を付さずに掲げる。現代語訳と語釈は当サイトによる。
+      </span>
+    </div>
+
+    <section class="doc">
+      <div class="dc dc--frame">
+        <p class="dc-genbun">{sekkanjo.prologue.genbun}</p>
+        <p class="dc-yaku">{sekkanjo.prologue.yaku}</p>
+      </div>
+
+      <p class="doc-head">覚</p>
+
+      {sekkanjo.articles.map((a) => (
+        <div class="dc">
+          <span class="dc-n">{a.n}</span>
+          <div class="dc-body">
+            <p class="dc-genbun">一、{a.genbun}</p>
+            <p class="dc-yaku">{a.yaku}</p>
+            {a.note && <p class="dc-note"><span class="dc-note-label">注</span>{a.note}</p>}
+          </div>
+        </div>
+      ))}
+
+      <div class="dc dc--frame">
+        <p class="dc-genbun">{sekkanjo.epilogue.genbun}</p>
+        <p class="dc-yaku">{sekkanjo.epilogue.yaku}</p>
+      </div>
+    </section>
+
+    <section class="mj-sec">
+      <h2 class="mj-sec-title">この後どうなったか</h2>
+      <div class="dc dc--frame">
+        <p class="dc-genbun">{sekkanjo.after.genbun}</p>
+        <p class="dc-yaku">{sekkanjo.after.yaku}</p>
+      </div>
+      <div class="dc dc--frame">
+        <p class="dc-genbun">{sekkanjo.sequel.genbun}</p>
+        <p class="dc-yaku">{sekkanjo.sequel.yaku}</p>
+      </div>
+    </section>
+
+    <section class="mj-sec">
+      <h2 class="mj-sec-title">解説</h2>
+      {sekkanjo.commentary.map((p) => <p class="mj-para">{p}</p>)}
+    </section>
+
+    <section class="mj-sec">
+      <h2 class="mj-sec-title">読むときの注意</h2>
+      <ul class="mj-cautions">
+        {sekkanjo.cautions.map((c) => <li>{c}</li>)}
+      </ul>
+    </section>
+
+    <section class="mj-sec">
+      <h2 class="mj-sec-title">まだ載せていない文書</h2>
+      <p class="mj-sec-lead">
+        載せたいが、いま載せていないものがある。理由もあわせて書いておく。
+      </p>
+      {notYet.map((d) => (
+        <div class="ny">
+          <div class="ny-head">
+            <h3 class="ny-title">{d.title}</h3>
+            <span class="ny-status">{d.status}</span>
+          </div>
+          <p class="ny-desc">{d.desc}</p>
+          <p class="ny-reason"><span class="dc-note-label">理由</span>{d.reason}</p>
+          {d.link && <p class="ny-link"><a href={d.link.href}>{d.link.label} →</a></p>}
+        </div>
+      ))}
+    </section>
+
+    <p class="mj-related">
+      関連：<a href="/kashin/">家臣一覧（佐久間信盛・林秀貞・安藤守就）</a>
+      <span class="mj-sep">｜</span><a href="/nenpyo/">年表</a>
+      <span class="mj-sep">｜</span><a href="/shiryo/">文献一覧</a>
+    </p>
+
+    <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .monjo { max-width: 50rem; padding-block: 2rem 3rem; }
+  .ep-back { margin: 0 0 1rem; }
+  .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
+  .ep-back-btm { margin-top: 2.4rem; }
+
+  .mj-title { font-size: clamp(1.7rem, 5vw, 2.4rem); margin: .2rem 0 .4rem; letter-spacing: .04em; }
+  .mj-meta {
+    margin: 0 0 1rem; font-size: .84rem; color: var(--sumi-soft);
+    font-family: var(--font-mincho);
+  }
+  .mj-sep { color: var(--rule); margin: 0 .5em; }
+  .mj-lead { color: var(--sumi-soft); line-height: 1.9; margin: 0 0 1.4rem; }
+
+  .mj-base {
+    border: 1px solid var(--rule); border-left: 3px solid #b8912f;
+    background: var(--washi); padding: .7rem .9rem; margin-bottom: 2.2rem;
+    font-size: .8rem; line-height: 1.75;
+  }
+  .mj-base-label {
+    font-family: var(--font-mincho); color: var(--shu); margin-right: .6em;
+  }
+  .mj-base-note { display: block; margin-top: .35rem; color: var(--sumi-soft); font-size: .76rem; }
+
+  .doc-head {
+    font-family: var(--font-mincho); font-size: 1.2rem; font-weight: 700;
+    text-align: center; letter-spacing: .5em; text-indent: .5em;
+    margin: 1.6rem 0 1rem; padding-bottom: .4rem;
+    border-bottom: 1px solid var(--sumi);
+  }
+
+  .dc {
+    display: grid; grid-template-columns: 2.2rem 1fr; gap: .8rem;
+    padding: 1rem 0; border-bottom: 1px dotted var(--rule);
+  }
+  .dc--frame { grid-template-columns: 1fr; }
+  .dc-n {
+    font-family: var(--font-mincho); font-size: .95rem; color: var(--shu);
+    text-align: right; padding-top: .1rem;
+  }
+  .dc-body { min-width: 0; }
+
+  .dc-genbun {
+    margin: 0; font-family: var(--font-mincho); font-size: .95rem; line-height: 2.05;
+    color: var(--sumi); padding-left: .9rem; border-left: 2px solid var(--shu);
+    letter-spacing: .02em;
+  }
+  .dc-yaku {
+    margin: .6rem 0 0; font-size: .88rem; line-height: 1.9; color: var(--sumi-soft);
+  }
+  .dc-note {
+    margin: .5rem 0 0; font-size: .79rem; line-height: 1.75; color: var(--sumi-soft);
+    background: var(--washi-deep); padding: .45rem .7rem;
+  }
+  .dc-note-label {
+    font-family: var(--font-mincho); color: var(--shu); margin-right: .6em; font-size: .77rem;
+  }
+
+  .mj-sec { margin-top: 2.6rem; }
+  .mj-sec-title {
+    font-size: 1.2rem; margin: 0 0 .8rem; padding-bottom: .4rem;
+    border-bottom: 3px double var(--sumi);
+  }
+  .mj-sec-lead { margin: 0 0 1rem; font-size: .86rem; color: var(--sumi-soft); line-height: 1.8; }
+  .mj-para { margin: 0 0 1rem; font-size: .9rem; line-height: 1.95; }
+
+  .mj-cautions { margin: 0; padding-left: 1.2rem; }
+  .mj-cautions li {
+    font-size: .84rem; line-height: 1.85; color: var(--sumi-soft); margin-bottom: .5rem;
+  }
+
+  .ny {
+    border: 1px solid var(--rule); border-left: 3px solid #b8b1a7;
+    background: var(--washi); padding: .9rem 1.1rem; margin-bottom: .9rem;
+  }
+  .ny-head { display: flex; align-items: baseline; justify-content: space-between; gap: .8rem; flex-wrap: wrap; }
+  .ny-title { font-size: 1.05rem; margin: 0; line-height: 1.5; }
+  .ny-status {
+    font-family: var(--font-mincho); font-size: .7rem; color: var(--sumi-soft);
+    border: 1px solid var(--rule); background: var(--washi-deep);
+    padding: .05em .55em; border-radius: 2px; white-space: nowrap;
+  }
+  .ny-desc { margin: .4rem 0 0; font-size: .87rem; line-height: 1.85; }
+  .ny-reason {
+    margin: .5rem 0 0; font-size: .81rem; line-height: 1.8; color: var(--sumi-soft);
+    background: var(--washi-deep); padding: .5rem .75rem;
+  }
+  .ny-link { margin: .4rem 0 0; font-size: .78rem; }
+
+  .mj-related { margin: 2rem 0 0; font-size: .84rem; }
+
+  @media (max-width: 600px) {
+    .dc { grid-template-columns: 1.6rem 1fr; gap: .5rem; }
+    .dc-genbun { font-size: .9rem; padding-left: .7rem; }
+  }
+</style>
