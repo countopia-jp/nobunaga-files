@@ -1,0 +1,83 @@
+---
+/*
+  地図コンポーネント｜自前のSVGで描く中部〜近畿の地図
+  ------------------------------------------------
+  海岸線は Natural Earth（パブリックドメイン）由来のパスを
+  ビルド時に焼き込んだもの。実行時に外部へ通信しない。
+
+  props
+    viewBox : 表示範囲（japan-outline.js の座標系）
+    points  : [{ lon, lat, label, sub, tone, dx, dy, anchor }]
+              tone: 'main' | 'sub' ／ dx,dy でラベルをずらし、anchor='end' で右詰め
+    routes  : [{ from, to, label }]  from/to は points の index
+    height  : 表示高さの目安（CSSで可変）
+*/
+import { COAST, BIWA, project } from '../data/japan-outline.js';
+
+const { viewBox = '405 275 160 100', points = [], routes = [], caption = '' } = Astro.props;
+const pts = points.map((p) => ({ ...p, ...project(p.lon, p.lat) }));
+---
+
+<figure class="map">
+  <svg viewBox={viewBox} role="img" aria-label={caption || '中部から近畿にかけての地図'}>
+    <rect x="0" y="0" width="901" height="550" class="sea" />
+    <path d={COAST} class="land" />
+    <path d={BIWA} class="lake" />
+
+    {routes.map((r) => {
+      const a = pts[r.from], b = pts[r.to];
+      if (!a || !b) return null;
+      return <line x1={a.x} y1={a.y} x2={b.x} y2={b.y} class="route" />;
+    })}
+
+    {pts.map((p, i) => (
+      <g class={`pt pt--${p.tone ?? 'main'}`}>
+        <circle cx={p.x} cy={p.y} r={p.tone === 'sub' ? 1.6 : 2.4} />
+        {p.tone !== 'sub' && <circle cx={p.x} cy={p.y} r="3.8" class="halo" />}
+        <text x={p.x + (p.dx ?? 5)} y={p.y + (p.dy ?? -1.5)}
+          text-anchor={p.anchor ?? 'start'} class="lb">{p.label}</text>
+        {p.sub && (
+          <text x={p.x + (p.dx ?? 5)} y={p.y + (p.dy ?? -1.5) + 5.5}
+            text-anchor={p.anchor ?? 'start'} class="lb-sub">{p.sub}</text>
+        )}
+      </g>
+    ))}
+  </svg>
+  {caption && <figcaption>{caption}</figcaption>}
+  <p class="map-credit">海岸線：Natural Earth（パブリックドメイン）より作成／琵琶湖は概略</p>
+</figure>
+
+<style>
+  .map { margin: 0 0 1.4rem; }
+  .map svg {
+    width: 100%; height: auto; display: block;
+    border: 1px solid var(--rule); background: #eceadf;
+  }
+  .sea { fill: #eae6da; }
+  .land { fill: #e3dac4; stroke: #a08a4a; stroke-width: .5; stroke-linejoin: round; }
+  .lake { fill: #d5dde0; stroke: #9aa8ad; stroke-width: .4; }
+
+  .route {
+    stroke: #a11414; stroke-width: .9; stroke-dasharray: 3 2; opacity: .75;
+  }
+
+  .pt circle { fill: #a11414; }
+  .pt .halo { fill: none; stroke: #a11414; stroke-width: .6; opacity: .55; }
+  .pt--sub circle { fill: #6f6a63; }
+
+  .lb {
+    font-family: var(--font-mincho); font-size: 5px; fill: #23201c;
+    paint-order: stroke; stroke: #eae6da; stroke-width: 1.6px; stroke-linejoin: round;
+  }
+  .lb-sub {
+    font-family: var(--font-gothic); font-size: 3.4px; fill: #57514a;
+    paint-order: stroke; stroke: #eae6da; stroke-width: 1.4px; stroke-linejoin: round;
+  }
+  .pt--sub .lb { font-size: 4px; fill: #57514a; }
+
+  figcaption {
+    margin-top: .5rem; font-size: .82rem; color: var(--sumi-soft);
+    font-family: var(--font-mincho);
+  }
+  .map-credit { margin: .25rem 0 0; font-size: .68rem; color: var(--sumi-soft); }
+</style>

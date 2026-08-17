@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="お問い合わせ｜ノブナガ・ファイル"
+  description="ノブナガ・ファイルへのお問い合わせ・ご指摘はこちらから。"
+>
+  <article class="wrap doc">
+    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+    <h1 class="doc-title">お問い合わせ</h1>
+
+    <p class="cform-lead">
+      内容へのご指摘・訂正のご提案・その他のお問い合わせは、下記フォームよりお送りください。
+      史料に基づく誤りのご指摘は、とくに歓迎いたします。いただいた内容は、返信の目的にのみ利用します。
+    </p>
+
+    <form class="cform" action="https://formspree.io/f/mjybepaq" method="POST">
+      <label class="cform-row">
+        <span class="cform-label">お名前</span>
+        <input type="text" name="name" required autocomplete="name" />
+      </label>
+      <label class="cform-row">
+        <span class="cform-label">メールアドレス</span>
+        <input type="email" name="email" required autocomplete="email" />
+      </label>
+      <label class="cform-row">
+        <span class="cform-label">お問い合わせ内容</span>
+        <textarea name="message" rows="7" required></textarea>
+      </label>
+      <button type="submit" class="cform-submit">送信する</button>
+    </form>
+
+    <p class="cform-privacy">
+      送信をもって、<a href="/privacy/">プライバシーポリシー</a>に同意いただいたものとみなします。
+    </p>
+
+    <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .doc { padding-block: 2.4rem 1rem; max-width: var(--prose); }
+  .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
+  .doc-title { font-size: clamp(1.5rem, 4.5vw, 2.1rem); margin: .2rem 0 1.2rem; }
+  .cform-lead { line-height: 1.95; color: var(--sumi-soft); margin: 0 0 1.8rem; }
+
+  .cform { display: flex; flex-direction: column; gap: 1.1rem; }
+  .cform-row { display: flex; flex-direction: column; gap: .35rem; }
+  .cform-label { font-size: .85rem; font-weight: 700; color: var(--sumi); }
+  .cform input, .cform textarea {
+    font: inherit; font-size: .95rem; color: var(--sumi);
+    background: var(--washi); border: 1px solid var(--rule); border-radius: 2px;
+    padding: .6rem .7rem; width: 100%;
+  }
+  .cform input:focus, .cform textarea:focus { outline: 2px solid var(--shu); outline-offset: 1px; border-color: var(--shu); }
+  .cform textarea { resize: vertical; }
+  .cform-submit {
+    align-self: flex-start; font: inherit; font-weight: 700; cursor: pointer;
+    color: var(--washi); background: var(--sumi); border: none; border-radius: 2px;
+    padding: .65rem 1.8rem; letter-spacing: .1em;
+  }
+  .cform-submit:hover { background: var(--shu); }
+  .cform-privacy { font-size: .8rem; color: var(--sumi-soft); margin: 1.2rem 0 1.5rem; }
+</style>

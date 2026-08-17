@@ -1,0 +1,135 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="織田家 家系図 — 維新まで｜ノブナガ・ファイル"
+  description="織田信長の家系を維新まで。直系は大名として早く途絶えたが、次男・信雄の系統と弟・有楽斎の系統から、あわせて四つの織田家が明治維新まで続いた。"
+>
+  <article class="wrap keizu">
+    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+
+    <p class="eyebrow">織田家 家系図</p>
+    <h1 class="k-title">維新まで続いた織田家</h1>
+    <p class="k-lead">
+      信長の<strong>直系</strong>は、大名としては早く途絶える。だが織田家そのものは、
+      次男・信雄の系統と、弟・有楽斎の系統から、あわせて<strong>四つの大名家</strong>が
+      明治維新まで続いた。
+    </p>
+
+    <section class="k-line">
+      <h2 class="k-h2">直系 — 信長 → 信忠 → 秀信</h2>
+      <ol class="k-flow">
+        <li><span class="k-name">織田信長</span></li>
+        <li><span class="k-name">信忠</span><span class="k-note">嫡男。本能寺で信長とともに自刃（1582）</span></li>
+        <li><span class="k-name">秀信（三法師）</span><span class="k-note">清洲会議で家督の象徴に。関ヶ原で西軍につき戦後改易、高野山へ。1605年没</span></li>
+        <li class="k-end"><span class="k-name">直系断絶</span><span class="k-note">大名としての信長直系は、ここで途絶える</span></li>
+      </ol>
+    </section>
+
+    <section class="k-line">
+      <h2 class="k-h2">信雄系 — 信長の血を引く二藩が維新まで</h2>
+      <p class="k-sub">次男・信雄（一度改易ののち大和宇陀松山で復す）の子孫。</p>
+      <div class="k-han-grid">
+        <div class="k-han is-ishin">
+          <p class="k-han-name">天童藩 <span>2万石</span></p>
+          <p class="k-han-place">出羽・現 山形県天童市</p>
+          <p class="k-han-desc">信雄の子・信良の系統（小幡 → 高畠 → 天童）。幕末藩主は織田信敏。戊辰戦争では当初、奥羽越列藩同盟に加わった。維新後は華族（子爵）。</p>
+        </div>
+        <div class="k-han is-ishin">
+          <p class="k-han-name">柏原藩 <span>2万石</span></p>
+          <p class="k-han-place">丹波・現 兵庫県丹波市</p>
+          <p class="k-han-desc">信雄の子・高長の系統（宇陀松山 → 柏原）。幕末藩主は織田信親。官軍側についた。維新後は華族（子爵）。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="k-line">
+      <h2 class="k-h2">有楽斎系 — 信長の弟の系統からも二藩</h2>
+      <p class="k-sub">信長の弟・織田長益（有楽斎。茶人）の子孫。信長の直接の血筋ではなく<strong>傍系（織田一門）</strong>。</p>
+      <div class="k-han-grid">
+        <div class="k-han is-ishin">
+          <p class="k-han-name">芝村藩 <span>1万石</span></p>
+          <p class="k-han-place">大和・現 奈良県桜井市</p>
+          <p class="k-han-desc">長益の四男・長政の系統（戒重藩 → のち芝村へ）。幕末藩主は織田長易。官軍側。</p>
+        </div>
+        <div class="k-han is-ishin">
+          <p class="k-han-name">柳本藩 <span>1万石</span></p>
+          <p class="k-han-place">大和・現 奈良県天理市ほか</p>
+          <p class="k-han-desc">長益の五男・尚長の系統。幕末藩主は織田信及。官軍側。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="k-after">
+      <h2 class="k-h2">その後</h2>
+      <p>明治2年（1869）の版籍奉還で、四家とも藩知事に任じられ華族に列した。明治4年（1871）の廃藩置県で藩は消えたが、家は残った。</p>
+      <p>現在も末裔は「織田会（織田家親族会）」として、柏原・天童・柳本・芝村の四家で続く。毎年6月2日（信長忌）には、安土城址の摠見寺などで法要が営まれる。</p>
+      <p class="k-caveat">※検証の注：明治期の養子縁組により、「生物学的な信長の血統」はそのままの形で伝わっていない部分もある（柏原家の当主自身が認めている）。「家」の連続と「血」の連続は別、という点は押さえておきたい。</p>
+    </section>
+
+    <p class="k-src">参考：Wikipedia「織田氏」「織田信雄」／攻城団「織田家（信雄系）」／奈良県「織田氏の末裔の藩」ほか。</p>
+    <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .keizu { padding-block: 2.4rem 1rem; max-width: var(--prose); }
+  .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
+  .k-title { font-size: clamp(1.6rem, 4.5vw, 2.3rem); margin: .2rem 0 1rem; }
+  .k-lead { color: var(--sumi-soft); line-height: 1.9; margin: 0 0 2.4rem; }
+  .k-lead strong { color: var(--shu); }
+
+  .k-line { margin: 0 0 2.4rem; }
+  .k-h2 {
+    font-size: 1.25rem; border-bottom: 2px solid var(--sumi);
+    padding-bottom: .3rem; margin: 0 0 1rem;
+  }
+  .k-sub { font-size: .9rem; color: var(--sumi-soft); margin: 0 0 1rem; }
+  .k-sub strong { color: var(--shu); }
+
+  .k-flow { list-style: none; margin: 0; padding: 0; }
+  .k-flow li {
+    position: relative; padding: .5rem 0 .5rem 1.4rem; border-left: 2px solid var(--rule);
+  }
+  .k-flow li::before {
+    content: ''; position: absolute; left: -6px; top: 1.05rem;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--washi); border: 2px solid #b8912f;
+  }
+  .k-flow .k-end::before { border-color: var(--sumi-soft); background: var(--washi-deep); }
+  .k-name { font-family: var(--font-mincho); font-weight: 700; font-size: 1.05rem; }
+  .k-flow .k-note { display: block; font-size: .82rem; color: var(--sumi-soft); margin-top: .15rem; }
+  .k-end .k-name { color: var(--sumi-soft); }
+
+  .k-han-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  .k-han {
+    position: relative; overflow: hidden;
+    background: var(--washi); border: 1px solid var(--rule);
+    border-top: 3px solid #b8912f; padding: 1rem 1.1rem;
+  }
+  .k-han-name {
+    font-family: var(--font-mincho); font-weight: 700; font-size: 1.2rem; color: var(--sumi);
+    margin: 0 0 .1rem;
+  }
+  .k-han-name span { font-size: .8rem; color: var(--shu); font-family: var(--font-gothic); margin-left: .3rem; }
+  .k-han-place { font-size: .74rem; color: var(--sumi-soft); margin: 0 0 .6rem; }
+  .k-han-desc { font-size: .86rem; color: var(--sumi-soft); line-height: 1.8; margin: 0; }
+  .k-han.is-ishin::after {
+    content: '維新まで'; position: absolute; top: .55rem; right: .6rem;
+    font-size: .6rem; letter-spacing: .1em; color: #8a6d2f;
+    border: 1px solid #d8c27a; border-radius: 2px; padding: .05em .4em;
+  }
+
+  .k-after { margin: 2.4rem 0 1.6rem; padding-top: 1.6rem; border-top: 1px solid var(--rule); }
+  .k-after p { line-height: 2; margin: 0 0 1rem; }
+  .k-caveat {
+    font-size: .86rem; color: var(--sumi-soft);
+    border-left: 3px solid var(--shu); background: var(--washi-deep);
+    padding: .7rem .9rem; margin-top: 1.2rem !important;
+  }
+  .k-src { font-size: .74rem; color: var(--sumi-soft); margin: 0 0 2rem; }
+
+  @media (max-width: 620px) {
+    .k-han-grid { grid-template-columns: 1fr; }
+  }
+</style>

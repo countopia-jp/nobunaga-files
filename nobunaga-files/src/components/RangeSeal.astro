@@ -1,0 +1,62 @@
+---
+/*
+  一覧カード用の「幅」スタンプ。
+  ------------------------------------------------
+  一枚のカードには複数の検証項目が入っており、判定は項目ごとに違う。
+  そこに単一の朱印（確実／諸説など）を押すと、カードの見出しに掲げた
+  通説そのものが確実だと読めてしまう。それはこのサイトの趣旨と逆になる。
+  そこで一覧では判定語を出さず、判定が何段階に散らばっているかだけを示す。
+*/
+const { min = 1, max = 5, count = 0 } = Astro.props;
+const levels = [1, 2, 3, 4, 5];
+---
+
+<span class="rseal" title={`検証${count}件・信憑性度は${min}から${max}まで分かれる`}>
+  <span class="rseal-cap">信憑性度</span>
+  <span class="rseal-range">{min}–{max}</span>
+  <span class="rseal-bar" aria-hidden="true">
+    {levels.map((n) => (
+      <i class={n >= min && n <= max ? 'on' : ''} data-l={n}></i>
+    ))}
+  </span>
+  <span class="rseal-note">に分かれる</span>
+</span>
+
+<style>
+  .rseal {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.12em;
+    width: 4.6em;
+    height: 4.6em;
+    padding: 0.2em;
+    font-size: 0.85rem;
+    border: 2px dashed #6f6a63;
+    border-radius: 4px;
+    color: #57514a;
+    background: rgba(111, 106, 99, 0.04);
+    font-family: var(--font-mincho);
+    line-height: 1.1;
+    text-align: center;
+    transform: rotate(-3deg);
+  }
+  .rseal-cap { font-size: 0.6em; letter-spacing: 0.06em; }
+  .rseal-range { font-size: 1.3em; font-weight: 700; letter-spacing: 0.02em; }
+  .rseal-note { font-size: 0.55em; color: #7a746c; }
+
+  .rseal-bar { display: flex; gap: 1.5px; margin-top: 0.1em; }
+  .rseal-bar i {
+    display: block;
+    width: 0.42em;
+    height: 0.42em;
+    border: 1px solid #b8b1a7;
+    background: transparent;
+  }
+  .rseal-bar i.on[data-l='5'] { background: #a11414; border-color: #a11414; }
+  .rseal-bar i.on[data-l='4'] { background: #b23a2e; border-color: #b23a2e; }
+  .rseal-bar i.on[data-l='3'] { background: #9a7d3a; border-color: #9a7d3a; }
+  .rseal-bar i.on[data-l='2'] { background: #8a8580; border-color: #8a8580; }
+  .rseal-bar i.on[data-l='1'] { background: #a9a29a; border-color: #a9a29a; }
+</style>

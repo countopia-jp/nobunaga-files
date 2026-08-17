@@ -1,0 +1,229 @@
+---
+/*
+  家紋コンポーネント
+  ------------------------------------------------
+  家紋そのものは中世以来の伝統意匠であり、意匠に著作権は生じない。
+  図案は二種類。
+   ① 単純な幾何形のものは、このファイル内で座標を計算して描いた自作SVG。
+   ② 複雑なものは、生成AIで起こした図案を当サイトでトレースしてSVG化し、
+      public/images/mon/ に置いたもの。CSSマスクで塗るため色は継承される。
+  いずれも外部の素材集や紋帳のトレースは用いていない。
+  なお、戦国期の武将は複数の紋を用いた例が多く、
+  「この人物の紋はこれ」という比定自体に諸説がある。
+*/
+const { name, size = 40, title = '' } = Astro.props;
+
+/* 画像からトレースして SVG 化した家紋。public/images/mon/ に置き、
+   CSSマスクで塗るので色は currentColor を継承する。 */
+const TRACED = new Set([
+  'ageha', 'botan', 'futatsukarigane', 'futatsunami', 'hanabishi', 'katabami7',
+  'kiri', 'kuginuki', 'mitsuboshi', 'mokkou', 'mokkou3', 'mukaidzuru', 'oda',
+  'oshiki3', 'sagarifuji', 'sasarindou', 'takenisuzume', 'tsurunomaru',
+  'tsuta', 'umebachi',
+]);
+const isTraced = TRACED.has(name);
+
+const R = (deg) => (deg * Math.PI) / 180;
+const pt = (cx, cy, r, deg) => [cx + r * Math.cos(R(deg)), cy + r * Math.sin(R(deg))];
+const poly = (cx, cy, r, n, start = -90) =>
+  Array.from({ length: n }, (_, i) => pt(cx, cy, r, start + (360 / n) * i))
+    .map(([x, y]) => `${x.toFixed(2)},${y.toFixed(2)}`)
+    .join(' ');
+
+// 菱（ひし）ひとつ
+const bishi = (cx, cy, w, h) =>
+  `${cx},${cy - h} ${cx + w},${cy} ${cx},${cy + h} ${cx - w},${cy}`;
+
+// 桔梗の花びら（先の尖った五弁）
+const kikyoPath = (cx, cy, r) => {
+  const seg = [];
+  for (let i = 0; i < 5; i++) {
+    const a = -90 + 72 * i;
+    const [tx, ty] = pt(cx, cy, r, a);
+    const [l1x, l1y] = pt(cx, cy, r * 0.42, a - 36);
+    const [l2x, l2y] = pt(cx, cy, r * 0.42, a + 36);
+    const [c1x, c1y] = pt(cx, cy, r * 0.98, a - 26);
+    const [c2x, c2y] = pt(cx, cy, r * 0.98, a + 26);
+    seg.push(`M ${l1x.toFixed(2)} ${l1y.toFixed(2)} Q ${c1x.toFixed(2)} ${c1y.toFixed(2)} ${tx.toFixed(2)} ${ty.toFixed(2)} Q ${c2x.toFixed(2)} ${c2y.toFixed(2)} ${l2x.toFixed(2)} ${l2y.toFixed(2)} Q ${cx} ${cy} ${l1x.toFixed(2)} ${l1y.toFixed(2)} Z`);
+  }
+  return seg.join(' ');
+};
+
+// 木瓜（もっこう）の外郭：中央から放射する五つの丸い花弁
+const mokkouLobes = (cx, cy, r) =>
+  Array.from({ length: 5 }, (_, i) => {
+    const a = -90 + 72 * i;
+    const [x, y] = pt(cx, cy, r * 0.62, a);
+    return { x, y, rr: r * 0.44, a };
+  });
+
+const label = title || name;
+---
+
+{isTraced && (
+  <span
+    class="mon mon-traced"
+    role={label ? 'img' : 'presentation'}
+    aria-label={label || undefined}
+    style={`--mon-src:url(/images/mon/${name}.svg); width:${size}px; height:${size}px;`}
+  ></span>
+)}
+
+{!isTraced && (
+<svg
+  class="mon"
+  viewBox="0 0 100 100"
+  width={size}
+  height={size}
+  role={label ? 'img' : 'presentation'}
+  aria-label={label || undefined}
+  xmlns="http://www.w3.org/2000/svg"
+>
+  {name === 'oda' && (
+    <g>
+      {mokkouLobes(50, 50, 46).map((l) => (
+        <ellipse cx={l.x} cy={l.y} rx={l.rr} ry={l.rr * 0.86}
+          transform={`rotate(${l.a + 90} ${l.x} ${l.y})`}
+          fill="none" stroke="currentColor" stroke-width="4" />
+      ))}
+      <circle cx="50" cy="50" r="14" fill="none" stroke="currentColor" stroke-width="4" />
+      <polygon points={poly(50, 50, 8, 4)} fill="currentColor" />
+    </g>
+  )}
+
+  {name === 'akechi' && (
+    <g>
+      <path d={kikyoPath(50, 50, 44)} fill="currentColor" />
+      <circle cx="50" cy="50" r="9" fill="none" stroke="currentColor" stroke-width="4" />
+    </g>
+  )}
+
+  {name === 'takeda' && (
+    <g fill="currentColor">
+      <polygon points={bishi(50, 26, 15, 20)} />
+      <polygon points={bishi(50, 74, 15, 20)} />
+      <polygon points={bishi(26, 50, 15, 20)} />
+      <polygon points={bishi(74, 50, 15, 20)} />
+    </g>
+  )}
+
+  {name === 'hikiryo' && (
+    <g>
+      <circle cx="50" cy="50" r="44" fill="none" stroke="currentColor" stroke-width="5" />
+      <rect x="18" y="33" width="64" height="10" fill="currentColor" />
+      <rect x="18" y="57" width="64" height="10" fill="currentColor" />
+    </g>
+  )}
+
+  {name === 'meyui' && (
+    <g fill="none" stroke="currentColor" stroke-width="7">
+      <polygon points={bishi(50, 22, 16, 16)} />
+      <polygon points={bishi(50, 78, 16, 16)} />
+      <polygon points={bishi(22, 50, 16, 16)} />
+      <polygon points={bishi(78, 50, 16, 16)} />
+    </g>
+  )}
+
+  {name === 'umebachi' && (
+    <g fill="currentColor">
+      {Array.from({ length: 5 }, (_, i) => {
+        const [x, y] = pt(50, 50, 30, -90 + 72 * i);
+        return <circle cx={x} cy={y} r="14" />;
+      })}
+      <circle cx="50" cy="50" r="9" />
+    </g>
+  )}
+
+  {name === 'sujikai' && (
+    <g fill="currentColor">
+      <polygon points="14,74 34,74 86,20 66,20" />
+      <polygon points="40,74 60,74 86,46 66,46" />
+    </g>
+  )}
+
+  {name === 'sankaibishi' && (
+    <g fill="currentColor">
+      <polygon points={bishi(50, 24, 16, 13)} />
+      <polygon points={bishi(50, 50, 24, 15)} />
+      <polygon points={bishi(50, 78, 32, 17)} />
+    </g>
+  )}
+
+  {name === 'mori' && (
+    <g fill="currentColor">
+      <rect x="16" y="20" width="68" height="12" rx="2" />
+      <circle cx="30" cy="58" r="13" />
+      <circle cx="70" cy="58" r="13" />
+      <circle cx="50" cy="82" r="13" />
+    </g>
+  )}
+
+  {name === 'kikkou3' && (
+    <g fill="none" stroke="currentColor" stroke-width="5">
+      <polygon points={poly(50, 27, 22, 6, -90)} />
+      <polygon points={poly(28, 68, 22, 6, -90)} />
+      <polygon points={poly(72, 68, 22, 6, -90)} />
+    </g>
+  )}
+
+  {name === 'mokkou3' && (
+    <g fill="none" stroke="currentColor" stroke-width="4">
+      {[[50, 27], [28, 68], [72, 68]].map(([cx, cy]) => (
+        <g>
+          {mokkouLobes(cx, cy, 21).map((l) => (
+            <ellipse cx={l.x} cy={l.y} rx={l.rr} ry={l.rr * 0.86}
+              transform={`rotate(${l.a + 90} ${l.x} ${l.y})`} />
+          ))}
+        </g>
+      ))}
+    </g>
+  )}
+
+  {name === 'kuyou' && (
+    <g fill="currentColor">
+      <circle cx="50" cy="50" r="17" />
+      {Array.from({ length: 8 }, (_, i) => {
+        const [x, y] = pt(50, 50, 37, -90 + 45 * i);
+        return <circle cx={x} cy={y} r="9.5" />;
+      })}
+    </g>
+  )}
+
+  {name === 'hikiryo3' && (
+    <g>
+      <circle cx="50" cy="50" r="44" fill="none" stroke="currentColor" stroke-width="5" />
+      <rect x="16" y="28" width="68" height="9" fill="currentColor" />
+      <rect x="16" y="45.5" width="68" height="9" fill="currentColor" />
+      <rect x="16" y="63" width="68" height="9" fill="currentColor" />
+    </g>
+  )}
+
+  {name === 'tomoe' && (
+    <g fill="currentColor">
+      <circle cx="50" cy="50" r="44" fill="none" stroke="currentColor" stroke-width="5" />
+      {Array.from({ length: 3 }, (_, i) => {
+        const a = -90 + 120 * i;
+        const [x, y] = pt(50, 50, 19, a);
+        const [tx, ty] = pt(50, 50, 34, a + 55);
+        return <path d={`M ${x} ${y} A 12 12 0 1 1 ${tx} ${ty} Q ${(x + tx) / 2} ${(y + ty) / 2} ${x} ${y} Z`} />;
+      })}
+    </g>
+  )}
+</svg>
+)}
+
+<style>
+  .mon { display: block; color: inherit; }
+  .mon-traced {
+    display: inline-block;
+    background-color: currentColor;
+    -webkit-mask-image: var(--mon-src);
+    mask-image: var(--mon-src);
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+  }
+</style>

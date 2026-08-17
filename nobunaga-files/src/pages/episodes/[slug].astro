@@ -1,0 +1,149 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Seal from '../../components/Seal.astro';
+import { episodes, getEpisode } from '../../data/episodes.js';
+
+export function getStaticPaths() {
+  return episodes.map((ep) => ({ params: { slug: ep.slug } }));
+}
+
+const { slug } = Astro.params;
+const ep = getEpisode(slug);
+if (!ep) return Astro.redirect('/404');
+
+const desc = ep.lead.slice(0, 110);
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('/images/og-image.jpg', Astro.site);
+---
+
+<BaseLayout title={`${ep.title}｜ノブナガ・ファイル`} description={desc}>
+  <script type="application/ld+json" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: ep.title,
+    description: desc,
+    inLanguage: 'ja',
+    image: ogImage.toString(),
+    mainEntityOfPage: canonical.toString(),
+    author: { '@type': 'Organization', name: 'ノブナガ・ファイル' },
+    publisher: { '@type': 'Organization', name: 'ノブナガ・ファイル' },
+  })} />
+  <article class="wrap ep">
+    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+
+    <p class="eyebrow">{ep.dateLabel}</p>
+    <h1 class="ep-title">{ep.title}</h1>
+
+    <div class="ep-lead">
+      <p class="ep-lead-label">通説</p>
+      <p>{ep.lead}</p>
+    </div>
+
+    <h2 class="ep-h2">検証</h2>
+    <p class="ep-note">
+      信憑性度は「その主張を支える史料の近さ」の目安です（5＝同時代の一次史料、1＝史料に根拠なし）。
+    </p>
+
+    <ol class="points">
+      {ep.points.map((p, i) => (
+        <li class="point">
+          <div class="point-seal"><Seal rating={p.rating} size="md" /></div>
+          <div class="point-body">
+            <p class="point-no">検証 {String(i + 1).padStart(2, '0')}</p>
+            <h3 class="point-claim">{p.claim}</h3>
+            <p class="point-verdict">見立て：{p.verdict}</p>
+            <ul class="src-list">
+              {p.sources.map((s) => (
+                <li class="src">
+                  <div class="src-head">
+                    <span class={`src-kind src-${s.kind}`}>{s.kind}</span>
+                    <span class="src-label">{s.label}</span>
+                    <span class="src-note">{s.note}</span>
+                  </div>
+                  {s.quote && (
+                    <blockquote class="genbun">
+                      <p>{s.quote}</p>
+                      <cite>—『{s.label}』{s.cite ? `　${s.cite}` : ''}</cite>
+                    </blockquote>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </li>
+      ))}
+    </ol>
+
+    {ep.article && ep.article.length > 0 && (
+      <section class="ep-article">
+        <h2 class="ep-h2">解説</h2>
+        {ep.article.map((para) => <p>{para}</p>)}
+      </section>
+    )}
+
+    <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .ep { padding-block: 2.4rem 1rem; max-width: var(--prose); }
+  .ep-article { margin-top: 2.6rem; padding-top: 1.6rem; border-top: 1px solid var(--rule); }
+  .ep-article .ep-h2 { margin-bottom: 1rem; }
+  .ep-article p { margin: 0 0 1.1rem; font-size: 1rem; line-height: 2; color: var(--sumi); }
+  .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
+  .ep-title { font-size: clamp(1.5rem, 4.5vw, 2.2rem); margin: .2rem 0 1.4rem; }
+
+  .ep-lead {
+    border-left: 3px solid var(--shu); background: var(--washi-deep);
+    padding: 1rem 1.2rem; margin: 0 0 2.4rem;
+  }
+  .ep-lead-label {
+    font-family: var(--font-gothic); font-size: .7rem; letter-spacing: .28em;
+    color: var(--shu); margin: 0 0 .4rem;
+  }
+  .ep-lead p:last-child { margin: 0; }
+
+  .ep-h2 { font-size: 1.35rem; border-bottom: 2px solid var(--sumi); padding-bottom: .3rem; margin: 0 0 .4rem; }
+  .ep-note { font-size: .8rem; color: var(--sumi-soft); margin: 0 0 1.6rem; }
+
+  .points { list-style: none; margin: 0; padding: 0; }
+  .point {
+    display: grid; grid-template-columns: 6rem 1fr; gap: 1.2rem;
+    padding: 1.4rem 0; border-top: 1px solid var(--rule);
+  }
+  .point-seal { display: flex; justify-content: center; padding-top: .4rem; }
+  .point-no {
+    font-family: var(--font-gothic); font-size: .7rem; letter-spacing: .2em;
+    color: var(--sumi-soft); margin: 0 0 .2rem;
+  }
+  .point-claim { font-size: 1.12rem; margin: 0 0 .4rem; }
+  .point-verdict { font-size: .9rem; color: var(--shu); margin: 0 0 .7rem; font-family: var(--font-mincho); }
+
+  .src-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .5rem; }
+  .src {
+    display: flex; flex-direction: column; gap: .5rem;
+    font-size: .84rem; background: var(--washi); border: 1px solid var(--rule);
+    padding: .5rem .7rem;
+  }
+  .src-head { display: grid; grid-template-columns: auto auto 1fr; gap: .5rem; align-items: baseline; }
+  .src-label { font-family: var(--font-mincho); font-weight: 700; }
+  .src-note { color: var(--sumi-soft); }
+
+  /* 原文引用（該当箇所の原文。PDの古典本文のみ・底本で要確認） */
+  .genbun {
+    margin: 0; padding: .55rem .8rem;
+    border-left: 3px solid var(--shu); background: var(--washi-deep);
+    font-family: var(--font-mincho);
+  }
+  .genbun p { margin: 0; font-size: .95rem; line-height: 1.9; color: var(--sumi); }
+  .genbun cite {
+    display: block; margin-top: .35rem; font-style: normal;
+    font-size: .7rem; color: var(--sumi-soft); font-family: var(--font-gothic);
+  }
+
+  @media (max-width: 620px) {
+    .point { grid-template-columns: 1fr; gap: .6rem; }
+    .point-seal { justify-content: flex-start; }
+    .src-head { grid-template-columns: 1fr; gap: .2rem; }
+  }
+</style>

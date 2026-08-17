@@ -1,0 +1,179 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MapJP from '../components/MapJP.astro';
+
+const castles = [
+  {
+    from: 1555, to: 1563, name: '清洲城', kuni: '尾張',
+    lon: 136.8434, lat: 35.1997,
+    why: '守護代・織田信友を滅ぼして奪った、尾張下四郡の中心。ここを本拠として尾張統一を進め、桶狭間へもここから出陣した。',
+    now: '現在の天守は平成の模擬天守。本来の城跡は五条川の対岸に公園として残る。',
+    link: '/shiseki/',
+  },
+  {
+    from: 1563, to: 1567, name: '小牧山城', kuni: '尾張',
+    lon: 136.9128, lat: 35.2905,
+    why: '美濃攻めのために、尾張の北端へ前進した。統一を終えた本拠を捨て、国境近くの新地へ移っている。',
+    now: '近年の発掘で山頂部から大規模な石垣が見つかり、「信長の石垣は安土から」という理解が改められた。',
+    link: '/shiseki/',
+  },
+  {
+    from: 1567, to: 1576, name: '岐阜城', kuni: '美濃',
+    lon: 136.7823, lat: 35.4339,
+    why: '稲葉山城を落として入り、井ノ口を岐阜と改めた。「天下布武」の印を使い始めるのもこの頃で、視線が畿内へ向く転換点にあたる。',
+    now: '天守は昭和の再建。山麓の居館跡（千畳敷）では庭園や水路の遺構が出ている。',
+    link: '/episodes/tenka-fubu/',
+  },
+  {
+    from: 1576, to: 1582, name: '安土城', kuni: '近江',
+    lon: 136.1400, lat: 35.1553,
+    why: '京と東国を結ぶ線上にあり、琵琶湖の水運で畿内へ直結する位置。もはや尾張・美濃の領主ではなく、畿内政権の主としての立地である。',
+    now: '天主は本能寺の変の直後に焼失。大手道の石段や礎石が特別史跡として残る。',
+    link: '/shiseki/',
+  },
+];
+
+const start = {
+  name: '那古野城', kuni: '尾張', lon: 136.8994, lat: 35.1856,
+  why: '少年期を過ごした城。家督を継いだ当初の拠点で、ここから尾張の内戦が始まる。',
+  now: 'のちの名古屋城築城で地表の痕跡は失われ、二の丸に石碑が立つのみ。',
+};
+
+const points = [
+  { lon: start.lon, lat: start.lat, label: '那古野', sub: '〜1555', dx: 7, dy: 3 },
+  { lon: castles[0].lon, lat: castles[0].lat, label: '清洲', sub: '1555–63', dx: -5, dy: -2, anchor: 'end' },
+  { lon: castles[1].lon, lat: castles[1].lat, label: '小牧山', sub: '1563–67', dx: 5, dy: -3 },
+  { lon: castles[2].lon, lat: castles[2].lat, label: '岐阜', sub: '1567–76', dx: 5, dy: -3 },
+  { lon: castles[3].lon, lat: castles[3].lat, label: '安土', sub: '1576–82', dx: -5, dy: -3, anchor: 'end' },
+  { lon: 135.7580, lat: 35.0100, label: '京', tone: 'sub', dx: -5, anchor: 'end' },
+  { lon: 136.9770, lat: 35.0580, label: '桶狭間', tone: 'sub', dx: 5, dy: 8 },
+];
+
+const routes = [
+  { from: 0, to: 1 }, { from: 1, to: 2 }, { from: 2, to: 3 }, { from: 3, to: 4 },
+];
+---
+<BaseLayout
+  title="信長の居城の変遷 — 那古野から安土まで｜ノブナガ・ファイル"
+  description="織田信長は生涯で本拠を四度移した。那古野・清洲・小牧山・岐阜・安土。それぞれの立地と移った理由を、地図とともにたどる。"
+>
+  <article class="wrap kyoten">
+    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+
+    <p class="eyebrow">居城の変遷</p>
+    <h1 class="ky-title">本拠を、四度動かした</h1>
+    <p class="ky-lead">
+      信長は生涯で本拠地を四度移している。
+      那古野、清洲、小牧山、岐阜、安土——直線距離にして
+      <strong>およそ七十キロを、二十七年かけて西へ動いた</strong>。
+      城を建てることより、どこに置くかを選び直し続けたことのほうが、この人物らしい。
+    </p>
+
+    <MapJP
+      viewBox="415 285 130 82"
+      points={points}
+      routes={routes}
+      caption="那古野から安土まで。破線は本拠の移動、灰色は参照地点。"
+    />
+
+    <section class="ky-sec">
+      <div class="cs cs--start">
+        <div class="cs-head">
+          <span class="cs-year">〜1555</span>
+          <h2 class="cs-name">{start.name}<span class="cs-kuni">{start.kuni}</span></h2>
+        </div>
+        <p class="cs-why">{start.why}</p>
+        <p class="cs-now"><span class="cs-label">現在</span>{start.now}</p>
+      </div>
+
+      {castles.map((c) => (
+        <div class="cs">
+          <div class="cs-head">
+            <span class="cs-year">{c.from}–{c.to}</span>
+            <h2 class="cs-name">{c.name}<span class="cs-kuni">{c.kuni}</span></h2>
+          </div>
+          <p class="cs-why">{c.why}</p>
+          <p class="cs-now"><span class="cs-label">現在</span>{c.now}</p>
+          <p class="cs-link"><a href={c.link}>関連ページ →</a></p>
+        </div>
+      ))}
+    </section>
+
+    <section class="ky-note">
+      <h2 class="ky-note-title">地図について — 当時の水際は今と違う</h2>
+      <p>
+        上の地図は現在の海岸線である。信長の時代の水際はこれとかなり違っていた。
+        安土城は築城当時、郭が琵琶湖（大中湖）に接していたとされる。
+        長島の一向一揆が三度の攻撃を凌いだのは、そこが木曽三川の三角州に散らばる中州だったからで、
+        現在の地形からはその難攻さが読み取りにくい。
+        京の南に広がっていた巨椋池も、近代の干拓で姿を消している。
+      </p>
+      <p>
+        つまり地図の上で拠点の位置関係を見るときは、
+        <strong>陸地の形そのものが、当時とは別のものだ</strong>という前提がいる。
+        逆に言えば、山の高さと川の流れる向きは今も同じである。
+        地形を手がかりに合戦を考えるときは、変わったものと変わらないものを分けて見るほかない。
+      </p>
+    </section>
+
+    <section class="ky-claim">
+      <h2 class="ky-note-title">語られている話</h2>
+      <p>
+        本拠を移し続けたことは、家臣を土地から切り離す政策——いわゆる兵農分離——の証拠として
+        語られてきた。しかし本拠の移転自体は他の大名にも例があり、
+        制度としての兵農分離がどこまで成立していたかについては、近年慎重な見方が強い。
+        <a href="/episodes/kakushinsha/">革新者だったのか →</a>
+      </p>
+    </section>
+
+    <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .kyoten { max-width: 54rem; padding-block: 2rem 3rem; }
+  .ep-back { margin: 0 0 1rem; }
+  .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
+  .ep-back-btm { margin-top: 2.4rem; }
+
+  .ky-title { font-size: clamp(1.7rem, 5vw, 2.4rem); margin: .2rem 0 1rem; }
+  .ky-lead { color: var(--sumi-soft); line-height: 1.9; margin: 0 0 1.8rem; }
+  .ky-lead strong { color: var(--shu); }
+
+  .ky-sec { margin-top: 2rem; }
+  .cs {
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); padding: .95rem 1.1rem; margin-bottom: .9rem;
+  }
+  .cs--start { border-left-color: #b8b1a7; }
+  .cs-head { display: flex; align-items: baseline; gap: .9rem; flex-wrap: wrap; }
+  .cs-year {
+    font-family: var(--font-mincho); font-size: .9rem; color: var(--sumi-soft);
+    white-space: nowrap;
+  }
+  .cs-name { font-size: 1.25rem; margin: 0; line-height: 1.4; }
+  .cs-kuni {
+    font-family: var(--font-mincho); font-size: .7rem; color: var(--shu);
+    border: 1px solid #c08a80; background: #fbf1ee;
+    padding: .05em .5em; border-radius: 2px; margin-left: .6em; vertical-align: .15em;
+  }
+  .cs-why { margin: .45rem 0 0; font-size: .9rem; line-height: 1.85; }
+  .cs-now {
+    margin: .5rem 0 0; font-size: .82rem; line-height: 1.78; color: var(--sumi-soft);
+    background: var(--washi-deep); padding: .45rem .7rem;
+  }
+  .cs-label {
+    font-family: var(--font-mincho); color: var(--shu); margin-right: .6em; font-size: .78rem;
+  }
+  .cs-link { margin: .4rem 0 0; font-size: .78rem; }
+
+  .ky-note, .ky-claim {
+    margin-top: 2.4rem; padding-top: 1.2rem; border-top: 3px double var(--sumi);
+  }
+  .ky-note-title { font-size: 1.1rem; margin: 0 0 .7rem; }
+  .ky-note p, .ky-claim p {
+    margin: 0 0 .8rem; font-size: .88rem; line-height: 1.9; color: var(--sumi-soft);
+  }
+  .ky-note p:last-child, .ky-claim p:last-child { margin-bottom: 0; }
+  .ky-note strong { color: var(--shu); }
+</style>

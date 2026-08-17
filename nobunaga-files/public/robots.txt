@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://nobunaga-files.com/sitemap-index.xml

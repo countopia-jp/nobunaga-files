@@ -1,0 +1,281 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { retainers, retainerStats, FATE, kashinSources } from '../data/retainers.js';
+import Mon from '../components/Mon.astro';
+import { getEpisode } from '../data/episodes.js';
+
+const shortTitle = (slug) => {
+  const ep = getEpisode(slug);
+  if (!ep) return slug;
+  return ep.title.split('——')[0].trim();
+};
+
+const stats = retainerStats();
+const fates = Object.entries(FATE);
+---
+<BaseLayout
+  title="織田信長の家臣一覧 — 一門・宿老・側近・降将｜ノブナガ・ファイル"
+  description="織田信長に仕えた人びとを、一門・方面軍を預かった宿老・譜代・実務を担った側近・他家から加わった降将に分けて一覧する。それぞれの役割と結末、そして後世に作られた逸話を区別して示す。"
+>
+  <article class="wrap kashin">
+    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+
+    <p class="eyebrow">家臣一覧</p>
+    <h1 class="ka-title">信長は、誰に何を任せたか</h1>
+    <p class="ka-lead">
+      織田家は血縁だけで回っていたわけではない。
+      足軽から方面軍を預かった者がいる一方で、二十年来の重臣が突然追放されてもいる。
+      誰が何を任され、そしてどう終わったのか。
+      名前の並びよりも、<strong>役割と結末</strong>が見えるようにまとめた。
+    </p>
+
+    <div class="ka-legend">
+      <p class="ka-legend-title">結末の見方</p>
+      {fates.map(([name, f]) => (
+        <p class="ka-legend-row">
+          <span class={`fate fate-${f.rank}`}>{name}</span>
+          <span>{f.note}</span>
+        </p>
+      ))}
+      <p class="ka-legend-note">
+        全 {stats.people} 名。うち {stats.myths} 名には、広く知られているが史料の裏づけが弱い話がある。
+        該当する人物には<span class="myth-inline">通説</span>の欄を設けた。
+      </p>
+      <p class="ka-legend-note ka-legend-mon">
+        名前に添えた家紋は、その人物が用いたと代表的に伝えられるもの。
+        戦国期の武将は複数の紋を使い分けた例が多く、比定そのものに諸説がある。
+        図案は当サイトで作成した。
+        なお、家の紋がはっきりしない人物には紋を置いていない。
+        吏僚として仕えた者の多くがこれにあたり、空欄は抜けではなく判断である。
+      </p>
+    </div>
+
+    {retainers.map((g) => (
+      <section class="ka-sec">
+        <h2 class="ka-sec-title">{g.group}</h2>
+        <p class="ka-sec-lead">{g.lead}</p>
+
+        <ul class="ka-grid">
+          {g.people.map((p) => (
+            <li class="pr">
+              <div class="pr-head">
+                <h3 class="pr-name">
+                  {p.mon && <span class="pr-mon"><Mon name={p.mon} size={24} title={`${p.name}の家紋（図案）`} /></span>}
+                  <span>{p.name}</span>
+                  <span class="pr-yomi">{p.yomi}</span>
+                </h3>
+                <span class={`fate fate-${FATE[p.fate].rank}`}>{p.fate}</span>
+              </div>
+              <p class="pr-role">{p.role}</p>
+              <p class="pr-desc">{p.desc}</p>
+              {p.end && <p class="pr-end">{p.end}</p>}
+              {p.myth && (
+                <p class="pr-myth"><span class="pr-myth-label">通説</span>{p.myth}</p>
+              )}
+              {p.sources && p.sources.length > 0 && (
+                <div class="pr-src">
+                  <p class="pr-src-label">この人物が出てくる史料</p>
+                  <ul class="pr-src-list">
+                    {p.sources.map((s) => (
+                      <li>
+                        <span class="src-kind">{s.kind}</span>
+                        <span class="src-name">{s.label}</span>
+                        <span class="src-note">{s.note}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {p.episodes && p.episodes.length > 0 && (
+                <p class="pr-eps">
+                  {p.episodes.map((slug) => (
+                    <a href={`/episodes/${slug}/`}>{shortTitle(slug)} →</a>
+                  ))}
+                </p>
+              )}
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+
+    <section class="ka-sec ka-srcsec">
+      <h2 class="ka-sec-title">家臣団は、どの史料に書かれているか</h2>
+      <p class="ka-sec-lead">
+        この一覧の記述が、どこから来ているかの内訳。
+        信長の家臣団は、秀吉や家康の家臣団に比べて残る史料が少ない分野でもある。
+      </p>
+      {kashinSources.map((s) => (
+        <div class="ks">
+          <div class="ks-head">
+            <h3 class="ks-label">{s.label}</h3>
+            <span class={`fate fate-${s.rank}`}>{s.kind}</span>
+          </div>
+          <p class="ks-author">{s.author}</p>
+          <p class="ks-desc">{s.desc}</p>
+          {s.caution && (
+            <p class="ks-caution"><span class="pr-myth-label">注意</span>{s.caution}</p>
+          )}
+        </div>
+      ))}
+      <p class="ks-more">史料そのものの性格は<a href="/shiryo/">文献一覧</a>にまとめてある。</p>
+    </section>
+
+    <p class="ka-foot">
+      徳川家康はこの一覧に入れていない。三河の同盟者であって、信長の家臣ではないからである。
+      同じように、朝倉・浅井・武田といった敵対勢力の武将も、ここでは扱わない。
+      なお個々の人物については、典拠を明記した辞典（谷口克広『織田信長家臣人名辞典』）があり、
+      名前から史料をたどるならそちらが確実である。
+      <a href="/shiryo/">→ 文献一覧</a>
+    </p>
+
+    <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .kashin { max-width: 62rem; padding-block: 2rem 3rem; }
+  .ep-back { margin: 0 0 1rem; }
+  .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
+  .ep-back-btm { margin-top: 2.4rem; }
+
+  .ka-title { font-size: clamp(1.6rem, 4.5vw, 2.3rem); margin: .2rem 0 1rem; }
+  .ka-lead { color: var(--sumi-soft); line-height: 1.9; margin: 0 0 1.8rem; max-width: 46rem; }
+  .ka-lead strong { color: var(--shu); }
+
+  .ka-legend {
+    border: 1px solid var(--rule); border-left: 3px solid #b8912f;
+    background: var(--washi); padding: .9rem 1.1rem; margin-bottom: 2.6rem;
+  }
+  .ka-legend-title {
+    margin: 0 0 .6rem; font-family: var(--font-mincho); font-weight: 700; font-size: .95rem;
+  }
+  .ka-legend-row {
+    margin: 0 0 .3rem; display: flex; align-items: center; gap: .6rem;
+    font-size: .82rem; color: var(--sumi-soft);
+  }
+  .ka-legend-note {
+    margin: .7rem 0 0; padding-top: .6rem; border-top: 1px dotted var(--rule);
+    font-size: .78rem; color: var(--sumi-soft); line-height: 1.8;
+  }
+  .ka-legend-mon { margin-top: .4rem; padding-top: .5rem; border-top: 1px dotted var(--rule); }
+  .myth-inline {
+    font-family: var(--font-mincho); color: var(--shu);
+    border: 1px solid #c08a80; background: #fbf1ee;
+    font-size: .72rem; padding: .05em .5em; margin: 0 .3em; border-radius: 2px;
+  }
+
+  .fate {
+    flex-shrink: 0; text-align: center;
+    font-family: var(--font-mincho); font-size: .7rem; letter-spacing: .04em;
+    padding: .15em .6em; border-radius: 2px; white-space: nowrap;
+    border: 1px solid var(--f-ink); color: var(--f-ink); background: var(--f-bg);
+  }
+  .fate-5 { --f-ink:#a11414; --f-bg:rgba(161,20,20,.07); }
+  .fate-4 { --f-ink:#b23a2e; --f-bg:rgba(178,58,46,.06); }
+  .fate-3 { --f-ink:#9a7d3a; --f-bg:rgba(154,125,58,.06); }
+  .fate-2 { --f-ink:#57514a; --f-bg:rgba(87,81,74,.04); }
+  .fate-1 { --f-ink:#8a8580; --f-bg:rgba(138,133,128,.05); }
+
+  .ka-sec { margin-bottom: 2.8rem; }
+  .ka-sec-title {
+    font-size: 1.25rem; margin: 0 0 .5rem; padding-bottom: .4rem;
+    border-bottom: 2px solid var(--sumi); line-height: 1.5;
+  }
+  .ka-sec-lead {
+    margin: 0 0 1.2rem; font-size: .86rem; color: var(--sumi-soft); line-height: 1.8;
+    max-width: 46rem;
+  }
+
+  .ka-grid {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;
+  }
+  .pr {
+    border: 1px solid var(--rule); border-left: 3px solid #b8912f;
+    background: var(--washi); padding: .9rem 1.1rem;
+  }
+  .pr-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: .7rem; flex-wrap: wrap;
+  }
+  .pr-name {
+    font-size: 1.1rem; margin: 0; line-height: 1.4;
+    display: flex; align-items: center; gap: .45rem; flex-wrap: wrap;
+  }
+  .pr-mon { flex-shrink: 0; color: #8a6d1f; }
+  .pr-yomi {
+    font-family: var(--font-gothic); font-size: .68rem; font-weight: 400;
+    color: var(--sumi-soft); margin-left: .5em;
+  }
+  .pr-role {
+    margin: .15rem 0 .5rem; font-size: .76rem; color: var(--shu);
+    font-family: var(--font-gothic);
+  }
+  .pr-desc { margin: 0; font-size: .88rem; line-height: 1.8; }
+  .pr-end {
+    margin: .4rem 0 0; font-size: .84rem; line-height: 1.75; color: var(--sumi-soft);
+    padding-left: .7rem; border-left: 2px solid var(--rule);
+  }
+  .pr-myth {
+    margin: .55rem 0 0; font-size: .78rem; line-height: 1.75; color: var(--sumi-soft);
+    background: var(--washi-deep); padding: .45rem .7rem;
+  }
+  .pr-myth-label {
+    font-family: var(--font-mincho); color: var(--shu);
+    margin-right: .6em; font-size: .76rem;
+  }
+  .pr-src {
+    margin: .55rem 0 0; padding: .5rem .7rem;
+    background: var(--washi-deep); border-left: 2px solid #b8912f;
+  }
+  .pr-src-label {
+    margin: 0 0 .3rem; font-size: .7rem; letter-spacing: .06em;
+    font-family: var(--font-mincho); color: var(--shu);
+  }
+  .pr-src-list { list-style: none; margin: 0; padding: 0; }
+  .pr-src-list li {
+    display: flex; align-items: baseline; gap: .45rem; flex-wrap: wrap;
+    font-size: .76rem; line-height: 1.7; color: var(--sumi-soft);
+    padding: .18rem 0;
+  }
+  .src-kind {
+    flex-shrink: 0; font-family: var(--font-mincho); font-size: .66rem;
+    border: 1px solid var(--rule); background: var(--washi);
+    padding: .04em .45em; border-radius: 2px;
+  }
+  .src-name { font-family: var(--font-mincho); color: var(--sumi); }
+
+  .ka-srcsec { margin-top: 3rem; }
+  .ks {
+    border: 1px solid var(--rule); border-left: 3px solid #b8912f;
+    background: var(--washi); padding: .9rem 1.1rem; margin-bottom: .9rem;
+  }
+  .ks-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: .8rem; flex-wrap: wrap;
+  }
+  .ks-label { font-size: 1.05rem; margin: 0; line-height: 1.5; }
+  .ks-author {
+    margin: .15rem 0 .5rem; font-size: .76rem; color: var(--sumi-soft);
+    font-family: var(--font-gothic);
+  }
+  .ks-desc { margin: 0; font-size: .88rem; line-height: 1.82; }
+  .ks-caution {
+    margin: .55rem 0 0; font-size: .79rem; line-height: 1.75; color: var(--sumi-soft);
+    background: var(--washi-deep); padding: .45rem .7rem;
+  }
+  .ks-more { margin: 1rem 0 0; font-size: .82rem; color: var(--sumi-soft); }
+
+  .pr-eps { margin: .5rem 0 0; font-size: .78rem; }
+  .pr-eps a { margin-right: .7em; }
+
+  .ka-foot {
+    margin: 2.4rem 0 0; padding-top: 1.2rem; border-top: 3px double var(--sumi);
+    font-size: .86rem; color: var(--sumi-soft); line-height: 1.9;
+  }
+
+  @media (max-width: 900px) {
+    .ka-grid { grid-template-columns: 1fr; }
+  }
+</style>

@@ -1,0 +1,112 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { glossary, glossaryStats } from '../data/glossary.js';
+
+const stats = glossaryStats();
+---
+<BaseLayout
+  title="戦国・織田家の用語辞典 — サイト内で使う語の解説｜ノブナガ・ファイル"
+  description="与力・馬廻・撫で斬り・安堵状・一次史料・信憑性度。ノブナガ・ファイルの各ページで使っている語を、史料と検証・身分と役職・土地と支配・戦・宗教勢力の5分野に分けて解説する。"
+>
+  <article class="wrap yougo">
+    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+
+    <p class="eyebrow">用語辞典</p>
+    <h1 class="yg-title">言葉のほうから調べる</h1>
+    <p class="yg-lead">
+      検証のページで出てくる語を、{stats.terms} 語ぶん集めた。
+      戦国の記録は、<strong>語の意味が今と違う</strong>ことがしばしばある。
+      「一揆」は反乱のことではないし、「知行」は土地そのものを指すわけでもない。
+      読んでいて引っかかったら、ここに戻ってきてほしい。
+    </p>
+
+    <nav class="yg-nav">
+      {glossary.map((g) => (
+        <a href={`#${encodeURIComponent(g.group)}`}>{g.group}</a>
+      ))}
+    </nav>
+
+    {glossary.map((g) => (
+      <section class="yg-sec" id={g.group}>
+        <h2 class="yg-sec-title">{g.group}</h2>
+        <p class="yg-sec-lead">{g.lead}</p>
+        <dl class="tm-list">
+          {g.terms.map((t) => (
+            <div class="tm" id={t.id}>
+              <dt class="tm-head">
+                <span class="tm-word">{t.word}</span>
+                <span class="tm-yomi">{t.yomi}</span>
+              </dt>
+              <dd class="tm-desc">
+                {t.desc}
+                {t.link && <a class="tm-link" href={t.link}>関連ページ →</a>}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+    ))}
+
+    <p class="yg-foot">
+      語の意味を今の感覚で読み替えてしまうことは、
+      通説を鵜呑みにするのと同じくらい、史料の読み違いにつながる。
+      <strong>「一揆」を暴動、「撫で斬り」を信長固有の残虐さ、と読んだ瞬間に、
+      その時代が見えなくなる</strong>——この辞典は、そのための予防線でもある。
+    </p>
+
+    <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .yougo { max-width: 52rem; padding-block: 2rem 3rem; }
+  .ep-back { margin: 0 0 1rem; }
+  .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
+  .ep-back-btm { margin-top: 2.4rem; }
+
+  .yg-title { font-size: clamp(1.7rem, 5vw, 2.4rem); margin: .2rem 0 1rem; }
+  .yg-lead { color: var(--sumi-soft); line-height: 1.9; margin: 0 0 1.6rem; }
+  .yg-lead strong { color: var(--shu); }
+
+  .yg-nav {
+    display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 2.4rem;
+    padding: .7rem .9rem; border: 1px solid var(--rule); background: var(--washi);
+  }
+  .yg-nav a {
+    font-family: var(--font-mincho); font-size: .82rem;
+    border: 1px solid var(--rule); background: var(--washi-deep);
+    padding: .2em .7em; border-radius: 2px; color: var(--sumi);
+  }
+  .yg-nav a:hover { border-color: var(--shu); color: var(--shu); text-decoration: none; }
+
+  .yg-sec { margin-bottom: 2.8rem; scroll-margin-top: 5rem; }
+  .yg-sec-title {
+    font-size: 1.25rem; margin: 0 0 .5rem; padding-bottom: .4rem;
+    border-bottom: 2px solid var(--sumi); line-height: 1.5;
+  }
+  .yg-sec-lead { margin: 0 0 1.1rem; font-size: .85rem; color: var(--sumi-soft); line-height: 1.8; }
+
+  .tm-list { margin: 0; padding: 0; }
+  .tm {
+    padding: .7rem 0; border-bottom: 1px dotted var(--rule);
+    scroll-margin-top: 5rem;
+  }
+  .tm:last-child { border-bottom: none; }
+  .tm:target { background: rgba(184,145,47,.10); }
+  .tm-head { display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap; margin: 0; }
+  .tm-word {
+    font-family: var(--font-mincho); font-size: 1.08rem; font-weight: 700;
+    color: var(--sumi); letter-spacing: .04em;
+  }
+  .tm-yomi { font-size: .72rem; color: var(--sumi-soft); font-family: var(--font-gothic); }
+  .tm-desc {
+    margin: .25rem 0 0; font-size: .88rem; line-height: 1.85; color: var(--sumi-soft);
+  }
+  .tm-link { margin-left: .6em; font-size: .78rem; white-space: nowrap; }
+
+  .yg-foot {
+    margin: 2.4rem 0 0; padding-top: 1.2rem; border-top: 3px double var(--sumi);
+    font-size: .9rem; color: var(--sumi-soft); line-height: 1.95;
+  }
+  .yg-foot strong { color: var(--shu); }
+</style>

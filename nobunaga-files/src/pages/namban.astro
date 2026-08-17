@@ -1,0 +1,165 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Seal from '../components/Seal.astro';
+import { facts, froisView, claims } from '../data/namban.js';
+---
+<BaseLayout
+  title="信長と南蛮 — 宣教師との交流、そして消えた屏風｜ノブナガ・ファイル"
+  description="織田信長と宣教師の関わりを、記録で確かめられることから整理する。フロイスとの謁見、南蛮寺と安土のセミナリヨ、ヴァリニャーノに贈られ行方不明となった安土山図屏風。宗教への寛容という通説も出典から検証する。"
+>
+  <article class="wrap namban">
+    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+
+    <p class="eyebrow">南蛮との交流</p>
+    <h1 class="nb-title">外から見られた信長</h1>
+    <p class="nb-lead">
+      信長と外国人の接触については、日本側の史料よりも<strong>宣教師の側の記録</strong>のほうが多く残っている。
+      容姿、声、酒を飲むかどうか——日本の記録が書かないことを、外の目が書いている。
+      この非対称そのものが、この章のいちばんの見どころである。
+    </p>
+
+    <section class="nb-sec">
+      <h2 class="nb-sec-title">記録で確かめられること</h2>
+      {facts.map((f) => (
+        <div class="fact">
+          <div class="fact-head">
+            <span class="fact-year">{f.year}</span>
+            <h3 class="fact-title">{f.title}</h3>
+          </div>
+          <p class="fact-desc">{f.desc}</p>
+          {f.caution && <p class="fact-caution"><span class="c-label">注意</span>{f.caution}</p>}
+          {f.link && <p class="fact-link"><a href={f.link.href}>{f.link.label} →</a></p>}
+        </div>
+      ))}
+    </section>
+
+    <section class="nb-sec">
+      <h2 class="nb-sec-title">フロイスが書き留めた信長</h2>
+      <p class="nb-sec-lead">{froisView.lead}</p>
+      <ul class="fv-list">
+        {froisView.items.map((i) => (
+          <li>
+            <span class="fv-label">{i.label}</span>
+            <span class="fv-desc">{i.desc}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="fv-caution"><span class="c-label">注意</span>{froisView.caution}</p>
+    </section>
+
+    <section class="nb-sec">
+      <h2 class="nb-sec-title">語られている話と、その検証</h2>
+      {claims.map((c) => (
+        <div class="claim">
+          <div class="claim-head">
+            <div class="claim-headtext">
+              <h3 class="claim-title">{c.claim}</h3>
+              <p class="claim-verdict">{c.verdict}</p>
+            </div>
+            <div class="claim-seal"><Seal rating={c.rating} size="sm" /></div>
+          </div>
+          <p class="claim-desc">{c.desc}</p>
+          {c.caution && <p class="claim-caution"><span class="c-label">注意</span>{c.caution}</p>}
+        </div>
+      ))}
+    </section>
+
+    <p class="nb-foot">
+      信長が贈った屏風は、四百年以上のあいだ行方が分からないままである。
+      そこには焼ける前の安土城が、信長自身の監修のもとに描かれていた。
+      <strong>信長の時代を最もよく伝える一点は、いま日本にない</strong>——
+      この事実は、私たちが何をもとに信長を語っているのかを、そのまま示している。
+    </p>
+
+    <p class="nb-related">
+      関連：<a href="/shoku/">食事と好物</a>
+      <span class="nb-sep">｜</span><a href="/kashin/">家臣一覧（弥助）</a>
+      <span class="nb-sep">｜</span><a href="/shiryo/">文献一覧（フロイスの記録）</a>
+    </p>
+
+    <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .namban { max-width: 52rem; padding-block: 2rem 3rem; }
+  .ep-back { margin: 0 0 1rem; }
+  .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
+  .ep-back-btm { margin-top: 2.4rem; }
+
+  .nb-title { font-size: clamp(1.7rem, 5vw, 2.4rem); margin: .2rem 0 1rem; }
+  .nb-lead { color: var(--sumi-soft); line-height: 1.9; margin: 0 0 2.4rem; }
+  .nb-lead strong { color: var(--shu); }
+
+  .nb-sec { margin-bottom: 2.8rem; }
+  .nb-sec-title {
+    font-size: 1.25rem; margin: 0 0 .8rem; padding-bottom: .4rem;
+    border-bottom: 2px solid var(--sumi); line-height: 1.5;
+  }
+  .nb-sec-lead { margin: 0 0 1rem; font-size: .87rem; color: var(--sumi-soft); line-height: 1.85; }
+
+  .c-label {
+    font-family: var(--font-mincho); color: var(--shu);
+    margin-right: .6em; font-size: .77rem;
+  }
+
+  .fact {
+    border: 1px solid var(--rule); border-left: 3px solid #b8912f;
+    background: var(--washi); padding: .9rem 1.1rem; margin-bottom: .9rem;
+  }
+  .fact-head { display: flex; align-items: baseline; gap: .8rem; flex-wrap: wrap; }
+  .fact-year {
+    font-family: var(--font-mincho); font-size: .8rem; color: var(--sumi-soft);
+    white-space: nowrap;
+  }
+  .fact-title { font-size: 1.05rem; margin: 0; line-height: 1.5; }
+  .fact-desc { margin: .4rem 0 0; font-size: .9rem; line-height: 1.85; }
+  .fact-caution {
+    margin: .55rem 0 0; font-size: .8rem; line-height: 1.78; color: var(--sumi-soft);
+    background: var(--washi-deep); padding: .45rem .7rem;
+  }
+  .fact-link { margin: .45rem 0 0; font-size: .78rem; }
+
+  .fv-list { list-style: none; margin: 0; padding: 0; }
+  .fv-list li {
+    display: grid; grid-template-columns: 5.5rem 1fr; gap: .8rem;
+    padding: .5rem 0; border-bottom: 1px dotted var(--rule);
+    font-size: .88rem; line-height: 1.8;
+  }
+  .fv-list li:last-child { border-bottom: none; }
+  .fv-label { font-family: var(--font-mincho); color: var(--shu); }
+  .fv-caution {
+    margin: .8rem 0 0; font-size: .8rem; line-height: 1.78; color: var(--sumi-soft);
+    background: var(--washi-deep); padding: .5rem .8rem;
+  }
+
+  .claim {
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); padding: 1rem 1.1rem; margin-bottom: 1rem;
+  }
+  .claim-head { display: flex; align-items: flex-start; gap: 1rem; }
+  .claim-headtext { flex: 1; min-width: 0; }
+  .claim-title { font-size: 1.02rem; margin: 0; line-height: 1.55; }
+  .claim-verdict {
+    margin: .2rem 0 0; font-size: .78rem; color: var(--shu); font-family: var(--font-mincho);
+  }
+  .claim-seal { flex-shrink: 0; }
+  .claim-desc { margin: .7rem 0 0; font-size: .9rem; line-height: 1.85; }
+  .claim-caution {
+    margin: .55rem 0 0; font-size: .8rem; line-height: 1.78; color: var(--sumi-soft);
+    padding-left: .8rem; border-left: 2px solid var(--rule);
+  }
+
+  .nb-foot {
+    margin: 2.4rem 0 0; padding-top: 1.2rem; border-top: 3px double var(--sumi);
+    font-size: .9rem; color: var(--sumi-soft); line-height: 1.95;
+  }
+  .nb-foot strong { color: var(--shu); }
+  .nb-related { margin: 1.2rem 0 0; font-size: .84rem; }
+  .nb-sep { color: var(--rule); margin: 0 .5em; }
+
+  @media (max-width: 640px) {
+    .claim-head { flex-direction: column; gap: .6rem; }
+    .fv-list li { grid-template-columns: 1fr; gap: .1rem; }
+  }
+</style>

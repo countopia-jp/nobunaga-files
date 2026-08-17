@@ -1,0 +1,121 @@
+---
+import '../styles/global.css';
+
+const {
+  title = 'ノブナガ・ファイル',
+  description = '織田信長をめぐる通説を、時系列で検証する。ドラマで語られる逸話の出典を示し、史料の近さで信憑性度を判定するファイル。',
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('/images/og-image.jpg', Astro.site);
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ノブナガ・ファイル" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta property="og:locale" content="ja_JP" />
+
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'ノブナガ・ファイル',
+      alternateName: 'The Nobunaga Files',
+      url: 'https://nobunaga-files.com',
+      description: '織田信長をめぐる通説を、史料の近さで検証する。出典と原文を示し、信憑性度を判定するファイル。',
+      inLanguage: 'ja',
+    })} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="site-head">
+      <div class="wrap">
+        <a href="/" class="brand">
+          ノブナガ・ファイル
+          <span class="en">THE NOBUNAGA FILES</span>
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-foot">
+      <div class="wrap">
+        <nav class="foot-map">
+          <div class="fm-col">
+            <p class="fm-title">検証する</p>
+            <a href="/">検証ファイル一覧</a>
+            <a href="/kuromaku/">本能寺の黒幕説</a>
+            <a href="/meigen/">名言・名台詞</a>
+            <a href="/monjo/">文書を読む</a>
+            <a href="/dedokoro/">出どころのない逸話</a>
+          </div>
+          <div class="fm-col">
+            <p class="fm-title">たどる</p>
+            <a href="/nenpyo/">年表</a>
+            <a href="/kassen/">合戦データベース</a>
+            <a href="/kyoten/">居城の変遷</a>
+            <a href="/kani/">異名と官位</a>
+          </div>
+          <div class="fm-col">
+            <p class="fm-title">人と勢力</p>
+            <a href="/kashin/">家臣一覧</a>
+            <a href="/tekitai/">敵対勢力一覧</a>
+            <a href="/keizu/">家系図</a>
+          </div>
+          <div class="fm-col">
+            <p class="fm-title">暮らしと文化</p>
+            <a href="/shoku/">食事と好物</a>
+            <a href="/shumi/">趣味・嗜好</a>
+            <a href="/namban/">南蛮との交流</a>
+          </div>
+          <div class="fm-col">
+            <p class="fm-title">調べる</p>
+            <a href="/shiryo/">文献一覧</a>
+            <a href="/shiseki/">史跡・資料館</a>
+            <a href="/yougo/">用語辞典</a>
+          </div>
+        </nav>
+
+        <p>
+          ノブナガ・ファイル｜通説を鵜呑みにせず、史料の近さで確かめる。
+          信憑性度は真偽の断定ではなく、根拠の強さの目安です。
+        </p>
+        <p class="foot-img">
+          図版について：家紋・図表・背景はすべて当サイトの自作。
+          史料画像はパブリックドメインのものに限り、所蔵先を明記して掲載しています。
+        </p>
+        <p class="foot-nav">
+          <a href="/privacy/">プライバシーポリシー・免責事項</a>
+          <span class="foot-sep">｜</span>
+          <a href="/contact/">お問い合わせ</a>
+        </p>
+        <p>&copy; {new Date().getFullYear()} The Nobunaga Files</p>
+      </div>
+    </footer>
+  </body>
+</html>

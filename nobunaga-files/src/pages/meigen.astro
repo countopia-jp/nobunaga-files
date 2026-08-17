@@ -1,0 +1,188 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Seal from '../components/Seal.astro';
+import { groups, misattributed, quoteStats } from '../data/quotes.js';
+import { getEpisode } from '../data/episodes.js';
+
+const shortTitle = (slug) => {
+  const ep = getEpisode(slug);
+  if (!ep) return slug;
+  return ep.title.split('——')[0].trim();
+};
+
+const stats = quoteStats();
+---
+<BaseLayout
+  title="信長の名言・名台詞の真贋 — その言葉は、どこから来たか｜ノブナガ・ファイル"
+  description="「是非に及ばず」「敵は本能寺にあり」「鳴かぬなら」「人間五十年」「であるか」。織田信長の言葉として広まっているものを、出典の近さで分類し、信憑性度を添えて検証する。"
+>
+  <article class="wrap meigen">
+    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+
+    <p class="eyebrow">名言・名台詞</p>
+    <h1 class="mg-title">その言葉は、どこから来たか</h1>
+    <p class="mg-lead">
+      信長の言葉として引かれるもののうち、記録に残っているものは驚くほど少ない。
+      有名さと、出典の近さは比例しない。
+      むしろ<strong>最も有名な台詞ほど、最も遠い本から来ている</strong>。
+      全 {stats.total} 句のうち、史料にあると言えるのは {stats.documented} 句だけである。
+    </p>
+
+    {groups.map((g) => (
+      <section class="mg-sec">
+        <h2 class="mg-sec-title">{g.title}</h2>
+        <p class="mg-sec-lead">{g.lead}</p>
+
+        {g.quotes.map((q) => (
+          <div class="qt">
+            <div class="qt-head">
+              <div class="qt-headtext">
+                <p class="qt-text">{q.text}</p>
+                <p class="qt-verdict">{q.verdict}</p>
+              </div>
+              <div class="qt-seal"><Seal rating={q.rating} size="sm" /></div>
+            </div>
+
+            <p class="qt-origin">
+              <span class="qt-kind">{q.kind}</span>
+              <span class="qt-origin-label">出どころ</span>
+              <span class="qt-origin-name">{q.origin}</span>
+            </p>
+
+            <p class="qt-desc">{q.desc}</p>
+            {q.caution && (
+              <p class="qt-caution"><span class="qt-c-label">注意</span>{q.caution}</p>
+            )}
+            {q.episodes && q.episodes.length > 0 && (
+              <p class="qt-eps">
+                {q.episodes.map((slug) => (
+                  <a href={`/episodes/${slug}/`}>{shortTitle(slug)} →</a>
+                ))}
+              </p>
+            )}
+          </div>
+        ))}
+      </section>
+    ))}
+
+    <section class="mg-sec">
+      <h2 class="mg-sec-title">そもそも信長の言葉ではないもの</h2>
+      <p class="mg-sec-lead">別人の言葉が、いつのまにか信長に付け替えられている例。</p>
+      <ul class="mis-list">
+        {misattributed.map((m) => (
+          <li class="mis">
+            <p class="mis-text">{m.text}</p>
+            <p class="mis-who">本来は：{m.who}</p>
+            <p class="mis-note">{m.note}</p>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <p class="mg-foot">
+      言葉は、人物像を最短距離で伝える。だからこそ、後世が最も手を入れたがる部分でもある。
+      「是非に及ばず」は牛一が書き留めた六文字だが、
+      「敵は本能寺にあり」は頼山陽の筆であり、「であるか」に至っては誰が言わせたのかも分からない。
+      信長の言葉を引くとき、私たちはしばしば
+      <strong>信長ではなく、後の時代の誰かの文章</strong>を引いている。
+    </p>
+
+    <p class="mg-related">
+      関連：<a href="/shiryo/">文献一覧</a>
+      <span class="mg-sep">｜</span>
+      <a href="/kuromaku/">本能寺の黒幕説</a>
+    </p>
+
+    <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .meigen { max-width: 52rem; padding-block: 2rem 3rem; }
+  .ep-back { margin: 0 0 1rem; }
+  .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
+  .ep-back-btm { margin-top: 2.4rem; }
+
+  .mg-title { font-size: clamp(1.7rem, 5vw, 2.4rem); margin: .2rem 0 1rem; }
+  .mg-lead { color: var(--sumi-soft); line-height: 1.9; margin: 0 0 2.4rem; }
+  .mg-lead strong { color: var(--shu); }
+
+  .mg-sec { margin-bottom: 2.8rem; }
+  .mg-sec-title {
+    font-size: 1.25rem; margin: 0 0 .5rem; padding-bottom: .4rem;
+    border-bottom: 2px solid var(--sumi); line-height: 1.5;
+  }
+  .mg-sec-lead {
+    margin: 0 0 1.2rem; font-size: .86rem; color: var(--sumi-soft); line-height: 1.8;
+  }
+
+  .qt {
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); padding: 1rem 1.2rem; margin-bottom: 1rem;
+  }
+  .qt-head { display: flex; align-items: flex-start; gap: 1rem; }
+  .qt-headtext { flex: 1; min-width: 0; }
+  .qt-text {
+    margin: 0; font-family: var(--font-mincho); font-size: 1.4rem;
+    font-weight: 700; color: var(--sumi); line-height: 1.5; letter-spacing: .04em;
+  }
+  .qt-verdict {
+    margin: .25rem 0 0; font-size: .8rem; color: var(--shu);
+    font-family: var(--font-mincho);
+  }
+  .qt-seal { flex-shrink: 0; }
+
+  .qt-origin {
+    margin: .8rem 0 .6rem; padding: .4rem .7rem;
+    background: var(--washi-deep);
+    display: flex; align-items: baseline; gap: .6rem; flex-wrap: wrap;
+    font-size: .82rem;
+  }
+  .qt-kind {
+    font-family: var(--font-mincho); font-size: .68rem; flex-shrink: 0;
+    border: 1px solid var(--rule); background: var(--washi);
+    padding: .05em .5em; border-radius: 2px;
+  }
+  .qt-origin-label { font-size: .72rem; color: var(--sumi-soft); }
+  .qt-origin-name { font-family: var(--font-mincho); color: var(--sumi); }
+
+  .qt-desc { margin: 0; font-size: .9rem; line-height: 1.85; }
+  .qt-caution {
+    margin: .55rem 0 0; font-size: .8rem; line-height: 1.78; color: var(--sumi-soft);
+    padding-left: .8rem; border-left: 2px solid var(--rule);
+  }
+  .qt-c-label {
+    font-family: var(--font-mincho); color: var(--shu);
+    margin-right: .6em; font-size: .77rem;
+  }
+  .qt-eps { margin: .5rem 0 0; font-size: .78rem; }
+  .qt-eps a { margin-right: .7em; }
+
+  .mis-list { list-style: none; margin: 0; padding: 0; }
+  .mis {
+    border: 1px solid var(--rule); background: var(--washi);
+    padding: .8rem 1rem; margin-bottom: .8rem;
+  }
+  .mis-text {
+    margin: 0; font-family: var(--font-mincho); font-size: 1.05rem;
+    color: var(--sumi); line-height: 1.5;
+  }
+  .mis-who {
+    margin: .2rem 0 .4rem; font-size: .78rem; color: var(--shu);
+    font-family: var(--font-gothic);
+  }
+  .mis-note { margin: 0; font-size: .84rem; line-height: 1.8; color: var(--sumi-soft); }
+
+  .mg-foot {
+    margin: 2.4rem 0 0; padding-top: 1.2rem; border-top: 3px double var(--sumi);
+    font-size: .9rem; color: var(--sumi-soft); line-height: 1.95;
+  }
+  .mg-foot strong { color: var(--shu); }
+  .mg-related { margin: 1.2rem 0 0; font-size: .84rem; }
+  .mg-sep { color: var(--rule); margin: 0 .5em; }
+
+  @media (max-width: 640px) {
+    .qt-head { flex-direction: column; gap: .6rem; }
+    .qt-text { font-size: 1.2rem; }
+  }
+</style>

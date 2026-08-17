@@ -1,0 +1,341 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { episodesByYear, timelessEpisodes } from '../data/episodes.js';
+
+const list = episodesByYear();
+const portraits = timelessEpisodes();
+---
+
+<BaseLayout>
+  <section class="hero">
+    <div class="hero-crest" aria-hidden="true">
+      <img src="/images/oda-mon.webp" width="760" height="756" alt="" />
+    </div>
+    <div class="wrap hero-grid">
+      <div class="hero-text">
+        <p class="eyebrow">織田信長 検証ファイル</p>
+        <h1 class="hero-title">通説を、<br />鵜呑みにしない。</h1>
+        <p class="hero-lead">
+          ドラマや小説で語られる信長の逸話を、年代順にならべる。
+          それぞれの出典を示し、史料の近さで<strong>信憑性度</strong>を判定する。
+        </p>
+      </div>
+      <figure class="hero-portrait">
+        <img
+          src="/images/nobunaga-framed.webp"
+          width="678" height="731"
+          alt="織田信長像（長興寺蔵）"
+          loading="eager"
+        />
+        <figcaption>長興寺蔵／Wikimedia Commons（パブリックドメイン）</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <p class="grid-note">
+      各カードの見出しと説明は<strong>語られている通説</strong>です。
+      信憑性度の判定は、それぞれのページの検証項目ごとに示しています。
+    </p>
+    <ul class="ep-grid">
+      {list.map((ep) => {
+        return (
+          <li>
+            <a class="ep-card" href={`/episodes/${ep.slug}/`}>
+              <div class="ep-card-head">
+                <span class="ep-year">{ep.year}</span>
+                <span class="ep-wa">{ep.dateLabel}</span>
+              </div>
+              <h2 class="ep-card-title">{ep.title}</h2>
+              <p class="ep-card-lead">{ep.lead}</p>
+              <div class="ep-card-foot">
+                <p class="ep-tags">
+                  {ep.tags.map((t) => <span class="tag">{t}</span>)}
+                </p>
+                <span class="ep-count">検証 {ep.points.length}件 →</span>
+              </div>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </section>
+
+  {portraits.length > 0 && (
+    <section class="wrap portraits">
+      <div class="portraits-head">
+        <p class="eyebrow">時系列の外</p>
+        <h2 class="portraits-title">人物像ファイル</h2>
+        <p class="portraits-lead">特定の年に起きた出来事ではなく、後世に作られた「信長像」を検証する。</p>
+      </div>
+      <ul class="ep-grid">
+        {portraits.map((ep) => {
+          return (
+            <li>
+              <a class="ep-card ep-card--portrait" href={`/episodes/${ep.slug}/`}>
+                <div class="ep-card-head">
+                  <span class="ep-wa">{ep.dateLabel}</span>
+                </div>
+                <h3 class="ep-card-title">{ep.title}</h3>
+                <p class="ep-card-lead">{ep.lead}</p>
+                <div class="ep-card-foot">
+                  <p class="ep-tags">
+                    {ep.tags.map((t) => <span class="tag">{t}</span>)}
+                  </p>
+                  <span class="ep-count">検証 {ep.points.length}件 →</span>
+                </div>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  )}
+
+  <section class="wrap explore">
+    <div class="explore-head">
+      <p class="eyebrow">検証を支える資料</p>
+      <h2 class="explore-title">調べる</h2>
+      <p class="explore-lead">個々の逸話の外側にある、信長を調べるための土台。</p>
+    </div>
+
+    <div class="ex-features">
+      <a class="ex-feature" href="/kuromaku/">
+        <span class="ex-badge">特集</span>
+        <span class="ex-feature-title">本能寺の変 — 黒幕は、いたのか</span>
+        <span class="ex-feature-desc">
+          四国説・足利義昭説・単独犯行説・怨恨説・朝廷説ほか、提起されてきた八つの説を、
+          根拠となる史料の近さで並べる。それぞれの弱いところも併記。
+        </span>
+      </a>
+
+      <a class="ex-feature" href="/monjo/">
+        <span class="ex-badge">特集</span>
+        <span class="ex-feature-title">佐久間信盛折檻状 — 十九ヶ条を全文で</span>
+        <span class="ex-feature-desc">
+          信長が宿老に突きつけた自筆の書状。同僚の名を挙げて比較し、逃げ道を順に塞いでいく。
+          『信長公記』巻十三の全文を、条ごとに原文と現代語訳で。
+        </span>
+      </a>
+
+      <a class="ex-feature" href="/dedokoro/">
+        <span class="ex-badge">特集</span>
+        <span class="ex-feature-title">出どころのない逸話 — 信長像はどう作られたか</span>
+        <span class="ex-feature-desc">
+          逸話を四百本あつめて並べると構造が見えた。核の周りに派生が、その外に創作の層が広がる。
+          面白い話ほど、出どころが遠い。
+        </span>
+      </a>
+
+      <a class="ex-feature" href="/meigen/">
+        <span class="ex-badge">特集</span>
+        <span class="ex-feature-title">名言・名台詞 — その言葉は、どこから来たか</span>
+        <span class="ex-feature-desc">
+          「是非に及ばず」「敵は本能寺にあり」「鳴かぬなら」「であるか」。
+          有名さと出典の近さは、まったく比例しない。
+        </span>
+      </a>
+    </div>
+
+    <ul class="ex-grid">
+      <li><a href="/nenpyo/">
+        <span class="ex-title">年表</span>
+        <span class="ex-desc">『信長公記』の巻立てに沿った編年。公記に載る事項と、他史料で補った事項を区別する。</span>
+      </a></li>
+      <li><a href="/kashin/">
+        <span class="ex-title">家臣一覧</span>
+        <span class="ex-desc">一門・宿老・側近・降将。誰が何を任され、どう終わったか。</span>
+      </a></li>
+      <li><a href="/kassen/">
+        <span class="ex-title">合戦データベース</span>
+        <span class="ex-desc">生涯の主要な戦い36件。相手・結果・『信長公記』の該当巻まで一覧に。</span>
+      </a></li>
+      <li><a href="/tekitai/">
+        <span class="ex-title">敵対勢力一覧</span>
+        <span class="ex-desc">誰と戦い、どう決着したか。滅んだ相手と、決着しないまま終わった相手。</span>
+      </a></li>
+      <li><a href="/keizu/">
+        <span class="ex-title">家系図</span>
+        <span class="ex-desc">維新まで続いた織田家。直系は早く途絶え、四つの大名家が残った。</span>
+      </a></li>
+      <li><a href="/kyoten/">
+        <span class="ex-title">居城の変遷</span>
+        <span class="ex-desc">那古野・清洲・小牧山・岐阜・安土。本拠を四度動かした軌跡を地図で。</span>
+      </a></li>
+      <li><a href="/shiseki/">
+        <span class="ex-title">史跡・資料館</span>
+        <span class="ex-desc">行ってみると何が残っているか。遺構か、復元か、石碑一本か。</span>
+      </a></li>
+      <li><a href="/namban/">
+        <span class="ex-title">南蛮との交流</span>
+        <span class="ex-desc">宣教師が書き留めた信長と、ローマへ渡って消えた安土山図屏風。</span>
+      </a></li>
+      <li><a href="/kani/">
+        <span class="ex-title">異名と官位</span>
+        <span class="ex-desc">自称の上総介から右大臣まで。そして最後の四年は無官だった。</span>
+      </a></li>
+      <li><a href="/shumi/">
+        <span class="ex-title">趣味・嗜好</span>
+        <span class="ex-desc">相撲・鷹狩・舞・茶の湯。好物と違い、相撲の記録は山ほど残っている。</span>
+      </a></li>
+      <li><a href="/shoku/">
+        <span class="ex-title">食事と好物</span>
+        <span class="ex-desc">記録で確かめられることは、驚くほど少ない。</span>
+      </a></li>
+      <li><a href="/yougo/">
+        <span class="ex-title">用語辞典</span>
+        <span class="ex-desc">与力・撫で斬り・安堵状・一次史料。意味が今と違う語を37語。</span>
+      </a></li>
+      <li><a href="/shiryo/">
+        <span class="ex-title">文献一覧</span>
+        <span class="ex-desc">信長からの距離順に並べた史料と本。通説の製造元もここにある。</span>
+      </a></li>
+    </ul>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    position: relative; overflow: hidden;
+    border-bottom: 3px solid var(--sumi);
+    background: #b8912f url('/images/gold-bg.webp') center/cover;
+  }
+  .hero .wrap { position: relative; z-index: 2; }
+  .hero-grid {
+    display: grid; grid-template-columns: 1fr auto; gap: 2.5rem;
+    align-items: center; padding-block: 3.4rem 3rem;
+    min-height: clamp(400px, 52vh, 540px);
+    max-width: 60rem; margin-inline: auto;
+  }
+  .hero-crest {
+    position: absolute; inset: 0; z-index: 1; opacity: .7;
+    display: flex; align-items: center; justify-content: flex-start; padding-left: 1rem;
+    pointer-events: none;
+  }
+  .hero-crest img { height: 86%; width: auto; max-width: none; }
+  .hero .eyebrow { color: #7a2a1c; }
+  .hero-title {
+    font-size: clamp(2.2rem, 6.5vw, 3.6rem); color: var(--sumi);
+    margin: .2rem 0 1rem; letter-spacing: .05em; line-height: 1.3;
+    text-shadow: 0 1px 0 rgba(255,248,220,.3);
+  }
+  .hero-lead { max-width: 34rem; margin: 0; color: #2b2413; }
+  .hero-lead strong { color: #8a1414; }
+  .hero-portrait { margin: 0; text-align: center; }
+  .hero-portrait img {
+    display: block; width: 320px; height: auto; max-width: 42vw;
+    box-shadow: 0 10px 30px rgba(50,34,0,.4);
+  }
+  .hero-portrait figcaption {
+    margin-top: .5rem; font-size: .66rem; color: #4a3c1a; font-family: var(--font-gothic);
+  }
+  @media (max-width: 640px) {
+    .hero-grid { grid-template-columns: 1fr; padding-block: 2.6rem 2.2rem; }
+    .hero-portrait { order: -1; }
+    .hero-portrait img { width: 190px; max-width: 58vw; margin-inline: auto; }
+    .hero-crest { justify-content: center; padding-left: 0; opacity: .08; }
+  }
+
+  .ep-grid {
+    list-style: none; margin: 2rem 0; padding: 0;
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.1rem;
+  }
+  .ep-card {
+    position: relative; overflow: hidden; height: 100%;
+    display: flex; flex-direction: column; gap: .45rem;
+    background: var(--washi); border: 1px solid var(--rule);
+    border-left: 3px solid #b8912f; border-top: 1px solid #d8c27a;
+    padding: 1.1rem 1.2rem 1rem; color: inherit;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .ep-card::before {
+    content: ''; position: absolute; z-index: 0; right: -24px; bottom: -24px;
+    width: 132px; height: 132px; opacity: .05; pointer-events: none;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='%23b8912f' stroke-width='3'%3E%3Ccircle cx='50' cy='50' r='30'/%3E%3Ccircle cx='50' cy='17' r='12'/%3E%3Ccircle cx='50' cy='83' r='12'/%3E%3Ccircle cx='17' cy='50' r='12'/%3E%3Ccircle cx='83' cy='50' r='12'/%3E%3Ccircle cx='50' cy='50' r='9'/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat;
+  }
+  .ep-card > * { position: relative; z-index: 1; }
+  .ep-card:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(120,90,20,.16); text-decoration: none; }
+  .ep-card--portrait { border-left-color: var(--shu); }
+
+  .ep-card-head { display: flex; align-items: baseline; gap: .6rem; }
+  .ep-year { font-family: var(--font-mincho); font-size: 1.5rem; font-weight: 700; color: var(--sumi); line-height: 1; }
+  .ep-wa { font-size: .66rem; color: var(--sumi-soft); }
+  .ep-card-title { font-size: 1.1rem; margin: .1rem 0 0; color: var(--sumi); line-height: 1.4; }
+  .ep-card-lead {
+    margin: 0; font-size: .86rem; color: var(--sumi-soft); flex: 1;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+  }
+  .ep-card-foot {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem; margin-top: .8rem; padding-top: .6rem;
+    border-top: 1px dotted var(--rule);
+  }
+  .ep-tags { margin: 0; display: flex; gap: .4rem; align-items: center; flex-wrap: wrap; }
+  .tag { font-size: .68rem; color: var(--sumi-soft); border: 1px solid var(--rule); border-radius: 2px; padding: .05em .5em; }
+  .ep-count {
+    font-size: .74rem; color: var(--shu); flex-shrink: 0;
+    font-family: var(--font-mincho); letter-spacing: .03em;
+  }
+
+  .portraits { margin-top: 2.4rem; padding-top: 2rem; border-top: 3px double var(--sumi); }
+  .portraits-head { margin-bottom: 1.2rem; }
+  .portraits-title { font-size: 1.5rem; margin: 0 0 .3rem; }
+  .portraits-lead { margin: 0; color: var(--sumi-soft); font-size: .9rem; }
+  .grid-note {
+    margin: 0 0 1rem; padding: .55rem .8rem;
+    border-left: 3px solid var(--shu); background: var(--washi);
+    font-size: .8rem; color: var(--sumi-soft); line-height: 1.75;
+  }
+  .grid-note strong { color: var(--shu); }
+
+  .explore { margin-top: 2.6rem; padding-top: 2rem; border-top: 3px double var(--sumi); }
+  .explore-head { margin-bottom: 1.2rem; }
+  .explore-title { font-size: 1.5rem; margin: 0 0 .3rem; }
+  .explore-lead { margin: 0; color: var(--sumi-soft); font-size: .9rem; }
+
+  .ex-features {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.1rem;
+    margin-bottom: 1.1rem;
+  }
+  .ex-feature {
+    display: block; position: relative; height: 100%;
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); padding: 1.1rem 1.2rem;
+    color: inherit; transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .ex-feature:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(120,90,20,.16); text-decoration: none; }
+  .ex-badge {
+    display: inline-block; font-family: var(--font-mincho); font-size: .68rem;
+    letter-spacing: .12em; color: var(--shu);
+    border: 1px solid var(--shu); background: #fbf1ee;
+    padding: .1em .7em; border-radius: 2px; margin-bottom: .4rem;
+  }
+  .ex-feature-title {
+    display: block; font-family: var(--font-mincho); font-size: 1.2rem;
+    font-weight: 700; color: var(--sumi); line-height: 1.5; margin-bottom: .3rem;
+  }
+  .ex-feature-desc { display: block; font-size: .86rem; color: var(--sumi-soft); line-height: 1.8; }
+
+  .ex-grid {
+    list-style: none; margin: 0; padding: 0;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: .9rem;
+  }
+  .ex-grid a {
+    display: block; height: 100%; color: inherit;
+    border: 1px solid var(--rule); border-left: 3px solid #b8912f;
+    background: var(--washi); padding: .85rem 1rem;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .ex-grid a:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(120,90,20,.16); text-decoration: none; }
+  .ex-title {
+    display: block; font-family: var(--font-mincho); font-size: 1.02rem;
+    font-weight: 700; color: var(--sumi); margin-bottom: .25rem;
+  }
+  .ex-desc { display: block; font-size: .8rem; color: var(--sumi-soft); line-height: 1.75; }
+
+  @media (max-width: 900px) {
+    .ep-grid { grid-template-columns: 1fr; }
+    .ex-grid { grid-template-columns: 1fr; }
+    .ex-features { grid-template-columns: 1fr; }
+  }
+</style>
