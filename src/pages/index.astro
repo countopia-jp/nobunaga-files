@@ -6,7 +6,10 @@ const list = episodesByYear();
 const portraits = timelessEpisodes();
 ---
 
-<BaseLayout>
+<BaseLayout
+  title="ノブナガ・ファイル — 織田信長の通説を、出典で検証する"
+  description="ドラマや小説で語られる織田信長の逸話は、どの史料に、どこまで書かれているのか。桶狭間・本能寺から、髑髏の杯・弥助・愛宕百韻まで、通説ごとに出典を示し、史料の近さで信憑性度を判定する。"
+>
   <section class="hero">
     <div class="hero-crest" aria-hidden="true">
       <img src="/images/oda-mon.webp" width="760" height="756" alt="" />
@@ -137,60 +140,72 @@ const portraits = timelessEpisodes();
       </a>
     </div>
 
-    <ul class="ex-grid">
-      <li><a href="/nenpyo/">
-        <span class="ex-title">年表</span>
-        <span class="ex-desc">『信長公記』の巻立てに沿った編年。公記に載る事項と、他史料で補った事項を区別する。</span>
-      </a></li>
-      <li><a href="/kashin/">
-        <span class="ex-title">家臣一覧</span>
-        <span class="ex-desc">一門・宿老・側近・降将。誰が何を任され、どう終わったか。</span>
-      </a></li>
-      <li><a href="/kassen/">
-        <span class="ex-title">合戦データベース</span>
-        <span class="ex-desc">生涯の主要な戦い36件。相手・結果・『信長公記』の該当巻まで一覧に。</span>
-      </a></li>
-      <li><a href="/tekitai/">
-        <span class="ex-title">敵対勢力一覧</span>
-        <span class="ex-desc">誰と戦い、どう決着したか。滅んだ相手と、決着しないまま終わった相手。</span>
-      </a></li>
-      <li><a href="/keizu/">
-        <span class="ex-title">家系図</span>
-        <span class="ex-desc">維新まで続いた織田家。直系は早く途絶え、四つの大名家が残った。</span>
-      </a></li>
-      <li><a href="/kyoten/">
-        <span class="ex-title">居城の変遷</span>
-        <span class="ex-desc">那古野・清洲・小牧山・岐阜・安土。本拠を四度動かした軌跡を地図で。</span>
-      </a></li>
-      <li><a href="/shiseki/">
-        <span class="ex-title">史跡・資料館</span>
-        <span class="ex-desc">行ってみると何が残っているか。遺構か、復元か、石碑一本か。</span>
-      </a></li>
-      <li><a href="/namban/">
-        <span class="ex-title">南蛮との交流</span>
-        <span class="ex-desc">宣教師が書き留めた信長と、ローマへ渡って消えた安土山図屏風。</span>
-      </a></li>
-      <li><a href="/kani/">
-        <span class="ex-title">異名と官位</span>
-        <span class="ex-desc">自称の上総介から右大臣まで。そして最後の四年は無官だった。</span>
-      </a></li>
-      <li><a href="/shumi/">
-        <span class="ex-title">趣味・嗜好</span>
-        <span class="ex-desc">相撲・鷹狩・舞・茶の湯。好物と違い、相撲の記録は山ほど残っている。</span>
-      </a></li>
-      <li><a href="/shoku/">
-        <span class="ex-title">食事と好物</span>
-        <span class="ex-desc">記録で確かめられることは、驚くほど少ない。</span>
-      </a></li>
-      <li><a href="/yougo/">
-        <span class="ex-title">用語辞典</span>
-        <span class="ex-desc">与力・撫で斬り・安堵状・一次史料。意味が今と違う語を37語。</span>
-      </a></li>
-      <li><a href="/shiryo/">
-        <span class="ex-title">文献一覧</span>
-        <span class="ex-desc">信長からの距離順に並べた史料と本。通説の製造元もここにある。</span>
-      </a></li>
-    </ul>
+    <div class="ex-group">
+      <h3 class="ex-group-title">通説を検証する</h3>
+      <ul class="ex-links">
+        <li><a href="/hakudami/">髑髏の杯</a></li>
+        <li><a href="/atago/">愛宕百韻</a></li>
+        <li><a href="/shinkou/">何を信じていたか</a></li>
+        <li><a href="/yasuke/">弥助</a></li>
+        <li><a href="/nouhime/">濃姫</a></li>
+        <li><a href="/bukoyawa/">武功夜話</a></li>
+        <li><a href="/densho/">信長伝説の分布</a></li>
+      </ul>
+    </div>
+    <div class="ex-group">
+      <h3 class="ex-group-title">本能寺とその後</h3>
+      <ul class="ex-links">
+        <li><a href="/yukue/">遺体の行方</a></li>
+        <li><a href="/tochu/">途中だったこと</a></li>
+      </ul>
+    </div>
+    <div class="ex-group">
+      <h3 class="ex-group-title">権威・政策・経済</h3>
+      <ul class="ex-links">
+        <li><a href="/kani/">異名と官位</a></li>
+        <li><a href="/chotei/">朝廷と信長</a></li>
+        <li><a href="/ranjatai/">蘭奢待</a></li>
+        <li><a href="/token/">信長の刀</a></li>
+        <li><a href="/meibutsu/">名物茶器</a></li>
+        <li><a href="/keizai/">信長の経済</a></li>
+      </ul>
+    </div>
+    <div class="ex-group">
+      <h3 class="ex-group-title">人と勢力</h3>
+      <ul class="ex-links">
+        <li><a href="/kashin/">家臣一覧</a></li>
+        <li><a href="/tekitai/">敵対勢力一覧</a></li>
+        <li><a href="/keizu/">家系図</a></li>
+        <li><a href="/ieyasu/">徳川家康との二十年</a></li>
+        <li><a href="/mitsuhide/">明智光秀</a></li>
+      </ul>
+    </div>
+    <div class="ex-group">
+      <h3 class="ex-group-title">土地と建物</h3>
+      <ul class="ex-links">
+        <li><a href="/azuchi/">安土城</a></li>
+        <li><a href="/kyoten/">居城の変遷</a></li>
+        <li><a href="/shiseki/">史跡・資料館</a></li>
+      </ul>
+    </div>
+    <div class="ex-group">
+      <h3 class="ex-group-title">時代と暮らし</h3>
+      <ul class="ex-links">
+        <li><a href="/nenpyo/">年表</a></li>
+        <li><a href="/kassen/">合戦データベース</a></li>
+        <li><a href="/namban/">南蛮との交流</a></li>
+        <li><a href="/shumi/">趣味・嗜好</a></li>
+        <li><a href="/kurashi/">戦国の暮らし</a></li>
+        <li><a href="/shoku/">食事と好物</a></li>
+      </ul>
+    </div>
+    <div class="ex-group">
+      <h3 class="ex-group-title">史料を調べる</h3>
+      <ul class="ex-links">
+        <li><a href="/shiryo/">文献一覧</a></li>
+        <li><a href="/yougo/">用語辞典</a></li>
+      </ul>
+    </div>
   </section>
 </BaseLayout>
 
@@ -316,26 +331,31 @@ const portraits = timelessEpisodes();
   }
   .ex-feature-desc { display: block; font-size: .86rem; color: var(--sumi-soft); line-height: 1.8; }
 
-  .ex-grid {
+  .ex-group { margin-bottom: 1.6rem; }
+  .ex-group-title {
+    font-family: var(--font-mincho); font-size: .95rem; letter-spacing: .12em;
+    margin: 0 0 .5rem; padding-bottom: .3rem;
+    border-bottom: 1px solid var(--rule); color: var(--shu);
+  }
+  .ex-links {
     list-style: none; margin: 0; padding: 0;
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: .9rem;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: .1rem 1rem;
   }
-  .ex-grid a {
-    display: block; height: 100%; color: inherit;
-    border: 1px solid var(--rule); border-left: 3px solid #b8912f;
-    background: var(--washi); padding: .85rem 1rem;
-    transition: transform .15s ease, box-shadow .15s ease;
+  .ex-links li { border-bottom: 1px dotted var(--rule); }
+  .ex-links a {
+    display: block; padding: .45rem .2rem .45rem .9rem; position: relative;
+    font-family: var(--font-mincho); font-size: .92rem; color: var(--sumi);
   }
-  .ex-grid a:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(120,90,20,.16); text-decoration: none; }
-  .ex-title {
-    display: block; font-family: var(--font-mincho); font-size: 1.02rem;
-    font-weight: 700; color: var(--sumi); margin-bottom: .25rem;
+  .ex-links a::before {
+    content: '│'; position: absolute; left: 0; top: .45rem;
+    color: #b8912f; font-size: .8rem;
   }
-  .ex-desc { display: block; font-size: .8rem; color: var(--sumi-soft); line-height: 1.75; }
+  .ex-links a:hover { color: var(--shu); text-decoration: none; background: var(--washi); }
 
-  @media (max-width: 900px) {
-    .ep-grid { grid-template-columns: 1fr; }
-    .ex-grid { grid-template-columns: 1fr; }
+  @media (max-width: 860px) {
+    .ex-links { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 640px) {
     .ex-features { grid-template-columns: 1fr; }
   }
 </style>

@@ -1,0 +1,118 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Seal from '../components/Seal.astro';
+import { timeline, claims, closing } from '../data/ieyasu.js';
+---
+<BaseLayout
+  title="徳川家康との二十年 — 敵でも家臣でもない相手｜ノブナガ・ファイル"
+  description="永禄5年の清洲の盟約から本能寺まで、二十年続いた織田・徳川の関係を追う。築山殿と信康の死、水野信元の粛清、そして堺での物見遊山と伊賀越えまで、通説と近年の見直しを出典で検証する。"
+>
+  <article class="wrap ieyasu">
+    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+
+    <p class="eyebrow">人と勢力</p>
+    <h1 class="iy-title">敵でも、家臣でもない相手</h1>
+    <p class="iy-lead">
+      当サイトの家臣一覧に、徳川家康は入れていない。家臣ではないからである。
+      だが二十年続いたこの関係を置く場所が、これまでどこにもなかった。
+      <strong>敵は滅び、家臣は追放され、同盟者だけが最後まで残った。</strong>
+    </p>
+
+    <section class="iy-sec">
+      <h2 class="iy-sec-title">二十年をたどる</h2>
+      <ol class="tl">
+        {timeline.map((e) => (
+          <li>
+            <span class="tl-when">{e.when}</span>
+            <div class="tl-body">
+              <p class="tl-t">{e.t}</p>
+              <p class="tl-d">{e.d}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <section class="iy-sec">
+      <h2 class="iy-sec-title">検証</h2>
+      {claims.map((c) => (
+        <div class="claim">
+          <div class="claim-head">
+            <div class="claim-headtext">
+              <h3 class="claim-title">{c.claim}</h3>
+              <p class="claim-verdict">{c.verdict}</p>
+            </div>
+            <div class="claim-seal"><Seal rating={c.rating} size="sm" /></div>
+          </div>
+          <p class="claim-desc">{c.desc}</p>
+        </div>
+      ))}
+    </section>
+
+    <section class="iy-closing">
+      <h2 class="iy-sec-title">動きながら、壊れなかった</h2>
+      {closing.map((p) => <p class="iy-para">{p}</p>)}
+    </section>
+
+    <p class="iy-related">
+      関連：<a href="/kashin/">家臣一覧</a>
+      <span class="iy-sep">｜</span><a href="/tekitai/">敵対勢力一覧</a>
+      <span class="iy-sep">｜</span><a href="/tochu/">途中だったこと</a>
+    </p>
+
+    <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .ieyasu { max-width: 50rem; padding-block: 2rem 3rem; }
+  .ep-back { margin: 0 0 1rem; }
+  .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
+  .ep-back-btm { margin-top: 2.4rem; }
+
+  .iy-title { font-size: clamp(1.7rem, 5vw, 2.4rem); margin: .2rem 0 1rem; line-height: 1.45; }
+  .iy-lead { color: var(--sumi-soft); line-height: 1.95; margin: 0 0 2.4rem; }
+  .iy-lead strong { color: var(--shu); }
+
+  .iy-sec { margin-bottom: 2.8rem; }
+  .iy-sec-title {
+    font-size: 1.25rem; margin: 0 0 .9rem; padding-bottom: .4rem;
+    border-bottom: 2px solid var(--sumi); line-height: 1.5;
+  }
+  .iy-para { margin: 0 0 1.1rem; font-size: .92rem; line-height: 2; }
+
+  .tl { list-style: none; margin: 0; padding: 0; }
+  .tl li {
+    display: grid; grid-template-columns: 9.5rem 1fr; gap: 1rem;
+    padding: .75rem 0; border-bottom: 1px dotted var(--rule);
+  }
+  .tl li:last-child { border-bottom: none; }
+  .tl-when {
+    font-family: var(--font-mincho); font-size: .84rem; color: var(--shu);
+    padding-top: .1rem;
+  }
+  .tl-t { margin: 0; font-family: var(--font-mincho); font-size: 1.02rem; font-weight: 700; }
+  .tl-d { margin: .2rem 0 0; font-size: .88rem; line-height: 1.88; color: var(--sumi-soft); }
+
+  .claim {
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); padding: 1rem 1.1rem; margin-bottom: 1rem;
+  }
+  .claim-head { display: flex; align-items: flex-start; gap: 1rem; }
+  .claim-headtext { flex: 1; min-width: 0; }
+  .claim-title { font-size: 1.02rem; margin: 0; line-height: 1.55; }
+  .claim-verdict { margin: .2rem 0 0; font-size: .78rem; color: var(--shu); font-family: var(--font-mincho); }
+  .claim-seal { flex-shrink: 0; }
+  .claim-desc { margin: .7rem 0 0; font-size: .89rem; line-height: 1.85; }
+
+  .iy-closing { margin-top: 3rem; padding-top: 1.4rem; border-top: 3px double var(--sumi); }
+  .iy-closing .iy-sec-title { border-bottom-color: var(--shu); }
+
+  .iy-related { margin: 2rem 0 0; font-size: .84rem; }
+  .iy-sep { color: var(--rule); margin: 0 .5em; }
+
+  @media (max-width: 640px) {
+    .tl li { grid-template-columns: 1fr; gap: .15rem; }
+    .claim-head { flex-direction: column; gap: .6rem; }
+  }
+</style>

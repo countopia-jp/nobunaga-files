@@ -1,0 +1,174 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Seal from '../components/Seal.astro';
+import { facts, innovations, meanings, stones, claims, closing } from '../data/azuchi.js';
+---
+<BaseLayout
+  title="安土城 — 六年で消えた城｜ノブナガ・ファイル"
+  description="天主を居住空間にし、五層七階の高さを持ち、金箔瓦と青い瓦で葺かれた城。だが存在した期間は六年で、焼けた理由もいまだ判明していない。石仏の転用石、蛇石、藤戸石、そして行方不明の安土山図屏風まで検証する。"
+>
+  <article class="wrap azuchi">
+    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+
+    <p class="eyebrow">建築の検証</p>
+    <h1 class="az-title">六年で消えた城</h1>
+    <p class="az-lead">
+      信長が作ったもののうち、最も大きなもの。そして、最も分からないもの。
+      <strong>存在した期間は六年で、焼けた理由も判明していない。</strong>
+      残っているのは石垣と、記録と、行方の分からない屏風である。
+    </p>
+
+    <section class="az-sec">
+      <ul class="fx-list">
+        {facts.map((f) => (
+          <li>
+            <span class="fx-t">{f.t}</span>
+            <span class="fx-d">{f.d}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="az-sec">
+      <h2 class="az-sec-title">何が新しかったか</h2>
+      {innovations.map((i) => (
+        <div class="iv">
+          <h3 class="iv-t">{i.t}</h3>
+          <p class="iv-d">{i.d}</p>
+        </div>
+      ))}
+    </section>
+
+    <section class="az-sec">
+      <h2 class="az-sec-title">城が語ろうとしたもの</h2>
+      {meanings.map((m) => (
+        <div class="mn">
+          <h3 class="mn-t">{m.t}</h3>
+          <p class="mn-d">{m.d}</p>
+          {m.link && <p class="mn-link"><a href={m.link.href}>{m.link.label} →</a></p>}
+        </div>
+      ))}
+    </section>
+
+    <section class="az-sec">
+      <h2 class="az-sec-title">石をめぐる三つの話</h2>
+      <p class="az-sec-lead">{stones.lead}</p>
+      {stones.items.map((s) => (
+        <div class="st">
+          <h3 class="st-t">{s.t}</h3>
+          <p class="st-d">{s.d}</p>
+          <p class="st-note"><span class="st-note-label">ただし</span>{s.note}</p>
+        </div>
+      ))}
+    </section>
+
+    <section class="az-sec">
+      <h2 class="az-sec-title">検証</h2>
+      {claims.map((c) => (
+        <div class="claim">
+          <div class="claim-head">
+            <div class="claim-headtext">
+              <h3 class="claim-title">{c.claim}</h3>
+              <p class="claim-verdict">{c.verdict}</p>
+            </div>
+            <div class="claim-seal"><Seal rating={c.rating} size="sm" /></div>
+          </div>
+          <p class="claim-desc">{c.desc}</p>
+        </div>
+      ))}
+    </section>
+
+    <section class="az-closing">
+      <h2 class="az-sec-title">上に、何もない</h2>
+      {closing.map((p) => <p class="az-para">{p}</p>)}
+    </section>
+
+    <p class="az-related">
+      関連：<a href="/kyoten/">居城の変遷</a>
+      <span class="az-sep">｜</span><a href="/shiseki/">史跡・資料館</a>
+      <span class="az-sep">｜</span><a href="/densho/">信長伝説の分布</a>
+    </p>
+
+    <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .azuchi { max-width: 50rem; padding-block: 2rem 3rem; }
+  .ep-back { margin: 0 0 1rem; }
+  .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
+  .ep-back-btm { margin-top: 2.4rem; }
+
+  .az-title { font-size: clamp(1.7rem, 5vw, 2.4rem); margin: .2rem 0 1rem; letter-spacing: .05em; }
+  .az-lead { color: var(--sumi-soft); line-height: 1.95; margin: 0 0 2.2rem; }
+  .az-lead strong { color: var(--shu); }
+
+  .az-sec { margin-bottom: 2.8rem; }
+  .az-sec-title {
+    font-size: 1.25rem; margin: 0 0 .9rem; padding-bottom: .4rem;
+    border-bottom: 2px solid var(--sumi); line-height: 1.5;
+  }
+  .az-sec-lead { margin: 0 0 1.1rem; font-size: .88rem; color: var(--sumi-soft); line-height: 1.85; }
+  .az-para { margin: 0 0 1.1rem; font-size: .92rem; line-height: 2; }
+
+  .fx-list {
+    list-style: none; margin: 0; padding: .8rem 1.1rem;
+    border: 1px solid var(--rule); background: var(--washi);
+  }
+  .fx-list li {
+    display: grid; grid-template-columns: 4.5rem 1fr; gap: .8rem;
+    padding: .45rem 0; border-bottom: 1px dotted var(--rule);
+    font-size: .87rem; line-height: 1.8;
+  }
+  .fx-list li:last-child { border-bottom: none; }
+  .fx-t { font-family: var(--font-mincho); color: var(--shu); }
+  .fx-d { color: var(--sumi-soft); }
+
+  .iv { border-left: 3px solid #b8912f; padding: .6rem 0 .6rem 1rem; margin-bottom: .9rem; }
+  .iv-t { font-size: 1.02rem; margin: 0 0 .2rem; line-height: 1.5; }
+  .iv-d { margin: 0; font-size: .88rem; line-height: 1.88; color: var(--sumi-soft); }
+
+  .mn {
+    border: 1px solid var(--rule); background: var(--washi);
+    padding: .85rem 1.05rem; margin-bottom: .85rem;
+  }
+  .mn-t { font-size: 1.02rem; margin: 0 0 .25rem; line-height: 1.5; }
+  .mn-d { margin: 0; font-size: .88rem; line-height: 1.88; color: var(--sumi-soft); }
+  .mn-link { margin: .4rem 0 0; font-size: .78rem; }
+
+  .st {
+    border-left: 3px solid var(--shu); background: var(--washi);
+    padding: .85rem 1.05rem; margin-bottom: .9rem;
+  }
+  .st-t { font-size: 1.05rem; margin: 0 0 .25rem; line-height: 1.5; }
+  .st-d { margin: 0; font-size: .89rem; line-height: 1.88; }
+  .st-note {
+    margin: .6rem 0 0; padding: .5rem .78rem; background: var(--washi-deep);
+    font-size: .83rem; line-height: 1.82; color: var(--sumi-soft);
+  }
+  .st-note-label {
+    font-family: var(--font-mincho); color: var(--shu); margin-right: .65em; font-size: .79rem;
+  }
+
+  .claim {
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); padding: 1rem 1.1rem; margin-bottom: 1rem;
+  }
+  .claim-head { display: flex; align-items: flex-start; gap: 1rem; }
+  .claim-headtext { flex: 1; min-width: 0; }
+  .claim-title { font-size: 1.02rem; margin: 0; line-height: 1.55; }
+  .claim-verdict { margin: .2rem 0 0; font-size: .78rem; color: var(--shu); font-family: var(--font-mincho); }
+  .claim-seal { flex-shrink: 0; }
+  .claim-desc { margin: .7rem 0 0; font-size: .89rem; line-height: 1.85; }
+
+  .az-closing { margin-top: 3rem; padding-top: 1.4rem; border-top: 3px double var(--sumi); }
+  .az-closing .az-sec-title { border-bottom-color: var(--shu); }
+
+  .az-related { margin: 2rem 0 0; font-size: .84rem; }
+  .az-sep { color: var(--rule); margin: 0 .5em; }
+
+  @media (max-width: 640px) {
+    .fx-list li { grid-template-columns: 1fr; gap: .1rem; }
+    .claim-head { flex-direction: column; gap: .6rem; }
+  }
+</style>

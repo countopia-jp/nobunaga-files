@@ -1,0 +1,135 @@
+---
+/*
+  史料の同心円図｜すべて自作のSVG（データから生成）
+  ------------------------------------------------
+  中心＝信長。外側のリングほど、信長から時代が遠い史料。
+  「史料の近さで検証する」というサイトの前提を、そのまま距離で描いたもの。
+*/
+import { rings, caption } from '../data/orbit.js';
+
+const CX = 560, CY = 470, W = 1120, H = 940;
+const rad = (d) => ((d - 0) * Math.PI) / 180;
+const pos = (r, a) => ({ x: CX + r * Math.cos(rad(a)), y: CY + r * Math.sin(rad(a)) });
+// ラベルは左半分なら右詰め、右半分なら左詰め
+const anchorOf = (a) => {
+  const n = ((a % 360) + 360) % 360;
+  return n > 100 && n < 260 ? 'end' : 'start';
+};
+const dxOf = (a) => (anchorOf(a) === 'end' ? -9 : 9);
+---
+
+<figure class="orbit">
+  <svg viewBox={`0 0 ${W} ${H}`} role="img"
+    aria-label="信長を中心に、史料を成立の古い順で同心円状に配置した図。内側から同時代の記録、側近の一代記、江戸初期の軍記、江戸中後期の随筆、近代以降の創作。">
+
+    {/* リング */}
+    {rings.map((g) => (
+      <circle cx={CX} cy={CY} r={g.r} class={`ring ring-${g.tone}`} />
+    ))}
+
+    {/* リング名（真下に置く） */}
+    {rings.map((g) => (
+      <text x={CX} y={CY + g.r + 15} text-anchor="middle" class="ring-name">
+        {g.name}<tspan class="ring-when"> {g.when}</tspan>
+      </text>
+    ))}
+
+    {/* 中心 */}
+    <circle cx={CX} cy={CY} r="30" class="core-bg" />
+    <circle cx={CX} cy={CY} r="30" class="core" />
+    <text x={CX} y={CY - 2} text-anchor="middle" class="core-t1">信長</text>
+    <text x={CX} y={CY + 13} text-anchor="middle" class="core-t2">1534–1582</text>
+
+    {/* 文献 */}
+    {rings.map((g) =>
+      g.works.map((w) => {
+        const p = pos(g.r, w.angle);
+        return (
+          <g class={`node work tone-${g.tone}`}>
+            <circle cx={p.x} cy={p.y} r="6" />
+            <text x={p.x + dxOf(w.angle)} y={p.y + 4} text-anchor={anchorOf(w.angle)} class="lb-work">
+              {w.label}
+            </text>
+          </g>
+        );
+      })
+    )}
+
+    {/* 逸話 */}
+    {rings.map((g) =>
+      (g.tales ?? []).map((t) => {
+        const p = pos(g.r, t.angle);
+        return (
+          <g class="node tale">
+            <circle cx={p.x} cy={p.y} r="3.6" />
+            <text x={p.x + dxOf(t.angle)} y={p.y + 3.5} text-anchor={anchorOf(t.angle)} class="lb-tale">
+              {t.label}
+            </text>
+          </g>
+        );
+      })
+    )}
+  </svg>
+
+  <div class="orbit-legend">
+    <p class="ol-row"><span class="ol-dot ol-work"></span>文献</p>
+    <p class="ol-row"><span class="ol-dot ol-tale"></span>その史料を出どころとする逸話</p>
+  </div>
+  <figcaption>{caption}</figcaption>
+</figure>
+
+<style>
+  .orbit { margin: 0 0 1.6rem; }
+  .orbit svg {
+    width: 100%; height: auto; display: block;
+    border: 1px solid var(--rule); background: var(--washi);
+  }
+
+  .ring { fill: none; stroke-width: 1.2; }
+  .ring-5 { stroke: #a11414; opacity: .5; }
+  .ring-4 { stroke: #b23a2e; opacity: .45; }
+  .ring-3 { stroke: #9a7d3a; opacity: .45; }
+  .ring-2 { stroke: #8a8580; opacity: .5; stroke-dasharray: 5 4; }
+  .ring-1 { stroke: #a9a29a; opacity: .55; stroke-dasharray: 3 5; }
+
+  .ring-name {
+    font-family: var(--font-mincho); font-size: 15px; fill: #57514a;
+    paint-order: stroke; stroke: var(--washi); stroke-width: 5px; stroke-linejoin: round;
+  }
+  .ring-when { font-size: 11px; fill: #8a8580; }
+
+  .core-bg { fill: var(--washi); }
+  .core { fill: rgba(161,20,20,.10); stroke: #a11414; stroke-width: 2; }
+  .core-t1 { font-family: var(--font-mincho); font-size: 17px; fill: #a11414; font-weight: 700; }
+  .core-t2 { font-family: var(--font-gothic); font-size: 9px; fill: #8a5a52; }
+
+  .node circle { stroke: var(--washi); stroke-width: 1.5; }
+  .tone-5 circle { fill: #a11414; }
+  .tone-4 circle { fill: #b23a2e; }
+  .tone-3 circle { fill: #9a7d3a; }
+  .tone-2 circle { fill: #6f6a63; }
+  .tone-1 circle { fill: #a9a29a; }
+  .tale circle { fill: #c2564a; stroke-width: 1.2; }
+
+  .lb-work {
+    font-family: var(--font-mincho); font-size: 14px; fill: #23201c;
+    paint-order: stroke; stroke: var(--washi); stroke-width: 4px; stroke-linejoin: round;
+  }
+  .lb-tale {
+    font-family: var(--font-gothic); font-size: 11.5px; fill: #8a4a40;
+    paint-order: stroke; stroke: var(--washi); stroke-width: 3.5px; stroke-linejoin: round;
+  }
+
+  .orbit-legend { display: flex; gap: 1.2rem; margin-top: .6rem; flex-wrap: wrap; }
+  .ol-row {
+    margin: 0; display: flex; align-items: center; gap: .45rem;
+    font-size: .78rem; color: var(--sumi-soft);
+  }
+  .ol-dot { width: .6rem; height: .6rem; border-radius: 50%; display: inline-block; }
+  .ol-work { background: #23201c; }
+  .ol-tale { background: #c2564a; }
+
+  figcaption {
+    margin-top: .5rem; font-size: .8rem; color: var(--sumi-soft); line-height: 1.75;
+  }
+</style>

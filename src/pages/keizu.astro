@@ -27,6 +27,46 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </section>
 
     <section class="k-line">
+      <h2 class="k-h2">妹・お市の系 — 血は将軍家へ入った</h2>
+      <p class="k-sub">
+        直系が絶えた一方で、信長の妹の血筋は別の形で続いた。三人の娘が、それぞれ違う陣営へ入っている。
+      </p>
+
+      <ol class="k-flow">
+        <li>
+          <span class="k-name">お市の方</span>
+          <span class="k-note">信長の妹。浅井長政に嫁ぎ、小谷城の落城後に三人の娘とともに救出される。のち柴田勝家と再婚し、賤ヶ岳の敗戦を受けて北ノ庄城で自害（1583）</span>
+        </li>
+      </ol>
+
+      <div class="k-han-grid">
+        <div class="k-han">
+          <p class="k-han-name">茶々（淀殿）</p>
+          <p class="k-han-detail">長女。豊臣秀吉の側室となり、秀頼を産む。大坂夏の陣で秀頼とともに自害（1615）</p>
+        </div>
+        <div class="k-han">
+          <p class="k-han-name">初（常高院）</p>
+          <p class="k-han-detail">次女。京極高次に嫁ぐ。大坂の陣では豊臣・徳川の間に立って和議の使者を務めた</p>
+        </div>
+        <div class="k-han is-ishin">
+          <p class="k-han-name">江（崇源院）</p>
+          <p class="k-han-detail">三女。徳川秀忠の正室となり、三代将軍・家光を産む</p>
+        </div>
+      </div>
+
+      <p class="k-note-block">
+        結果として、<strong>三代家光からあとの徳川将軍は、信長の妹の血を引いている</strong>ことになる。
+        豊臣の淀殿、京極の常高院、徳川の崇源院——三姉妹はそれぞれ、最後まで争った三つの家に入った。
+        信長の直系が大名として絶えたことと、この血筋が続いたことは、同じ一つの家の話である。
+      </p>
+
+      <p class="k-caution">
+        なお、小谷城の落城時に、お市が産んだ男子（万福丸）は捜し出されて処断されたと伝わる。
+        娘たちが助けられ、男子が助けられなかったことの意味は、当時の家の継承の考え方を踏まえて読む必要がある。
+      </p>
+    </section>
+
+    <section class="k-line">
       <h2 class="k-h2">信雄系 — 信長の血を引く二藩が維新まで</h2>
       <p class="k-sub">次男・信雄（一度改易ののち大和宇陀松山で復す）の子孫。</p>
       <div class="k-han-grid">
@@ -68,6 +108,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </section>
 
     <p class="k-src">参考：Wikipedia「織田氏」「織田信雄」／攻城団「織田家（信雄系）」／奈良県「織田氏の末裔の藩」ほか。</p>
+    <p class="xref"><span class="xref-label">あわせて</span><a href="/nouhime/">濃姫 — 記録が消える →</a></p>
+
     <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
   </article>
 </BaseLayout>
@@ -131,5 +173,24 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   @media (max-width: 620px) {
     .k-han-grid { grid-template-columns: 1fr; }
+  }
+  .xref {
+    margin-top: 2rem; padding: .75rem 1rem;
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); font-size: .86rem;
+  }
+  .xref-label {
+    font-family: var(--font-mincho); font-size: .78rem; color: var(--shu);
+    letter-spacing: .08em; margin-right: .9em;
+  }
+  .k-note-block {
+    margin: 1rem 0 0; padding: .8rem 1rem;
+    border-left: 3px solid var(--shu); background: var(--washi);
+    font-size: .9rem; line-height: 1.95;
+  }
+  .k-note-block strong { color: var(--shu); }
+  .k-caution {
+    margin: .7rem 0 0; padding: .6rem .9rem; background: var(--washi-deep);
+    font-size: .83rem; line-height: 1.85; color: var(--sumi-soft);
   }
 </style>

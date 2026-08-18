@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Seal from '../components/Seal.astro';
-import { groups, misattributed, quoteStats } from '../data/quotes.js';
+import { groups, nicknames, around, misattributed, quoteStats } from '../data/quotes.js';
 import { getEpisode } from '../data/episodes.js';
 
 const shortTitle = (slug) => {
@@ -64,6 +64,41 @@ const stats = quoteStats();
         ))}
       </section>
     ))}
+
+    <section class="mg-sec">
+      <h2 class="mg-sec-title">{nicknames.title}</h2>
+      <p class="mg-sec-lead">{nicknames.lead}</p>
+      {nicknames.items.map((n) => (
+        <div class="nk">
+          <div class="nk-head">
+            <p class="nk-word">{n.word}</p>
+            <span class="nk-who">{n.who}</span>
+            <div class="nk-seal"><Seal rating={n.rating} size="sm" /></div>
+          </div>
+          <p class="nk-verdict">{n.verdict}</p>
+          <p class="nk-desc">{n.desc}</p>
+          {n.link && <p class="nk-link"><a href={n.link.href}>{n.link.label} →</a></p>}
+        </div>
+      ))}
+      <p class="nk-note">{nicknames.note}</p>
+    </section>
+
+    <section class="mg-sec">
+      <h2 class="mg-sec-title">{around.title}</h2>
+      <p class="mg-sec-lead">{around.lead}</p>
+      {around.items.map((a) => (
+        <div class="ar">
+          <div class="ar-head">
+            <p class="ar-text">{a.text}</p>
+            <span class="ar-who">{a.who}</span>
+            <div class="ar-seal"><Seal rating={a.rating} size="sm" /></div>
+          </div>
+          <p class="ar-verdict">{a.verdict}</p>
+          <p class="ar-desc">{a.desc}</p>
+          <p class="ar-caution"><span class="ar-caution-label">注意</span>{a.caution}</p>
+        </div>
+      ))}
+    </section>
 
     <section class="mg-sec">
       <h2 class="mg-sec-title">そもそも信長の言葉ではないもの</h2>
@@ -157,6 +192,54 @@ const stats = quoteStats();
   }
   .qt-eps { margin: .5rem 0 0; font-size: .78rem; }
   .qt-eps a { margin-right: .7em; }
+
+  .nk {
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); padding: .85rem 1.1rem; margin-bottom: .8rem;
+  }
+  .nk-head { display: flex; align-items: center; gap: .7rem; flex-wrap: wrap; }
+  .nk-word {
+    margin: 0; font-family: var(--font-mincho); font-size: 1.25rem;
+    font-weight: 700; color: var(--sumi); letter-spacing: .04em;
+  }
+  .nk-who {
+    font-size: .74rem; color: var(--sumi-soft); font-family: var(--font-gothic);
+    border: 1px solid var(--rule); background: var(--washi-deep);
+    padding: .1em .55em; border-radius: 2px;
+  }
+  .nk-seal { margin-left: auto; }
+  .nk-verdict { margin: .3rem 0 0; font-size: .78rem; color: var(--shu); font-family: var(--font-mincho); }
+  .nk-desc { margin: .35rem 0 0; font-size: .88rem; line-height: 1.8; }
+  .nk-link { margin: .35rem 0 0; font-size: .78rem; }
+  .nk-note {
+    margin: 1rem 0 0; padding: .6rem .9rem;
+    background: var(--washi-deep); font-size: .84rem; line-height: 1.85; color: var(--sumi-soft);
+  }
+
+  .ar {
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); padding: .9rem 1.1rem; margin-bottom: .9rem;
+  }
+  .ar-head { display: flex; align-items: center; gap: .7rem; flex-wrap: wrap; }
+  .ar-text {
+    margin: 0; font-family: var(--font-mincho); font-size: 1.2rem;
+    font-weight: 700; color: var(--sumi); letter-spacing: .04em;
+  }
+  .ar-who {
+    font-size: .74rem; color: var(--sumi-soft); font-family: var(--font-gothic);
+    border: 1px solid var(--rule); background: var(--washi-deep);
+    padding: .1em .55em; border-radius: 2px;
+  }
+  .ar-seal { margin-left: auto; }
+  .ar-verdict { margin: .3rem 0 0; font-size: .78rem; color: var(--shu); font-family: var(--font-mincho); }
+  .ar-desc { margin: .4rem 0 0; font-size: .88rem; line-height: 1.88; }
+  .ar-caution {
+    margin: .6rem 0 0; padding: .5rem .8rem; background: var(--washi-deep);
+    font-size: .83rem; line-height: 1.82; color: var(--sumi-soft);
+  }
+  .ar-caution-label {
+    font-family: var(--font-mincho); color: var(--shu); margin-right: .65em; font-size: .78rem;
+  }
 
   .mis-list { list-style: none; margin: 0; padding: 0; }
   .mis {

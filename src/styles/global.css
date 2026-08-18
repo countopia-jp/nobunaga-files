@@ -84,6 +84,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   padding-bottom: .3rem;
   border-bottom: 1px dotted var(--rule);
 }
+.fm-title--2 { margin-top: .9rem; }
 .foot-map a { color: var(--sumi-soft); font-size: .82rem; line-height: 1.5; }
 .foot-map a:hover { color: var(--shu); }
 

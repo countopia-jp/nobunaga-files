@@ -1,0 +1,188 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Seal from '../components/Seal.astro';
+import { dialogues, actions, selfdeification, claims, legends, closing } from '../data/shinkou.js';
+---
+<BaseLayout
+  title="信長は何を信じていたか — 無神論者という像の根拠｜ノブナガ・ファイル"
+  description="来世の否定、一夫一婦制への反論、地球儀への質問攻め。信長を無神論者・合理主義者とする像の根拠は、ほぼ宣教師フロイスの記録一本に集中している。その証言と、寺社への安堵状や神宮への寄進という実際の行動を並べて検証する。"
+>
+  <article class="wrap shinkou">
+    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+
+    <p class="eyebrow">人物像の検証</p>
+    <h1 class="sk-title">何を信じていたか</h1>
+    <p class="sk-lead">
+      このサイトは各所で「無神論者」「合理主義者」という像に触れてきた。
+      だがその根拠を並べたことがなかった。並べてみると、
+      <strong>根拠はほぼ一箇所に集中している</strong>——宣教師フロイスの記録である。
+      その証言を確かめたうえで、実際の行動がその像と噛み合うかを見る。
+    </p>
+
+    <section class="sk-sec">
+      <h2 class="sk-sec-title">フロイスが書き留めた対話</h2>
+      <p class="sk-sec-lead">{dialogues.lead}</p>
+      {dialogues.items.map((d) => (
+        <div class="dg">
+          <p class="dg-q">{d.q}</p>
+          <p class="dg-a">{d.a}</p>
+          <p class="dg-note">{d.note}</p>
+        </div>
+      ))}
+      <p class="sk-caution"><span class="sk-caution-label">注意</span>{dialogues.caution}</p>
+    </section>
+
+    <section class="sk-sec">
+      <h2 class="sk-sec-title">では、何をしたか</h2>
+      <p class="sk-sec-lead">{actions.lead}</p>
+      <ul class="ac-list">
+        {actions.items.map((a) => (
+          <li>
+            <span class="ac-t">{a.t}</span>
+            <span class="ac-d">{a.d}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="sk-note">{actions.note}</p>
+    </section>
+
+    <section class="sk-sec">
+      <h2 class="sk-sec-title">信じない者が、神になろうとした</h2>
+      <p class="sk-sec-lead">{selfdeification.lead}</p>
+      <ul class="ac-list">
+        {selfdeification.items.map((a) => (
+          <li>
+            <span class="ac-t">{a.t}</span>
+            <span class="ac-d">{a.d}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="sk-note">{selfdeification.note}</p>
+    </section>
+
+    <section class="sk-sec">
+      <h2 class="sk-sec-title">検証</h2>
+      {claims.map((c) => (
+        <div class="claim">
+          <div class="claim-head">
+            <div class="claim-headtext">
+              <h3 class="claim-title">{c.claim}</h3>
+              <p class="claim-verdict">{c.verdict}</p>
+            </div>
+            <div class="claim-seal"><Seal rating={c.rating} size="sm" /></div>
+          </div>
+          <p class="claim-desc">{c.desc}</p>
+        </div>
+      ))}
+    </section>
+
+    <section class="sk-sec">
+      <h2 class="sk-sec-title">「合理主義者」を支える、根拠のない逸話</h2>
+      <p class="sk-sec-lead">{legends.lead}</p>
+      <ul class="lg-list">
+        {legends.items.map((t) => <li>{t}</li>)}
+      </ul>
+      <p class="sk-note">{legends.note}</p>
+      <p class="lg-link"><a href={legends.link.href}>{legends.link.label} →</a></p>
+    </section>
+
+    <section class="sk-closing">
+      <h2 class="sk-sec-title">三つの像は、別のことを言っている</h2>
+      {closing.map((p) => <p class="sk-para">{p}</p>)}
+    </section>
+
+    <p class="sk-related">
+      関連：<a href="/episodes/dairokuten/">第六天魔王</a>
+      <span class="sk-sep">｜</span><a href="/namban/">南蛮との交流</a>
+      <span class="sk-sep">｜</span><a href="/episodes/hieizan/">比叡山焼き討ち</a>
+    </p>
+
+    <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .shinkou { max-width: 50rem; padding-block: 2rem 3rem; }
+  .ep-back { margin: 0 0 1rem; }
+  .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
+  .ep-back-btm { margin-top: 2.4rem; }
+
+  .sk-title { font-size: clamp(1.7rem, 5vw, 2.4rem); margin: .2rem 0 1rem; letter-spacing: .05em; }
+  .sk-lead { color: var(--sumi-soft); line-height: 1.95; margin: 0 0 2.4rem; }
+  .sk-lead strong { color: var(--shu); }
+
+  .sk-sec { margin-bottom: 2.8rem; }
+  .sk-sec-title {
+    font-size: 1.25rem; margin: 0 0 .9rem; padding-bottom: .4rem;
+    border-bottom: 2px solid var(--sumi); line-height: 1.5;
+  }
+  .sk-sec-lead { margin: 0 0 1.2rem; font-size: .89rem; color: var(--sumi-soft); line-height: 1.88; }
+  .sk-para { margin: 0 0 1.1rem; font-size: .92rem; line-height: 2; }
+
+  .dg {
+    border-left: 3px solid var(--shu); background: var(--washi);
+    padding: .8rem 1rem; margin-bottom: .85rem;
+  }
+  .dg-q {
+    margin: 0; font-family: var(--font-mincho); font-size: .82rem; color: var(--shu);
+    letter-spacing: .04em;
+  }
+  .dg-a { margin: .3rem 0 0; font-size: .95rem; line-height: 1.85; }
+  .dg-note {
+    margin: .45rem 0 0; padding-top: .4rem; border-top: 1px dotted var(--rule);
+    font-size: .8rem; line-height: 1.78; color: var(--sumi-soft);
+  }
+
+  .sk-caution {
+    margin: 1.1rem 0 0; padding: .7rem .95rem;
+    border: 1px solid var(--rule); background: var(--washi-deep);
+    font-size: .84rem; line-height: 1.85; color: var(--sumi-soft);
+  }
+  .sk-caution-label {
+    font-family: var(--font-mincho); color: var(--shu); margin-right: .6em; font-size: .8rem;
+  }
+
+  .ac-list { list-style: none; margin: 0 0 1rem; padding: 0; }
+  .ac-list li {
+    padding: .5rem 0; border-bottom: 1px dotted var(--rule);
+    font-size: .88rem; line-height: 1.82;
+  }
+  .ac-list li:last-child { border-bottom: none; }
+  .ac-t {
+    font-family: var(--font-mincho); font-weight: 700; color: var(--sumi); margin-right: .8em;
+  }
+  .ac-d { color: var(--sumi-soft); }
+
+  .lg-list { margin: 0 0 1rem; padding-left: 1.2rem; }
+  .lg-list li {
+    font-size: .87rem; line-height: 1.85; color: var(--sumi-soft); margin-bottom: .35rem;
+  }
+  .lg-link { margin: .5rem 0 0; font-size: .8rem; }
+
+  .sk-note {
+    margin: 0; padding: .7rem .95rem; background: var(--washi);
+    border-left: 3px solid #b8912f;
+    font-size: .86rem; line-height: 1.88; color: var(--sumi-soft);
+  }
+
+  .claim {
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); padding: 1rem 1.1rem; margin-bottom: 1rem;
+  }
+  .claim-head { display: flex; align-items: flex-start; gap: 1rem; }
+  .claim-headtext { flex: 1; min-width: 0; }
+  .claim-title { font-size: 1.02rem; margin: 0; line-height: 1.55; }
+  .claim-verdict { margin: .2rem 0 0; font-size: .78rem; color: var(--shu); font-family: var(--font-mincho); }
+  .claim-seal { flex-shrink: 0; }
+  .claim-desc { margin: .7rem 0 0; font-size: .89rem; line-height: 1.85; }
+
+  .sk-closing { margin-top: 3rem; padding-top: 1.4rem; border-top: 3px double var(--sumi); }
+  .sk-closing .sk-sec-title { border-bottom-color: var(--shu); }
+
+  .sk-related { margin: 2rem 0 0; font-size: .84rem; }
+  .sk-sep { color: var(--rule); margin: 0 .5em; }
+
+  @media (max-width: 640px) {
+    .claim-head { flex-direction: column; gap: .6rem; }
+  }
+</style>

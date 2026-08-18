@@ -1,0 +1,134 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Seal from '../components/Seal.astro';
+import { supports, pressures, claims, closing } from '../data/chotei.js';
+---
+<BaseLayout
+  title="朝廷と信長 — 軽んじたのか、握ったのか｜ノブナガ・ファイル"
+  description="御料所の回復、即位式の費用負担、伊勢神宮の式年遷宮、祇園祭の再興。信長は当時最大級の朝廷支援者だった。一方で譲位を促し、三職推任に答えなかった。支えたことと圧したことを並べて検証する。"
+>
+  <article class="wrap chotei">
+    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+
+    <p class="eyebrow">権威との関係</p>
+    <h1 class="ch-title">軽んじたのか、握ったのか</h1>
+    <p class="ch-lead">
+      「信長は朝廷を軽んじた」という像が、長く語られてきた。
+      だが記録を並べると、別の顔が出てくる。
+      <strong>この時代で、最大級の朝廷支援者でもあった。</strong>
+      支えたことと圧したことを、両方並べて見る。
+    </p>
+
+    <section class="ch-sec ch-support">
+      <h2 class="ch-sec-title">支えたこと</h2>
+      <ul class="it-list">
+        {supports.map((s) => (
+          <li>
+            <span class="it-t">{s.t}</span>
+            <span class="it-d">{s.d}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="ch-sec ch-pressure">
+      <h2 class="ch-sec-title">圧したこと</h2>
+      <ul class="it-list">
+        {pressures.map((p) => (
+          <li>
+            <span class="it-t">{p.t}</span>
+            <span class="it-d">{p.d}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="ch-sec">
+      <h2 class="ch-sec-title">検証</h2>
+      {claims.map((c) => (
+        <div class="claim">
+          <div class="claim-head">
+            <div class="claim-headtext">
+              <h3 class="claim-title">{c.claim}</h3>
+              <p class="claim-verdict">{c.verdict}</p>
+            </div>
+            <div class="claim-seal"><Seal rating={c.rating} size="sm" /></div>
+          </div>
+          <p class="claim-desc">{c.desc}</p>
+        </div>
+      ))}
+    </section>
+
+    <section class="ch-closing">
+      <h2 class="ch-sec-title">壊す必要がなかった</h2>
+      {closing.map((p) => <p class="ch-para">{p}</p>)}
+    </section>
+
+    <p class="ch-related">
+      関連：<a href="/kani/">異名と官位</a>
+      <span class="ch-sep">｜</span><a href="/ranjatai/">蘭奢待</a>
+      <span class="ch-sep">｜</span><a href="/kuromaku/">黒幕説（朝廷説）</a>
+    </p>
+
+    <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .chotei { max-width: 50rem; padding-block: 2rem 3rem; }
+  .ep-back { margin: 0 0 1rem; }
+  .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
+  .ep-back-btm { margin-top: 2.4rem; }
+
+  .ch-title { font-size: clamp(1.65rem, 4.8vw, 2.3rem); margin: .2rem 0 1rem; line-height: 1.45; }
+  .ch-lead { color: var(--sumi-soft); line-height: 1.95; margin: 0 0 2.4rem; }
+  .ch-lead strong { color: var(--shu); }
+
+  .ch-sec { margin-bottom: 2.6rem; }
+  .ch-sec-title {
+    font-size: 1.25rem; margin: 0 0 .9rem; padding-bottom: .4rem;
+    border-bottom: 2px solid var(--sumi); line-height: 1.5;
+  }
+  .ch-para { margin: 0 0 1.1rem; font-size: .92rem; line-height: 2; }
+
+  .ch-support, .ch-pressure {
+    border-left: 3px solid #b8912f; background: var(--washi);
+    padding: 1rem 1.2rem;
+  }
+  .ch-pressure { border-left-color: var(--shu); }
+  .ch-support .ch-sec-title { border-bottom-color: #b8912f; }
+  .ch-pressure .ch-sec-title { border-bottom-color: var(--shu); }
+
+  .it-list { list-style: none; margin: 0; padding: 0; }
+  .it-list li {
+    padding: .55rem 0; border-bottom: 1px dotted var(--rule);
+    font-size: .89rem; line-height: 1.85;
+  }
+  .it-list li:last-child { border-bottom: none; }
+  .it-t {
+    display: block; font-family: var(--font-mincho); font-weight: 700;
+    color: var(--sumi); font-size: 1rem; margin-bottom: .1rem;
+  }
+  .it-d { color: var(--sumi-soft); }
+
+  .claim {
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); padding: 1rem 1.1rem; margin-bottom: 1rem;
+  }
+  .claim-head { display: flex; align-items: flex-start; gap: 1rem; }
+  .claim-headtext { flex: 1; min-width: 0; }
+  .claim-title { font-size: 1.02rem; margin: 0; line-height: 1.55; }
+  .claim-verdict { margin: .2rem 0 0; font-size: .78rem; color: var(--shu); font-family: var(--font-mincho); }
+  .claim-seal { flex-shrink: 0; }
+  .claim-desc { margin: .7rem 0 0; font-size: .89rem; line-height: 1.85; }
+
+  .ch-closing { margin-top: 3rem; padding-top: 1.4rem; border-top: 3px double var(--sumi); }
+  .ch-closing .ch-sec-title { border-bottom-color: var(--shu); }
+
+  .ch-related { margin: 2rem 0 0; font-size: .84rem; }
+  .ch-sep { color: var(--rule); margin: 0 .5em; }
+
+  @media (max-width: 640px) {
+    .claim-head { flex-direction: column; gap: .6rem; }
+  }
+</style>

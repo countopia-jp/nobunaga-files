@@ -45,6 +45,8 @@ const shortTitle = (slug) => {
         </ul>
 
         <p class="th-note">{t.note}</p>
+        {t.note2 && <p class="th-note th-note2">{t.note2}</p>}
+        {t.link && <p class="th-eps"><a href={t.link.href}>{t.link.label} →</a></p>}
 
         {t.episodes && (
           <p class="th-eps">
@@ -122,6 +124,7 @@ const shortTitle = (slug) => {
   .rec-when { font-family: var(--font-mincho); color: var(--sumi); }
   .rec-text { color: var(--sumi-soft); }
 
+  .th-note2 { border-left-color: #b8912f; margin-top: .5rem; }
   .th-note {
     margin: 0; font-size: .84rem; line-height: 1.8; color: var(--sumi-soft);
     background: var(--washi); border-left: 3px solid #b8912f;

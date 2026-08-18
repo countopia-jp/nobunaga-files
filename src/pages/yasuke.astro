@@ -1,0 +1,150 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Seal from '../components/Seal.astro';
+import { records, issues, claims, closing } from '../data/yasuke.js';
+---
+<BaseLayout
+  title="弥助 — 写本一本に懸かっている｜ノブナガ・ファイル"
+  description="信長に仕えた黒人・弥助。名も、刀も、屋敷も、『信長公記』の尊経閣文庫本という一つの写本にだけ記される。「侍だったか」という争点を、史料の所在から検証する。"
+>
+  <article class="wrap yasuke">
+    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+
+    <p class="eyebrow">人物の検証</p>
+    <h1 class="ys-title">写本一本に、懸かっている</h1>
+    <p class="ys-lead">
+      記録の量と、語られる量の差が最も大きい人物である。
+      そして争点は、<strong>写本一本にしかない記述をどう扱うか</strong>という、
+      このサイトが繰り返し向き合ってきた問題そのものにある。
+      まず、記録が何と書いているかから始める。
+    </p>
+
+    <section class="ys-sec">
+      <h2 class="ys-sec-title">記録は、何と書いているか</h2>
+      {records.map((r) => (
+        <div class={`rc${r.weight ? ' rc--key' : ''}`}>
+          <div class="rc-head">
+            <h3 class="rc-src">{r.src}</h3>
+            <span class="rc-kind">{r.kind}</span>
+          </div>
+          <p class="rc-d">{r.d}</p>
+        </div>
+      ))}
+    </section>
+
+    {issues.map((i) => (
+      <section class="is">
+        <div class="is-head">
+          <span class="is-n">争点 {i.n}</span>
+          <h2 class="is-title">{i.title}</h2>
+        </div>
+        <p class="is-lead">{i.lead}</p>
+        {i.body.map((p) => <p class="is-para">{p}</p>)}
+        {i.note && <p class="is-note"><span class="is-note-label">注</span>{i.note}</p>}
+      </section>
+    ))}
+
+    <section class="ys-sec">
+      <h2 class="ys-sec-title">検証</h2>
+      {claims.map((c) => (
+        <div class="claim">
+          <div class="claim-head">
+            <div class="claim-headtext">
+              <h3 class="claim-title">{c.claim}</h3>
+              <p class="claim-verdict">{c.verdict}</p>
+            </div>
+            <div class="claim-seal"><Seal rating={c.rating} size="sm" /></div>
+          </div>
+          <p class="claim-desc">{c.desc}</p>
+        </div>
+      ))}
+    </section>
+
+    <section class="ys-closing">
+      <h2 class="ys-sec-title">少なさが、余白をつくる</h2>
+      {closing.map((p) => <p class="ys-para">{p}</p>)}
+    </section>
+
+    <p class="ys-related">
+      関連：<a href="/kashin/">家臣一覧</a>
+      <span class="ys-sep">｜</span><a href="/namban/">南蛮との交流</a>
+      <span class="ys-sep">｜</span><a href="/shiryo/">文献一覧</a>
+    </p>
+
+    <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .yasuke { max-width: 50rem; padding-block: 2rem 3rem; }
+  .ep-back { margin: 0 0 1rem; }
+  .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
+  .ep-back-btm { margin-top: 2.4rem; }
+
+  .ys-title { font-size: clamp(1.65rem, 4.8vw, 2.3rem); margin: .2rem 0 1rem; line-height: 1.45; }
+  .ys-lead { color: var(--sumi-soft); line-height: 1.95; margin: 0 0 2.4rem; }
+  .ys-lead strong { color: var(--shu); }
+
+  .ys-sec { margin-bottom: 2.8rem; }
+  .ys-sec-title {
+    font-size: 1.25rem; margin: 0 0 .9rem; padding-bottom: .4rem;
+    border-bottom: 2px solid var(--sumi); line-height: 1.5;
+  }
+  .ys-para { margin: 0 0 1.1rem; font-size: .92rem; line-height: 2; }
+
+  .rc {
+    border: 1px solid var(--rule); background: var(--washi);
+    padding: .85rem 1.05rem; margin-bottom: .85rem;
+  }
+  .rc--key { border-left: 3px solid var(--shu); background: #fbf3ef; }
+  .rc-head { display: flex; align-items: baseline; gap: .7rem; flex-wrap: wrap; }
+  .rc-src { font-size: 1.02rem; margin: 0; line-height: 1.5; font-family: var(--font-mincho); }
+  .rc-kind {
+    font-family: var(--font-mincho); font-size: .68rem; color: var(--sumi-soft);
+    border: 1px solid var(--rule); background: var(--washi-deep);
+    padding: .1em .5em; border-radius: 2px;
+  }
+  .rc-d { margin: .35rem 0 0; font-size: .88rem; line-height: 1.88; color: var(--sumi-soft); }
+
+  .is {
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); padding: 1.1rem 1.2rem; margin-bottom: 1.4rem;
+  }
+  .is-head { display: flex; align-items: baseline; gap: .8rem; flex-wrap: wrap; margin-bottom: .6rem; }
+  .is-n {
+    font-family: var(--font-mincho); font-size: .74rem; color: var(--washi);
+    background: var(--shu); padding: .15em .7em; border-radius: 2px; white-space: nowrap;
+  }
+  .is-title { font-size: 1.18rem; margin: 0; line-height: 1.5; }
+  .is-lead { margin: 0 0 .8rem; font-size: .93rem; line-height: 1.9; }
+  .is-para { margin: 0 0 .9rem; font-size: .89rem; line-height: 1.92; color: var(--sumi-soft); }
+  .is-para:last-of-type { margin-bottom: 0; }
+  .is-note {
+    margin: .9rem 0 0; padding: .55rem .8rem; background: var(--washi-deep);
+    font-size: .82rem; line-height: 1.82; color: var(--sumi-soft);
+  }
+  .is-note-label {
+    font-family: var(--font-mincho); color: var(--shu); margin-right: .6em; font-size: .78rem;
+  }
+
+  .claim {
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); padding: 1rem 1.1rem; margin-bottom: 1rem;
+  }
+  .claim-head { display: flex; align-items: flex-start; gap: 1rem; }
+  .claim-headtext { flex: 1; min-width: 0; }
+  .claim-title { font-size: 1.02rem; margin: 0; line-height: 1.55; }
+  .claim-verdict { margin: .2rem 0 0; font-size: .78rem; color: var(--shu); font-family: var(--font-mincho); }
+  .claim-seal { flex-shrink: 0; }
+  .claim-desc { margin: .7rem 0 0; font-size: .89rem; line-height: 1.85; }
+
+  .ys-closing { margin-top: 3rem; padding-top: 1.4rem; border-top: 3px double var(--sumi); }
+  .ys-closing .ys-sec-title { border-bottom-color: var(--shu); }
+
+  .ys-related { margin: 2rem 0 0; font-size: .84rem; }
+  .ys-sep { color: var(--rule); margin: 0 .5em; }
+
+  @media (max-width: 640px) {
+    .claim-head { flex-direction: column; gap: .6rem; }
+  }
+</style>

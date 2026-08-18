@@ -1,0 +1,156 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MapJP from '../components/MapJP.astro';
+import { places, unlocated, closing } from '../data/densho.js';
+
+const points = places.map((p) => ({
+  lon: p.lon, lat: p.lat,
+  label: p.name,
+  sub: p.tales.length > 1 ? `伝承${p.tales.length}件` : undefined,
+  dx: p.dx, dy: p.dy, anchor: p.anchor,
+}));
+
+const total =
+  places.reduce((n, p) => n + p.tales.length, 0) +
+  unlocated.reduce((n, u) => n + u.tales.length, 0);
+---
+<BaseLayout
+  title="信長伝説の分布 — どの土地が、何を語り継いだか｜ノブナガ・ファイル"
+  description="織田信長にまつわる民間伝承を地図の上に並べる。泣き石、底なし井戸、幻影兵士、木瓜紋のタブー。史料の裏づけは一つもないが、これらは土地に張り付いている。分布そのものが、その土地と信長の関わりの深さを映している。"
+>
+  <article class="wrap densho">
+    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+
+    <p class="eyebrow">民間伝承</p>
+    <h1 class="dn-title">どの土地が、何を語り継いだか</h1>
+    <p class="dn-lead">
+      信長の逸話を千本あつめて、最後に残ったのがこの層だった。
+      史料の裏づけは一つもない。だが他の創作と違うところがある。
+      <strong>これらは「どこか」に張り付いている。</strong>
+      岩、井戸、柳、イチョウ、松——語り継ぐために、土地の側が具体物を用意している。
+      全 {total} 件を、場所の分かるものは地図に、分からないものは県ごとに並べた。
+    </p>
+
+    <MapJP
+      viewBox="380 235 320 150"
+      points={points}
+      caption="伝承の残る場所。ほとんどが、信長が実際に城を構えたか、戦った土地に重なる。"
+    />
+
+    <section class="dn-sec">
+      <h2 class="dn-sec-title">場所のある伝承</h2>
+      {places.map((p) => (
+        <div class="pl">
+          <div class="pl-head">
+            <h3 class="pl-name">{p.name}</h3>
+            <span class="pl-where">{p.where}</span>
+          </div>
+          <ul class="pl-tales">
+            {p.tales.map((t) => (
+              <li>
+                <span class="tl-t">{t.t}</span>
+                <span class="tl-d">{t.d}</span>
+              </li>
+            ))}
+          </ul>
+          <p class="pl-why"><span class="pl-why-label">なぜこの土地に</span>{p.why}</p>
+        </div>
+      ))}
+    </section>
+
+    <section class="dn-sec">
+      <h2 class="dn-sec-title">場所の分からない伝承</h2>
+      <p class="dn-sec-lead">
+        「県の山中」「城下の古い柳」といった粒度で伝わるもの。
+        地図に打てないこと自体が、伝承というものの性質を示している。
+      </p>
+      {unlocated.map((u) => (
+        <div class="ul">
+          <h3 class="ul-pref">{u.pref}</h3>
+          <ul class="pl-tales">
+            {u.tales.map((t) => (
+              <li>
+                <span class="tl-t">{t.t}</span>
+                <span class="tl-d">{t.d}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </section>
+
+    <section class="dn-closing">
+      <h2 class="dn-sec-title">史実ではない、しかし痕跡ではある</h2>
+      {closing.map((p) => <p class="dn-para">{p}</p>)}
+    </section>
+
+    <p class="dn-related">
+      関連：<a href="/dedokoro/">出どころのない逸話</a>
+      <span class="dn-sep">｜</span><a href="/shiryo/">文献一覧（史料の同心円図）</a>
+      <span class="dn-sep">｜</span><a href="/shiseki/">史跡・資料館</a>
+    </p>
+
+    <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .densho { max-width: 54rem; padding-block: 2rem 3rem; }
+  .ep-back { margin: 0 0 1rem; }
+  .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
+  .ep-back-btm { margin-top: 2.4rem; }
+
+  .dn-title { font-size: clamp(1.7rem, 5vw, 2.4rem); margin: .2rem 0 1rem; }
+  .dn-lead { color: var(--sumi-soft); line-height: 1.95; margin: 0 0 1.8rem; }
+  .dn-lead strong { color: var(--shu); }
+
+  .dn-sec { margin-bottom: 2.8rem; }
+  .dn-sec-title {
+    font-size: 1.25rem; margin: 0 0 .9rem; padding-bottom: .4rem;
+    border-bottom: 2px solid var(--sumi); line-height: 1.5;
+  }
+  .dn-sec-lead { margin: 0 0 1.1rem; font-size: .86rem; color: var(--sumi-soft); line-height: 1.8; }
+
+  .pl {
+    border: 1px solid var(--rule); border-left: 3px solid #b8912f;
+    background: var(--washi); padding: .9rem 1.1rem; margin-bottom: 1rem;
+  }
+  .pl-head { display: flex; align-items: baseline; gap: .8rem; flex-wrap: wrap; }
+  .pl-name { font-size: 1.15rem; margin: 0; line-height: 1.45; letter-spacing: .04em; }
+  .pl-where { font-size: .74rem; color: var(--sumi-soft); font-family: var(--font-gothic); }
+
+  .pl-tales { list-style: none; margin: .5rem 0 0; padding: 0; }
+  .pl-tales li {
+    padding: .45rem 0; border-bottom: 1px dotted var(--rule);
+    font-size: .87rem; line-height: 1.8;
+  }
+  .pl-tales li:last-child { border-bottom: none; }
+  .tl-t {
+    font-family: var(--font-mincho); color: var(--sumi); font-weight: 700;
+    margin-right: .8em;
+  }
+  .tl-d { color: var(--sumi-soft); }
+
+  .pl-why {
+    margin: .7rem 0 0; padding: .5rem .8rem; background: var(--washi-deep);
+    font-size: .82rem; line-height: 1.8; color: var(--sumi-soft);
+  }
+  .pl-why-label {
+    font-family: var(--font-mincho); color: var(--shu); margin-right: .7em; font-size: .78rem;
+  }
+
+  .ul { margin-bottom: 1.2rem; }
+  .ul-pref {
+    font-size: 1rem; margin: 0; padding-bottom: .3rem;
+    border-bottom: 1px solid var(--rule); font-family: var(--font-mincho);
+  }
+
+  .dn-closing {
+    margin-top: 3rem; padding-top: 1.4rem; border-top: 3px double var(--sumi);
+  }
+  .dn-closing .dn-sec-title { border-bottom-color: var(--shu); }
+  .dn-para { margin: 0 0 1.1rem; font-size: .92rem; line-height: 2; }
+
+  .dn-related { margin: 2rem 0 0; font-size: .84rem; }
+  .dn-sep { color: var(--rule); margin: 0 .5em; }
+</style>

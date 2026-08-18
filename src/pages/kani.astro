@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Seal from '../components/Seal.astro';
-import { names, ranks, claims } from '../data/ranks.js';
+import { names, ranks, kao, claims } from '../data/ranks.js';
 import { getEpisode } from '../data/episodes.js';
 
 const shortTitle = (slug) => {
@@ -67,6 +67,22 @@ const shortTitle = (slug) => {
     </section>
 
     <section class="kn-sec">
+      <h2 class="kn-h2">花押 — 図像の署名</h2>
+      <p class="kn-lead">{kao.lead}</p>
+      <ul class="kao-list">
+        {kao.points.map((p) => (
+          <li>
+            <span class="kao-t">{p.t}</span>
+            <span class="kao-d">{p.d}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="kao-note">{kao.note}</p>
+      <p class="kao-caution"><span class="kao-caution-label">図版について</span>{kao.caution}</p>
+      <p class="kao-link"><a href={kao.link.href}>{kao.link.label} →</a></p>
+    </section>
+
+    <section class="kn-sec">
       <h2 class="kn-sec-title">語られている話と、その検証</h2>
       {claims.map((c) => (
         <div class="claim">
@@ -95,6 +111,9 @@ const shortTitle = (slug) => {
       <span class="kn-sep">｜</span><a href="/kuromaku/">本能寺の黒幕説</a>
       <span class="kn-sep">｜</span><a href="/nenpyo/">年表</a>
     </p>
+
+    <p class="xref"><span class="xref-label">あわせて</span><a href="/chotei/">朝廷と信長 — 軽んじたのか、握ったのか →</a></p>
+
 
     <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
   </article>
@@ -175,4 +194,36 @@ const shortTitle = (slug) => {
     .rk { grid-template-columns: 1fr; gap: .2rem; }
     .claim-head { flex-direction: column; gap: .6rem; }
   }
+  .xref {
+    margin-top: 2rem; padding: .75rem 1rem;
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); font-size: .86rem;
+  }
+  .xref-label {
+    font-family: var(--font-mincho); font-size: .78rem; color: var(--shu);
+    letter-spacing: .08em; margin-right: .9em;
+  }
+  .kao-list { list-style: none; margin: 0 0 1rem; padding: 0; }
+  .kao-list li {
+    padding: .55rem 0; border-bottom: 1px dotted var(--rule);
+    font-size: .89rem; line-height: 1.88;
+  }
+  .kao-list li:last-child { border-bottom: none; }
+  .kao-t {
+    display: block; font-family: var(--font-mincho); font-weight: 700;
+    color: var(--sumi); font-size: 1rem; margin-bottom: .1rem;
+  }
+  .kao-d { color: var(--sumi-soft); }
+  .kao-note {
+    margin: 0; padding: .75rem 1rem; background: var(--washi);
+    border-left: 3px solid var(--shu); font-size: .89rem; line-height: 1.95;
+  }
+  .kao-caution {
+    margin: .7rem 0 0; padding: .55rem .85rem; background: var(--washi-deep);
+    font-size: .82rem; line-height: 1.82; color: var(--sumi-soft);
+  }
+  .kao-caution-label {
+    font-family: var(--font-mincho); color: var(--shu); margin-right: .7em; font-size: .78rem;
+  }
+  .kao-link { margin: .6rem 0 0; font-size: .8rem; }
 </style>

@@ -149,6 +149,9 @@ const ticks = [1550, 1555, 1560, 1565, 1570, 1575, 1580, 1582];
       <a href="/kashin/">→ 家臣一覧</a>
     </p>
 
+    <p class="xref"><span class="xref-label">あわせて</span><a href="/kurashi/">戦国の暮らし（村の自治と一揆） →</a></p>
+
+
     <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
   </article>
 </BaseLayout>
@@ -269,5 +272,14 @@ const ticks = [1550, 1555, 1560, 1565, 1570, 1575, 1580, 1582];
 
   @media (max-width: 900px) {
     .tk-grid { grid-template-columns: 1fr; }
+  }
+  .xref {
+    margin-top: 2rem; padding: .75rem 1rem;
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); font-size: .86rem;
+  }
+  .xref-label {
+    font-family: var(--font-mincho); font-size: .78rem; color: var(--shu);
+    letter-spacing: .08em; margin-right: .9em;
   }
 </style>

@@ -57,8 +57,12 @@ const residues = Object.entries(RESIDUE);
               </div>
               <p class="sp-place">{p.place}</p>
               <p class="sp-desc">{p.desc}</p>
+              {p.note2 && <p class="sp-note2">{p.note2}</p>}
               {p.caution && (
                 <p class="sp-caution"><span class="sp-caution-label">注意</span>{p.caution}</p>
+              )}
+              {p.link && (
+                <p class="sp-link"><a href={p.link.href}>{p.link.label} →</a></p>
               )}
               {p.episodes && p.episodes.length > 0 && (
                 <p class="sp-eps">
@@ -81,6 +85,9 @@ const residues = Object.entries(RESIDUE);
       桶狭間の起伏、金ヶ崎の尾根、安土山の高さ——史料の記述が現実的かどうかは、
       結局その場所に立ってみないと分からない。
     </p>
+
+    <p class="xref"><span class="xref-label">あわせて</span><a href="/azuchi/">安土城 — 六年で消えた城 →</a></p>
+
 
     <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
   </article>
@@ -152,6 +159,11 @@ const residues = Object.entries(RESIDUE);
     font-family: var(--font-gothic);
   }
   .sp-desc { margin: 0; font-size: .88rem; line-height: 1.8; }
+  .sp-note2 {
+    margin: .5rem 0 0; padding-left: .9rem; border-left: 2px solid #b8912f;
+    font-size: .85rem; line-height: 1.85; color: var(--sumi-soft);
+  }
+  .sp-link { margin: .45rem 0 0; font-size: .8rem; }
   .sp-caution {
     margin: .55rem 0 0; font-size: .79rem; line-height: 1.75; color: var(--sumi-soft);
     background: var(--washi-deep); padding: .45rem .7rem;
@@ -171,5 +183,14 @@ const residues = Object.entries(RESIDUE);
 
   @media (max-width: 900px) {
     .s-grid { grid-template-columns: 1fr; }
+  }
+  .xref {
+    margin-top: 2rem; padding: .75rem 1rem;
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); font-size: .86rem;
+  }
+  .xref-label {
+    font-family: var(--font-mincho); font-size: .78rem; color: var(--shu);
+    letter-spacing: .08em; margin-right: .9em;
   }
 </style>

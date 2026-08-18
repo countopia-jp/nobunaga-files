@@ -1,0 +1,159 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Seal from '../components/Seal.astro';
+import { certain, names, traces, claims, closing } from '../data/nouhime.js';
+---
+<BaseLayout
+  title="濃姫 — 記録が消える｜ノブナガ・ファイル"
+  description="斎藤道三の娘として信長に嫁いだ正室。だが婚姻の後、同時代の記録がほとんど途切れる。早世説・離縁説から、『織田信雄分限帳』の「安土殿」説、過去帳にもとづく慶長十七年生存説まで、空白がどう埋められてきたかを検証する。"
+>
+  <article class="wrap nouhime">
+    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+
+    <p class="eyebrow">人物の検証</p>
+    <h1 class="nh-title">記録が、消える</h1>
+    <p class="nh-lead">
+      斎藤道三の娘として信長に嫁いだ正室。
+      ところが婚姻の後、彼女の動静を伝える同時代の記録がほとんど見あたらない。
+      家臣の名も、茶器の由来も、日付つきで書き留められた人物の周辺で、
+      <strong>正室だけが空白になる。</strong>
+      このページが追うのは彼女の生涯ではない。
+      その空白が、どう埋められてきたかである。
+    </p>
+
+    <section class="nh-sec">
+      <h2 class="nh-sec-title">確かなこと</h2>
+      {certain.map((c) => (
+        <div class="ct">
+          <h3 class="ct-title">{c.title}</h3>
+          <p class="ct-desc">{c.desc}</p>
+        </div>
+      ))}
+    </section>
+
+    <section class="nh-sec">
+      <h2 class="nh-sec-title">名前からして、後世のものである</h2>
+      <p class="nm-lead">{names.lead}</p>
+      {names.body.map((p) => <p class="nh-para">{p}</p>)}
+    </section>
+
+    <section class="nh-sec">
+      <h2 class="nh-sec-title">消えた後を追う、三つの道</h2>
+      {traces.map((t) => (
+        <div class="tr">
+          <div class="tr-head">
+            <span class="tr-n">{t.n}</span>
+            <h3 class="tr-title">{t.title}</h3>
+            <span class="tr-kind">{t.kind}</span>
+          </div>
+          <p class="tr-lead">{t.lead}</p>
+          {t.body.map((p) => <p class="tr-para">{p}</p>)}
+          {t.note && <p class="tr-note"><span class="tr-note-label">注</span>{t.note}</p>}
+        </div>
+      ))}
+    </section>
+
+    <section class="nh-sec">
+      <h2 class="nh-sec-title">検証</h2>
+      {claims.map((c) => (
+        <div class="claim">
+          <div class="claim-head">
+            <div class="claim-headtext">
+              <h3 class="claim-title">{c.claim}</h3>
+              <p class="claim-verdict">{c.verdict}</p>
+            </div>
+            <div class="claim-seal"><Seal rating={c.rating} size="sm" /></div>
+          </div>
+          <p class="claim-desc">{c.desc}</p>
+        </div>
+      ))}
+    </section>
+
+    <section class="nh-closing">
+      <h2 class="nh-sec-title">空白は、誰のものか</h2>
+      {closing.map((p) => <p class="nh-para">{p}</p>)}
+    </section>
+
+    <p class="nh-related">
+      関連：<a href="/keizu/">家系図</a>
+      <span class="nh-sep">｜</span><a href="/dedokoro/">出どころのない逸話</a>
+      <span class="nh-sep">｜</span><a href="/shiryo/">文献一覧</a>
+    </p>
+
+    <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .nouhime { max-width: 50rem; padding-block: 2rem 3rem; }
+  .ep-back { margin: 0 0 1rem; }
+  .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
+  .ep-back-btm { margin-top: 2.4rem; }
+
+  .nh-title { font-size: clamp(1.7rem, 5vw, 2.4rem); margin: .2rem 0 1rem; letter-spacing: .06em; }
+  .nh-lead { color: var(--sumi-soft); line-height: 1.95; margin: 0 0 2.4rem; }
+  .nh-lead strong { color: var(--shu); }
+
+  .nh-sec { margin-bottom: 2.8rem; }
+  .nh-sec-title {
+    font-size: 1.25rem; margin: 0 0 .9rem; padding-bottom: .4rem;
+    border-bottom: 2px solid var(--sumi); line-height: 1.5;
+  }
+  .nh-para { margin: 0 0 1rem; font-size: .91rem; line-height: 1.95; }
+  .nm-lead { margin: 0 0 1rem; font-size: .95rem; line-height: 1.9; color: var(--shu); font-family: var(--font-mincho); }
+
+  .ct {
+    border-left: 3px solid #b8912f; background: var(--washi);
+    padding: .75rem 1rem; margin-bottom: .8rem;
+  }
+  .ct-title { font-size: 1rem; margin: 0 0 .25rem; line-height: 1.5; }
+  .ct-desc { margin: 0; font-size: .88rem; line-height: 1.85; color: var(--sumi-soft); }
+
+  .tr {
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); padding: 1rem 1.15rem; margin-bottom: 1.1rem;
+  }
+  .tr-head { display: flex; align-items: baseline; gap: .7rem; flex-wrap: wrap; margin-bottom: .5rem; }
+  .tr-n {
+    font-family: var(--font-mincho); font-size: .95rem;
+    width: 1.9em; height: 1.9em; display: flex; align-items: center; justify-content: center;
+    border: 1px solid var(--shu); color: var(--shu); border-radius: 50%; flex-shrink: 0;
+  }
+  .tr-title { font-size: 1.1rem; margin: 0; line-height: 1.5; }
+  .tr-kind {
+    font-family: var(--font-mincho); font-size: .68rem; color: var(--sumi-soft);
+    border: 1px solid var(--rule); background: var(--washi-deep);
+    padding: .1em .55em; border-radius: 2px; white-space: nowrap;
+  }
+  .tr-lead { margin: 0 0 .7rem; font-size: .91rem; line-height: 1.9; }
+  .tr-para { margin: 0 0 .8rem; font-size: .88rem; line-height: 1.9; color: var(--sumi-soft); }
+  .tr-para:last-of-type { margin-bottom: 0; }
+  .tr-note {
+    margin: .8rem 0 0; padding: .55rem .8rem; background: var(--washi-deep);
+    font-size: .8rem; line-height: 1.8; color: var(--sumi-soft);
+  }
+  .tr-note-label {
+    font-family: var(--font-mincho); color: var(--shu); margin-right: .6em; font-size: .78rem;
+  }
+
+  .claim {
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); padding: 1rem 1.1rem; margin-bottom: 1rem;
+  }
+  .claim-head { display: flex; align-items: flex-start; gap: 1rem; }
+  .claim-headtext { flex: 1; min-width: 0; }
+  .claim-title { font-size: 1.02rem; margin: 0; line-height: 1.55; }
+  .claim-verdict { margin: .2rem 0 0; font-size: .78rem; color: var(--shu); font-family: var(--font-mincho); }
+  .claim-seal { flex-shrink: 0; }
+  .claim-desc { margin: .7rem 0 0; font-size: .89rem; line-height: 1.85; }
+
+  .nh-closing { margin-top: 3rem; padding-top: 1.4rem; border-top: 3px double var(--sumi); }
+  .nh-closing .nh-sec-title { border-bottom-color: var(--shu); }
+
+  .nh-related { margin: 2rem 0 0; font-size: .84rem; }
+  .nh-sep { color: var(--rule); margin: 0 .5em; }
+
+  @media (max-width: 640px) {
+    .claim-head { flex-direction: column; gap: .6rem; }
+  }
+</style>

@@ -150,6 +150,9 @@ const late = battles.filter((b) => b.maki !== '首巻');
       <span class="ks-sep">｜</span><a href="/kashin/">家臣一覧</a>
     </p>
 
+    <p class="xref"><span class="xref-label">あわせて</span><a href="/tochu/">途中だったこと — 本能寺が止めたもの →</a></p>
+
+
     <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
   </article>
 </BaseLayout>
@@ -253,5 +256,14 @@ const late = battles.filter((b) => b.maki !== '首巻');
     .bt { grid-template-columns: 1fr; gap: .3rem; }
     .bt-l { flex-direction: row; align-items: baseline; gap: .5rem; }
     .bt-maki { margin-top: 0; }
+  }
+  .xref {
+    margin-top: 2rem; padding: .75rem 1rem;
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); font-size: .86rem;
+  }
+  .xref-label {
+    font-family: var(--font-mincho); font-size: .78rem; color: var(--shu);
+    letter-spacing: .08em; margin-right: .9em;
   }
 </style>

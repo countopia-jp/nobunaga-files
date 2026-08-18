@@ -1,0 +1,143 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Seal from '../components/Seal.astro';
+import { certain, theories, aftermath, closing } from '../data/yukue.js';
+---
+<BaseLayout
+  title="遺体の行方 — なぜ首は見つからなかったか｜ノブナガ・ファイル"
+  description="本能寺の変のあと、明智軍も秀吉も信長の遺体を探し続けたが、骨片ひとつ出なかった。火薬による焼失説から阿弥陀寺の寺伝、井戸や地下道の伝説まで、七つの説を信憑性度で並べ、遺体が確定しなかったことが何を引き起こしたかを考える。"
+>
+  <article class="wrap yukue">
+    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+
+    <p class="eyebrow">本能寺の変</p>
+    <h1 class="yk-title">なぜ、首は見つからなかったか</h1>
+    <p class="yk-lead">
+      光秀が探した。秀吉も探した。四百年、誰も見つけていない。
+      このページは、どこへ行ったかを決める場所ではない。
+      <strong>決められなかったことが、何を引き起こしたか</strong>を見る場所である。
+    </p>
+
+    <section class="yk-sec">
+      <h2 class="yk-sec-title">確かなこと</h2>
+      {certain.map((c) => (
+        <div class="ct">
+          <h3 class="ct-title">{c.title}</h3>
+          <p class="ct-desc">{c.desc}</p>
+        </div>
+      ))}
+    </section>
+
+    <section class="yk-sec">
+      <h2 class="yk-sec-title">七つの説</h2>
+      <p class="yk-sec-lead">
+        信憑性度の高い順に並べる。上へ行くほど説明として無理がなく、
+        下へ行くほど話として面白い。この順番自体が、逸話の性質を示している。
+      </p>
+      {theories.map((t) => (
+        <div class="th">
+          <div class="th-head">
+            <div class="th-headtext">
+              <h3 class="th-title">{t.title}</h3>
+              <span class="th-kind">{t.kind}</span>
+            </div>
+            <div class="th-seal"><Seal rating={t.rating} size="sm" /></div>
+          </div>
+          <p class="th-desc">{t.desc}</p>
+          {t.note && <p class="th-note"><span class="th-note-label">注</span>{t.note}</p>}
+        </div>
+      ))}
+    </section>
+
+    <section class="yk-sec">
+      <h2 class="yk-sec-title">見つからなかったことの帰結</h2>
+      {aftermath.map((a) => (
+        <div class="af">
+          <h3 class="af-title">{a.title}</h3>
+          <p class="af-desc">{a.desc}</p>
+          <p class="af-link"><a href={a.link.href}>{a.link.label} →</a></p>
+        </div>
+      ))}
+    </section>
+
+    <section class="yk-closing">
+      <h2 class="yk-sec-title">首は、証拠だった</h2>
+      {closing.map((p) => <p class="yk-para">{p}</p>)}
+    </section>
+
+    <p class="yk-related">
+      関連：<a href="/episodes/honnoji/">本能寺の変（検証ファイル）</a>
+      <span class="yk-sep">｜</span><a href="/kuromaku/">黒幕説</a>
+      <span class="yk-sep">｜</span><a href="/atago/">愛宕百韻</a>
+    </p>
+
+    <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .yukue { max-width: 50rem; padding-block: 2rem 3rem; }
+  .ep-back { margin: 0 0 1rem; }
+  .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
+  .ep-back-btm { margin-top: 2.4rem; }
+
+  .yk-title { font-size: clamp(1.7rem, 5vw, 2.4rem); margin: .2rem 0 1rem; }
+  .yk-lead { color: var(--sumi-soft); line-height: 1.95; margin: 0 0 2.4rem; }
+  .yk-lead strong { color: var(--shu); }
+
+  .yk-sec { margin-bottom: 2.8rem; }
+  .yk-sec-title {
+    font-size: 1.25rem; margin: 0 0 .9rem; padding-bottom: .4rem;
+    border-bottom: 2px solid var(--sumi); line-height: 1.5;
+  }
+  .yk-sec-lead { margin: 0 0 1.2rem; font-size: .87rem; color: var(--sumi-soft); line-height: 1.85; }
+  .yk-para { margin: 0 0 1.1rem; font-size: .92rem; line-height: 2; }
+
+  .ct {
+    border-left: 3px solid #b8912f; background: var(--washi);
+    padding: .75rem 1rem; margin-bottom: .8rem;
+  }
+  .ct-title { font-size: 1rem; margin: 0 0 .25rem; line-height: 1.5; }
+  .ct-desc { margin: 0; font-size: .88rem; line-height: 1.85; color: var(--sumi-soft); }
+
+  .th {
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); padding: .95rem 1.1rem; margin-bottom: .9rem;
+  }
+  .th-head { display: flex; align-items: flex-start; gap: 1rem; }
+  .th-headtext { flex: 1; min-width: 0; }
+  .th-title { font-size: 1.05rem; margin: 0; line-height: 1.5; }
+  .th-kind {
+    display: inline-block; margin-top: .2rem;
+    font-family: var(--font-mincho); font-size: .7rem; color: var(--sumi-soft);
+    border: 1px solid var(--rule); background: var(--washi-deep);
+    padding: .1em .55em; border-radius: 2px;
+  }
+  .th-seal { flex-shrink: 0; }
+  .th-desc { margin: .6rem 0 0; font-size: .89rem; line-height: 1.85; }
+  .th-note {
+    margin: .55rem 0 0; padding: .45rem .75rem; background: var(--washi-deep);
+    font-size: .8rem; line-height: 1.78; color: var(--sumi-soft);
+  }
+  .th-note-label {
+    font-family: var(--font-mincho); color: var(--shu); margin-right: .6em; font-size: .77rem;
+  }
+
+  .af {
+    border-left: 3px solid var(--sumi); background: var(--washi);
+    padding: .8rem 1rem; margin-bottom: .9rem;
+  }
+  .af-title { font-size: 1.02rem; margin: 0 0 .3rem; line-height: 1.5; }
+  .af-desc { margin: 0; font-size: .89rem; line-height: 1.85; color: var(--sumi-soft); }
+  .af-link { margin: .4rem 0 0; font-size: .78rem; }
+
+  .yk-closing { margin-top: 3rem; padding-top: 1.4rem; border-top: 3px double var(--sumi); }
+  .yk-closing .yk-sec-title { border-bottom-color: var(--shu); }
+
+  .yk-related { margin: 2rem 0 0; font-size: .84rem; }
+  .yk-sep { color: var(--rule); margin: 0 .5em; }
+
+  @media (max-width: 640px) {
+    .th-head { flex-direction: column; gap: .5rem; }
+  }
+</style>

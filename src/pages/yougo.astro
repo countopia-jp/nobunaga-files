@@ -39,7 +39,7 @@ const stats = glossaryStats();
               </dt>
               <dd class="tm-desc">
                 {t.desc}
-                {t.link && <a class="tm-link" href={t.link}>関連ページ →</a>}
+                {t.link && <a class="tm-link" href={t.link}>{t.linkLabel ?? "関連ページ"} →</a>}
               </dd>
             </div>
           ))}

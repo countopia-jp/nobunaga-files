@@ -81,6 +81,13 @@ const ogImage = new URL('/images/og-image.jpg', Astro.site);
       </section>
     )}
 
+    {ep.related && ep.related.length > 0 && (
+      <p class="ep-related">
+        <span class="ep-related-label">この件を掘り下げる</span>
+        {ep.related.map((r) => <a href={r.href}>{r.label}</a>)}
+      </p>
+    )}
+
     <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
   </article>
 </BaseLayout>
@@ -90,6 +97,16 @@ const ogImage = new URL('/images/og-image.jpg', Astro.site);
   .ep-article { margin-top: 2.6rem; padding-top: 1.6rem; border-top: 1px solid var(--rule); }
   .ep-article .ep-h2 { margin-bottom: 1rem; }
   .ep-article p { margin: 0 0 1.1rem; font-size: 1rem; line-height: 2; color: var(--sumi); }
+  .ep-related {
+    margin-top: 2rem; padding: .8rem 1rem;
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); font-size: .86rem; line-height: 2;
+  }
+  .ep-related-label {
+    display: block; font-family: var(--font-mincho); font-size: .78rem;
+    color: var(--shu); letter-spacing: .08em; margin-bottom: .2rem;
+  }
+  .ep-related a { display: inline-block; margin-right: 1.4rem; }
   .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
   .ep-title { font-size: clamp(1.5rem, 4.5vw, 2.2rem); margin: .2rem 0 1.4rem; }
 

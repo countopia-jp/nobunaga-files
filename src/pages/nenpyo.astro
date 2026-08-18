@@ -56,7 +56,10 @@ const stats = chronologyStats();
                     : <span class="tag-sup">補足</span>}
                 </p>
                 {ev.note && <p class="ev-note">{ev.note}</p>}
-                {ev.slug && (
+                {ev.page && (
+                    <p class="ev-link"><a href={ev.page}>{ev.pageLabel} →</a></p>
+                  )}
+                  {ev.slug && (
                   <p class="ev-link">
                     <a href={`/episodes/${ev.slug}/`}>この出来事を検証する →</a>
                   </p>

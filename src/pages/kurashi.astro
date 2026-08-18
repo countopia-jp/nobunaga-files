@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Seal from '../components/Seal.astro';
+import { sections, claims, closing } from '../data/kurashi.js';
+---
+<BaseLayout
+  title="戦国の暮らし — 庶民は、受け身ではなかった｜ノブナガ・ファイル"
+  description="村の自治と逃散、乱取りと落ち武者狩り、座と関所。ドラマが描く「無力な農民」「黒装束の忍者」を、人物の逸話と同じ手つきで検証する。信長の政策が何に向けられていたかも、庶民の側から見ると分かる。"
+>
+  <article class="wrap kurashi">
+    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+
+    <p class="eyebrow">風俗・暮らし</p>
+    <h1 class="ku-title">庶民は、受け身ではなかった</h1>
+    <p class="ku-lead">
+      信長そのものではなく、信長が動いた世界の話である。
+      合戦の記録は武士の側から書かれるため、庶民は巻き込まれるだけの存在に見えやすい。
+      <strong>だが記録を見ると、そこまで受け身ではない。</strong>
+    </p>
+
+    {sections.map((s) => (
+      <section class="ks">
+        <h2 class="ks-title">{s.name}</h2>
+        <p class="ks-lead">{s.lead}</p>
+        <ul class="ks-list">
+          {s.points.map((p) => <li>{p}</li>)}
+        </ul>
+        {s.note && <p class="ks-note">{s.note}</p>}
+        {s.link && <p class="ks-link"><a href={s.link.href}>{s.link.label} →</a></p>}
+      </section>
+    ))}
+
+    <section class="ku-sec">
+      <h2 class="ku-sec-title">検証</h2>
+      {claims.map((c) => (
+        <div class="claim">
+          <div class="claim-head">
+            <div class="claim-headtext">
+              <h3 class="claim-title">{c.claim}</h3>
+              <p class="claim-verdict">{c.verdict}</p>
+            </div>
+            <div class="claim-seal"><Seal rating={c.rating} size="sm" /></div>
+          </div>
+          <p class="claim-desc">{c.desc}</p>
+        </div>
+      ))}
+    </section>
+
+    <section class="ku-closing">
+      <h2 class="ku-sec-title">時代にも、通説がある</h2>
+      {closing.map((p) => <p class="ku-para">{p}</p>)}
+    </section>
+
+    <p class="ku-related">
+      関連：<a href="/shoku/">食事と好物</a>
+      <span class="ku-sep">｜</span><a href="/tekitai/">敵対勢力一覧</a>
+      <span class="ku-sep">｜</span><a href="/yougo/">用語辞典</a>
+    </p>
+
+    <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .kurashi { max-width: 50rem; padding-block: 2rem 3rem; }
+  .ep-back { margin: 0 0 1rem; }
+  .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
+  .ep-back-btm { margin-top: 2.4rem; }
+
+  .ku-title { font-size: clamp(1.7rem, 5vw, 2.4rem); margin: .2rem 0 1rem; line-height: 1.45; }
+  .ku-lead { color: var(--sumi-soft); line-height: 1.95; margin: 0 0 2.4rem; }
+  .ku-lead strong { color: var(--shu); }
+
+  .ks {
+    border: 1px solid var(--rule); border-left: 3px solid #b8912f;
+    background: var(--washi); padding: 1.1rem 1.2rem; margin-bottom: 1.2rem;
+  }
+  .ks-title { font-size: 1.2rem; margin: 0 0 .5rem; line-height: 1.5; }
+  .ks-lead { margin: 0 0 .8rem; font-size: .91rem; line-height: 1.9; }
+  .ks-list { list-style: none; margin: 0; padding: 0; }
+  .ks-list li {
+    position: relative; padding: .45rem 0 .45rem 1.3rem;
+    border-bottom: 1px dotted var(--rule);
+    font-size: .88rem; line-height: 1.85; color: var(--sumi-soft);
+  }
+  .ks-list li:last-child { border-bottom: none; }
+  .ks-list li::before {
+    content: '│'; position: absolute; left: .1rem; top: .5rem;
+    color: #b8912f; font-size: .8rem;
+  }
+  .ks-note {
+    margin: .8rem 0 0; padding: .6rem .9rem; background: var(--washi-deep);
+    font-size: .85rem; line-height: 1.85;
+  }
+  .ks-link { margin: .5rem 0 0; font-size: .8rem; }
+
+  .ku-sec { margin: 2.8rem 0; }
+  .ku-sec-title {
+    font-size: 1.25rem; margin: 0 0 .9rem; padding-bottom: .4rem;
+    border-bottom: 2px solid var(--sumi); line-height: 1.5;
+  }
+  .ku-para { margin: 0 0 1.1rem; font-size: .92rem; line-height: 2; }
+
+  .claim {
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); padding: 1rem 1.1rem; margin-bottom: 1rem;
+  }
+  .claim-head { display: flex; align-items: flex-start; gap: 1rem; }
+  .claim-headtext { flex: 1; min-width: 0; }
+  .claim-title { font-size: 1.02rem; margin: 0; line-height: 1.55; }
+  .claim-verdict { margin: .2rem 0 0; font-size: .78rem; color: var(--shu); font-family: var(--font-mincho); }
+  .claim-seal { flex-shrink: 0; }
+  .claim-desc { margin: .7rem 0 0; font-size: .89rem; line-height: 1.85; }
+
+  .ku-closing { margin-top: 3rem; padding-top: 1.4rem; border-top: 3px double var(--sumi); }
+  .ku-closing .ku-sec-title { border-bottom-color: var(--shu); }
+
+  .ku-related { margin: 2rem 0 0; font-size: .84rem; }
+  .ku-sep { color: var(--rule); margin: 0 .5em; }
+
+  @media (max-width: 640px) {
+    .claim-head { flex-direction: column; gap: .6rem; }
+  }
+</style>

@@ -90,6 +90,13 @@ const sorted = [...theories].sort((a, b) => b.rating - a.rating);
       <a href="/shiryo/">文献一覧</a>
     </p>
 
+    <p class="xref"><span class="xref-label">あわせて</span><a href="/atago/">愛宕百韻 — 謀反は句に詠まれていたか →</a></p>
+
+
+    <p class="xref"><span class="xref-label">あわせて</span><a href="/mitsuhide/">明智光秀 — 前半生が、分からない →</a></p>
+
+
+
     <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
   </article>
 </BaseLayout>
@@ -174,5 +181,14 @@ const sorted = [...theories].sort((a, b) => b.rating - a.rating);
   @media (max-width: 700px) {
     .th-cols { grid-template-columns: 1fr; gap: 1rem; }
     .th-head { flex-direction: column; gap: .6rem; }
+  }
+  .xref {
+    margin-top: 2rem; padding: .75rem 1rem;
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); font-size: .86rem;
+  }
+  .xref-label {
+    font-family: var(--font-mincho); font-size: .78rem; color: var(--shu);
+    letter-spacing: .08em; margin-right: .9em;
   }
 </style>

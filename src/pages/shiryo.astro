@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { bibliography, bibliographyStats, KIND } from '../data/bibliography.js';
+import SourceOrbit from '../components/SourceOrbit.astro';
 import { getEpisode } from '../data/episodes.js';
 
 const shortTitle = (slug) => {
@@ -27,6 +28,17 @@ const kinds = Object.entries(KIND);
       同時代の文書と日記から始まり、『信長公記』、江戸期の軍記物、
       有名な逸話の出どころとなった随筆、そして現代の研究書まで。
       それぞれの性格と、使うときに気をつける点を添えてある。
+    </p>
+
+    <SourceOrbit />
+
+    <p class="b-orbit-note">
+      内側の二つの輪までが、このサイトで信憑性度4以上を支えられる範囲である。
+      三つ目の輪から外は、<strong>史実の証拠にはならないかわりに、
+      その話がいつ生まれたかを教えてくれる</strong>。
+      有名な逸話ほど外側にあることは、一目で分かるはずだ。
+      なお、いちばん外の輪は過去のものではない。
+      <a href="/bukoyawa/">『武功夜話』</a>のように、二十世紀に現れて通説を作った書物もある。
     </p>
 
     <div class="b-legend">
@@ -60,6 +72,8 @@ const kinds = Object.entries(KIND);
             </div>
             <p class="src-meta">{it.author}<span class="src-sep">／</span>{it.when}</p>
             <p class="src-desc">{it.desc}</p>
+            {it.note2 && <p class="src-note">{it.note2}</p>}
+            {it.note3 && <p class="src-note">{it.note3}</p>}
             {it.caution && (
               <p class="src-caution"><span class="src-caution-label">注意</span>{it.caution}</p>
             )}
@@ -98,6 +112,12 @@ const kinds = Object.entries(KIND);
   .b-lead { color: var(--sumi-soft); line-height: 1.9; margin: 0 0 1.8rem; }
   .b-lead strong { color: var(--shu); }
 
+  .b-orbit-note {
+    margin: 0 0 2rem; padding: .8rem 1rem;
+    border-left: 3px solid var(--shu); background: var(--washi);
+    font-size: .88rem; line-height: 1.9; color: var(--sumi-soft);
+  }
+  .b-orbit-note strong { color: var(--shu); }
   .b-legend {
     border: 1px solid var(--rule); border-left: 3px solid #b8912f;
     background: var(--washi); padding: .9rem 1.1rem; margin-bottom: 2.6rem;
@@ -150,6 +170,10 @@ const kinds = Object.entries(KIND);
   }
   .src-sep { margin: 0 .4em; color: var(--rule); }
   .src-desc { margin: 0; font-size: .9rem; line-height: 1.85; }
+  .src-note {
+    margin: .55rem 0 0; padding-left: .9rem; border-left: 2px solid #b8912f;
+    font-size: .85rem; line-height: 1.88; color: var(--sumi-soft);
+  }
   .src-caution {
     margin: .55rem 0 0; font-size: .8rem; line-height: 1.75; color: var(--sumi-soft);
     background: var(--washi-deep); padding: .45rem .7rem;

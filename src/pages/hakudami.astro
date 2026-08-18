@@ -1,0 +1,149 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Seal from '../components/Seal.astro';
+import { certain, oneword, readings, claims, closing } from '../data/hakudami.js';
+---
+<BaseLayout
+  title="髑髏の杯 — 「飲んだ」とは書かれていない｜ノブナガ・ファイル"
+  description="浅井父子と朝倉義景の首を金箔で加工し、正月の宴で披露した一件。『信長公記』巻七に記されるが、それを杯にして酒を飲んだという記述はない。「肴」と「杯」の入れ替わりを検証する。"
+>
+  <article class="wrap hakudami">
+    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+
+    <p class="eyebrow">残虐性の検証</p>
+    <h1 class="hk-title">「飲んだ」とは、書かれていない</h1>
+    <p class="hk-lead">
+      信長の残虐さを示す逸話として、おそらく最も有名なものである。
+      滅ぼした敵将の頭蓋骨を杯にして酒を飲んだ——そう語られてきた。
+      だが『信長公記』が書いているのは、そこまでではない。
+      <strong>一語が足されたことで、話は異様から怪物へ移った。</strong>
+    </p>
+
+    <section class="hk-sec">
+      <h2 class="hk-sec-title">確かなこと</h2>
+      {certain.map((c) => (
+        <div class="ct">
+          <h3 class="ct-title">{c.title}</h3>
+          <p class="ct-desc">{c.desc}</p>
+        </div>
+      ))}
+    </section>
+
+    <section class="hk-sec hk-oneword">
+      <h2 class="hk-sec-title">「肴」と「杯」</h2>
+      <p class="ow-lead">{oneword.lead}</p>
+      {oneword.body.map((p) => <p class="hk-para">{p}</p>)}
+    </section>
+
+    <section class="hk-sec">
+      <h2 class="hk-sec-title">では、何のための行為だったか</h2>
+      {readings.map((r) => (
+        <div class="rd">
+          <h3 class="rd-title">{r.title}</h3>
+          <p class="rd-desc">{r.desc}</p>
+          <p class="rd-against"><span class="rd-against-label">引っかかり</span>{r.against}</p>
+        </div>
+      ))}
+    </section>
+
+    <section class="hk-sec">
+      <h2 class="hk-sec-title">検証</h2>
+      {claims.map((c) => (
+        <div class="claim">
+          <div class="claim-head">
+            <div class="claim-headtext">
+              <h3 class="claim-title">{c.claim}</h3>
+              <p class="claim-verdict">{c.verdict}</p>
+            </div>
+            <div class="claim-seal"><Seal rating={c.rating} size="sm" /></div>
+          </div>
+          <p class="claim-desc">{c.desc}</p>
+        </div>
+      ))}
+    </section>
+
+    <section class="hk-closing">
+      <h2 class="hk-sec-title">弁護ではない</h2>
+      {closing.map((p) => <p class="hk-para">{p}</p>)}
+    </section>
+
+    <p class="hk-related">
+      関連：<a href="/episodes/zangyaku/">残虐だったのか</a>
+      <span class="hk-sep">｜</span><a href="/episodes/hieizan/">比叡山焼き討ち</a>
+      <span class="hk-sep">｜</span><a href="/dedokoro/">出どころのない逸話</a>
+    </p>
+
+    <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .hakudami { max-width: 50rem; padding-block: 2rem 3rem; }
+  .ep-back { margin: 0 0 1rem; }
+  .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
+  .ep-back-btm { margin-top: 2.4rem; }
+
+  .hk-title { font-size: clamp(1.65rem, 4.8vw, 2.3rem); margin: .2rem 0 1rem; line-height: 1.45; }
+  .hk-lead { color: var(--sumi-soft); line-height: 1.95; margin: 0 0 2.4rem; }
+  .hk-lead strong { color: var(--shu); }
+
+  .hk-sec { margin-bottom: 2.8rem; }
+  .hk-sec-title {
+    font-size: 1.25rem; margin: 0 0 .9rem; padding-bottom: .4rem;
+    border-bottom: 2px solid var(--sumi); line-height: 1.5;
+  }
+  .hk-para { margin: 0 0 1.1rem; font-size: .92rem; line-height: 2; }
+
+  .ct {
+    border-left: 3px solid #b8912f; background: var(--washi);
+    padding: .75rem 1rem; margin-bottom: .8rem;
+  }
+  .ct-title { font-size: 1rem; margin: 0 0 .25rem; line-height: 1.5; }
+  .ct-desc { margin: 0; font-size: .88rem; line-height: 1.85; color: var(--sumi-soft); }
+
+  .hk-oneword {
+    border-left: 3px solid var(--shu); background: var(--washi);
+    padding: 1.1rem 1.2rem; margin-bottom: 2.8rem;
+  }
+  .hk-oneword .hk-sec-title { border-bottom-color: var(--shu); }
+  .ow-lead {
+    margin: 0 0 .9rem; font-family: var(--font-mincho); font-size: 1rem;
+    color: var(--shu); line-height: 1.8;
+  }
+  .hk-oneword .hk-para:last-child { margin-bottom: 0; }
+
+  .rd {
+    border: 1px solid var(--rule); background: var(--washi);
+    padding: .9rem 1.1rem; margin-bottom: .9rem;
+  }
+  .rd-title { font-size: 1.05rem; margin: 0 0 .35rem; line-height: 1.5; }
+  .rd-desc { margin: 0; font-size: .89rem; line-height: 1.88; color: var(--sumi-soft); }
+  .rd-against {
+    margin: .7rem 0 0; padding: .55rem .8rem; background: var(--washi-deep);
+    font-size: .84rem; line-height: 1.85;
+  }
+  .rd-against-label {
+    font-family: var(--font-mincho); color: var(--shu); margin-right: .7em; font-size: .79rem;
+  }
+
+  .claim {
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); padding: 1rem 1.1rem; margin-bottom: 1rem;
+  }
+  .claim-head { display: flex; align-items: flex-start; gap: 1rem; }
+  .claim-headtext { flex: 1; min-width: 0; }
+  .claim-title { font-size: 1.02rem; margin: 0; line-height: 1.55; }
+  .claim-verdict { margin: .2rem 0 0; font-size: .78rem; color: var(--shu); font-family: var(--font-mincho); }
+  .claim-seal { flex-shrink: 0; }
+  .claim-desc { margin: .7rem 0 0; font-size: .89rem; line-height: 1.85; }
+
+  .hk-closing { margin-top: 3rem; padding-top: 1.4rem; border-top: 3px double var(--sumi); }
+  .hk-closing .hk-sec-title { border-bottom-color: var(--shu); }
+
+  .hk-related { margin: 2rem 0 0; font-size: .84rem; }
+  .hk-sep { color: var(--rule); margin: 0 .5em; }
+
+  @media (max-width: 640px) {
+    .claim-head { flex-direction: column; gap: .6rem; }
+  }
+</style>

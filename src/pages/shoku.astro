@@ -119,6 +119,9 @@ const shortTitle = (slug) => {
       <strong>残りは、後の世が味付けした分</strong>だと考えたほうがいい。
     </p>
 
+    <p class="xref"><span class="xref-label">あわせて</span><a href="/kurashi/">戦国の暮らし — 庶民は、受け身ではなかった →</a></p>
+
+
     <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
   </article>
 </BaseLayout>
@@ -222,5 +225,14 @@ const shortTitle = (slug) => {
   @media (max-width: 700px) {
     .ctx-grid { grid-template-columns: 1fr; }
     .claim-head { flex-direction: column; gap: .6rem; }
+  }
+  .xref {
+    margin-top: 2rem; padding: .75rem 1rem;
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); font-size: .86rem;
+  }
+  .xref-label {
+    font-family: var(--font-mincho); font-size: .78rem; color: var(--shu);
+    letter-spacing: .08em; margin-right: .9em;
   }
 </style>

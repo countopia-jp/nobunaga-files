@@ -1,0 +1,141 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Seal from '../components/Seal.astro';
+import { certain, wobbles, claims, why } from '../data/atago.js';
+---
+<BaseLayout
+  title="愛宕百韻 — 謀反は句に詠まれていたか｜ノブナガ・ファイル"
+  description="本能寺の変の数日前、明智光秀が愛宕山で興行した連歌会。その発句に謀反の決意が詠み込まれていたと語られる。だがこの句は、字句そのものが写本によって揺れ、その読み方も正反対に分かれる。二重の揺れを出典とともに検証する。"
+>
+  <article class="wrap atago">
+    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+
+    <p class="eyebrow">本能寺の変</p>
+    <h1 class="at-title">謀反は、句に詠まれていたか</h1>
+    <p class="at-lead">
+      本能寺の変の数日前、光秀は愛宕山で連歌の会を催した。
+      その発句に、謀反の決意が詠み込まれていた——そう語られてきた。
+      だがこの句は、検証の題材として珍しい構造をしている。
+      <strong>字句そのものが写本によって違い、その字句をどう読むかでも意味が正反対になる。</strong>
+      揺れが二重にあるのだ。
+    </p>
+
+    <section class="at-sec">
+      <h2 class="at-sec-title">確かなこと</h2>
+      {certain.map((c) => (
+        <div class="ct">
+          <h3 class="ct-title">{c.title}</h3>
+          <p class="ct-desc">{c.desc}</p>
+        </div>
+      ))}
+    </section>
+
+    {wobbles.map((w) => (
+      <section class="wb">
+        <div class="wb-head">
+          <span class="wb-n">揺れ {w.n}</span>
+          <h2 class="wb-title">{w.title}</h2>
+        </div>
+        <p class="wb-lead">{w.lead}</p>
+        {w.body.map((p) => <p class="wb-para">{p}</p>)}
+        {w.note && (
+          <p class="wb-note"><span class="wb-note-label">注</span>{w.note}</p>
+        )}
+      </section>
+    ))}
+
+    <section class="at-sec">
+      <h2 class="at-sec-title">検証</h2>
+      {claims.map((c) => (
+        <div class="claim">
+          <div class="claim-head">
+            <div class="claim-headtext">
+              <h3 class="claim-title">{c.claim}</h3>
+              <p class="claim-verdict">{c.verdict}</p>
+            </div>
+            <div class="claim-seal"><Seal rating={c.rating} size="sm" /></div>
+          </div>
+          <p class="claim-desc">{c.desc}</p>
+        </div>
+      ))}
+    </section>
+
+    <section class="at-sec">
+      <h2 class="at-sec-title">なぜ、この読みは強いのか</h2>
+      {why.map((p) => <p class="at-para">{p}</p>)}
+    </section>
+
+    <p class="at-related">
+      関連：<a href="/mitsuhide/">明智光秀</a>
+      <span class="at-sep">｜</span><a href="/kuromaku/">本能寺の黒幕説</a>
+      <span class="at-sep">｜</span><a href="/meigen/">名言・名台詞</a>
+      <span class="at-sep">｜</span><a href="/episodes/honnoji/">本能寺の変（検証ファイル）</a>
+    </p>
+
+    <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .atago { max-width: 50rem; padding-block: 2rem 3rem; }
+  .ep-back { margin: 0 0 1rem; }
+  .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
+  .ep-back-btm { margin-top: 2.4rem; }
+
+  .at-title { font-size: clamp(1.7rem, 5vw, 2.4rem); margin: .2rem 0 1rem; }
+  .at-lead { color: var(--sumi-soft); line-height: 1.95; margin: 0 0 2.4rem; }
+  .at-lead strong { color: var(--shu); }
+
+  .at-sec { margin-bottom: 2.8rem; }
+  .at-sec-title {
+    font-size: 1.25rem; margin: 0 0 1rem; padding-bottom: .4rem;
+    border-bottom: 2px solid var(--sumi); line-height: 1.5;
+  }
+  .at-para { margin: 0 0 1rem; font-size: .92rem; line-height: 1.95; }
+
+  .ct {
+    border-left: 3px solid #b8912f; background: var(--washi);
+    padding: .75rem 1rem; margin-bottom: .8rem;
+  }
+  .ct-title { font-size: 1rem; margin: 0 0 .25rem; line-height: 1.5; }
+  .ct-desc { margin: 0; font-size: .88rem; line-height: 1.85; color: var(--sumi-soft); }
+
+  .wb {
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); padding: 1.1rem 1.2rem; margin-bottom: 1.4rem;
+  }
+  .wb-head { display: flex; align-items: baseline; gap: .8rem; flex-wrap: wrap; margin-bottom: .6rem; }
+  .wb-n {
+    font-family: var(--font-mincho); font-size: .74rem; color: var(--washi);
+    background: var(--shu); padding: .15em .7em; border-radius: 2px; white-space: nowrap;
+  }
+  .wb-title { font-size: 1.2rem; margin: 0; line-height: 1.5; }
+  .wb-lead { margin: 0 0 .8rem; font-size: .93rem; line-height: 1.9; }
+  .wb-para { margin: 0 0 .9rem; font-size: .89rem; line-height: 1.9; color: var(--sumi-soft); }
+  .wb-para:last-of-type { margin-bottom: 0; }
+  .wb-note {
+    margin: .9rem 0 0; padding: .55rem .8rem; background: var(--washi-deep);
+    font-size: .8rem; line-height: 1.8; color: var(--sumi-soft);
+  }
+  .wb-note-label {
+    font-family: var(--font-mincho); color: var(--shu); margin-right: .6em; font-size: .78rem;
+  }
+
+  .claim {
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); padding: 1rem 1.1rem; margin-bottom: 1rem;
+  }
+  .claim-head { display: flex; align-items: flex-start; gap: 1rem; }
+  .claim-headtext { flex: 1; min-width: 0; }
+  .claim-title { font-size: 1.02rem; margin: 0; line-height: 1.55; }
+  .claim-verdict { margin: .2rem 0 0; font-size: .78rem; color: var(--shu); font-family: var(--font-mincho); }
+  .claim-seal { flex-shrink: 0; }
+  .claim-desc { margin: .7rem 0 0; font-size: .89rem; line-height: 1.85; }
+
+  .at-related { margin: 2rem 0 0; font-size: .84rem; }
+  .at-sep { color: var(--rule); margin: 0 .5em; }
+
+  @media (max-width: 640px) {
+    .claim-head { flex-direction: column; gap: .6rem; }
+  }
+</style>

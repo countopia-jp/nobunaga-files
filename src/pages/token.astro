@@ -1,0 +1,143 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Seal from '../components/Seal.astro';
+import { swords, claims, closing } from '../data/token.js';
+---
+<BaseLayout
+  title="信長の刀 — 「残っている」にも段階がある｜ノブナガ・ファイル"
+  description="義元左文字、へし切長谷部、不動行光、薬研藤四郎。信長にまつわる刀を、現存の状態と伝来から検証する。桶狭間の日付を刻ませた金象嵌銘は、本人が物に残した記録として「天下布武」の印に並ぶ。"
+>
+  <article class="wrap token">
+    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+
+    <p class="eyebrow">物からたどる</p>
+    <h1 class="tk-title">「残っている」にも、段階がある</h1>
+    <p class="tk-lead">
+      刀は、物が残っている題材である。
+      だが四振り並べてみると、<strong>「残っている」の意味が一振りずつ違う</strong>ことが分かる。
+      焼けて打ち直された刀、他家に伝わって当時の姿を保った刀、名だけが残って現物のない刀。
+    </p>
+
+    <section class="tk-sec">
+      {swords.map((s) => (
+        <div class="sw">
+          <div class="sw-head">
+            <div class="sw-headtext">
+              <h2 class="sw-name">{s.name}</h2>
+              {s.alias && <span class="sw-alias">{s.alias}</span>}
+            </div>
+            <div class="sw-seal"><Seal rating={s.rating} size="sm" /></div>
+          </div>
+          <p class="sw-now"><span class="sw-now-label">いま</span>{s.now}</p>
+          <p class="sw-verdict">{s.verdict}</p>
+          {s.story.map((p) => <p class="sw-story">{p}</p>)}
+          <p class="sw-key">{s.key}</p>
+          {s.caution && (
+            <p class="sw-caution"><span class="sw-caution-label">注意</span>{s.caution}</p>
+          )}
+        </div>
+      ))}
+    </section>
+
+    <section class="tk-sec">
+      <h2 class="tk-sec-title">検証</h2>
+      {claims.map((c) => (
+        <div class="claim">
+          <div class="claim-head">
+            <div class="claim-headtext">
+              <h3 class="claim-title">{c.claim}</h3>
+              <p class="claim-verdict">{c.verdict}</p>
+            </div>
+            <div class="claim-seal"><Seal rating={c.rating} size="sm" /></div>
+          </div>
+          <p class="claim-desc">{c.desc}</p>
+        </div>
+      ))}
+    </section>
+
+    <section class="tk-closing">
+      <h2 class="tk-sec-title">物にも、距離がある</h2>
+      {closing.map((p) => <p class="tk-para">{p}</p>)}
+    </section>
+
+    <p class="tk-related">
+      関連：<a href="/meibutsu/">名物茶器</a>
+      <span class="tk-sep">｜</span><a href="/ranjatai/">蘭奢待</a>
+      <span class="tk-sep">｜</span><a href="/shiseki/">史跡・資料館</a>
+      <span class="tk-sep">｜</span><a href="/episodes/tenka-fubu/">天下布武</a>
+    </p>
+
+    <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .token { max-width: 50rem; padding-block: 2rem 3rem; }
+  .ep-back { margin: 0 0 1rem; }
+  .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
+  .ep-back-btm { margin-top: 2.4rem; }
+
+  .tk-title { font-size: clamp(1.7rem, 5vw, 2.4rem); margin: .2rem 0 1rem; line-height: 1.45; }
+  .tk-lead { color: var(--sumi-soft); line-height: 1.95; margin: 0 0 2.4rem; }
+  .tk-lead strong { color: var(--shu); }
+
+  .tk-sec { margin-bottom: 2.8rem; }
+  .tk-sec-title {
+    font-size: 1.25rem; margin: 0 0 .9rem; padding-bottom: .4rem;
+    border-bottom: 2px solid var(--sumi); line-height: 1.5;
+  }
+  .tk-para { margin: 0 0 1.1rem; font-size: .92rem; line-height: 2; }
+
+  .sw {
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); padding: 1.1rem 1.2rem; margin-bottom: 1.2rem;
+  }
+  .sw-head { display: flex; align-items: flex-start; gap: 1rem; }
+  .sw-headtext { flex: 1; min-width: 0; }
+  .sw-name {
+    font-size: 1.3rem; margin: 0; line-height: 1.4; letter-spacing: .05em;
+  }
+  .sw-alias { font-size: .76rem; color: var(--sumi-soft); font-family: var(--font-gothic); }
+  .sw-seal { flex-shrink: 0; }
+  .sw-now {
+    margin: .5rem 0 0; padding: .4rem .7rem; background: var(--washi-deep);
+    font-size: .82rem; color: var(--sumi-soft);
+  }
+  .sw-now-label {
+    font-family: var(--font-mincho); color: var(--shu); margin-right: .7em; font-size: .78rem;
+  }
+  .sw-verdict { margin: .35rem 0 0; font-size: .78rem; color: var(--shu); font-family: var(--font-mincho); }
+  .sw-story { margin: .6rem 0 0; font-size: .89rem; line-height: 1.92; color: var(--sumi-soft); }
+  .sw-key {
+    margin: .8rem 0 0; padding: .65rem .9rem; background: #fbf3ef;
+    border-left: 2px solid var(--shu); font-size: .88rem; line-height: 1.9;
+  }
+  .sw-caution {
+    margin: .6rem 0 0; padding: .5rem .8rem; background: var(--washi-deep);
+    font-size: .83rem; line-height: 1.82; color: var(--sumi-soft);
+  }
+  .sw-caution-label {
+    font-family: var(--font-mincho); color: var(--shu); margin-right: .65em; font-size: .78rem;
+  }
+
+  .claim {
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); padding: 1rem 1.1rem; margin-bottom: 1rem;
+  }
+  .claim-head { display: flex; align-items: flex-start; gap: 1rem; }
+  .claim-headtext { flex: 1; min-width: 0; }
+  .claim-title { font-size: 1.02rem; margin: 0; line-height: 1.55; }
+  .claim-verdict { margin: .2rem 0 0; font-size: .78rem; color: var(--shu); font-family: var(--font-mincho); }
+  .claim-seal { flex-shrink: 0; }
+  .claim-desc { margin: .7rem 0 0; font-size: .89rem; line-height: 1.85; }
+
+  .tk-closing { margin-top: 3rem; padding-top: 1.4rem; border-top: 3px double var(--sumi); }
+  .tk-closing .tk-sec-title { border-bottom-color: var(--shu); }
+
+  .tk-related { margin: 2rem 0 0; font-size: .84rem; }
+  .tk-sep { color: var(--rule); margin: 0 .5em; }
+
+  @media (max-width: 640px) {
+    .sw-head, .claim-head { flex-direction: column; gap: .5rem; }
+  }
+</style>

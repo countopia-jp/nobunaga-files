@@ -1,0 +1,161 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Seal from '../components/Seal.astro';
+import { fronts, plans, claims, closing } from '../data/tochu.js';
+---
+<BaseLayout
+  title="途中だったこと — 本能寺が止めたもの｜ノブナガ・ファイル"
+  description="天正十年六月、織田の軍は中国・北陸・関東・四国の四方面で同時に動いていた。四国への渡海は直前、信長自身の中国出陣も決まっていた。本能寺が止めたのは一人の命だけではない。"
+>
+  <article class="wrap tochu">
+    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+
+    <p class="eyebrow">本能寺の変</p>
+    <h1 class="tc-title">本能寺が止めたもの</h1>
+    <p class="tc-lead">
+      本能寺が止めたのは、一人の命だけではない。
+      進行中の計画が、いくつも途中で止まった。
+      このページが扱うのは「やらなかったこと」ではなく、
+      <strong>「途中だったこと」</strong>である。
+    </p>
+
+    <section class="tc-sec">
+      <h2 class="tc-sec-title">四つの前線</h2>
+      <p class="tc-sec-lead">{fronts.lead}</p>
+      <ul class="fr-list">
+        {fronts.items.map((f) => (
+          <li>
+            <span class="fr-t">{f.t}</span>
+            <span class="fr-d">{f.d}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="tc-note">{fronts.note}</p>
+    </section>
+
+    <section class="tc-sec">
+      <h2 class="tc-sec-title">止まった計画</h2>
+      {plans.map((p) => (
+        <div class="pl">
+          <div class="pl-head">
+            <h3 class="pl-t">{p.t}</h3>
+            <span class="pl-kind">{p.kind}</span>
+          </div>
+          <p class="pl-d">{p.d}</p>
+          {p.note && <p class="pl-note"><span class="pl-note-label">注</span>{p.note}</p>}
+          {p.link && <p class="pl-link"><a href={p.link.href}>{p.link.label} →</a></p>}
+        </div>
+      ))}
+    </section>
+
+    <section class="tc-sec">
+      <h2 class="tc-sec-title">検証</h2>
+      {claims.map((c) => (
+        <div class="claim">
+          <div class="claim-head">
+            <div class="claim-headtext">
+              <h3 class="claim-title">{c.claim}</h3>
+              <p class="claim-verdict">{c.verdict}</p>
+            </div>
+            <div class="claim-seal"><Seal rating={c.rating} size="sm" /></div>
+          </div>
+          <p class="claim-desc">{c.desc}</p>
+        </div>
+      ))}
+    </section>
+
+    <section class="tc-closing">
+      <h2 class="tc-sec-title">止まった位置</h2>
+      {closing.map((p) => <p class="tc-para">{p}</p>)}
+    </section>
+
+    <p class="tc-related">
+      関連：<a href="/episodes/honnoji/">本能寺の変</a>
+      <span class="tc-sep">｜</span><a href="/kassen/">合戦データベース</a>
+      <span class="tc-sep">｜</span><a href="/yukue/">遺体の行方</a>
+    </p>
+
+    <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .tochu { max-width: 50rem; padding-block: 2rem 3rem; }
+  .ep-back { margin: 0 0 1rem; }
+  .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
+  .ep-back-btm { margin-top: 2.4rem; }
+
+  .tc-title { font-size: clamp(1.7rem, 5vw, 2.4rem); margin: .2rem 0 1rem; line-height: 1.45; }
+  .tc-lead { color: var(--sumi-soft); line-height: 1.95; margin: 0 0 2.4rem; }
+  .tc-lead strong { color: var(--shu); }
+
+  .tc-sec { margin-bottom: 2.8rem; }
+  .tc-sec-title {
+    font-size: 1.25rem; margin: 0 0 .9rem; padding-bottom: .4rem;
+    border-bottom: 2px solid var(--sumi); line-height: 1.5;
+  }
+  .tc-sec-lead { margin: 0 0 1.1rem; font-size: .88rem; color: var(--sumi-soft); line-height: 1.85; }
+  .tc-para { margin: 0 0 1.1rem; font-size: .92rem; line-height: 2; }
+
+  .fr-list {
+    list-style: none; margin: 0 0 1rem; padding: .8rem 1.1rem;
+    border: 1px solid var(--rule); background: var(--washi);
+  }
+  .fr-list li {
+    display: grid; grid-template-columns: 4rem 1fr; gap: .8rem;
+    padding: .5rem 0; border-bottom: 1px dotted var(--rule);
+    font-size: .88rem; line-height: 1.85;
+  }
+  .fr-list li:last-child { border-bottom: none; }
+  .fr-t { font-family: var(--font-mincho); color: var(--shu); font-weight: 700; }
+  .fr-d { color: var(--sumi-soft); }
+
+  .tc-note {
+    margin: 0; padding: .7rem .95rem; background: var(--washi);
+    border-left: 3px solid var(--shu);
+    font-size: .88rem; line-height: 1.9;
+  }
+
+  .pl {
+    border: 1px solid var(--rule); border-left: 3px solid #b8912f;
+    background: var(--washi); padding: .9rem 1.1rem; margin-bottom: .9rem;
+  }
+  .pl-head { display: flex; align-items: baseline; gap: .7rem; flex-wrap: wrap; }
+  .pl-t { font-size: 1.05rem; margin: 0; line-height: 1.5; }
+  .pl-kind {
+    font-family: var(--font-mincho); font-size: .68rem; color: var(--sumi-soft);
+    border: 1px solid var(--rule); background: var(--washi-deep);
+    padding: .1em .55em; border-radius: 2px; white-space: nowrap;
+  }
+  .pl-d { margin: .35rem 0 0; font-size: .89rem; line-height: 1.88; }
+  .pl-note {
+    margin: .55rem 0 0; padding: .45rem .75rem; background: var(--washi-deep);
+    font-size: .82rem; line-height: 1.8; color: var(--sumi-soft);
+  }
+  .pl-note-label {
+    font-family: var(--font-mincho); color: var(--shu); margin-right: .6em; font-size: .78rem;
+  }
+  .pl-link { margin: .4rem 0 0; font-size: .78rem; }
+
+  .claim {
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); padding: 1rem 1.1rem; margin-bottom: 1rem;
+  }
+  .claim-head { display: flex; align-items: flex-start; gap: 1rem; }
+  .claim-headtext { flex: 1; min-width: 0; }
+  .claim-title { font-size: 1.02rem; margin: 0; line-height: 1.55; }
+  .claim-verdict { margin: .2rem 0 0; font-size: .78rem; color: var(--shu); font-family: var(--font-mincho); }
+  .claim-seal { flex-shrink: 0; }
+  .claim-desc { margin: .7rem 0 0; font-size: .89rem; line-height: 1.85; }
+
+  .tc-closing { margin-top: 3rem; padding-top: 1.4rem; border-top: 3px double var(--sumi); }
+  .tc-closing .tc-sec-title { border-bottom-color: var(--shu); }
+
+  .tc-related { margin: 2rem 0 0; font-size: .84rem; }
+  .tc-sep { color: var(--rule); margin: 0 .5em; }
+
+  @media (max-width: 640px) {
+    .fr-list li { grid-template-columns: 1fr; gap: .1rem; }
+    .claim-head { flex-direction: column; gap: .6rem; }
+  }
+</style>

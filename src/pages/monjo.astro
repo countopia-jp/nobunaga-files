@@ -88,6 +88,7 @@ import { sekkanjo, notYet } from '../data/documents.js';
           </div>
           <p class="ny-desc">{d.desc}</p>
           <p class="ny-reason"><span class="dc-note-label">理由</span>{d.reason}</p>
+          {d.reason2 && <p class="ny-reason ny-reason2">{d.reason2}</p>}
           {d.link && <p class="ny-link"><a href={d.link.href}>{d.link.label} →</a></p>}
         </div>
       ))}
@@ -190,6 +191,7 @@ import { sekkanjo, notYet } from '../data/documents.js';
     margin: .5rem 0 0; font-size: .81rem; line-height: 1.8; color: var(--sumi-soft);
     background: var(--washi-deep); padding: .5rem .75rem;
   }
+  .ny-reason2 { margin-top: .5rem; border-left-color: #b8912f; }
   .ny-link { margin: .4rem 0 0; font-size: .78rem; }
 
   .mj-related { margin: 2rem 0 0; font-size: .84rem; }

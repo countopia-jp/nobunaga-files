@@ -1,0 +1,144 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Seal from '../components/Seal.astro';
+import { certain, readings, claims, closing } from '../data/ranjatai.js';
+---
+<BaseLayout
+  title="蘭奢待 — 截り取った跡が、いまも残る｜ノブナガ・ファイル"
+  description="天正二年、信長は正倉院を開封させ名香・蘭奢待を截り取った。権威への挑戦として語られてきたが、勅許を得た正式な手続きであり、足利義政という先例もある。香木に残る截取の付箋という物証から検証する。"
+>
+  <article class="wrap ranjatai">
+    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+
+    <p class="eyebrow">権威との関係</p>
+    <h1 class="rj-title">截り取った跡が、いまも残る</h1>
+    <p class="rj-lead">
+      このサイトが扱ってきたものの大半は、文字の記録だった。
+      誰かが書き、誰かが写し、誰かが誤って伝えた文字を追う作業である。
+      蘭奢待は違う。<strong>物が残っている。しかも截り取った跡ごと残っている。</strong>
+      千年以上を経た香木の上に、信長の行為の痕跡が刻まれている。
+    </p>
+
+    <section class="rj-sec">
+      <h2 class="rj-sec-title">確かなこと</h2>
+      {certain.map((c) => (
+        <div class="ct">
+          <h3 class="ct-title">{c.title}</h3>
+          <p class="ct-desc">{c.desc}</p>
+        </div>
+      ))}
+    </section>
+
+    <section class="rj-sec">
+      <h2 class="rj-sec-title">三つの読み方</h2>
+      {readings.map((r) => (
+        <div class="rd">
+          <div class="rd-head">
+            <span class="rd-n">{r.n}</span>
+            <h3 class="rd-title">{r.title}</h3>
+          </div>
+          <p class="rd-lead">{r.lead}</p>
+          <p class="rd-body">{r.body}</p>
+          <p class="rd-against"><span class="rd-against-label">引っかかり</span>{r.against}</p>
+        </div>
+      ))}
+    </section>
+
+    <section class="rj-sec">
+      <h2 class="rj-sec-title">検証</h2>
+      {claims.map((c) => (
+        <div class="claim">
+          <div class="claim-head">
+            <div class="claim-headtext">
+              <h3 class="claim-title">{c.claim}</h3>
+              <p class="claim-verdict">{c.verdict}</p>
+            </div>
+            <div class="claim-seal"><Seal rating={c.rating} size="sm" /></div>
+          </div>
+          <p class="claim-desc">{c.desc}</p>
+        </div>
+      ))}
+    </section>
+
+    <section class="rj-closing">
+      <h2 class="rj-sec-title">壊してはいない。使っている</h2>
+      {closing.map((p) => <p class="rj-para">{p}</p>)}
+    </section>
+
+    <p class="rj-related">
+      関連：<a href="/token/">信長の刀</a>
+      <span class="rj-sep">｜</span><a href="/kani/">異名と官位</a>
+      <span class="rj-sep">｜</span><a href="/shinkou/">何を信じていたか</a>
+      <span class="rj-sep">｜</span><a href="/episodes/kakushinsha/">革新者だったのか</a>
+    </p>
+
+    <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .ranjatai { max-width: 50rem; padding-block: 2rem 3rem; }
+  .ep-back { margin: 0 0 1rem; }
+  .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
+  .ep-back-btm { margin-top: 2.4rem; }
+
+  .rj-title { font-size: clamp(1.65rem, 4.8vw, 2.3rem); margin: .2rem 0 1rem; line-height: 1.45; }
+  .rj-lead { color: var(--sumi-soft); line-height: 1.95; margin: 0 0 2.4rem; }
+  .rj-lead strong { color: var(--shu); }
+
+  .rj-sec { margin-bottom: 2.8rem; }
+  .rj-sec-title {
+    font-size: 1.25rem; margin: 0 0 .9rem; padding-bottom: .4rem;
+    border-bottom: 2px solid var(--sumi); line-height: 1.5;
+  }
+  .rj-para { margin: 0 0 1.1rem; font-size: .92rem; line-height: 2; }
+
+  .ct {
+    border-left: 3px solid #b8912f; background: var(--washi);
+    padding: .75rem 1rem; margin-bottom: .8rem;
+  }
+  .ct-title { font-size: 1rem; margin: 0 0 .25rem; line-height: 1.5; }
+  .ct-desc { margin: 0; font-size: .88rem; line-height: 1.85; color: var(--sumi-soft); }
+
+  .rd {
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); padding: 1rem 1.15rem; margin-bottom: 1.1rem;
+  }
+  .rd-head { display: flex; align-items: baseline; gap: .7rem; flex-wrap: wrap; margin-bottom: .5rem; }
+  .rd-n {
+    font-family: var(--font-mincho); font-size: .95rem;
+    width: 1.9em; height: 1.9em; display: flex; align-items: center; justify-content: center;
+    border: 1px solid var(--shu); color: var(--shu); border-radius: 50%; flex-shrink: 0;
+  }
+  .rd-title { font-size: 1.1rem; margin: 0; line-height: 1.5; }
+  .rd-lead { margin: 0 0 .6rem; font-size: .92rem; line-height: 1.9; }
+  .rd-body { margin: 0; font-size: .88rem; line-height: 1.9; color: var(--sumi-soft); }
+  .rd-against {
+    margin: .7rem 0 0; padding: .55rem .8rem; background: var(--washi-deep);
+    font-size: .84rem; line-height: 1.85;
+  }
+  .rd-against-label {
+    font-family: var(--font-mincho); color: var(--shu); margin-right: .7em; font-size: .79rem;
+  }
+
+  .claim {
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); padding: 1rem 1.1rem; margin-bottom: 1rem;
+  }
+  .claim-head { display: flex; align-items: flex-start; gap: 1rem; }
+  .claim-headtext { flex: 1; min-width: 0; }
+  .claim-title { font-size: 1.02rem; margin: 0; line-height: 1.55; }
+  .claim-verdict { margin: .2rem 0 0; font-size: .78rem; color: var(--shu); font-family: var(--font-mincho); }
+  .claim-seal { flex-shrink: 0; }
+  .claim-desc { margin: .7rem 0 0; font-size: .89rem; line-height: 1.85; }
+
+  .rj-closing { margin-top: 3rem; padding-top: 1.4rem; border-top: 3px double var(--sumi); }
+  .rj-closing .rj-sec-title { border-bottom-color: var(--shu); }
+
+  .rj-related { margin: 2rem 0 0; font-size: .84rem; }
+  .rj-sep { color: var(--rule); margin: 0 .5em; }
+
+  @media (max-width: 640px) {
+    .claim-head { flex-direction: column; gap: .6rem; }
+  }
+</style>

@@ -77,6 +77,9 @@ import { facts, froisView, claims } from '../data/namban.js';
       <span class="nb-sep">｜</span><a href="/shiryo/">文献一覧（フロイスの記録）</a>
     </p>
 
+    <p class="xref"><span class="xref-label">あわせて</span><a href="/shinkou/">何を信じていたか →</a></p>
+
+
     <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
   </article>
 </BaseLayout>
@@ -161,5 +164,14 @@ import { facts, froisView, claims } from '../data/namban.js';
   @media (max-width: 640px) {
     .claim-head { flex-direction: column; gap: .6rem; }
     .fv-list li { grid-template-columns: 1fr; gap: .1rem; }
+  }
+  .xref {
+    margin-top: 2rem; padding: .75rem 1rem;
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); font-size: .86rem;
+  }
+  .xref-label {
+    font-family: var(--font-mincho); font-size: .78rem; color: var(--shu);
+    letter-spacing: .08em; margin-right: .9em;
   }
 </style>

@@ -1,0 +1,129 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Seal from '../components/Seal.astro';
+import { policies, claims, closing } from '../data/keizai.js';
+---
+<BaseLayout
+  title="信長の経済 — 楽市楽座の四文字で語られないこと｜ノブナガ・ファイル"
+  description="関所の廃止と要衝の直轄化、撰銭令、堺への矢銭要求、茶器を恩賞にする仕組み、そして鉛と硝石の確保。楽市楽座の一語で語られがちな信長の経済政策を、実際にやったことから検証する。"
+>
+  <article class="wrap keizai">
+    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+
+    <p class="eyebrow">政策の検証</p>
+    <h1 class="kz-title">楽市楽座の四文字で語られないこと</h1>
+    <p class="kz-lead">
+      このサイトは「楽市楽座は信長の発明ではない」と書いてきた。
+      だが、では実際に何をしたのかを書いていなかった。
+      <strong>通説を否定したまま空白にしておくのは、検証として片手落ちである。</strong>
+      七つの政策を、それぞれの「引っかかり」とあわせて並べる。
+    </p>
+
+    <section class="kz-sec">
+      {policies.map((p, i) => (
+        <div class="po">
+          <div class="po-head">
+            <span class="po-n">{String(i + 1).padStart(2, '0')}</span>
+            <h2 class="po-title">{p.title}</h2>
+          </div>
+          <p class="po-lead">{p.lead}</p>
+          <p class="po-body">{p.body}</p>
+          <p class="po-catch"><span class="po-catch-label">ただし</span>{p.catch}</p>
+          {p.link && <p class="po-link"><a href={p.link.href}>{p.link.label} →</a></p>}
+        </div>
+      ))}
+    </section>
+
+    <section class="kz-sec">
+      <h2 class="kz-sec-title">検証</h2>
+      {claims.map((c) => (
+        <div class="claim">
+          <div class="claim-head">
+            <div class="claim-headtext">
+              <h3 class="claim-title">{c.claim}</h3>
+              <p class="claim-verdict">{c.verdict}</p>
+            </div>
+            <div class="claim-seal"><Seal rating={c.rating} size="sm" /></div>
+          </div>
+          <p class="claim-desc">{c.desc}</p>
+        </div>
+      ))}
+    </section>
+
+    <section class="kz-closing">
+      <h2 class="kz-sec-title">自由化ではなく、付け替え</h2>
+      {closing.map((p) => <p class="kz-para">{p}</p>)}
+    </section>
+
+    <p class="kz-related">
+      関連：<a href="/episodes/kakushinsha/">革新者だったのか</a>
+      <span class="kz-sep">｜</span><a href="/namban/">南蛮との交流</a>
+      <span class="kz-sep">｜</span><a href="/kassen/">合戦データベース</a>
+    </p>
+
+    <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .keizai { max-width: 50rem; padding-block: 2rem 3rem; }
+  .ep-back { margin: 0 0 1rem; }
+  .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
+  .ep-back-btm { margin-top: 2.4rem; }
+
+  .kz-title { font-size: clamp(1.6rem, 4.6vw, 2.2rem); margin: .2rem 0 1rem; line-height: 1.45; }
+  .kz-lead { color: var(--sumi-soft); line-height: 1.95; margin: 0 0 2.4rem; }
+  .kz-lead strong { color: var(--shu); }
+
+  .kz-sec { margin-bottom: 2.8rem; }
+  .kz-sec-title {
+    font-size: 1.25rem; margin: 0 0 .9rem; padding-bottom: .4rem;
+    border-bottom: 2px solid var(--sumi); line-height: 1.5;
+  }
+  .kz-para { margin: 0 0 1.1rem; font-size: .92rem; line-height: 2; }
+
+  .po {
+    border: 1px solid var(--rule); border-left: 3px solid #b8912f;
+    background: var(--washi); padding: 1rem 1.15rem; margin-bottom: 1.1rem;
+  }
+  .po-head { display: flex; align-items: baseline; gap: .8rem; flex-wrap: wrap; }
+  .po-n {
+    font-family: var(--font-mincho); font-size: .95rem; color: var(--shu);
+    letter-spacing: .05em; flex-shrink: 0;
+  }
+  .po-title { font-size: 1.18rem; margin: 0; line-height: 1.45; letter-spacing: .03em; }
+  .po-lead {
+    margin: .35rem 0 .55rem; font-size: .93rem; line-height: 1.85;
+    font-family: var(--font-mincho); color: var(--sumi);
+  }
+  .po-body { margin: 0; font-size: .88rem; line-height: 1.9; color: var(--sumi-soft); }
+  .po-catch {
+    margin: .7rem 0 0; padding: .55rem .8rem; background: var(--washi-deep);
+    font-size: .85rem; line-height: 1.85;
+  }
+  .po-catch-label {
+    font-family: var(--font-mincho); color: var(--shu); margin-right: .7em; font-size: .8rem;
+  }
+  .po-link { margin: .45rem 0 0; font-size: .78rem; }
+
+  .claim {
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); padding: 1rem 1.1rem; margin-bottom: 1rem;
+  }
+  .claim-head { display: flex; align-items: flex-start; gap: 1rem; }
+  .claim-headtext { flex: 1; min-width: 0; }
+  .claim-title { font-size: 1.02rem; margin: 0; line-height: 1.55; }
+  .claim-verdict { margin: .2rem 0 0; font-size: .78rem; color: var(--shu); font-family: var(--font-mincho); }
+  .claim-seal { flex-shrink: 0; }
+  .claim-desc { margin: .7rem 0 0; font-size: .89rem; line-height: 1.85; }
+
+  .kz-closing { margin-top: 3rem; padding-top: 1.4rem; border-top: 3px double var(--sumi); }
+  .kz-closing .kz-sec-title { border-bottom-color: var(--shu); }
+
+  .kz-related { margin: 2rem 0 0; font-size: .84rem; }
+  .kz-sep { color: var(--rule); margin: 0 .5em; }
+
+  @media (max-width: 640px) {
+    .claim-head { flex-direction: column; gap: .6rem; }
+  }
+</style>

@@ -93,7 +93,7 @@ export const chronology = [
       { month: '四月', text: '武田信玄が病死する。', koki: false },
       { month: '七月', text: '足利義昭を追放する（槙島城の戦い）。', koki: true },
       { month: '八月', text: '朝倉・浅井が滅ぶ（一乗谷城・小谷城）。', koki: true },
-      { month: '十一月', text: '佐久間信盛が三好義継を滅ぼす（若江城の戦い）。', koki: true },
+      { month: '十一月', text: '佐久間信盛が三好義継を滅ぼす（若江城の戦い）。', koki: true , page: '/monjo/', pageLabel: '折檻状を読む'},
     ],
   },
   {
@@ -101,6 +101,8 @@ export const chronology = [
     wa: '天正2年',
     year: 1574,
     events: [
+      { month: '正月', text: '浅井父子と朝倉義景の首を薄濃にし、宴で披露する。', koki: true, page: '/hakudami/', pageLabel: '髑髏の杯を読む' },
+      { month: '三月', text: '正倉院を開封させ、名香・蘭奢待を截り取る。', koki: true, page: '/ranjatai/', pageLabel: '蘭奢待を読む' },
       { month: '四月', text: '越前が一向一揆の支配下に入る。', koki: true },
       { month: '九月', text: '長島一向一揆を殲滅する。', koki: true },
     ],
@@ -121,7 +123,7 @@ export const chronology = [
     wa: '天正4年',
     year: 1576,
     events: [
-      { month: '正月', text: '安土城の築城を始める。', koki: true },
+      { month: '正月', text: '安土城の築城を始める。', koki: true , page: '/azuchi/', pageLabel: '安土城を読む'},
       { month: '五月', text: '本願寺と天王寺で戦う。', koki: true },
       { month: '七月', text: '第一次木津川口の戦い。毛利方の水軍に敗れる。', koki: true },
     ],
@@ -154,10 +156,10 @@ export const chronology = [
     wa: '天正7年',
     year: 1579,
     events: [
-      { month: '五月', text: '安土城の天主が完成する。', koki: true },
+      { month: '五月', text: '安土城の天主が完成する。', koki: true , page: '/azuchi/', pageLabel: '安土城を読む'},
       { month: '八月', text: '明智光秀が丹波を平定する（十月には丹後も）。', koki: true },
       { month: '——', text: '備前の宇喜多直家が毛利から離れ、織田方につく。', koki: true },
-      { month: '十二月', text: '荒木一族を処刑する。', koki: true },
+      { month: '十二月', text: '荒木一族を処刑する。', koki: true , page: '/episodes/zangyaku/', pageLabel: '残虐性の検証へ'},
     ],
   },
   {

@@ -1,0 +1,181 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Seal from '../components/Seal.astro';
+import { outline, products, doubts, defenses, claims, closing } from '../data/bukoyawa.js';
+---
+<BaseLayout
+  title="武功夜話 — 二十世紀に現れた一冊｜ノブナガ・ファイル"
+  description="墨俣一夜城も、生駒吉乃も、この一冊から広まった。昭和に発見され1987年に活字化された『武功夜話』の真贋論争を、偽書説と慎重説の双方の根拠を並べて検証する。"
+>
+  <article class="wrap bukoyawa">
+    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+
+    <p class="eyebrow">史料の検証</p>
+    <h1 class="bk-title">二十世紀に現れた一冊</h1>
+    <p class="bk-lead">
+      このサイトは「江戸期の軍記が通説を作った」と繰り返し書いてきた。
+      だが同じことは、二十世紀にも起きている。
+      <strong>昭和に土蔵から出てきたとされる一冊が、誰もが知る場面をいくつも生んだ。</strong>
+      そしてその真贋は、いまも決着していない。
+    </p>
+
+    <section class="bk-sec">
+      <h2 class="bk-sec-title">この本は何か</h2>
+      <ul class="ol-list">
+        {outline.map((o) => (
+          <li>
+            <span class="ol-t">{o.t}</span>
+            <span class="ol-d">{o.d}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="bk-sec">
+      <h2 class="bk-sec-title">ここから生まれた場面</h2>
+      {products.map((p) => (
+        <div class="pr">
+          <h3 class="pr-t">{p.t}</h3>
+          <p class="pr-d">{p.d}</p>
+          {p.link && <p class="pr-link"><a href={p.link.href}>{p.link.label} →</a></p>}
+        </div>
+      ))}
+    </section>
+
+    <section class="bk-sec">
+      <h2 class="bk-sec-title">真贋論争</h2>
+      <p class="bk-sec-lead">
+        この主題では、双方に研究者がついている。片側だけを紹介するのは公平ではないので、両方を並べる。
+      </p>
+
+      <div class="dv dv--doubt">
+        <h3 class="dv-title">偽書とする側の根拠</h3>
+        <ul class="dv-list">
+          {doubts.map((d) => (
+            <li>
+              <span class="dv-t">{d.t}</span>
+              <span class="dv-d">{d.d}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="dv dv--defend">
+        <h3 class="dv-title">切り捨てるべきでないとする側</h3>
+        <ul class="dv-list">
+          {defenses.map((d) => (
+            <li>
+              <span class="dv-t">{d.t}</span>
+              <span class="dv-d">{d.d}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="bk-sec">
+      <h2 class="bk-sec-title">検証</h2>
+      {claims.map((c) => (
+        <div class="claim">
+          <div class="claim-head">
+            <div class="claim-headtext">
+              <h3 class="claim-title">{c.claim}</h3>
+              <p class="claim-verdict">{c.verdict}</p>
+            </div>
+            <div class="claim-seal"><Seal rating={c.rating} size="sm" /></div>
+          </div>
+          <p class="claim-desc">{c.desc}</p>
+        </div>
+      ))}
+    </section>
+
+    <section class="bk-closing">
+      <h2 class="bk-sec-title">いちばん外の輪は、いまも伸びている</h2>
+      {closing.map((p) => <p class="bk-para">{p}</p>)}
+    </section>
+
+    <p class="bk-related">
+      関連：<a href="/shiryo/">文献一覧（史料の同心円図）</a>
+      <span class="bk-sep">｜</span><a href="/dedokoro/">出どころのない逸話</a>
+      <span class="bk-sep">｜</span><a href="/yasuke/">弥助</a>
+    </p>
+
+    <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .bukoyawa { max-width: 50rem; padding-block: 2rem 3rem; }
+  .ep-back { margin: 0 0 1rem; }
+  .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
+  .ep-back-btm { margin-top: 2.4rem; }
+
+  .bk-title { font-size: clamp(1.65rem, 4.8vw, 2.3rem); margin: .2rem 0 1rem; line-height: 1.45; }
+  .bk-lead { color: var(--sumi-soft); line-height: 1.95; margin: 0 0 2.4rem; }
+  .bk-lead strong { color: var(--shu); }
+
+  .bk-sec { margin-bottom: 2.8rem; }
+  .bk-sec-title {
+    font-size: 1.25rem; margin: 0 0 .9rem; padding-bottom: .4rem;
+    border-bottom: 2px solid var(--sumi); line-height: 1.5;
+  }
+  .bk-sec-lead { margin: 0 0 1.2rem; font-size: .88rem; color: var(--sumi-soft); line-height: 1.85; }
+  .bk-para { margin: 0 0 1.1rem; font-size: .92rem; line-height: 2; }
+
+  .ol-list {
+    list-style: none; margin: 0; padding: .8rem 1.1rem;
+    border: 1px solid var(--rule); background: var(--washi);
+  }
+  .ol-list li {
+    padding: .5rem 0; border-bottom: 1px dotted var(--rule);
+    font-size: .88rem; line-height: 1.85;
+  }
+  .ol-list li:last-child { border-bottom: none; }
+  .ol-t {
+    display: block; font-family: var(--font-mincho); font-weight: 700;
+    color: var(--sumi); font-size: .98rem; margin-bottom: .1rem;
+  }
+  .ol-d { color: var(--sumi-soft); }
+
+  .pr {
+    border-left: 3px solid #b8912f; background: var(--washi);
+    padding: .8rem 1rem; margin-bottom: .85rem;
+  }
+  .pr-t { font-size: 1.05rem; margin: 0 0 .25rem; line-height: 1.5; }
+  .pr-d { margin: 0; font-size: .88rem; line-height: 1.88; color: var(--sumi-soft); }
+  .pr-link { margin: .4rem 0 0; font-size: .78rem; }
+
+  .dv { padding: .9rem 1.1rem; margin-bottom: 1rem; border: 1px solid var(--rule); }
+  .dv--doubt { border-left: 3px solid var(--shu); background: var(--washi); }
+  .dv--defend { border-left: 3px solid #6f6a63; background: var(--washi-deep); }
+  .dv-title { font-size: 1.05rem; margin: 0 0 .5rem; line-height: 1.5; font-family: var(--font-mincho); }
+  .dv-list { list-style: none; margin: 0; padding: 0; }
+  .dv-list li {
+    padding: .45rem 0; border-bottom: 1px dotted var(--rule);
+    font-size: .87rem; line-height: 1.85;
+  }
+  .dv-list li:last-child { border-bottom: none; }
+  .dv-t { display: block; font-family: var(--font-mincho); color: var(--sumi); font-weight: 700; }
+  .dv-d { color: var(--sumi-soft); }
+
+  .claim {
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); padding: 1rem 1.1rem; margin-bottom: 1rem;
+  }
+  .claim-head { display: flex; align-items: flex-start; gap: 1rem; }
+  .claim-headtext { flex: 1; min-width: 0; }
+  .claim-title { font-size: 1.02rem; margin: 0; line-height: 1.55; }
+  .claim-verdict { margin: .2rem 0 0; font-size: .78rem; color: var(--shu); font-family: var(--font-mincho); }
+  .claim-seal { flex-shrink: 0; }
+  .claim-desc { margin: .7rem 0 0; font-size: .89rem; line-height: 1.85; }
+
+  .bk-closing { margin-top: 3rem; padding-top: 1.4rem; border-top: 3px double var(--sumi); }
+  .bk-closing .bk-sec-title { border-bottom-color: var(--shu); }
+
+  .bk-related { margin: 2rem 0 0; font-size: .84rem; }
+  .bk-sep { color: var(--rule); margin: 0 .5em; }
+
+  @media (max-width: 640px) {
+    .claim-head { flex-direction: column; gap: .6rem; }
+  }
+</style>

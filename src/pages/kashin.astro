@@ -86,6 +86,9 @@ const fates = Object.entries(FATE);
                   </ul>
                 </div>
               )}
+              {p.link && (
+                <p class="pr-link"><a href={p.link.href}>{p.link.label} →</a></p>
+              )}
               {p.episodes && p.episodes.length > 0 && (
                 <p class="pr-eps">
                   {p.episodes.map((slug) => (
@@ -122,7 +125,7 @@ const fates = Object.entries(FATE);
     </section>
 
     <p class="ka-foot">
-      徳川家康はこの一覧に入れていない。三河の同盟者であって、信長の家臣ではないからである。
+      徳川家康はこの一覧に入れていない。三河の同盟者であって、信長の家臣ではないからである（<a href="/ieyasu/">徳川家康との二十年</a>で別に扱った）。
       同じように、朝倉・浅井・武田といった敵対勢力の武将も、ここでは扱わない。
       なお個々の人物については、典拠を明記した辞典（谷口克広『織田信長家臣人名辞典』）があり、
       名前から史料をたどるならそちらが確実である。
@@ -217,6 +220,7 @@ const fates = Object.entries(FATE);
     margin: .4rem 0 0; font-size: .84rem; line-height: 1.75; color: var(--sumi-soft);
     padding-left: .7rem; border-left: 2px solid var(--rule);
   }
+  .pr-link { margin: .45rem 0 0; font-size: .8rem; }
   .pr-myth {
     margin: .55rem 0 0; font-size: .78rem; line-height: 1.75; color: var(--sumi-soft);
     background: var(--washi-deep); padding: .45rem .7rem;
