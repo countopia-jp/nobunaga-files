@@ -65,6 +65,17 @@ import { certain, names, traces, claims, closing } from '../data/nouhime.js';
             <div class="claim-seal"><Seal rating={c.rating} size="sm" /></div>
           </div>
           <p class="claim-desc">{c.desc}</p>
+          {c.sources && (
+            <ul class="claim-sources">
+              {c.sources.map((s) => (
+                <li>
+                  <span class="cs-label">{s.label}</span>
+                  <span class="cs-kind">{s.kind}</span>
+                  <span class="cs-note">{s.note}</span>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       ))}
     </section>
@@ -156,4 +167,19 @@ import { certain, names, traces, claims, closing } from '../data/nouhime.js';
   @media (max-width: 640px) {
     .claim-head { flex-direction: column; gap: .6rem; }
   }
+  .claim-sources {
+    list-style: none; margin: .7rem 0 0; padding: .6rem .85rem;
+    background: var(--washi-deep); border-left: 2px solid #b8912f;
+  }
+  .claim-sources li {
+    padding: .3rem 0; border-bottom: 1px dotted var(--rule);
+    font-size: .82rem; line-height: 1.8;
+  }
+  .claim-sources li:last-child { border-bottom: none; }
+  .cs-label { font-family: var(--font-mincho); font-weight: 700; margin-right: .6em; }
+  .cs-kind {
+    font-size: .68rem; color: var(--sumi-soft); border: 1px solid var(--rule);
+    background: var(--washi); padding: .05em .45em; border-radius: 2px; margin-right: .6em;
+  }
+  .cs-note { color: var(--sumi-soft); }
 </style>
