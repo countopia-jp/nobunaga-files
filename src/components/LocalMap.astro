@@ -30,8 +30,10 @@ const routeD = routePts.map((p, i) => `${i ? 'L' : 'M'}${p.x.toFixed(1)} ${p.y.t
 
 // スケールバー：緯度1度＝約111km として、図の下部に5kmぶんの長さを描く
 const kmPerLonDeg = 111 * Math.cos(((la0 + la1) / 2) * Math.PI / 180);
-const barKm = 2;
-const barW = (barKm / kmPerLonDeg / (lo1 - lo0)) * 100;
+const spanKm = (lo1 - lo0) * kmPerLonDeg;           // 図の横幅（km）
+const cand = [1, 2, 5, 10, 20, 50, 100];
+const barKm = cand.find((k) => k / spanKm >= 0.15) ?? 100;  // 図幅の15%以上になる最小のもの
+const barW = (barKm / spanKm) * 100;
 ---
 
 <figure class="lmap">

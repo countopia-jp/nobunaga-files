@@ -77,29 +77,16 @@ const ogImage = new URL('/images/og-image.jpg', Astro.site);
       ))}
     </ol>
 
-    {ep.slug === 'okehazama' && (
+    {ep.map && (
       <section class="ep-map">
-        <h2 class="ep-h2">砦の配置</h2>
+        <h2 class="ep-h2">{ep.map.title}</h2>
         <LocalMap
-          bbox={[136.902, 136.988, 35.036, 35.100]}
-          route={['丹下砦', '善照寺砦', '中島砦', '桶狭間']}
-          points={[
-            { lon: 136.938, lat: 35.088, label: '丹下砦', side: 'oda', dx: -3.5, dy: 1, anchor: 'end' },
-            { lon: 136.952, lat: 35.084, label: '善照寺砦', side: 'oda', dx: 3.5, dy: 1, anchor: 'start' },
-            { lon: 136.947, lat: 35.078, label: '鳴海城', side: 'enemy', dx: 3.5, dy: 4, anchor: 'start' },
-            { lon: 136.943, lat: 35.068, label: '中島砦', side: 'oda', dx: -3.5, dy: 1, anchor: 'end' },
-            { lon: 136.936, lat: 35.052, label: '鷲津砦', side: 'oda', dx: -3.5, dy: 0, anchor: 'end' },
-            { lon: 136.925, lat: 35.045, label: '大高城', side: 'enemy', dx: -3.5, dy: 1, anchor: 'end' },
-            { lon: 136.930, lat: 35.040, label: '丸根砦', side: 'oda', dx: 3.5, dy: 2, anchor: 'start' },
-            { lon: 136.977, lat: 35.058, label: '桶狭間', side: 'place', note: '古戦場とされる一帯', dx: 3, dy: 1 },
-          ]}
-          caption="この図の範囲外、北におよそ五キロの地点に熱田があり、さらに北西へ十数キロ行くと信長の居城・清洲城がある。信長は清洲を発って熱田に立ち寄り、そこから南下して、丹下・善照寺・中島と自軍の砦を伝いながら前へ出た。破線はそのおおよその進路である。鳴海城と大高城は今川方が押さえ、それを囲むように織田方の砦が置かれていた。鷲津・丸根の両砦は、この日の朝に今川軍の攻撃を受けて落ちる。なお当時の海岸線は現在よりかなり内陸にあり、大高・鳴海のすぐ西まで水際が迫っていた。地形の感覚は今と異なる。"
+          bbox={ep.map.bbox}
+          route={ep.map.route}
+          points={ep.map.points}
+          caption={ep.map.caption}
         />
-        <p class="ep-map-note">
-          この配置を見ると、当日の動きが「わずかな手勢で野を駆けた」というより、
-          <strong>あらかじめ築いてあった砦を伝っての前進</strong>だったことが分かる。
-          奇襲か正面攻撃かという議論も、この前提の上で読む必要がある。
-        </p>
+        <p class="ep-map-note" set:html={ep.map.note} />
       </section>
     )}
 

@@ -10,6 +10,20 @@
 export const episodes = [
   {
     slug: 'kanegasaki',
+    map: {
+      title: '金ヶ崎からの退路',
+      bbox: [135.55, 136.35, 35.28, 35.82],
+      route: ['金ヶ崎', '朽木', '京'],
+      points: [
+      { lon: 136.073, lat: 35.66, label: '金ヶ崎', side: 'oda', note: '朝倉攻めの最前線', dx: 3, dy: 1 },
+      { lon: 136.23, lat: 35.47, label: '小谷城', side: 'enemy', note: '浅井長政', dx: 3, dy: 1 },
+      { lon: 135.966, lat: 35.335, label: '朽木', side: 'place', note: 'ここを通って抜けた', dx: 3, dy: 1 },
+      { lon: 135.768, lat: 35.012, label: '京', side: 'place', dx: 3, dy: 1 },
+      { lon: 136.782, lat: 35.434, label: '岐阜', side: 'oda', note: '本国', dx: -3.5, dy: 1, anchor: 'end' },
+      ],
+      caption: '破線は撤退のおおよその経路。浅井の離反によって、来た道である南東（小谷城の方角）は塞がれた。信長は西へ回り、朽木を抜けて京へ入っている。地図にすると、なぜ遠回りを選ぶしかなかったかが分かる。距離と位置はおおよそのもの。',
+      note: '退路が断たれるとは、地理の上でどういうことか。<strong>本国のある東へ戻れず、西へ大きく迂回した</strong>——その形が図に出ている。',
+    },
     title: '金ヶ崎の退き口 —— 秀吉の殿と、お市の小豆袋',
     year: 1570,
     dateLabel: '元亀元年（1570）四月',
@@ -53,6 +67,20 @@ export const episodes = [
 
   {
     slug: 'nagashino-sandan',
+    map: {
+      title: '長篠と設楽原',
+      bbox: [137.48, 137.6, 34.88, 34.96],
+      route: [],
+      points: [
+      { lon: 137.559, lat: 34.913, label: '長篠城', side: 'oda', note: '奥平氏が籠城', dx: 3, dy: 1 },
+      { lon: 137.523, lat: 34.923, label: '設楽原', side: 'place', note: '決戦の場', dx: -3.5, dy: 1, anchor: 'end' },
+      { lon: 137.545, lat: 34.905, label: '鳶ヶ巣山', side: 'enemy', note: '武田方の砦', dx: 3, dy: 1 },
+      { lon: 137.508, lat: 34.93, label: '織田・徳川本陣', side: 'oda', dx: -3.5, dy: 1, anchor: 'end' },
+      { lon: 137.54, lat: 34.935, label: '武田軍', side: 'enemy', dx: 3, dy: 1 },
+      ],
+      caption: '武田軍が長篠城を囲み、織田・徳川の連合軍が西の設楽原に布陣した。両者の距離はごく近い。位置と縮尺はおおよそのもの。',
+      note: '城を囲む側と、それを救援に来た側が、<strong>数キロの範囲で向き合っている</strong>。鉄砲の数や隊列の話の前に、この距離感がある。',
+    },
     title: '長篠の戦い「三段撃ち」—— 鉄砲三千挺は交互に撃たれたか',
     year: 1575,
     dateLabel: '天正三年（1575）五月',
@@ -160,6 +188,23 @@ export const episodes = [
 
   {
     slug: 'okehazama',
+    map: {
+      title: '砦の配置',
+      bbox: [136.902, 136.988, 35.036, 35.100],
+      route: ['丹下砦', '善照寺砦', '中島砦', '桶狭間'],
+      points: [
+        { lon: 136.938, lat: 35.088, label: '丹下砦', side: 'oda', dx: -3.5, dy: 1, anchor: 'end' },
+        { lon: 136.952, lat: 35.084, label: '善照寺砦', side: 'oda', dx: 3.5, dy: 1, anchor: 'start' },
+        { lon: 136.947, lat: 35.078, label: '鳴海城', side: 'enemy', dx: 3.5, dy: 4, anchor: 'start' },
+        { lon: 136.943, lat: 35.068, label: '中島砦', side: 'oda', dx: -3.5, dy: 1, anchor: 'end' },
+        { lon: 136.936, lat: 35.052, label: '鷲津砦', side: 'oda', dx: -3.5, dy: 0, anchor: 'end' },
+        { lon: 136.925, lat: 35.045, label: '大高城', side: 'enemy', dx: -3.5, dy: 1, anchor: 'end' },
+        { lon: 136.930, lat: 35.040, label: '丸根砦', side: 'oda', dx: 3.5, dy: 2, anchor: 'start' },
+        { lon: 136.977, lat: 35.058, label: '桶狭間', side: 'place', note: '古戦場とされる一帯', dx: 3, dy: 1 },
+      ],
+      caption: 'この図の範囲外、北におよそ五キロの地点に熱田があり、さらに北西へ十数キロ行くと信長の居城・清洲城がある。信長は清洲を発って熱田に立ち寄り、そこから南下して、丹下・善照寺・中島と自軍の砦を伝いながら前へ出た。破線はそのおおよその進路である。鳴海城と大高城は今川方が押さえ、それを囲むように織田方の砦が置かれていた。鷲津・丸根の両砦は、この日の朝に今川軍の攻撃を受けて落ちる。なお当時の海岸線は現在よりかなり内陸にあり、大高・鳴海のすぐ西まで水際が迫っていた。地形の感覚は今と異なる。',
+      note: 'この配置を見ると、当日の動きが「わずかな手勢で野を駆けた」というより、<strong>あらかじめ築いてあった砦を伝っての前進</strong>だったことが分かる。奇襲か正面攻撃かという議論も、この前提の上で読む必要がある。',
+    },
     title: '桶狭間の戦い —— 豪雨の奇襲だったのか',
     year: 1560,
     dateLabel: '永禄三年（1560）五月',
@@ -265,6 +310,20 @@ export const episodes = [
 
   {
     slug: 'hieizan',
+    map: {
+      title: '比叡山と、その前年',
+      bbox: [135.74, 136.10, 34.99, 35.21],
+      route: [],
+      points: [
+      { lon: 135.841, lat: 35.07, label: '比叡山', side: 'enemy', note: '延暦寺', dx: 3, dy: 1 },
+      { lon: 135.868, lat: 35.048, label: '宇佐山城', side: 'oda', note: '森可成が守り、討死', dx: 3, dy: 1 },
+      { lon: 135.868, lat: 35.017, label: '坂本', side: 'place', dx: 3, dy: 1 },
+      { lon: 135.768, lat: 35.012, label: '京', side: 'place', dx: -3.5, dy: 1, anchor: 'end' },
+      { lon: 136.061, lat: 35.181, label: '小谷城', side: 'enemy', note: '浅井', dx: 3, dy: 1 },
+      ],
+      caption: '前年の志賀の陣で、浅井・朝倉の軍は北から南下し、比叡山に入った。山は京へ通じる道を見下ろす位置にある。宇佐山城で森可成が討たれたのも、この時である。位置と縮尺はおおよそのもの。',
+      note: '比叡山が焼かれた理由を地理から見ると、<strong>そこが京への道を扼する場所だった</strong>ことが分かる。信仰の中心であると同時に、軍事上の要地でもあった。',
+    },
     title: '比叡山焼き討ち —— 全山焼失・数千人虐殺は本当か',
     year: 1571,
     dateLabel: '元亀二年（1571）九月',
