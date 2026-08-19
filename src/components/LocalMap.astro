@@ -15,6 +15,7 @@
 const {
   bbox = [136.9, 137.0, 35.03, 35.21],
   points = [],
+  route = [],
   caption = '',
 } = Astro.props;
 
@@ -23,11 +24,36 @@ const W = 100, H = 100;
 const px = (lon) => ((lon - lo0) / (lo1 - lo0)) * W;
 const py = (lat) => H - ((lat - la0) / (la1 - la0)) * H;
 const pts = points.map((p) => ({ ...p, x: px(p.lon), y: py(p.lat) }));
+const byLabel = Object.fromEntries(pts.map((p) => [p.label, p]));
+const routePts = route.map((l) => byLabel[l]).filter(Boolean);
+const routeD = routePts.map((p, i) => `${i ? 'L' : 'M'}${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' ');
+
+// スケールバー：緯度1度＝約111km として、図の下部に5kmぶんの長さを描く
+const kmPerLonDeg = 111 * Math.cos(((la0 + la1) / 2) * Math.PI / 180);
+const barKm = 2;
+const barW = (barKm / kmPerLonDeg / (lo1 - lo0)) * 100;
 ---
 
 <figure class="lmap">
   <svg viewBox="-14 -6 128 112" role="img" aria-label={caption || '配置の模式図'}>
     <rect x="-14" y="-6" width="128" height="112" class="bg" />
+
+    {routeD && (
+      <path d={routeD} class="route" />
+    )}
+
+    <g class="compass">
+      <path d="M104 4 L104 14" />
+      <path d="M101 7 L104 3.4 L107 7" fill="none" />
+      <text x="104" y="19" text-anchor="middle" class="compass-t">北</text>
+    </g>
+
+    <g class="scale">
+      <path d={`M2 103 h${barW.toFixed(1)}`} />
+      <path d="M2 101 v4" />
+      <path d={`M${(2 + barW).toFixed(1)} 101 v4`} />
+      <text x={(2 + barW / 2).toFixed(1)} y="100" text-anchor="middle" class="scale-t">{barKm}km</text>
+    </g>
 
     {pts.map((p) => (
       <g class={`pt pt--${p.side || 'place'}`}>
@@ -54,6 +80,7 @@ const pts = points.map((p) => ({ ...p, x: px(p.lon), y: py(p.lat) }));
     <p><span class="dot dot--oda"></span>織田方</p>
     <p><span class="dot dot--enemy"></span>今川方</p>
     <p><span class="dot dot--place"></span>その他の地点</p>
+    <p><span class="dash"></span>信長の進路（おおよそ）</p>
   </div>
   {caption && <figcaption>{caption}</figcaption>}
 </figure>
@@ -65,6 +92,15 @@ const pts = points.map((p) => ({ ...p, x: px(p.lon), y: py(p.lat) }));
     border: 1px solid var(--rule); background: var(--washi);
   }
   .bg { fill: var(--washi); }
+
+  .route {
+    fill: none; stroke: #a11414; stroke-width: .9;
+    stroke-dasharray: 2.6 2; opacity: .55; stroke-linecap: round;
+  }
+  .compass path { stroke: #8a8580; stroke-width: 1; fill: #8a8580; }
+  .compass-t { font-family: var(--font-mincho); font-size: 3.6px; fill: #8a8580; }
+  .scale path { stroke: #6b655d; stroke-width: .8; fill: none; }
+  .scale-t { font-family: var(--font-gothic); font-size: 3px; fill: #6b655d; }
 
   .pt circle { stroke: var(--washi); stroke-width: .6; }
   .pt--oda circle { fill: #a11414; }
@@ -89,6 +125,10 @@ const pts = points.map((p) => ({ ...p, x: px(p.lon), y: py(p.lat) }));
   .dot--oda { background: #a11414; }
   .dot--enemy { background: #3f5a6b; }
   .dot--place { background: #8a8580; }
+  .dash {
+    width: 1.4rem; height: 0; display: inline-block;
+    border-top: 2px dashed #a11414; opacity: .6;
+  }
 
   figcaption { margin-top: .5rem; font-size: .8rem; color: var(--sumi-soft); line-height: 1.75; }
 </style>
