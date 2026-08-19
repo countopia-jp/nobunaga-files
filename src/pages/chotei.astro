@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
 import { supports, pressures, claims, closing } from '../data/chotei.js';
 ---
@@ -8,7 +9,8 @@ import { supports, pressures, claims, closing } from '../data/chotei.js';
   description="御料所の回復、即位式の費用負担、伊勢神宮の式年遷宮、祇園祭の再興。信長は当時最大級の朝廷支援者だった。一方で譲位を促し、三職推任に答えなかった。支えたことと圧したことを並べて検証する。"
 >
   <article class="wrap chotei">
-    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+   <Ornament kind="mon" />
+     <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
 
     <p class="eyebrow">権威との関係</p>
     <h1 class="ch-title">軽んじたのか、握ったのか</h1>

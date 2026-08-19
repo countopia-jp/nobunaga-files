@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
 import { fronts, plans, claims, closing } from '../data/tochu.js';
 ---
@@ -8,7 +9,8 @@ import { fronts, plans, claims, closing } from '../data/tochu.js';
   description="天正十年六月、織田の軍は中国・北陸・関東・四国の四方面で同時に動いていた。四国への渡海は直前、信長自身の中国出陣も決まっていた。本能寺が止めたのは一人の命だけではない。"
 >
   <article class="wrap tochu">
-    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+   <Ornament kind="blade" />
+     <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
 
     <p class="eyebrow">本能寺の変</p>
     <h1 class="tc-title">本能寺が止めたもの</h1>

@@ -2,42 +2,41 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
-import { intro, items, claims, closing } from '../data/meibutsu.js';
+import { overview, women, claims, closing } from '../data/tsuma.js';
 ---
 <BaseLayout
-  title="名物茶器 — 価値は、認めさせて作る｜ノブナガ・ファイル"
-  description="九十九髪茄子、初花肩衝、平蜘蛛の茶釜、曜変天目。名物の価値は物の性能ではなく人が認めることで成り立つ。信長はその仕組みに乗り、土地に代わる恩賞として用いた。"
+  title="妻と子 — 母のわからない子が多い｜ノブナガ・ファイル"
+  description="信長の子は二十人を超えるとされるが、生母がはっきり分かる子はごく少ない。濃姫、生駒吉乃、お鍋の方。女性の記録がどういうときに残るのかを、史料の側から考える。"
 >
-  <article class="wrap meibutsu">
-   <Ornament kind="blade" />
+  <article class="wrap tsuma">
+   <Ornament kind="brush" />
      <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
 
-    <p class="eyebrow">物からたどる</p>
-    <h1 class="tk-title">価値は、認めさせて作る</h1>
+    <p class="eyebrow">人物の検証</p>
+    <h1 class="tk-title">母のわからない子が、多い</h1>
     <p class="tk-lead">
-      名物もまた、物の題材である。だが刀とは性質が一つ違う。
-      刀は斬れることに実用の根があるが、
-      <strong>名物の価値は、人が認めることでしか成り立たない。</strong>
-      信長は、その価値を認めさせる側に回った。
+      信長の子は、合わせて二十人を超えるという数え方も行われる。
+      ところが<strong>その母が誰かとなると、はっきりしない子のほうが多い。</strong>
+      記録が乏しいのは正室に限らない。側室たちの記録も、そのほとんどが断片である。
     </p>
 
     <section class="tk-sec">
-      {intro.map((p) => <p class="tk-para">{p}</p>)}
+      {overview.map((p) => <p class="tk-para">{p}</p>)}
     </section>
 
     <section class="tk-sec">
-      {items.map((s) => (
+      {women.map((s) => (
         <div class="sw">
           <div class="sw-head">
             <div class="sw-headtext">
               <h2 class="sw-name">{s.name}</h2>
-              <span class="sw-alias">{s.yomi}</span>
+              <span class="sw-alias">{s.role}</span>
             </div>
             <div class="sw-seal"><Seal rating={s.rating} size="sm" /></div>
           </div>
-          <p class="sw-now"><span class="sw-now-label">いま</span>{s.now}</p>
           <p class="sw-story">{s.d}</p>
           <p class="sw-key">{s.key}</p>
+          {s.link && <p class="sw-link"><a href={s.link.href}>{s.link.label} →</a></p>}
         </div>
       ))}
     </section>
@@ -70,14 +69,15 @@ import { intro, items, claims, closing } from '../data/meibutsu.js';
     </section>
 
     <section class="tk-closing">
-      <h2 class="tk-sec-title">運べる資産にした、その裏</h2>
+      <h2 class="tk-sec-title">記録が残る条件</h2>
       {closing.map((p) => <p class="tk-para">{p}</p>)}
     </section>
 
     <p class="tk-related">
-      関連：<a href="/token/">信長の刀</a>
-      <span class="tk-sep">｜</span><a href="/keizai/">信長の経済</a>
-      <span class="tk-sep">｜</span><a href="/shumi/">趣味・嗜好（茶の湯）</a>
+      関連：<a href="/meibutsu/">名物茶器</a>
+      <span class="tk-sep">｜</span><a href="/ranjatai/">蘭奢待</a>
+      <span class="tk-sep">｜</span><a href="/shiseki/">史跡・資料館</a>
+      <span class="tk-sep">｜</span><a href="/episodes/tenka-fubu/">天下布武</a>
     </p>
 
     <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
@@ -125,6 +125,7 @@ import { intro, items, claims, closing } from '../data/meibutsu.js';
     margin: .8rem 0 0; padding: .65rem .9rem; background: #fbf3ef;
     border-left: 2px solid var(--shu); font-size: .88rem; line-height: 1.9;
   }
+  .sw-link { margin: .5rem 0 0; font-size: .8rem; }
   .sw-caution {
     margin: .6rem 0 0; padding: .5rem .8rem; background: var(--washi-deep);
     font-size: .83rem; line-height: 1.82; color: var(--sumi-soft);

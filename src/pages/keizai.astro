@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
 import { policies, claims, closing } from '../data/keizai.js';
 ---
@@ -8,7 +9,8 @@ import { policies, claims, closing } from '../data/keizai.js';
   description="関所の廃止と要衝の直轄化、撰銭令、堺への矢銭要求、茶器を恩賞にする仕組み、そして鉛と硝石の確保。楽市楽座の一語で語られがちな信長の経済政策を、実際にやったことから検証する。"
 >
   <article class="wrap keizai">
-    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+   <Ornament kind="mon" />
+     <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
 
     <p class="eyebrow">政策の検証</p>
     <h1 class="kz-title">楽市楽座の四文字で語られないこと</h1>

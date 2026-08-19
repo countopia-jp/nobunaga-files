@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { groups, closing } from '../data/dedokoro.js';
+import Ornament from '../components/Ornament.astro';
+import { groups, edo, closing } from '../data/dedokoro.js';
 
 const total = groups.reduce(
   (n, g) => n + (g.items?.length ?? 0) + (g.pairs?.length ?? 0) * 2,
@@ -12,7 +13,8 @@ const total = groups.reduce(
   description="織田信長の逸話を四百本あまり集めて分かったこと。史料の裏づけがある核の周囲に、何百もの派生と創作が層をなしている。典拠を示せない逸話を系統ごとに分類し、それぞれがどんな信長像を支えるために生まれたのかを考える。"
 >
   <article class="wrap dedokoro">
-    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+   <Ornament kind="seal" />
+     <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
 
     <p class="eyebrow">人物像の検証</p>
     <h1 class="dd-title">出どころのない逸話</h1>
@@ -67,6 +69,19 @@ const total = groups.reduce(
         {g.why && <p class="dg-why">{g.why}</p>}
       </section>
     ))}
+
+    <section class="dg">
+      <h2 class="dg-title">{edo.title}</h2>
+      <p class="dg-lead">{edo.lead}</p>
+      {edo.items.map((e) => (
+        <div class="edo">
+          <h3 class="edo-t">{e.t}</h3>
+          <p class="edo-d">{e.d}</p>
+          <p class="edo-k">{e.k}</p>
+        </div>
+      ))}
+      <p class="dg-why">{edo.note}</p>
+    </section>
 
     <section class="dd-closing">
       <h2 class="dg-title">面白い話ほど、出どころが遠い</h2>
@@ -155,6 +170,17 @@ const total = groups.reduce(
     margin: 0; font-size: .89rem; line-height: 1.9; color: var(--sumi-soft);
     background: var(--washi); border-left: 3px solid var(--shu);
     padding: .8rem 1rem;
+  }
+
+  .edo {
+    border: 1px solid var(--rule); background: var(--washi);
+    padding: .9rem 1.1rem; margin-bottom: .9rem;
+  }
+  .edo-t { font-size: 1.05rem; margin: 0 0 .3rem; line-height: 1.5; }
+  .edo-d { margin: 0; font-size: .89rem; line-height: 1.9; color: var(--sumi-soft); }
+  .edo-k {
+    margin: .6rem 0 0; padding: .5rem .8rem; background: var(--washi-deep);
+    font-size: .85rem; line-height: 1.85;
   }
 
   .dd-closing {

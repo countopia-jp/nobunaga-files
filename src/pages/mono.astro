@@ -2,47 +2,41 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
-import { records, issues, claims, closing } from '../data/yasuke.js';
+import { lead, cases, claims, closing } from '../data/mono.js';
 ---
 <BaseLayout
-  title="弥助 — 写本一本に懸かっている｜ノブナガ・ファイル"
-  description="信長に仕えた黒人・弥助。名も、刀も、屋敷も、『信長公記』の尊経閣文庫本という一つの写本にだけ記される。「侍だったか」という争点を、史料の所在から検証する。"
+  title="物から検証する — 記録を介さずに分かること｜ノブナガ・ファイル"
+  description="鉄砲玉の鉛はどこの鉱山から来たか。本能寺はどんな構造だったか。比叡山はどこまで焼けたか。鉛同位体比分析と発掘調査という、文字の記録とは別系統の証拠から検証する。"
 >
-  <article class="wrap yasuke">
-   <Ornament kind="brush" />
+  <article class="wrap mono">
+   <Ornament kind="blade" />
      <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
 
-    <p class="eyebrow">人物の検証</p>
-    <h1 class="ys-title">写本一本に、懸かっている</h1>
+    <p class="eyebrow">方法の検証</p>
+    <h1 class="ys-title">記録を介さずに、分かること</h1>
     <p class="ys-lead">
-      記録の量と、語られる量の差が最も大きい人物である。
-      そして争点は、<strong>写本一本にしかない記述をどう扱うか</strong>という、
-      このサイトが繰り返し向き合ってきた問題そのものにある。
-      まず、記録が何と書いているかから始める。
+      当サイトの判定は、原則として「その話がどの種類の記録に載っているか」で決まる。
+      だが<strong>記録を介さずに確かめられることがある。</strong>
+      発掘された遺構、出土した金属の成分、火を受けた瓦の変色。
+      誰かが書き残したものではなく、そのとき物理的に起きたことの痕跡である。
     </p>
 
     <section class="ys-sec">
-      <h2 class="ys-sec-title">記録は、何と書いているか</h2>
-      {records.map((r) => (
-        <div class={`rc${r.weight ? ' rc--key' : ''}`}>
-          <div class="rc-head">
-            <h3 class="rc-src">{r.src}</h3>
-            <span class="rc-kind">{r.kind}</span>
-          </div>
-          <p class="rc-d">{r.d}</p>
-        </div>
-      ))}
+      {lead.map((p) => <p class="ys-para">{p}</p>)}
     </section>
 
-    {issues.map((i) => (
+    
+
+    {cases.map((i) => (
       <section class="is">
         <div class="is-head">
-          <span class="is-n">争点 {i.n}</span>
+          <span class="is-n">{i.method}</span>
           <h2 class="is-title">{i.title}</h2>
         </div>
         <p class="is-lead">{i.lead}</p>
         {i.body.map((p) => <p class="is-para">{p}</p>)}
-        {i.note && <p class="is-note"><span class="is-note-label">注</span>{i.note}</p>}
+        {i.caution && <p class="is-note"><span class="is-note-label">限界</span>{i.caution}</p>}
+        {i.link && <p class="is-link"><a href={i.link.href}>{i.link.label} →</a></p>}
       </section>
     ))}
 
@@ -74,14 +68,14 @@ import { records, issues, claims, closing } from '../data/yasuke.js';
     </section>
 
     <section class="ys-closing">
-      <h2 class="ys-sec-title">少なさが、余白をつくる</h2>
+      <h2 class="ys-sec-title">得意な問いが、違う</h2>
       {closing.map((p) => <p class="ys-para">{p}</p>)}
     </section>
 
     <p class="ys-related">
-      関連：<a href="/kashin/">家臣一覧</a>
-      <span class="ys-sep">｜</span><a href="/namban/">南蛮との交流</a>
-      <span class="ys-sep">｜</span><a href="/shiryo/">文献一覧</a>
+      関連：<a href="/shiryo/">文献一覧（史料の同心円図）</a>
+      <span class="ys-sep">｜</span><a href="/shiseki/">史跡・資料館</a>
+      <span class="ys-sep">｜</span><a href="/token/">信長の刀</a>
     </p>
 
     <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
@@ -132,6 +126,7 @@ import { records, issues, claims, closing } from '../data/yasuke.js';
   .is-lead { margin: 0 0 .8rem; font-size: .93rem; line-height: 1.9; }
   .is-para { margin: 0 0 .9rem; font-size: .89rem; line-height: 1.92; color: var(--sumi-soft); }
   .is-para:last-of-type { margin-bottom: 0; }
+  .is-link { margin: .6rem 0 0; font-size: .8rem; }
   .is-note {
     margin: .9rem 0 0; padding: .55rem .8rem; background: var(--washi-deep);
     font-size: .82rem; line-height: 1.82; color: var(--sumi-soft);

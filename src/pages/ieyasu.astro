@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
 import { timeline, claims, closing } from '../data/ieyasu.js';
 ---
@@ -8,7 +9,8 @@ import { timeline, claims, closing } from '../data/ieyasu.js';
   description="永禄5年の清洲の盟約から本能寺まで、二十年続いた織田・徳川の関係を追う。築山殿と信康の死、水野信元の粛清、そして堺での物見遊山と伊賀越えまで、通説と近年の見直しを出典で検証する。"
 >
   <article class="wrap ieyasu">
-    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+   <Ornament kind="brush" />
+     <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
 
     <p class="eyebrow">人と勢力</p>
     <h1 class="iy-title">敵でも、家臣でもない相手</h1>

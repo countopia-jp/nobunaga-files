@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
 import { facts, claims, context } from '../data/food.js';
 import { getEpisode } from '../data/episodes.js';
@@ -15,7 +16,8 @@ const shortTitle = (slug) => {
   description="織田信長の食事について、同時代の記録で確かめられることと、江戸期の逸話集が出どころの話を分けて示す。砂糖と金平糖の贈答、安土の家康饗応膳、そして「水くさい」の逸話まで、出典と信憑性度を添えて検証する。"
 >
   <article class="wrap shoku">
-    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+   <Ornament kind="wave" />
+     <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
 
     <p class="eyebrow">風俗・暮らし</p>
     <h1 class="f-title">信長は、何を食べていたか</h1>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Ornament from '../components/Ornament.astro';
 import { battles, battleStats, RESULT } from '../data/battles.js';
 import { getEpisode } from '../data/episodes.js';
 
@@ -21,7 +22,8 @@ const late = battles.filter((b) => b.maki !== '首巻');
   description="織田信長が関わった主な合戦を年代順に一覧する。相手・場所・結果・『信長公記』の該当巻・信長自身の出陣の有無をまとめ、兵力は出典を示せるものだけを載せる。後世の軍記が加えた脚色も併記。"
 >
   <article class="wrap kassen">
-    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+   <Ornament kind="stone" />
+     <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
 
     <p class="eyebrow">合戦データベース</p>
     <h1 class="ks-title">生涯の戦い、{stats.total}件</h1>

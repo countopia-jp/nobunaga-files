@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
 import { facts, froisView, claims } from '../data/namban.js';
 ---
@@ -8,7 +9,8 @@ import { facts, froisView, claims } from '../data/namban.js';
   description="織田信長と宣教師の関わりを、記録で確かめられることから整理する。フロイスとの謁見、南蛮寺と安土のセミナリヨ、ヴァリニャーノに贈られ行方不明となった安土山図屏風。宗教への寛容という通説も出典から検証する。"
 >
   <article class="wrap namban">
-    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+   <Ornament kind="wave" />
+     <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
 
     <p class="eyebrow">南蛮との交流</p>
     <h1 class="nb-title">外から見られた信長</h1>

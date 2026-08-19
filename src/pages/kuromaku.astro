@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
 import { premises, theories } from '../data/kuromaku.js';
 
@@ -10,7 +11,8 @@ const sorted = [...theories].sort((a, b) => b.rating - a.rating);
   description="本能寺の変で明智光秀を動かしたのは誰か。四国説・足利義昭説・単独犯行説・怨恨説・朝廷説・秀吉黒幕説など、提起されてきた説を出典と信憑性度で並べ、それぞれの根拠と弱点を示す。"
 >
   <article class="wrap kuromaku">
-    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+   <Ornament kind="mon" />
+     <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
 
     <p class="eyebrow">本能寺の変</p>
     <h1 class="km-title">黒幕は、いたのか</h1>

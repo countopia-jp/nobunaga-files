@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
 import { groups, nicknames, around, misattributed, quoteStats } from '../data/quotes.js';
 import { getEpisode } from '../data/episodes.js';
@@ -17,7 +18,8 @@ const stats = quoteStats();
   description="「是非に及ばず」「敵は本能寺にあり」「鳴かぬなら」「人間五十年」「であるか」。織田信長の言葉として広まっているものを、出典の近さで分類し、信憑性度を添えて検証する。"
 >
   <article class="wrap meigen">
-    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+   <Ornament kind="seal" />
+     <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
 
     <p class="eyebrow">名言・名台詞</p>
     <h1 class="mg-title">その言葉は、どこから来たか</h1>

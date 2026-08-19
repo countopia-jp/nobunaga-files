@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Ornament from '../components/Ornament.astro';
 import { bibliography, bibliographyStats, KIND } from '../data/bibliography.js';
 import SourceOrbit from '../components/SourceOrbit.astro';
 import { getEpisode } from '../data/episodes.js';
@@ -18,7 +19,8 @@ const kinds = Object.entries(KIND);
   description="織田信長を調べるための史料と本の一覧。同時代の文書・日記から、『信長公記』、江戸期の軍記物、逸話の出どころとなった随筆、そして現代の研究書までを、信長からの距離の順に並べ、それぞれの性格と使うときの注意を添える。"
 >
   <article class="wrap biblio">
-    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+   <Ornament kind="seal" />
+     <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
 
     <p class="eyebrow">文献一覧</p>
     <h1 class="b-title">信長は、どの本に書いてあるか</h1>
@@ -97,6 +99,9 @@ const kinds = Object.entries(KIND);
       <strong>その話がいつ誰の手で生まれたか</strong>を教えてくれる。
       通説の出どころを突き止める作業は、いつもそちら側の本から始まる。
     </p>
+
+    <p class="xref"><span class="xref-label">あわせて</span><a href="/mono/">物から検証する — 記録を介さずに分かること →</a></p>
+
 
     <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
   </article>
@@ -191,4 +196,13 @@ const kinds = Object.entries(KIND);
     font-size: .88rem; color: var(--sumi-soft); line-height: 1.9;
   }
   .b-foot strong { color: var(--shu); }
+  .xref {
+    margin-top: 2rem; padding: .75rem 1rem;
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); font-size: .86rem;
+  }
+  .xref-label {
+    font-family: var(--font-mincho); font-size: .78rem; color: var(--shu);
+    letter-spacing: .08em; margin-right: .9em;
+  }
 </style>

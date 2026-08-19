@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
 import { certain, readings, claims, closing } from '../data/ranjatai.js';
 ---
@@ -8,7 +9,8 @@ import { certain, readings, claims, closing } from '../data/ranjatai.js';
   description="天正二年、信長は正倉院を開封させ名香・蘭奢待を截り取った。権威への挑戦として語られてきたが、勅許を得た正式な手続きであり、足利義政という先例もある。香木に残る截取の付箋という物証から検証する。"
 >
   <article class="wrap ranjatai">
-    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+   <Ornament kind="mon" />
+     <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
 
     <p class="eyebrow">権威との関係</p>
     <h1 class="rj-title">截り取った跡が、いまも残る</h1>

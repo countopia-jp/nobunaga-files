@@ -1,0 +1,27 @@
+{
+  "name": "ノブナガ・ファイル",
+  "short_name": "ノブナガ・ファイル",
+  "description": "織田信長の通説を、出典で検証する。",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a1613",
+  "theme_color": "#1a1613",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

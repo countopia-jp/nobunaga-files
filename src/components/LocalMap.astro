@@ -1,0 +1,94 @@
+---
+/*
+  局地図コンポーネント｜自作SVG
+  ------------------------------------------------
+  緯度経度を指定した範囲に線形投影して点を打つだけの簡素な図。
+  海岸線や地形は描かない（正確に描けないものは描かない方針）。
+  縮尺と位置はおおよそのもので、地図ではなく配置の模式図として扱う。
+
+  props
+    bbox    : [lonMin, lonMax, latMin, latMax]
+    points  : [{ lon, lat, label, side, note, dx, dy, anchor }]
+              side: 'oda' | 'enemy' | 'place'
+    caption : 図の説明
+*/
+const {
+  bbox = [136.9, 137.0, 35.03, 35.21],
+  points = [],
+  caption = '',
+} = Astro.props;
+
+const [lo0, lo1, la0, la1] = bbox;
+const W = 100, H = 100;
+const px = (lon) => ((lon - lo0) / (lo1 - lo0)) * W;
+const py = (lat) => H - ((lat - la0) / (la1 - la0)) * H;
+const pts = points.map((p) => ({ ...p, x: px(p.lon), y: py(p.lat) }));
+---
+
+<figure class="lmap">
+  <svg viewBox="-14 -6 128 112" role="img" aria-label={caption || '配置の模式図'}>
+    <rect x="-14" y="-6" width="128" height="112" class="bg" />
+
+    {pts.map((p) => (
+      <g class={`pt pt--${p.side || 'place'}`}>
+        <circle cx={p.x} cy={p.y} r={p.side === 'place' ? 1.5 : 2.1} />
+        <text
+          x={p.x + (p.dx ?? 3)}
+          y={p.y + (p.dy ?? 1.2)}
+          text-anchor={p.anchor || 'start'}
+          class="lb"
+        >{p.label}</text>
+        {p.note && (
+          <text
+            x={p.x + (p.dx ?? 3)}
+            y={p.y + (p.dy ?? 1.2) + 3.4}
+            text-anchor={p.anchor || 'start'}
+            class="lb-sub"
+          >{p.note}</text>
+        )}
+      </g>
+    ))}
+  </svg>
+
+  <div class="lmap-legend">
+    <p><span class="dot dot--oda"></span>織田方</p>
+    <p><span class="dot dot--enemy"></span>今川方</p>
+    <p><span class="dot dot--place"></span>その他の地点</p>
+  </div>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style>
+  .lmap { margin: 0 0 1.4rem; }
+  .lmap svg {
+    width: 100%; height: auto; display: block;
+    border: 1px solid var(--rule); background: var(--washi);
+  }
+  .bg { fill: var(--washi); }
+
+  .pt circle { stroke: var(--washi); stroke-width: .6; }
+  .pt--oda circle { fill: #a11414; }
+  .pt--enemy circle { fill: #3f5a6b; }
+  .pt--place circle { fill: #8a8580; }
+
+  .lb {
+    font-family: var(--font-mincho); font-size: 3.4px; fill: #23201c;
+    paint-order: stroke; stroke: var(--washi); stroke-width: 1.1px; stroke-linejoin: round;
+  }
+  .lb-sub {
+    font-family: var(--font-gothic); font-size: 2.5px; fill: #6b655d;
+    paint-order: stroke; stroke: var(--washi); stroke-width: 1px; stroke-linejoin: round;
+  }
+
+  .lmap-legend { display: flex; gap: 1.1rem; margin-top: .5rem; flex-wrap: wrap; }
+  .lmap-legend p {
+    margin: 0; display: flex; align-items: center; gap: .4rem;
+    font-size: .76rem; color: var(--sumi-soft);
+  }
+  .dot { width: .55rem; height: .55rem; border-radius: 50%; display: inline-block; }
+  .dot--oda { background: #a11414; }
+  .dot--enemy { background: #3f5a6b; }
+  .dot--place { background: #8a8580; }
+
+  figcaption { margin-top: .5rem; font-size: .8rem; color: var(--sumi-soft); line-height: 1.75; }
+</style>

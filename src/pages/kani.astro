@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
 import { names, ranks, kao, claims } from '../data/ranks.js';
 import { getEpisode } from '../data/episodes.js';
@@ -15,7 +16,8 @@ const shortTitle = (slug) => {
   description="吉法師から上総介、権大納言・右近衛大将、右大臣、そして三職推任まで。織田信長の名乗りと官位の変遷を整理し、自称と朝廷の任命の境目、天正6年の辞官の意味を出典とともに検証する。"
 >
   <article class="wrap kani">
-    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+   <Ornament kind="mon" />
+     <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
 
     <p class="eyebrow">異名と官位</p>
     <h1 class="kn-title">何者として、扱われていたか</h1>

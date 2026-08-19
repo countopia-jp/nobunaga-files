@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
 import { facts, innovations, meanings, stones, claims, closing } from '../data/azuchi.js';
 ---
@@ -8,7 +9,8 @@ import { facts, innovations, meanings, stones, claims, closing } from '../data/a
   description="天主を居住空間にし、五層七階の高さを持ち、金箔瓦と青い瓦で葺かれた城。だが存在した期間は六年で、焼けた理由もいまだ判明していない。石仏の転用石、蛇石、藤戸石、そして行方不明の安土山図屏風まで検証する。"
 >
   <article class="wrap azuchi">
-    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+   <Ornament kind="stone" />
+     <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
 
     <p class="eyebrow">建築の検証</p>
     <h1 class="az-title">六年で消えた城</h1>

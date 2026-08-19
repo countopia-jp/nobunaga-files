@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
 import { themes, claims } from '../data/pastimes.js';
 import { getEpisode } from '../data/episodes.js';
@@ -15,7 +16,8 @@ const shortTitle = (slug) => {
   description="織田信長が繰り返し催した相撲、生涯続けた鷹狩、人前で舞った幸若舞、そして名物を集めた茶の湯。『信長公記』に残る記録から、信長が何に時間を使ったかを整理し、語られている話は出典とともに検証する。"
 >
   <article class="wrap shumi">
-    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+   <Ornament kind="wave" />
+     <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
 
     <p class="eyebrow">風俗・暮らし</p>
     <h1 class="sh-title">信長は、何に時間を使ったか</h1>

@@ -29,8 +29,13 @@ const ogImage = new URL('/images/og-image.jpg', Astro.site);
     <meta name="twitter:image" content={ogImage} />
     <meta property="og:locale" content="ja_JP" />
 
-    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#1a1613" />
 
     <script type="application/ld+json" set:html={JSON.stringify({
       '@context': 'https://schema.org',
@@ -96,6 +101,7 @@ const ogImage = new URL('/images/og-image.jpg', Astro.site);
             <a href="/mitsuhide/">明智光秀</a>
             <a href="/yasuke/">弥助</a>
             <a href="/nouhime/">濃姫</a>
+            <a href="/tsuma/">妻と子</a>
           </div>
           <div class="fm-col">
             <p class="fm-title">土地と時代</p>
@@ -117,6 +123,7 @@ const ogImage = new URL('/images/og-image.jpg', Astro.site);
             <p class="fm-title fm-title--2">史料を調べる</p>
             <a href="/monjo/">文書を読む</a>
             <a href="/shiryo/">文献一覧</a>
+            <a href="/mono/">物から検証する</a>
             <a href="/bukoyawa/">武功夜話</a>
             <a href="/yougo/">用語辞典</a>
           </div>

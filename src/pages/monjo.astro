@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Ornament from '../components/Ornament.astro';
 import { sekkanjo, notYet } from '../data/documents.js';
 ---
 <BaseLayout
@@ -7,7 +8,8 @@ import { sekkanjo, notYet } from '../data/documents.js';
   description="天正八年、織田信長が宿老・佐久間信盛に突きつけた十九ヶ条の折檻状。『信長公記』巻十三所収の全文を、条ごとに原文と現代語訳で読む。信長の自筆と記される、家臣への評価が本人の言葉で残る稀有な文書。"
 >
   <article class="wrap monjo">
-    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+   <Ornament kind="brush" />
+     <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
 
     <p class="eyebrow">文書を読む</p>
     <h1 class="mj-title">{sekkanjo.title}</h1>

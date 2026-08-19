@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
 import { certain, wobbles, claims, why } from '../data/atago.js';
 ---
@@ -8,7 +9,8 @@ import { certain, wobbles, claims, why } from '../data/atago.js';
   description="本能寺の変の数日前、明智光秀が愛宕山で興行した連歌会。その発句に謀反の決意が詠み込まれていたと語られる。だがこの句は、字句そのものが写本によって揺れ、その読み方も正反対に分かれる。二重の揺れを出典とともに検証する。"
 >
   <article class="wrap atago">
-    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+   <Ornament kind="seal" />
+     <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
 
     <p class="eyebrow">本能寺の変</p>
     <h1 class="at-title">謀反は、句に詠まれていたか</h1>

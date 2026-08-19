@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
 import { certain, names, traces, claims, closing } from '../data/nouhime.js';
 ---
@@ -8,7 +9,8 @@ import { certain, names, traces, claims, closing } from '../data/nouhime.js';
   description="斎藤道三の娘として信長に嫁いだ正室。だが婚姻の後、同時代の記録がほとんど途切れる。早世説・離縁説から、『織田信雄分限帳』の「安土殿」説、過去帳にもとづく慶長十七年生存説まで、空白がどう埋められてきたかを検証する。"
 >
   <article class="wrap nouhime">
-    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+   <Ornament kind="brush" />
+     <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
 
     <p class="eyebrow">人物の検証</p>
     <h1 class="nh-title">記録が、消える</h1>
@@ -86,7 +88,8 @@ import { certain, names, traces, claims, closing } from '../data/nouhime.js';
     </section>
 
     <p class="nh-related">
-      関連：<a href="/keizu/">家系図</a>
+      関連：<a href="/tsuma/">妻と子</a>
+      <span class="nh-sep">｜</span><a href="/keizu/">家系図</a>
       <span class="nh-sep">｜</span><a href="/dedokoro/">出どころのない逸話</a>
       <span class="nh-sep">｜</span><a href="/shiryo/">文献一覧</a>
     </p>

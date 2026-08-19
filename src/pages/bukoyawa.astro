@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
 import { outline, products, doubts, defenses, claims, closing } from '../data/bukoyawa.js';
 ---
@@ -8,7 +9,8 @@ import { outline, products, doubts, defenses, claims, closing } from '../data/bu
   description="墨俣一夜城も、生駒吉乃も、この一冊から広まった。昭和に発見され1987年に活字化された『武功夜話』の真贋論争を、偽書説と慎重説の双方の根拠を並べて検証する。"
 >
   <article class="wrap bukoyawa">
-    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+   <Ornament kind="seal" />
+     <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
 
     <p class="eyebrow">史料の検証</p>
     <h1 class="bk-title">二十世紀に現れた一冊</h1>

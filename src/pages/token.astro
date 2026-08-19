@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
 import { swords, claims, closing } from '../data/token.js';
 ---
@@ -8,7 +9,8 @@ import { swords, claims, closing } from '../data/token.js';
   description="義元左文字、へし切長谷部、不動行光、薬研藤四郎。信長にまつわる刀を、現存の状態と伝来から検証する。桶狭間の日付を刻ませた金象嵌銘は、本人が物に残した記録として「天下布武」の印に並ぶ。"
 >
   <article class="wrap token">
-    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+   <Ornament kind="blade" />
+     <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
 
     <p class="eyebrow">物からたどる</p>
     <h1 class="tk-title">「残っている」にも、段階がある</h1>

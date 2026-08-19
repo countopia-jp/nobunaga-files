@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
 import { sections, claims, closing } from '../data/kurashi.js';
 ---
@@ -8,7 +9,8 @@ import { sections, claims, closing } from '../data/kurashi.js';
   description="村の自治と逃散、乱取りと落ち武者狩り、座と関所。ドラマが描く「無力な農民」「黒装束の忍者」を、人物の逸話と同じ手つきで検証する。信長の政策が何に向けられていたかも、庶民の側から見ると分かる。"
 >
   <article class="wrap kurashi">
-    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+   <Ornament kind="wave" />
+     <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
 
     <p class="eyebrow">風俗・暮らし</p>
     <h1 class="ku-title">庶民は、受け身ではなかった</h1>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Ornament from '../components/Ornament.astro';
 import { chronology, chronologyStats } from '../data/chronology.js';
 
 const stats = chronologyStats();
@@ -9,7 +10,8 @@ const stats = chronologyStats();
   description="織田信長の生涯を年表に。太田牛一『信長公記』は上洛以前の首巻と、永禄11年から天正10年までを一年一巻で記した本記十五巻から成る。その巻立てをそのまま骨格として出来事を並べ、公記に記載のある事項と他史料による補いを区別して示す。"
 >
   <article class="wrap nenpyo">
-    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+   <Ornament kind="stone" />
+     <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
 
     <p class="eyebrow">織田信長 年表</p>
     <h1 class="n-title">『信長公記』の巻立てに沿って</h1>

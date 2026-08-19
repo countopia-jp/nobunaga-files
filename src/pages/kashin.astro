@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Ornament from '../components/Ornament.astro';
 import { retainers, retainerStats, FATE, kashinSources } from '../data/retainers.js';
 import Mon from '../components/Mon.astro';
 import { getEpisode } from '../data/episodes.js';
@@ -21,6 +22,7 @@ const fates = Object.entries(FATE);
     <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
 
     <p class="eyebrow">家臣一覧</p>
+    <Ornament kind="brush" />
     <h1 class="ka-title">信長は、誰に何を任せたか</h1>
     <p class="ka-lead">
       織田家は血縁だけで回っていたわけではない。

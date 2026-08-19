@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Ornament from '../components/Ornament.astro';
 import { glossary, glossaryStats } from '../data/glossary.js';
 
 const stats = glossaryStats();
@@ -9,7 +10,8 @@ const stats = glossaryStats();
   description="与力・馬廻・撫で斬り・安堵状・一次史料・信憑性度。ノブナガ・ファイルの各ページで使っている語を、史料と検証・身分と役職・土地と支配・戦・宗教勢力の5分野に分けて解説する。"
 >
   <article class="wrap yougo">
-    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+   <Ornament kind="wave" />
+     <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
 
     <p class="eyebrow">用語辞典</p>
     <h1 class="yg-title">言葉のほうから調べる</h1>

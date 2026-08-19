@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
 import { dialogues, actions, selfdeification, claims, legends, closing } from '../data/shinkou.js';
 ---
@@ -8,7 +9,8 @@ import { dialogues, actions, selfdeification, claims, legends, closing } from '.
   description="来世の否定、一夫一婦制への反論、地球儀への質問攻め。信長を無神論者・合理主義者とする像の根拠は、ほぼ宣教師フロイスの記録一本に集中している。その証言と、寺社への安堵状や神宮への寄進という実際の行動を並べて検証する。"
 >
   <article class="wrap shinkou">
-    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+   <Ornament kind="brush" />
+     <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
 
     <p class="eyebrow">人物像の検証</p>
     <h1 class="sk-title">何を信じていたか</h1>

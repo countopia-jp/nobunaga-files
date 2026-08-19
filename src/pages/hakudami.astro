@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
 import { certain, oneword, readings, claims, closing } from '../data/hakudami.js';
 ---
@@ -8,7 +9,8 @@ import { certain, oneword, readings, claims, closing } from '../data/hakudami.js
   description="浅井父子と朝倉義景の首を金箔で加工し、正月の宴で披露した一件。『信長公記』巻七に記されるが、それを杯にして酒を飲んだという記述はない。「肴」と「杯」の入れ替わりを検証する。"
 >
   <article class="wrap hakudami">
-    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+   <Ornament kind="seal" />
+     <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
 
     <p class="eyebrow">残虐性の検証</p>
     <h1 class="hk-title">「飲んだ」とは、書かれていない</h1>

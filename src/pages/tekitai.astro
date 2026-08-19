@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Ornament from '../components/Ornament.astro';
 import { enemies, enemyStats, OUTCOME, houimou } from '../data/enemies.js';
 import Mon from '../components/Mon.astro';
 import { getEpisode } from '../data/episodes.js';
@@ -35,6 +36,7 @@ const ticks = [1550, 1555, 1560, 1565, 1570, 1575, 1580, 1582];
     <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
 
     <p class="eyebrow">敵対勢力</p>
+    <Ornament kind="mon" />
     <h1 class="tk-title">信長は、誰と戦ったか</h1>
     <p class="tk-lead">
       信長の生涯は、ほぼ切れ目なく戦い続けた二十数年である。

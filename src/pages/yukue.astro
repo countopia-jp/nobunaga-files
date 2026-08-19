@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
 import { certain, theories, aftermath, closing } from '../data/yukue.js';
 ---
@@ -8,7 +9,8 @@ import { certain, theories, aftermath, closing } from '../data/yukue.js';
   description="本能寺の変のあと、明智軍も秀吉も信長の遺体を探し続けたが、骨片ひとつ出なかった。火薬による焼失説から阿弥陀寺の寺伝、井戸や地下道の伝説まで、七つの説を信憑性度で並べ、遺体が確定しなかったことが何を引き起こしたかを考える。"
 >
   <article class="wrap yukue">
-    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+   <Ornament kind="blade" />
+     <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
 
     <p class="eyebrow">本能寺の変</p>
     <h1 class="yk-title">なぜ、首は見つからなかったか</h1>
@@ -70,6 +72,9 @@ import { certain, theories, aftermath, closing } from '../data/yukue.js';
       <span class="yk-sep">｜</span><a href="/kuromaku/">黒幕説</a>
       <span class="yk-sep">｜</span><a href="/atago/">愛宕百韻</a>
     </p>
+
+    <p class="xref"><span class="xref-label">あわせて</span><a href="/mono/">物から検証する — 記録を介さずに分かること →</a></p>
+
 
     <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
   </article>
@@ -139,5 +144,14 @@ import { certain, theories, aftermath, closing } from '../data/yukue.js';
 
   @media (max-width: 640px) {
     .th-head { flex-direction: column; gap: .5rem; }
+  }
+  .xref {
+    margin-top: 2rem; padding: .75rem 1rem;
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi); font-size: .86rem;
+  }
+  .xref-label {
+    font-family: var(--font-mincho); font-size: .78rem; color: var(--shu);
+    letter-spacing: .08em; margin-right: .9em;
   }
 </style>

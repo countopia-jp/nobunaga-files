@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Seal from '../../components/Seal.astro';
+import Ornament from '../../components/Ornament.astro';
+import LocalMap from '../../components/LocalMap.astro';
 import { episodes, getEpisode } from '../../data/episodes.js';
 
 export function getStaticPaths() {
@@ -31,6 +33,7 @@ const ogImage = new URL('/images/og-image.jpg', Astro.site);
   <article class="wrap ep">
     <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
 
+    <Ornament kind={ep.year ? "seal" : "brush"} />
     <p class="eyebrow">{ep.dateLabel}</p>
     <h1 class="ep-title">{ep.title}</h1>
 
@@ -74,6 +77,32 @@ const ogImage = new URL('/images/og-image.jpg', Astro.site);
       ))}
     </ol>
 
+    {ep.slug === 'okehazama' && (
+      <section class="ep-map">
+        <h2 class="ep-h2">砦の配置</h2>
+        <LocalMap
+          bbox={[136.900, 136.990, 35.035, 35.135]}
+          points={[
+            { lon: 136.907, lat: 35.128, label: '熱田', side: 'place', note: '出陣の朝に立ち寄る', dx: 3, dy: 1 },
+            { lon: 136.938, lat: 35.088, label: '丹下砦', side: 'oda', dx: -3.5, dy: 1, anchor: 'end' },
+            { lon: 136.952, lat: 35.084, label: '善照寺砦', side: 'oda', dx: 3.5, dy: 1, anchor: 'start' },
+            { lon: 136.947, lat: 35.078, label: '鳴海城', side: 'enemy', dx: 3.5, dy: 4, anchor: 'start' },
+            { lon: 136.943, lat: 35.068, label: '中島砦', side: 'oda', dx: -3.5, dy: 1, anchor: 'end' },
+            { lon: 136.936, lat: 35.052, label: '鷲津砦', side: 'oda', dx: -3.5, dy: 0, anchor: 'end' },
+            { lon: 136.925, lat: 35.045, label: '大高城', side: 'enemy', dx: -3.5, dy: 1, anchor: 'end' },
+            { lon: 136.930, lat: 35.040, label: '丸根砦', side: 'oda', dx: 3.5, dy: 2, anchor: 'start' },
+            { lon: 136.977, lat: 35.058, label: '桶狭間', side: 'place', note: '古戦場とされる一帯', dx: 3, dy: 1 },
+          ]}
+          caption="縮尺と位置はおおよそのもの。この図の範囲外、北西およそ十数キロに信長の居城・清洲城がある。信長はそこを発って熱田に立ち寄り、丹下・善照寺・中島と自軍の砦を伝って前へ出ている。鳴海城と大高城は今川方が押さえ、それを囲むように織田方の砦が置かれていた。鷲津・丸根の両砦は、この日の朝に今川軍の攻撃を受けて落ちる。"
+        />
+        <p class="ep-map-note">
+          この配置を見ると、当日の動きが「わずかな手勢で野を駆けた」というより、
+          <strong>あらかじめ築いてあった砦を伝っての前進</strong>だったことが分かる。
+          奇襲か正面攻撃かという議論も、この前提の上で読む必要がある。
+        </p>
+      </section>
+    )}
+
     {ep.article && ep.article.length > 0 && (
       <section class="ep-article">
         <h2 class="ep-h2">解説</h2>
@@ -94,6 +123,13 @@ const ogImage = new URL('/images/og-image.jpg', Astro.site);
 
 <style>
   .ep { padding-block: 2.4rem 1rem; max-width: var(--prose); }
+  .ep-map { margin-top: 2.6rem; padding-top: 1.6rem; border-top: 1px solid var(--rule); }
+  .ep-map-note {
+    margin: .6rem 0 0; padding: .7rem 1rem;
+    border-left: 3px solid var(--shu); background: var(--washi);
+    font-size: .88rem; line-height: 1.9;
+  }
+  .ep-map-note strong { color: var(--shu); }
   .ep-article { margin-top: 2.6rem; padding-top: 1.6rem; border-top: 1px solid var(--rule); }
   .ep-article .ep-h2 { margin-bottom: 1rem; }
   .ep-article p { margin: 0 0 1.1rem; font-size: 1rem; line-height: 2; color: var(--sumi); }

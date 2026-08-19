@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Ornament from '../components/Ornament.astro';
 import MapJP from '../components/MapJP.astro';
 
 const castles = [
@@ -58,7 +59,8 @@ const routes = [
   description="織田信長は生涯で本拠を四度移した。那古野・清洲・小牧山・岐阜・安土。それぞれの立地と移った理由を、地図とともにたどる。"
 >
   <article class="wrap kyoten">
-    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+   <Ornament kind="stone" />
+     <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
 
     <p class="eyebrow">居城の変遷</p>
     <h1 class="ky-title">本拠を、四度動かした</h1>

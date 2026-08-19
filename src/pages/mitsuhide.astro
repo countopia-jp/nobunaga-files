@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
 import { known, unknown, claims, closing } from '../data/mitsuhide.js';
 ---
@@ -8,7 +9,8 @@ import { known, unknown, claims, closing } from '../data/mitsuhide.js';
   description="生年も出自も、信長に仕えるまでの経歴も確かめられない。空白を埋めたのは後世の軍記であり、そこから怨恨説が育った。分かっていることと分かっていないことを分けて並べる。"
 >
   <article class="wrap mitsuhide">
-    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+   <Ornament kind="brush" />
+     <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
 
     <p class="eyebrow">人物の検証</p>
     <h1 class="mt-title">前半生が、分からない</h1>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Ornament from '../components/Ornament.astro';
 import { sites, siteStats, RESIDUE } from '../data/sites.js';
 import { getEpisode } from '../data/episodes.js';
 
@@ -17,7 +18,8 @@ const residues = Object.entries(RESIDUE);
   description="織田信長ゆかりの史跡、資料館、城跡、古戦場、墓所を地域別に紹介する。現地に何が残っているか（遺構・寺社・展示施設・復元・石碑のみ）を種別で示し、場所の比定に議論があるものはその旨を明記する。"
 >
   <article class="wrap shiseki">
-    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+   <Ornament kind="stone" />
+     <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
 
     <p class="eyebrow">史跡・資料館</p>
     <h1 class="s-title">行ってみると、何が残っているか</h1>

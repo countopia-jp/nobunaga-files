@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Ornament from '../components/Ornament.astro';
 import MapJP from '../components/MapJP.astro';
 import { places, unlocated, closing } from '../data/densho.js';
 
@@ -19,7 +20,8 @@ const total =
   description="織田信長にまつわる民間伝承を地図の上に並べる。泣き石、底なし井戸、幻影兵士、木瓜紋のタブー。史料の裏づけは一つもないが、これらは土地に張り付いている。分布そのものが、その土地と信長の関わりの深さを映している。"
 >
   <article class="wrap densho">
-    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+   <Ornament kind="seal" />
+     <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
 
     <p class="eyebrow">民間伝承</p>
     <h1 class="dn-title">どの土地が、何を語り継いだか</h1>
