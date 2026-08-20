@@ -59,6 +59,7 @@ import { dialogues, actions, selfdeification, claims, legends, closing } from '.
           </li>
         ))}
       </ul>
+      {selfdeification.caution && <p class="sk-caution"><span class="sk-caution-label">注意</span>{selfdeification.caution}</p>}
       <p class="sk-note">{selfdeification.note}</p>
     </section>
 

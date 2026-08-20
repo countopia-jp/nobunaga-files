@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
-import { supports, pressures, claims, closing } from '../data/chotei.js';
+import { supports, pressures, pressuresNote, claims, closing } from '../data/chotei.js';
 ---
 <BaseLayout
   title="朝廷と信長 — 軽んじたのか、握ったのか｜ノブナガ・ファイル"
@@ -43,6 +43,7 @@ import { supports, pressures, claims, closing } from '../data/chotei.js';
           </li>
         ))}
       </ul>
+      <p class="ch-note">{pressuresNote}</p>
     </section>
 
     <section class="ch-sec">
@@ -112,6 +113,10 @@ import { supports, pressures, claims, closing } from '../data/chotei.js';
   .ch-support .ch-sec-title { border-bottom-color: #b8912f; }
   .ch-pressure .ch-sec-title { border-bottom-color: var(--shu); }
 
+  .ch-note {
+    margin: 1rem 0 0; padding: .7rem .95rem; background: var(--washi-deep);
+    font-size: .85rem; line-height: 1.88; color: var(--sumi-soft);
+  }
   .it-list { list-style: none; margin: 0; padding: 0; }
   .it-list li {
     padding: .55rem 0; border-bottom: 1px dotted var(--rule);

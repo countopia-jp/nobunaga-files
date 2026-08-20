@@ -46,7 +46,9 @@ import { certain, theories, aftermath, closing } from '../data/yukue.js';
             <div class="th-seal"><Seal rating={t.rating} size="sm" /></div>
           </div>
           <p class="th-desc">{t.desc}</p>
+          {t.evidence && <p class="th-evidence"><span class="th-evidence-label">物証</span>{t.evidence}</p>}
           {t.note && <p class="th-note"><span class="th-note-label">注</span>{t.note}</p>}
+          {t.link && <p class="th-link"><a href={t.link.href}>{t.link.label} →</a></p>}
         </div>
       ))}
     </section>
@@ -120,6 +122,14 @@ import { certain, theories, aftermath, closing } from '../data/yukue.js';
   }
   .th-seal { flex-shrink: 0; }
   .th-desc { margin: .6rem 0 0; font-size: .89rem; line-height: 1.85; }
+  .th-evidence {
+    margin: .55rem 0 0; padding: .5rem .8rem; background: #f7f3e9;
+    border-left: 2px solid #b8912f; font-size: .85rem; line-height: 1.85;
+  }
+  .th-evidence-label {
+    font-family: var(--font-mincho); color: #7a5a1a; margin-right: .6em; font-size: .78rem;
+  }
+  .th-link { margin: .5rem 0 0; font-size: .8rem; }
   .th-note {
     margin: .55rem 0 0; padding: .45rem .75rem; background: var(--washi-deep);
     font-size: .8rem; line-height: 1.78; color: var(--sumi-soft);

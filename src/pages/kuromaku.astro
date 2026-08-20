@@ -43,7 +43,10 @@ const sorted = [...theories].sort((a, b) => b.rating - a.rating);
       <section class="th">
         <div class="th-head">
           <div class="th-headtext">
-            <h3 class="th-name">{t.name}</h3>
+            <div class="th-nameline">
+              <h3 class="th-name">{t.name}</h3>
+              {t.axis && <span class={`axis axis--${t.axis === '動機' ? 'motive' : 'mastermind'}`}>{t.axis}の説</span>}
+            </div>
             <p class="th-verdict">{t.verdict}</p>
           </div>
           <div class="th-seal"><Seal rating={t.rating} size="sm" /></div>
@@ -142,6 +145,13 @@ const sorted = [...theories].sort((a, b) => b.rating - a.rating);
   }
   .th-head { display: flex; align-items: flex-start; gap: 1rem; }
   .th-headtext { flex: 1; min-width: 0; }
+  .th-nameline { display: flex; align-items: baseline; gap: .7rem; flex-wrap: wrap; }
+  .axis {
+    font-family: var(--font-mincho); font-size: .7rem; padding: .12em .6em;
+    border-radius: 2px; white-space: nowrap;
+  }
+  .axis--motive { color: #7a5a1a; border: 1px solid #b8912f; background: #fbf6e8; }
+  .axis--mastermind { color: #2f4a58; border: 1px solid #3f5a6b; background: #eef3f5; }
   .th-name { font-size: 1.15rem; margin: 0; line-height: 1.5; }
   .th-verdict {
     margin: .2rem 0 0; font-size: .8rem; color: var(--shu);
