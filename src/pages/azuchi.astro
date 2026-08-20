@@ -37,6 +37,7 @@ import { facts, innovations, meanings, stones, claims, closing } from '../data/a
         <div class="iv">
           <h3 class="iv-t">{i.t}</h3>
           <p class="iv-d">{i.d}</p>
+          {i.caution && <p class="iv-caution"><span class="iv-caution-label">注意</span>{i.caution}</p>}
         </div>
       ))}
     </section>
@@ -141,6 +142,13 @@ import { facts, innovations, meanings, stones, claims, closing } from '../data/a
   .iv-t { font-size: 1.02rem; margin: 0 0 .2rem; line-height: 1.5; }
   .iv-d { margin: 0; font-size: .88rem; line-height: 1.88; color: var(--sumi-soft); }
 
+  .iv-caution {
+    margin: .5rem 0 0; padding: .5rem .8rem; background: var(--washi-deep);
+    font-size: .83rem; line-height: 1.82; color: var(--sumi-soft);
+  }
+  .iv-caution-label {
+    font-family: var(--font-mincho); color: var(--shu); margin-right: .65em; font-size: .78rem;
+  }
   .mn {
     border: 1px solid var(--rule); background: var(--washi);
     padding: .85rem 1.05rem; margin-bottom: .85rem;
