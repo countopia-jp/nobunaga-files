@@ -82,7 +82,7 @@ export const claims = [
     rating: 3,
     verdict: '半分は正しい',
     sources: [
-      { label: '同時代の記録', kind: '一次', note: '領内の関所を排したことは伝わる' },
+      { label: '信長の発給文書・制札', kind: '一次', note: '関所の停止を命じた文書や、街道と市に出された制札が残る' },
       { label: '直轄化の事実', kind: '一次', note: '同時に堺・大津や鉱山を直轄地としており、自由化と独占は同じ政策の裏表' },
     ],
     desc:

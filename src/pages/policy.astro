@@ -1,0 +1,221 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Ornament from '../components/Ornament.astro';
+import { RUBRIC } from '../data/rubric.js';
+import { episodes } from '../data/episodes.js';
+import { bibliography } from '../data/bibliography.js';
+
+// 更新日はビルド時刻から自動で入る
+const built = new Date();
+const updated = `${built.getFullYear()}年${built.getMonth() + 1}月${built.getDate()}日`;
+
+const epCount = episodes.length;
+const biblioCount = bibliography.reduce((n, g) => n + g.items.length, 0);
+const rubricRows = Object.entries(RUBRIC).sort((a, b) => Number(b[0]) - Number(a[0]));
+---
+<BaseLayout
+  title="編集方針 — 何を、どう確かめているか｜ノブナガ・ファイル"
+  description="ノブナガ・ファイルの編集方針。信憑性度の基準、出典の示し方、判定を変えるときの手順、そして書かないと決めていることを公開しています。"
+>
+  <article class="wrap policy">
+    <p class="ep-back"><a href="/">← 一覧へ戻る</a></p>
+
+    <Ornament kind="seal" />
+    <p class="eyebrow">このサイトについて</p>
+    <h1 class="po-title">何を、どう確かめているか</h1>
+    <p class="po-lead">
+      当サイトは、織田信長をめぐって語られてきた話を、
+      <strong>その話がどの史料に、どこまで書かれているか</strong>という一点で確かめる場所です。
+      判定の基準と手順を、ここに公開しておきます。
+      読む側が、判定そのものを疑えるようにしておくためです。
+    </p>
+
+    <section class="po-sec po-name">
+      <h2 class="po-h2">編集者について</h2>
+      <p class="po-p">
+        当サイトの編集は<strong>衡一（こういち）</strong>が行っています。
+      </p>
+      <p class="po-p">
+        「衡」は、はかり。重さを量る道具のことです。
+        当サイトが下しているのは真偽の判定ではなく、その話を支える史料がどれだけ重いか、という測定にすぎません。
+        ★5は「本当だ」ではなく「支える史料が重い」、★1は「嘘だ」ではなく「支えが軽い」。
+        名にした一字は、その仕事を指しています。
+      </p>
+      <p class="po-p">
+        なお当サイトには、案内役の人物も、語り手の設定もありません。
+        名を掲げているのは、書いた責任の所在を示すためであって、
+        誰が書いたかによって内容の重みが変わらないようにするためでもあります。
+        判定は、名前ではなく出典が支えます。
+      </p>
+    </section>
+
+    <section class="po-sec">
+      <h2 class="po-h2">信憑性度の基準</h2>
+      <p class="po-p">
+        朱印の数字は、<strong>話の真偽ではなく、その話を支える史料の近さ</strong>を示します。
+        ★5であっても「事実だと証明された」という意味にはなりません。
+        同時代の記録がそう書いている、というところまでです。
+      </p>
+      <ul class="rb-list">
+        {rubricRows.map(([n, r]) => (
+          <li>
+            <span class={`rb-n rb-${n}`}>{n}</span>
+            <span class="rb-label">{r.label}</span>
+            <span class="rb-desc">{r.short}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="po-note">
+        ★5には「同時代の一次史料に裏づけがある」ことを条件としています。
+        出来事として動かしがたい場合でも、一次史料を示せないうちは★4に置きます。
+        桶狭間で義元を討ち取ったこと、長篠で勝利したことを★4としているのは、この規則によります。
+      </p>
+    </section>
+
+    <section class="po-sec">
+      <h2 class="po-h2">出典の示し方</h2>
+      <ul class="po-list">
+        <li><b>書名・巻・文書名まで書く。</b>「同時代の記録」「後世の書物」といった書き方はしません。どの本に載っているかまで示せて、はじめて出典です。</li>
+        <li><b>原文があるものは原文を掲げる。</b>ただし引用が支える範囲を超えて主張しないよう、その引用が何を示し、何を示さないかを添えます。</li>
+        <li><b>示せないものは「示せない」と書く。</b>根拠を特定できていない箇所には「——」を置き、どの範囲を探して見あたらないのかを記します。空欄にはしません。</li>
+        <li><b>写本の違いに触れる。</b>『信長公記』のように諸本で記述が異なる史料は、どの系統に拠っているかを書きます。</li>
+      </ul>
+    </section>
+
+    <section class="po-sec">
+      <h2 class="po-h2">否定するときの手順</h2>
+      <p class="po-p">
+        通説を否定するとき、<strong>否定の範囲を測り違えない</strong>ことに最も注意を払っています。
+      </p>
+      <ul class="po-list">
+        <li><b>「史料にない」と「ありえない」は別。</b>記録がないことは、起きなかったことの証明にはなりません。</li>
+        <li><b>制度と実態を分ける。</b>長篠の「三段撃ち」で否定しているのは編成と号令であって、射撃が続いたこと自体ではありません。</li>
+        <li><b>役職名と役割を分ける。</b>「小姓と書かれていない」ことは、その役を務めていなかったことを意味しません。</li>
+        <li><b>「書かれていない」の重さを測る。</b>周辺が詳しく書かれているなかでの欠落は強い否定になり、そもそも記録されにくい事柄の欠落は弱い否定にとどまります。</li>
+      </ul>
+    </section>
+
+    <section class="po-sec">
+      <h2 class="po-h2">書かないと決めていること</h2>
+      <ul class="po-list">
+        <li><b>数値化しない。</b>武将を武力・知力などの数字で表すことはしません。史料から導けないためです。</li>
+        <li><b>現代の通貨に換算しない。</b>石高や矢銭を「現代の何円」と書き換えることはしません。経済の仕組みが違いすぎます。</li>
+        <li><b>起きなかったことを論じない。</b>「信長が生きていれば」という仮定には史料が存在しないため、検証の対象にしません。</li>
+        <li><b>生成した人物画や情景画を置かない。</b>出どころのない画像を批判する立場で、自ら作った像を並べるのは筋が通らないと考えています。図版はすべて自作の図・紋・地図か、パブリックドメインの史料画像に限ります。</li>
+        <li><b>収益化しない。</b>広告・アフィリエイトの類は掲載していません。</li>
+      </ul>
+    </section>
+
+    <section class="po-sec">
+      <h2 class="po-h2">誤りが見つかったとき</h2>
+      <p class="po-p">
+        判定を変えたときは、変えた事実と理由を本文に残します。消して書き直すことはしません。
+        たとえば桶狭間の正面攻撃説について、当初は「すわかかれ」という掛け声を根拠に挙げていましたが、
+        その一句は迂回した先でも発せられるため根拠にならないと判断し、
+        現在は『信長公記』が迂回そのものを書いていないことと、陣所の位置を根拠としています。
+      </p>
+      <p class="po-p">
+        誤りにお気づきの場合は、お問い合わせからご指摘ください。
+        史料を示していただけると、こちらで確かめて反映できます。
+      </p>
+    </section>
+
+    <section class="po-meta">
+      <h2 class="po-h2">サイトの状態</h2>
+      <dl class="meta">
+        <div><dt>最終更新</dt><dd>{updated}</dd></div>
+        <div><dt>検証ファイル</dt><dd>{epCount}件</dd></div>
+        <div><dt>掲載する文献</dt><dd>{biblioCount}点</dd></div>
+        <div><dt>編集</dt><dd>衡一（こういち）</dd></div>
+        <div><dt>運営</dt><dd>個人による非営利のサイトです。広告は掲載していません。</dd></div>
+      </dl>
+      <p class="po-note">
+        最終更新日は、サイトを組み直した日付です。
+        個々の記事がいつ書かれたかではなく、全体が最後に更新された時点を示します。
+      </p>
+    </section>
+
+    
+
+    <p class="po-related">
+      関連：<a href="/shiryo/">文献一覧</a>
+      <span class="po-sep">｜</span><a href="/yougo/">用語辞典</a>
+      <span class="po-sep">｜</span><a href="/contact/">お問い合わせ</a>
+    </p>
+
+    <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
+  </article>
+</BaseLayout>
+
+<style>
+  .policy { max-width: 48rem; padding-block: 2rem 3rem; }
+  .ep-back { margin: 0 0 1rem; }
+  .ep-back a { font-size: .84rem; color: var(--sumi-soft); }
+  .ep-back-btm { margin-top: 2.4rem; }
+
+  .po-title { font-size: clamp(1.7rem, 5vw, 2.3rem); margin: .2rem 0 1rem; line-height: 1.45; }
+  .po-lead { color: var(--sumi-soft); line-height: 1.95; margin: 0 0 2.4rem; }
+  .po-lead strong { color: var(--shu); }
+
+  .po-sec { margin-bottom: 2.6rem; }
+  .po-h2 {
+    font-size: 1.2rem; margin: 0 0 .8rem; padding-bottom: .35rem;
+    border-bottom: 2px solid var(--sumi); line-height: 1.5;
+  }
+  .po-p { margin: 0 0 1rem; font-size: .92rem; line-height: 1.95; }
+  .po-p strong { color: var(--shu); }
+
+  .po-list { list-style: none; margin: 0; padding: 0; }
+  .po-list li {
+    position: relative; padding: .6rem 0 .6rem 1.3rem;
+    border-bottom: 1px dotted var(--rule);
+    font-size: .89rem; line-height: 1.9;
+  }
+  .po-list li:last-child { border-bottom: none; }
+  .po-list li::before {
+    content: '│'; position: absolute; left: .1rem; top: .65rem;
+    color: #b8912f; font-size: .8rem;
+  }
+  .po-list b { color: var(--sumi); }
+
+  .rb-list { list-style: none; margin: 0 0 1rem; padding: 0; }
+  .rb-list li {
+    display: grid; grid-template-columns: 2rem 4.5rem 1fr; gap: .8rem;
+    align-items: baseline; padding: .5rem 0;
+    border-bottom: 1px dotted var(--rule); font-size: .87rem; line-height: 1.8;
+  }
+  .rb-list li:last-child { border-bottom: none; }
+  .rb-n {
+    font-family: var(--font-mincho); text-align: center;
+    border: 1px solid currentColor; border-radius: 2px; font-size: .82rem;
+  }
+  .rb-5 { color: #a11414; } .rb-4 { color: #b23a2e; } .rb-3 { color: #9a7d3a; }
+  .rb-2 { color: #6f6a63; } .rb-1 { color: #8a8580; }
+  .rb-label { font-family: var(--font-mincho); font-weight: 700; }
+  .rb-desc { color: var(--sumi-soft); }
+
+  .po-note {
+    margin: 0; padding: .7rem .95rem; background: var(--washi-deep);
+    font-size: .85rem; line-height: 1.88; color: var(--sumi-soft);
+  }
+
+  .po-meta {
+    margin-top: 3rem; padding-top: 1.4rem; border-top: 3px double var(--sumi);
+  }
+  .meta { margin: 0 0 1rem; }
+  .meta > div {
+    display: grid; grid-template-columns: 8rem 1fr; gap: 1rem;
+    padding: .55rem 0; border-bottom: 1px dotted var(--rule);
+  }
+  .meta dt { font-family: var(--font-mincho); color: var(--shu); font-size: .87rem; }
+  .meta dd { margin: 0; font-size: .89rem; line-height: 1.8; }
+
+  .po-related { margin: 2rem 0 0; font-size: .84rem; }
+  .po-sep { color: var(--rule); margin: 0 .5em; }
+
+  @media (max-width: 640px) {
+    .rb-list li { grid-template-columns: 1.8rem 1fr; }
+    .rb-desc { grid-column: 1 / -1; }
+    .meta > div { grid-template-columns: 1fr; gap: .1rem; }
+  }
+</style>
