@@ -91,8 +91,9 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   align-items: center;
   justify-content: center;
   min-height: 42px;
-  padding: .4rem .6rem;
-  border: 1px solid rgba(233,227,214,.34);
+  padding: .4rem .6rem .4rem .75rem;
+  border: 1px solid rgba(233,227,214,.28);
+  border-left: 3px solid #b8912f;
   border-radius: 2px;
   background: rgba(233,227,214,.11);
   color: #f2ede2;
@@ -107,6 +108,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   color: #1e1a16;
   background: #d9b356;
   border-color: #d9b356;
+  border-left-color: #8c6d1f;
   text-decoration: none;
 }
 
