@@ -111,7 +111,27 @@ import Ornament from '../components/Ornament.astro';
       <p class="k-caveat">※検証の注：明治期の養子縁組により、「生物学的な信長の血統」はそのままの形で伝わっていない部分もある（柏原家の当主自身が認めている）。「家」の連続と「血」の連続は別、という点は押さえておきたい。</p>
     </section>
 
-    <p class="k-src">参考：Wikipedia「織田氏」「織田信雄」／攻城団「織田家（信雄系）」／奈良県「織田氏の末裔の藩」ほか。</p>
+    <section class="k-srcsec">
+      <h2 class="k-h2">この系図は、何にもとづくか</h2>
+      <ul class="k-srclist">
+        <li>
+          <span class="k-srct">江戸期の大名家の系譜</span>
+          <span class="k-srcd">柏原・天童・柳本・芝村の四藩については、幕府に届け出られた系譜や藩の記録から、代々の当主と石高をたどれる。大名家として続いた家は、記録が残りやすい。</span>
+        </li>
+        <li>
+          <span class="k-srct">信長の子女に関する記述</span>
+          <span class="k-srcd">『信長公記』のほか、江戸期に編まれた系譜による。ただし系譜どうしで母が食い違う例があり、生母まで確かなのはごく一部である。</span>
+        </li>
+        <li>
+          <span class="k-srct">現在の末裔について</span>
+          <span class="k-srcd">織田家親族会（織田会）の活動や、信長忌の法要は、寺社や自治体の案内などで公表されている。</span>
+        </li>
+        <li>
+          <span class="k-srct">——</span>
+          <span class="k-srcd">当サイトは、藩の系譜そのものを原本や自治体史にあたって確認したわけではない。刊行された事典類と、各藩・各寺社が公表する情報を突き合わせた範囲での記述である。</span>
+        </li>
+      </ul>
+    </section>
     <p class="xref"><span class="xref-label">あわせて</span><a href="/nouhime/">濃姫 — 記録が消える →</a></p>
 
     <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>
@@ -197,4 +217,21 @@ import Ornament from '../components/Ornament.astro';
     margin: .7rem 0 0; padding: .6rem .9rem; background: var(--washi-deep);
     font-size: .83rem; line-height: 1.85; color: var(--sumi-soft);
   }
+  .k-srcsec {
+    margin-top: 2.4rem; padding: 1rem 1.2rem;
+    border: 1px solid var(--rule); border-left: 3px solid #b8912f;
+    background: var(--washi);
+  }
+  .k-srcsec .k-h2 { margin-top: 0; border-bottom-color: #b8912f; }
+  .k-srclist { list-style: none; margin: 0; padding: 0; }
+  .k-srclist li {
+    padding: .55rem 0; border-bottom: 1px dotted var(--rule);
+    font-size: .87rem; line-height: 1.85;
+  }
+  .k-srclist li:last-child { border-bottom: none; }
+  .k-srct {
+    display: block; font-family: var(--font-mincho); font-weight: 700;
+    color: var(--sumi); margin-bottom: .1rem;
+  }
+  .k-srcd { color: var(--sumi-soft); }
 </style>

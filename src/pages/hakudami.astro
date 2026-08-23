@@ -34,6 +34,13 @@ import { certain, oneword, readings, claims, closing } from '../data/hakudami.js
     <section class="hk-sec hk-oneword">
       <h2 class="hk-sec-title">「肴」と「杯」</h2>
       <p class="ow-lead">{oneword.lead}</p>
+      {oneword.genbun && (
+        <blockquote class="genbun">
+          <p class="genbun-text">{oneword.genbun.text}</p>
+          <cite>—{oneword.genbun.cite}</cite>
+          <p class="genbun-note">{oneword.genbun.note}</p>
+        </blockquote>
+      )}
       {oneword.body.map((p) => <p class="hk-para">{p}</p>)}
     </section>
 
@@ -67,6 +74,12 @@ import { certain, oneword, readings, claims, closing } from '../data/hakudami.js
                   <span class="cs-label">{s.label}</span>
                   <span class="cs-kind">{s.kind}</span>
                   <span class="cs-note">{s.note}</span>
+                  {s.quote && (
+                    <blockquote class="cs-genbun">
+                      <p class="cs-genbun-text">{s.quote}</p>
+                      {s.cite && <cite>—{s.cite}</cite>}
+                    </blockquote>
+                  )}
                 </li>
               ))}
             </ul>
@@ -113,6 +126,23 @@ import { certain, oneword, readings, claims, closing } from '../data/hakudami.js
   }
   .ct-title { font-size: 1rem; margin: 0 0 .25rem; line-height: 1.5; }
   .ct-desc { margin: 0; font-size: .88rem; line-height: 1.85; color: var(--sumi-soft); }
+
+  .genbun {
+    margin: 1rem 0; padding: .9rem 1.1rem;
+    border-left: 3px solid var(--shu); background: #faf7f0;
+  }
+  .genbun-text {
+    margin: 0; font-family: var(--font-mincho); font-size: 1.02rem;
+    line-height: 2; letter-spacing: .03em;
+  }
+  .genbun cite {
+    display: block; margin-top: .5rem; font-size: .78rem;
+    color: var(--sumi-soft); font-style: normal;
+  }
+  .genbun-note {
+    margin: .7rem 0 0; padding-top: .6rem; border-top: 1px dotted var(--rule);
+    font-size: .86rem; line-height: 1.9; color: var(--sumi-soft);
+  }
 
   .hk-oneword {
     border-left: 3px solid var(--shu); background: var(--washi);
@@ -174,4 +204,16 @@ import { certain, oneword, readings, claims, closing } from '../data/hakudami.js
     background: var(--washi); padding: .05em .45em; border-radius: 2px; margin-right: .6em;
   }
   .cs-note { color: var(--sumi-soft); }
+  .cs-genbun {
+    margin: .5rem 0 .2rem; padding: .6rem .85rem;
+    border-left: 2px solid var(--shu); background: #faf7f0;
+  }
+  .cs-genbun-text {
+    margin: 0; font-family: var(--font-mincho); font-size: .93rem;
+    line-height: 2.05; letter-spacing: .03em; color: var(--sumi);
+  }
+  .cs-genbun cite {
+    display: block; margin-top: .4rem; font-size: .74rem;
+    color: var(--sumi-soft); font-style: normal; line-height: 1.7;
+  }
 </style>

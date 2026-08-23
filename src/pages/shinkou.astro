@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
-import { dialogues, actions, selfdeification, claims, legends, closing } from '../data/shinkou.js';
+import { dialogues, actions, kishomon, selfdeification, claims, legends, closing } from '../data/shinkou.js';
 ---
 <BaseLayout
   title="信長は何を信じていたか — 無神論者という像の根拠｜ノブナガ・ファイル"
@@ -24,6 +24,9 @@ import { dialogues, actions, selfdeification, claims, legends, closing } from '.
     <section class="sk-sec">
       <h2 class="sk-sec-title">フロイスが書き留めた対話</h2>
       <p class="sk-sec-lead">{dialogues.lead}</p>
+      {dialogues.source && (
+        <p class="sk-source"><span class="sk-source-label">出典</span>{dialogues.source}</p>
+      )}
       {dialogues.items.map((d) => (
         <div class="dg">
           <p class="dg-q">{d.q}</p>
@@ -46,6 +49,18 @@ import { dialogues, actions, selfdeification, claims, legends, closing } from '.
         ))}
       </ul>
       <p class="sk-note">{actions.note}</p>
+    </section>
+
+    <section class="sk-sec sk-kisho">
+      <h2 class="sk-sec-title">{kishomon.title}</h2>
+      <p class="sk-sec-lead">{kishomon.lead}</p>
+      {kishomon.items.map((k) => (
+        <div class="ki">
+          <h3 class="ki-t">{k.t}</h3>
+          <p class="ki-d">{k.d}</p>
+        </div>
+      ))}
+      <p class="sk-note">{kishomon.note}</p>
     </section>
 
     <section class="sk-sec">
@@ -82,6 +97,12 @@ import { dialogues, actions, selfdeification, claims, legends, closing } from '.
                   <span class="cs-label">{s.label}</span>
                   <span class="cs-kind">{s.kind}</span>
                   <span class="cs-note">{s.note}</span>
+                  {s.quote && (
+                    <blockquote class="cs-genbun">
+                      <p class="cs-genbun-text">{s.quote}</p>
+                      {s.cite && <cite>—{s.cite}</cite>}
+                    </blockquote>
+                  )}
                 </li>
               ))}
             </ul>
@@ -132,6 +153,15 @@ import { dialogues, actions, selfdeification, claims, legends, closing } from '.
   }
   .sk-sec-lead { margin: 0 0 1.2rem; font-size: .89rem; color: var(--sumi-soft); line-height: 1.88; }
   .sk-para { margin: 0 0 1.1rem; font-size: .92rem; line-height: 2; }
+
+  .sk-source {
+    margin: 0 0 1.1rem; padding: .6rem .9rem;
+    background: var(--washi-deep); border-left: 2px solid #b8912f;
+    font-size: .84rem; line-height: 1.85; color: var(--sumi-soft);
+  }
+  .sk-source-label {
+    font-family: var(--font-mincho); color: var(--shu); margin-right: .6em; font-size: .78rem;
+  }
 
   .dg {
     border-left: 3px solid var(--shu); background: var(--washi);
@@ -214,4 +244,23 @@ import { dialogues, actions, selfdeification, claims, legends, closing } from '.
     background: var(--washi); padding: .05em .45em; border-radius: 2px; margin-right: .6em;
   }
   .cs-note { color: var(--sumi-soft); }
+  .cs-genbun {
+    margin: .5rem 0 .2rem; padding: .6rem .85rem;
+    border-left: 2px solid var(--shu); background: #faf7f0;
+  }
+  .cs-genbun-text {
+    margin: 0; font-family: var(--font-mincho); font-size: .93rem;
+    line-height: 2.05; letter-spacing: .03em; color: var(--sumi);
+  }
+  .cs-genbun cite {
+    display: block; margin-top: .4rem; font-size: .74rem;
+    color: var(--sumi-soft); font-style: normal; line-height: 1.7;
+  }
+  .sk-kisho { border-left: 3px solid #b8912f; padding-left: 1rem; }
+  .ki {
+    border: 1px solid var(--rule); background: var(--washi);
+    padding: .8rem 1rem; margin-bottom: .8rem;
+  }
+  .ki-t { margin: 0 0 .35rem; font-size: 1rem; line-height: 1.5; }
+  .ki-d { margin: 0; font-size: .88rem; line-height: 1.9; color: var(--sumi-soft); }
 </style>

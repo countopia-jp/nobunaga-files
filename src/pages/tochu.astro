@@ -44,6 +44,13 @@ import { fronts, plans, claims, closing } from '../data/tochu.js';
             <span class="pl-kind">{p.kind}</span>
           </div>
           <p class="pl-d">{p.d}</p>
+          {[p.genbun, p.genbun2].filter(Boolean).map((g) => (
+            <blockquote class="genbun">
+              <p class="genbun-text">{g.text}</p>
+              <cite>—{g.cite}</cite>
+              <p class="genbun-note">{g.note}</p>
+            </blockquote>
+          ))}
           {p.note && <p class="pl-note"><span class="pl-note-label">注</span>{p.note}</p>}
           {p.link && <p class="pl-link"><a href={p.link.href}>{p.link.label} →</a></p>}
         </div>
@@ -69,6 +76,12 @@ import { fronts, plans, claims, closing } from '../data/tochu.js';
                   <span class="cs-label">{s.label}</span>
                   <span class="cs-kind">{s.kind}</span>
                   <span class="cs-note">{s.note}</span>
+                  {s.quote && (
+                    <blockquote class="cs-genbun">
+                      <p class="cs-genbun-text">{s.quote}</p>
+                      {s.cite && <cite>—{s.cite}</cite>}
+                    </blockquote>
+                  )}
                 </li>
               ))}
             </ul>
@@ -141,6 +154,23 @@ import { fronts, plans, claims, closing } from '../data/tochu.js';
     padding: .1em .55em; border-radius: 2px; white-space: nowrap;
   }
   .pl-d { margin: .35rem 0 0; font-size: .89rem; line-height: 1.88; }
+  .genbun {
+    margin: .9rem 0; padding: .85rem 1.05rem;
+    border-left: 3px solid var(--shu); background: #faf7f0;
+  }
+  .genbun-text {
+    margin: 0; font-family: var(--font-mincho); font-size: .98rem;
+    line-height: 2.1; letter-spacing: .03em;
+  }
+  .genbun cite {
+    display: block; margin-top: .5rem; font-size: .77rem;
+    color: var(--sumi-soft); font-style: normal; line-height: 1.7;
+  }
+  .genbun-note {
+    margin: .7rem 0 0; padding-top: .6rem; border-top: 1px dotted var(--rule);
+    font-size: .86rem; line-height: 1.9; color: var(--sumi-soft);
+  }
+
   .pl-note {
     margin: .55rem 0 0; padding: .45rem .75rem; background: var(--washi-deep);
     font-size: .82rem; line-height: 1.8; color: var(--sumi-soft);
@@ -186,4 +216,16 @@ import { fronts, plans, claims, closing } from '../data/tochu.js';
     background: var(--washi); padding: .05em .45em; border-radius: 2px; margin-right: .6em;
   }
   .cs-note { color: var(--sumi-soft); }
+  .cs-genbun {
+    margin: .5rem 0 .2rem; padding: .6rem .85rem;
+    border-left: 2px solid var(--shu); background: #faf7f0;
+  }
+  .cs-genbun-text {
+    margin: 0; font-family: var(--font-mincho); font-size: .93rem;
+    line-height: 2.05; letter-spacing: .03em; color: var(--sumi);
+  }
+  .cs-genbun cite {
+    display: block; margin-top: .4rem; font-size: .74rem;
+    color: var(--sumi-soft); font-style: normal; line-height: 1.7;
+  }
 </style>

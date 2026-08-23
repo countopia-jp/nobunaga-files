@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Ornament from '../components/Ornament.astro';
 import MapJP from '../components/MapJP.astro';
-import { places, unlocated, closing } from '../data/densho.js';
+import { places, unlocated, closing, sourceNote } from '../data/densho.js';
 
 const points = places.map((p) => ({
   lon: p.lon, lat: p.lat,
@@ -81,6 +81,11 @@ const total =
       ))}
     </section>
 
+    <section class="dn-srcnote">
+      <h2 class="dn-sec-title">{sourceNote.title}</h2>
+      {sourceNote.body.map((p) => <p class="dn-para">{p}</p>)}
+    </section>
+
     <section class="dn-closing">
       <h2 class="dn-sec-title">史実ではない、しかし痕跡ではある</h2>
       {closing.map((p) => <p class="dn-para">{p}</p>)}
@@ -155,4 +160,11 @@ const total =
 
   .dn-related { margin: 2rem 0 0; font-size: .84rem; }
   .dn-sep { color: var(--rule); margin: 0 .5em; }
+  .dn-srcnote {
+    margin-top: 2.6rem; padding: 1rem 1.2rem;
+    border: 1px solid var(--rule); border-left: 3px solid #b8912f;
+    background: var(--washi);
+  }
+  .dn-srcnote .dn-sec-title { border-bottom-color: #b8912f; margin-top: 0; }
+  .dn-srcnote .dn-para { font-size: .89rem; line-height: 1.92; color: var(--sumi-soft); }
 </style>

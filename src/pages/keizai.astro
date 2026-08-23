@@ -30,6 +30,14 @@ import { policies, claims, closing } from '../data/keizai.js';
           </div>
           <p class="po-lead">{p.lead}</p>
           <p class="po-body">{p.body}</p>
+          {p.genbun && (
+            <blockquote class="cs-genbun">
+              <p class="cs-genbun-text">{p.genbun.text}</p>
+              <cite>—{p.genbun.cite}</cite>
+            </blockquote>
+          )}
+          {p.afternote && <p class="po-after">{p.afternote}</p>}
+          {p.afternote2 && <p class="po-after">{p.afternote2}</p>}
           <p class="po-catch"><span class="po-catch-label">ただし</span>{p.catch}</p>
           {p.link && <p class="po-link"><a href={p.link.href}>{p.link.label} →</a></p>}
         </div>
@@ -55,6 +63,12 @@ import { policies, claims, closing } from '../data/keizai.js';
                   <span class="cs-label">{s.label}</span>
                   <span class="cs-kind">{s.kind}</span>
                   <span class="cs-note">{s.note}</span>
+                  {s.quote && (
+                    <blockquote class="cs-genbun">
+                      <p class="cs-genbun-text">{s.quote}</p>
+                      {s.cite && <cite>—{s.cite}</cite>}
+                    </blockquote>
+                  )}
                 </li>
               ))}
             </ul>
@@ -154,4 +168,21 @@ import { policies, claims, closing } from '../data/keizai.js';
     background: var(--washi); padding: .05em .45em; border-radius: 2px; margin-right: .6em;
   }
   .cs-note { color: var(--sumi-soft); }
+  .cs-genbun {
+    margin: .5rem 0 .2rem; padding: .6rem .85rem;
+    border-left: 2px solid var(--shu); background: #faf7f0;
+  }
+  .cs-genbun-text {
+    margin: 0; font-family: var(--font-mincho); font-size: .93rem;
+    line-height: 2.05; letter-spacing: .03em; color: var(--sumi);
+  }
+  .cs-genbun cite {
+    display: block; margin-top: .4rem; font-size: .74rem;
+    color: var(--sumi-soft); font-style: normal; line-height: 1.7;
+  }
+  .po-after {
+    margin: .8rem 0 0; padding: .7rem .95rem;
+    background: var(--washi-deep); border-left: 2px solid #b8912f;
+    font-size: .88rem; line-height: 1.92;
+  }
 </style>

@@ -39,6 +39,17 @@ const shortTitle = (slug) => {
             </div>
             <p class="nm-when">{n.when}</p>
             <p class="nm-desc">{n.desc}</p>
+            {n.genbun && (
+              <div class="nm-genbun">
+                {[n.genbun.a, n.genbun.b].map((g) => (
+                  <blockquote class="cs-genbun">
+                    <p class="cs-genbun-text">{g.text}</p>
+                    <cite>—{g.cite}</cite>
+                    <p class="nm-gnote">{g.note}</p>
+                  </blockquote>
+                ))}
+              </div>
+            )}
             {n.episodes && (
               <p class="nm-eps">
                 {n.episodes.map((s) => <a href={`/episodes/${s}/`}>{shortTitle(s)} →</a>)}
@@ -103,6 +114,12 @@ const shortTitle = (slug) => {
                   <span class="cs-label">{s.label}</span>
                   <span class="cs-kind">{s.kind}</span>
                   <span class="cs-note">{s.note}</span>
+                  {s.quote && (
+                    <blockquote class="cs-genbun">
+                      <p class="cs-genbun-text">{s.quote}</p>
+                      {s.cite && <cite>—{s.cite}</cite>}
+                    </blockquote>
+                  )}
                 </li>
               ))}
             </ul>
@@ -254,4 +271,21 @@ const shortTitle = (slug) => {
     background: var(--washi); padding: .05em .45em; border-radius: 2px; margin-right: .6em;
   }
   .cs-note { color: var(--sumi-soft); }
+  .cs-genbun {
+    margin: .5rem 0 .2rem; padding: .6rem .85rem;
+    border-left: 2px solid var(--shu); background: #faf7f0;
+  }
+  .cs-genbun-text {
+    margin: 0; font-family: var(--font-mincho); font-size: .93rem;
+    line-height: 2.05; letter-spacing: .03em; color: var(--sumi);
+  }
+  .cs-genbun cite {
+    display: block; margin-top: .4rem; font-size: .74rem;
+    color: var(--sumi-soft); font-style: normal; line-height: 1.7;
+  }
+  .nm-genbun { margin-top: .6rem; }
+  .nm-gnote {
+    margin: .5rem 0 0; padding-top: .45rem; border-top: 1px dotted var(--rule);
+    font-size: .83rem; line-height: 1.85; color: var(--sumi-soft);
+  }
 </style>

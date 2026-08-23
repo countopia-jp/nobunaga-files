@@ -24,7 +24,7 @@ export const rings = [
       { label: '兼見卿記', angle: -18 },
       { label: '多聞院日記', angle: 42 },
       { label: '言継卿記', angle: 108 },
-      { label: 'フロイスの記録', angle: 168 },
+      { label: 'ルイス・フロイス『日本史』', angle: 168 },
       { label: '石谷家文書', angle: 222 },
     ],
     tales: [

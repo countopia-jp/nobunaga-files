@@ -28,6 +28,15 @@ import { sekkanjo, notYet } from '../data/documents.js';
       </span>
     </div>
 
+    {sekkanjo.crosscheck && (
+      <section class="mj-cross">
+        <h2 class="mj-cross-title">{sekkanjo.crosscheck.title}</h2>
+        <p class="mj-cross-p">{sekkanjo.crosscheck.body}</p>
+        <p class="mj-cross-p">{sekkanjo.crosscheck.body2}</p>
+        <p class="mj-cross-detail">{sekkanjo.crosscheck.detail}</p>
+      </section>
+    )}
+
     <section class="doc">
       <div class="dc dc--frame">
         <p class="dc-genbun">{sekkanjo.prologue.genbun}</p>
@@ -201,5 +210,20 @@ import { sekkanjo, notYet } from '../data/documents.js';
   @media (max-width: 600px) {
     .dc { grid-template-columns: 1.6rem 1fr; gap: .5rem; }
     .dc-genbun { font-size: .9rem; padding-left: .7rem; }
+  }
+  .mj-cross {
+    margin: 1.6rem 0 2rem; padding: 1rem 1.2rem;
+    border: 1px solid var(--rule); border-left: 3px solid #b8912f;
+    background: var(--washi);
+  }
+  .mj-cross-title {
+    margin: 0 0 .7rem; font-size: 1.05rem;
+    font-family: var(--font-mincho); color: var(--sumi);
+    padding-bottom: .3rem; border-bottom: 1px dotted #b8912f;
+  }
+  .mj-cross-p { margin: 0 0 .8rem; font-size: .89rem; line-height: 1.95; }
+  .mj-cross-detail {
+    margin: 0; padding: .7rem .9rem; background: var(--washi-deep);
+    font-size: .85rem; line-height: 1.9; color: var(--sumi-soft);
   }
 </style>

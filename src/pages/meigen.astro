@@ -79,6 +79,17 @@ const stats = quoteStats();
           </div>
           <p class="nk-verdict">{n.verdict}</p>
           <p class="nk-desc">{n.desc}</p>
+          {n.sources && (
+            <ul class="q-sources">
+              {n.sources.map((s) => (
+                <li>
+                  <span class="qs-label">{s.label}</span>
+                  <span class="qs-kind">{s.kind}</span>
+                  <span class="qs-note">{s.note}</span>
+                </li>
+              ))}
+            </ul>
+          )}
           {n.link && <p class="nk-link"><a href={n.link.href}>{n.link.label} →</a></p>}
         </div>
       ))}
@@ -97,6 +108,17 @@ const stats = quoteStats();
           </div>
           <p class="ar-verdict">{a.verdict}</p>
           <p class="ar-desc">{a.desc}</p>
+          {a.sources && (
+            <ul class="q-sources">
+              {a.sources.map((s) => (
+                <li>
+                  <span class="qs-label">{s.label}</span>
+                  <span class="qs-kind">{s.kind}</span>
+                  <span class="qs-note">{s.note}</span>
+                </li>
+              ))}
+            </ul>
+          )}
           <p class="ar-caution"><span class="ar-caution-label">注意</span>{a.caution}</p>
         </div>
       ))}
@@ -213,6 +235,22 @@ const stats = quoteStats();
   .nk-verdict { margin: .3rem 0 0; font-size: .78rem; color: var(--shu); font-family: var(--font-mincho); }
   .nk-desc { margin: .35rem 0 0; font-size: .88rem; line-height: 1.8; }
   .nk-link { margin: .35rem 0 0; font-size: .78rem; }
+  .q-sources {
+    list-style: none; margin: .7rem 0 0; padding: .6rem .85rem;
+    background: var(--washi-deep); border-left: 2px solid #b8912f;
+  }
+  .q-sources li {
+    padding: .3rem 0; border-bottom: 1px dotted var(--rule);
+    font-size: .82rem; line-height: 1.8;
+  }
+  .q-sources li:last-child { border-bottom: none; }
+  .qs-label { font-family: var(--font-mincho); font-weight: 700; margin-right: .6em; }
+  .qs-kind {
+    font-size: .68rem; color: var(--sumi-soft); border: 1px solid var(--rule);
+    background: var(--washi); padding: .05em .45em; border-radius: 2px; margin-right: .6em;
+  }
+  .qs-note { color: var(--sumi-soft); }
+
   .nk-note {
     margin: 1rem 0 0; padding: .6rem .9rem;
     background: var(--washi-deep); font-size: .84rem; line-height: 1.85; color: var(--sumi-soft);
