@@ -95,8 +95,8 @@ import { sekkanjo, neneShosoku, notYet } from '../data/documents.js';
       <p class="mj-sec-lead">{neneShosoku.lead}</p>
       <p class="nn-base">底本：{neneShosoku.base}</p>
       <div class="doc">
-        <div class="dc">
-          <p class="dc-genbun">{neneShosoku.genbun.join('')}</p>
+        <div class="dc dc--frame">
+          <p class="dc-genbun nn-genbun">{neneShosoku.genbun.join('\n')}</p>
           <p class="dc-addr">{neneShosoku.address}</p>
           {neneShosoku.yaku.map((p) => <p class="dc-yaku">{p}</p>)}
         </div>
@@ -222,6 +222,7 @@ import { sekkanjo, neneShosoku, notYet } from '../data/documents.js';
     font-size: 1rem; margin: 1.6rem 0 .6rem; padding-left: .5rem;
     border-left: 3px solid var(--shu); font-family: var(--font-mincho);
   }
+  .nn-genbun { white-space: pre-line; }
   .dc-addr {
     margin: .6rem 0 0; font-family: var(--font-mincho); font-size: .88rem;
     color: var(--sumi-soft); letter-spacing: .04em;
