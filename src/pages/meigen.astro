@@ -90,6 +90,13 @@ const stats = quoteStats();
               ))}
             </ul>
           )}
+          {n.genbun && (
+            <div class="nk-genbun">
+              <p class="nkg-text">{n.genbun.text}</p>
+              <p class="nkg-cite">{n.genbun.cite}</p>
+              <p class="nkg-note">{n.genbun.note}</p>
+            </div>
+          )}
           {n.link && <p class="nk-link"><a href={n.link.href}>{n.link.label} →</a></p>}
         </div>
       ))}
@@ -235,6 +242,16 @@ const stats = quoteStats();
   .nk-verdict { margin: .3rem 0 0; font-size: .78rem; color: var(--shu); font-family: var(--font-mincho); }
   .nk-desc { margin: .35rem 0 0; font-size: .88rem; line-height: 1.8; }
   .nk-link { margin: .35rem 0 0; font-size: .78rem; }
+  .nk-genbun {
+    margin: .7rem 0 0; padding: .55rem 0 .55rem .85rem;
+    border-left: 3px solid var(--shu); background: var(--washi-deep);
+  }
+  .nkg-text {
+    margin: 0; font-family: var(--font-mincho); font-size: .95rem;
+    line-height: 1.95; letter-spacing: .02em;
+  }
+  .nkg-cite { margin: .3rem 0 0; font-size: .74rem; color: var(--sumi-soft); }
+  .nkg-note { margin: .4rem 0 0; font-size: .8rem; line-height: 1.8; color: var(--sumi-soft); }
   .q-sources {
     list-style: none; margin: .7rem 0 0; padding: .6rem .85rem;
     background: var(--washi-deep); border-left: 2px solid #b8912f;

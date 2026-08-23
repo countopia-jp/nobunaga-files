@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Ornament from '../components/Ornament.astro';
-import { sekkanjo, notYet } from '../data/documents.js';
+import { sekkanjo, neneShosoku, notYet } from '../data/documents.js';
 ---
 <BaseLayout
   title="佐久間信盛折檻状 全文 — 十九ヶ条を原文と現代語訳で｜ノブナガ・ファイル"
@@ -87,6 +87,33 @@ import { sekkanjo, notYet } from '../data/documents.js';
     </section>
 
     <section class="mj-sec">
+      <h2 class="mj-sec-title">もう一通 ── {neneShosoku.title}</h2>
+      <p class="mj-meta2">
+        <span>{neneShosoku.date}</span>
+        <span>{neneShosoku.source}</span>
+      </p>
+      <p class="mj-sec-lead">{neneShosoku.lead}</p>
+      <p class="nn-base">底本：{neneShosoku.base}</p>
+      <div class="doc">
+        <div class="dc">
+          <p class="dc-genbun">{neneShosoku.genbun.join('')}</p>
+          <p class="dc-addr">{neneShosoku.address}</p>
+          {neneShosoku.yaku.map((p) => <p class="dc-yaku">{p}</p>)}
+        </div>
+      </div>
+      <h3 class="mj-h3">語釈</h3>
+      <ul class="mj-cautions">
+        {neneShosoku.goshaku.map((g) => <li>{g}</li>)}
+      </ul>
+      <h3 class="mj-h3">読みどころ</h3>
+      {neneShosoku.commentary.map((p) => <p class="mj-para">{p}</p>)}
+      <h3 class="mj-h3">注意</h3>
+      <ul class="mj-cautions">
+        {neneShosoku.cautions.map((c) => <li>{c}</li>)}
+      </ul>
+    </section>
+
+    <section class="mj-sec">
       <h2 class="mj-sec-title">まだ載せていない文書</h2>
       <p class="mj-sec-lead">
         載せたいが、いま載せていないものがある。理由もあわせて書いておく。
@@ -100,6 +127,7 @@ import { sekkanjo, notYet } from '../data/documents.js';
           <p class="ny-desc">{d.desc}</p>
           <p class="ny-reason"><span class="dc-note-label">理由</span>{d.reason}</p>
           {d.reason2 && <p class="ny-reason ny-reason2">{d.reason2}</p>}
+          {d.reason3 && <p class="ny-reason ny-reason2">{d.reason3}</p>}
           {d.link && <p class="ny-link"><a href={d.link.href}>{d.link.label} →</a></p>}
         </div>
       ))}
@@ -181,6 +209,23 @@ import { sekkanjo, notYet } from '../data/documents.js';
   .mj-sec-lead { margin: 0 0 1rem; font-size: .86rem; color: var(--sumi-soft); line-height: 1.8; }
   .mj-para { margin: 0 0 1rem; font-size: .9rem; line-height: 1.95; }
 
+  .mj-meta2 {
+    margin: 0 0 .6rem; font-size: .8rem; color: var(--sumi-soft);
+    font-family: var(--font-mincho); display: flex; gap: 1.2rem; flex-wrap: wrap;
+  }
+  .nn-base {
+    margin: 0 0 1.2rem; font-size: .78rem; color: var(--sumi-soft);
+    border-left: 3px solid #b8912f; padding: .4rem 0 .4rem .7rem;
+    background: var(--washi-deep);
+  }
+  .mj-h3 {
+    font-size: 1rem; margin: 1.6rem 0 .6rem; padding-left: .5rem;
+    border-left: 3px solid var(--shu); font-family: var(--font-mincho);
+  }
+  .dc-addr {
+    margin: .6rem 0 0; font-family: var(--font-mincho); font-size: .88rem;
+    color: var(--sumi-soft); letter-spacing: .04em;
+  }
   .mj-cautions { margin: 0; padding-left: 1.2rem; }
   .mj-cautions li {
     font-size: .84rem; line-height: 1.85; color: var(--sumi-soft); margin-bottom: .5rem;
