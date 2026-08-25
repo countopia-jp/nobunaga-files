@@ -125,6 +125,19 @@ const ticks = [1550, 1555, 1560, 1565, 1570, 1575, 1580, 1582];
               {f.myth && (
                 <p class="fc-myth"><span class="fc-myth-label">通説</span>{f.myth}</p>
               )}
+              {f.primary && (
+                <div class="fc-primary">
+                  <p class="fc-primary-head">
+                    <span class="fc-primary-kind">一次</span>
+                    <span class="fc-primary-label">{f.primary.label}</span>
+                  </p>
+                  <p class="fc-primary-note">{f.primary.note}</p>
+                  <blockquote class="fc-genbun">
+                    <p class="fc-genbun-text">{f.primary.quote}</p>
+                    <cite>—{f.primary.cite}</cite>
+                  </blockquote>
+                </div>
+              )}
               {((f.episodes && f.episodes.length > 0) || f.link) && (
                 <p class="fc-links">
                   {f.episodes && f.episodes.map((slug) => (
@@ -252,6 +265,30 @@ const ticks = [1550, 1555, 1560, 1565, 1570, 1575, 1580, 1582];
   .fc-myth-label {
     font-family: var(--font-mincho); color: var(--shu);
     margin-right: .6em; font-size: .77rem;
+  }
+  .fc-primary {
+    margin: .6rem 0 0; padding: .55rem .75rem;
+    border: 1px solid var(--rule); border-left: 3px solid var(--shu);
+    background: var(--washi);
+  }
+  .fc-primary-head { margin: 0 0 .3rem; }
+  .fc-primary-kind {
+    font-size: .68rem; color: var(--shu); border: 1px solid var(--shu);
+    padding: .05rem .35rem; margin-right: .6em; white-space: nowrap;
+  }
+  .fc-primary-label { font-family: var(--font-mincho); font-weight: 700; font-size: .82rem; }
+  .fc-primary-note { margin: 0; font-size: .78rem; line-height: 1.75; color: var(--sumi-soft); }
+  .fc-genbun {
+    margin: .5rem 0 0; padding: .45rem 0 .45rem .75rem;
+    border-left: 2px solid var(--shu); background: var(--washi-deep);
+  }
+  .fc-genbun-text {
+    margin: 0; font-family: var(--font-mincho); font-size: .88rem;
+    line-height: 1.95; letter-spacing: .02em; color: var(--sumi);
+  }
+  .fc-genbun cite {
+    display: block; margin: .28rem 0 0; font-style: normal;
+    font-size: .71rem; color: var(--sumi-soft);
   }
   .fc-links { margin: .5rem 0 0; font-size: .78rem; }
   .fc-links a { margin-right: .7em; }

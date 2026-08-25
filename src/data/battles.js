@@ -111,7 +111,7 @@ export const battles = [
   { year: 1580, wa: '天正8年', name: '石山合戦の終結', place: '摂津・大坂', enemy: '石山本願寺', result: '和睦・調略', maki: '巻十三', self: false,
     desc: '朝廷の仲介で和議が成り、顕如が大坂を退去した。十年におよぶ、信長にとって最長の戦役が終わる。' },
   { year: 1581, wa: '天正9年', name: '天正伊賀の乱', place: '伊賀', enemy: '伊賀惣国一揆', result: '勝利', maki: '巻十四', self: false,
-    desc: '織田信雄が大軍で伊賀へ攻め入り、平定した。' },
+    desc: '織田信雄が大軍で伊賀へ攻め入り、平定した。信長は直後に国中の城の破却を命じている。' },
   { year: 1581, wa: '天正9年', name: '鳥取城の戦い', place: '因幡', enemy: '吉川経家', result: '勝利', maki: '巻十四', self: false,
     desc: '羽柴秀吉が周辺の米を買い占めたうえで包囲し、兵糧攻めで落とした。' },
   { year: 1582, wa: '天正10年', name: '甲州征伐', place: '甲斐・信濃', enemy: '武田勝頼', result: '勝利', maki: '巻十五', self: true,
