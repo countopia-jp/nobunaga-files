@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import EpLink from '../components/EpLink.astro';
 import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
 import { swords, claims, closing } from '../data/token.js';
@@ -83,7 +84,7 @@ import { swords, claims, closing } from '../data/token.js';
       関連：<a href="/meibutsu/">名物茶器</a>
       <span class="tk-sep">｜</span><a href="/ranjatai/">蘭奢待</a>
       <span class="tk-sep">｜</span><a href="/shiseki/">史跡・資料館</a>
-      <span class="tk-sep">｜</span><a href="/episodes/tenka-fubu/">天下布武</a>
+      <span class="tk-sep">｜</span><EpLink slug="tenka-fubu" label="天下布武" />
     </p>
 
     <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>

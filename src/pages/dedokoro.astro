@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { hrefOpen } from '../data/episodes.js';
+import EpLink from '../components/EpLink.astro';
 import Ornament from '../components/Ornament.astro';
 import { groups, edo, closing } from '../data/dedokoro.js';
 
@@ -62,7 +64,7 @@ const total = groups.reduce(
         {g.core && (
           <p class="dg-core">
             <span class="dg-core-label">{g.core.label}</span>
-            <a href={g.core.href}>{g.core.text}</a>
+            {hrefOpen(g.core.href) ? <a href={g.core.href}>{g.core.text}</a> : <span>{g.core.text}</span>}
           </p>
         )}
 
@@ -92,7 +94,7 @@ const total = groups.reduce(
       関連：<a href="/shiryo/">文献一覧（史料の同心円図）</a>
       <span class="dd-sep">｜</span><a href="/meigen/">名言・名台詞（出どころをたどれない言葉）</a>
       <span class="dd-sep">｜</span><a href="/shiryo/">文献一覧</a>
-      <span class="dd-sep">｜</span><a href="/episodes/utsuke/">「大うつけ」の検証</a>
+      <span class="dd-sep">｜</span><EpLink slug="utsuke" label="「大うつけ」の検証" />
     </p>
 
     <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>

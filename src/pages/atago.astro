@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import EpLink from '../components/EpLink.astro';
 import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
 import { certain, wobbles, claims, why } from '../data/atago.js';
@@ -88,7 +89,7 @@ import { certain, wobbles, claims, why } from '../data/atago.js';
       関連：<a href="/mitsuhide/">明智光秀</a>
       <span class="at-sep">｜</span><a href="/kuromaku/">本能寺の黒幕説</a>
       <span class="at-sep">｜</span><a href="/meigen/">名言・名台詞</a>
-      <span class="at-sep">｜</span><a href="/episodes/honnoji/">本能寺の変（検証ファイル）</a>
+      <span class="at-sep">｜</span><EpLink slug="honnoji" label="本能寺の変（検証ファイル）" />
     </p>
 
     <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>

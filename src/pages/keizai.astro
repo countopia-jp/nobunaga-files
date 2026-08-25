@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import EpLink from '../components/EpLink.astro';
 import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
 import { policies, claims, closing } from '../data/keizai.js';
@@ -83,7 +84,7 @@ import { policies, claims, closing } from '../data/keizai.js';
     </section>
 
     <p class="kz-related">
-      関連：<a href="/episodes/kakushinsha/">革新者だったのか</a>
+      関連：<EpLink slug="kakushinsha" label="革新者だったのか" />
       <span class="kz-sep">｜</span><a href="/namban/">南蛮との交流</a>
       <span class="kz-sep">｜</span><a href="/kassen/">合戦データベース</a>
     </p>

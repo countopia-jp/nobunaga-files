@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { hrefOpen } from '../data/episodes.js';
 import Ornament from '../components/Ornament.astro';
 import { glossary, glossaryStats } from '../data/glossary.js';
 
@@ -41,7 +42,7 @@ const stats = glossaryStats();
               </dt>
               <dd class="tm-desc">
                 {t.desc}
-                {t.link && <a class="tm-link" href={t.link}>{t.linkLabel ?? "関連ページ"} →</a>}
+                {t.link && hrefOpen(t.link) && <a class="tm-link" href={t.link}>{t.linkLabel ?? "関連ページ"} →</a>}
               </dd>
             </div>
           ))}

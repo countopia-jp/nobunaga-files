@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import EpLink from '../components/EpLink.astro';
 import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
 import { certain, readings, claims, closing } from '../data/ranjatai.js';
@@ -88,7 +89,7 @@ import { certain, readings, claims, closing } from '../data/ranjatai.js';
       関連：<a href="/token/">信長の刀</a>
       <span class="rj-sep">｜</span><a href="/kani/">異名と官位</a>
       <span class="rj-sep">｜</span><a href="/shinkou/">何を信じていたか</a>
-      <span class="rj-sep">｜</span><a href="/episodes/kakushinsha/">革新者だったのか</a>
+      <span class="rj-sep">｜</span><EpLink slug="kakushinsha" label="革新者だったのか" />
     </p>
 
     <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>

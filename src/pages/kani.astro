@@ -1,9 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { hrefOpen } from '../data/episodes.js';
+import EpLink from '../components/EpLink.astro';
 import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
 import { names, ranks, kao, claims } from '../data/ranks.js';
-import { getEpisode } from '../data/episodes.js';
+import { getEpisode, isOpen } from '../data/episodes.js';
 
 const shortTitle = (slug) => {
   const ep = getEpisode(slug);
@@ -52,7 +54,7 @@ const shortTitle = (slug) => {
             )}
             {n.episodes && (
               <p class="nm-eps">
-                {n.episodes.map((s) => <a href={`/episodes/${s}/`}>{shortTitle(s)} →</a>)}
+                {n.episodes.map((s) => <EpLink slug={s} arrow />)}
               </p>
             )}
           </li>
@@ -92,7 +94,7 @@ const shortTitle = (slug) => {
       </ul>
       <p class="kao-note">{kao.note}</p>
       <p class="kao-caution"><span class="kao-caution-label">図版について</span>{kao.caution}</p>
-      <p class="kao-link"><a href={kao.link.href}>{kao.link.label} →</a></p>
+      {hrefOpen(kao.link.href) && <p class="kao-link"><a href={kao.link.href}>{kao.link.label} →</a></p>}
     </section>
 
     <section class="kn-sec">
@@ -137,7 +139,7 @@ const shortTitle = (slug) => {
     </p>
 
     <p class="kn-related">
-      関連：<a href="/episodes/tenka-fubu/">天下布武</a>
+      関連：<EpLink slug="tenka-fubu" label="天下布武" />
       <span class="kn-sep">｜</span><a href="/kuromaku/">本能寺の黒幕説</a>
       <span class="kn-sep">｜</span><a href="/nenpyo/">年表</a>
     </p>

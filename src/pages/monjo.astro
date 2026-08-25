@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { hrefOpen } from '../data/episodes.js';
 import Ornament from '../components/Ornament.astro';
 import { sekkanjo, neneShosoku, notYet } from '../data/documents.js';
 ---
@@ -128,7 +129,7 @@ import { sekkanjo, neneShosoku, notYet } from '../data/documents.js';
           <p class="ny-reason"><span class="dc-note-label">理由</span>{d.reason}</p>
           {d.reason2 && <p class="ny-reason ny-reason2">{d.reason2}</p>}
           {d.reason3 && <p class="ny-reason ny-reason2">{d.reason3}</p>}
-          {d.link && <p class="ny-link"><a href={d.link.href}>{d.link.label} →</a></p>}
+          {d.link && hrefOpen(d.link.href) && <p class="ny-link"><a href={d.link.href}>{d.link.label} →</a></p>}
         </div>
       ))}
     </section>

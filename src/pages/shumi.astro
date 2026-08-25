@@ -1,9 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import EpLink from '../components/EpLink.astro';
 import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
 import { themes, claims } from '../data/pastimes.js';
-import { getEpisode } from '../data/episodes.js';
+import { getEpisode, isOpen } from '../data/episodes.js';
 
 const shortTitle = (slug) => {
   const ep = getEpisode(slug);
@@ -52,7 +53,7 @@ const shortTitle = (slug) => {
 
         {t.episodes && (
           <p class="th-eps">
-            {t.episodes.map((s) => <a href={`/episodes/${s}/`}>{shortTitle(s)} →</a>)}
+            {t.episodes.map((s) => <EpLink slug={s} arrow />)}
           </p>
         )}
       </section>
@@ -89,7 +90,7 @@ const shortTitle = (slug) => {
           )}
           {c.episodes && (
             <p class="claim-eps">
-              {c.episodes.map((s) => <a href={`/episodes/${s}/`}>{shortTitle(s)} →</a>)}
+              {c.episodes.map((s) => <EpLink slug={s} arrow />)}
             </p>
           )}
         </div>

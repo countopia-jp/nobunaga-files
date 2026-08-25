@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { hrefOpen } from '../data/episodes.js';
 import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
 import { outline, products, doubts, defenses, claims, closing } from '../data/bukoyawa.js';
@@ -39,7 +40,7 @@ import { outline, products, doubts, defenses, claims, closing } from '../data/bu
         <div class="pr">
           <h3 class="pr-t">{p.t}</h3>
           <p class="pr-d">{p.d}</p>
-          {p.link && <p class="pr-link"><a href={p.link.href}>{p.link.label} →</a></p>}
+          {p.link && hrefOpen(p.link.href) && <p class="pr-link"><a href={p.link.href}>{p.link.label} →</a></p>}
         </div>
       ))}
     </section>

@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import EpLink from '../components/EpLink.astro';
 import Ornament from '../components/Ornament.astro';
 import { sites, siteStats, RESIDUE } from '../data/sites.js';
-import { getEpisode } from '../data/episodes.js';
+import { getEpisode, isOpen } from '../data/episodes.js';
 
 const shortTitle = (slug) => {
   const ep = getEpisode(slug);
@@ -68,9 +69,7 @@ const residues = Object.entries(RESIDUE);
               )}
               {p.episodes && p.episodes.length > 0 && (
                 <p class="sp-eps">
-                  {p.episodes.map((slug) => (
-                    <a href={`/episodes/${slug}/`}>{shortTitle(slug)} →</a>
-                  ))}
+                  {p.episodes.map((slug) => <EpLink slug={slug} arrow />)}
                 </p>
               )}
             </li>

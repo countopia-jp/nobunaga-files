@@ -1,8 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import EpLink from '../components/EpLink.astro';
 import Ornament from '../components/Ornament.astro';
 import { battles, battleStats, RESULT } from '../data/battles.js';
-import { getEpisode } from '../data/episodes.js';
+import Mon from '../components/Mon.astro';
+import { getEpisode, isOpen } from '../data/episodes.js';
 
 const shortTitle = (slug) => {
   const ep = getEpisode(slug);
@@ -43,6 +45,8 @@ const late = battles.filter((b) => b.maki !== '首巻');
       <p class="ks-legend-note">
         うち信長自身が出陣した戦 {stats.self} 件。
         {stats.myths} 件には、後世の軍記が加えた脚色について注記がある。
+        相手の名の前に添えた家紋は当サイトが描いた図案で、紋帳の正確な再現ではない。
+        一つの家に絞れない戦、および一揆・寺社が相手の戦には置いていない。
       </p>
       <p class="ks-caution">
         <span class="c-label">兵力について</span>
@@ -68,7 +72,10 @@ const late = battles.filter((b) => b.maki !== '首巻');
               <span class={`rs rs-${RESULT[b.result].rank}`}>{b.result}</span>
             </div>
             <p class="bt-meta">
-              <span class="bt-enemy">対 {b.enemy}</span>
+              <span class="bt-enemy">
+                {b.mon && <span class="bt-mon"><Mon name={b.mon} size={17} title={`${b.enemy}の家紋（図案）`} /></span>}
+                対 {b.enemy}
+              </span>
               <span class="bt-sep">／</span>
               <span>{b.place}</span>
               {b.self && <span class="bt-self">信長出陣</span>}
@@ -88,7 +95,7 @@ const late = battles.filter((b) => b.maki !== '首巻');
             {b.myth && <p class="bt-myth"><span class="c-label">通説</span>{b.myth}</p>}
             {b.episodes && (
               <p class="bt-eps">
-                {b.episodes.map((s) => <a href={`/episodes/${s}/`}>{shortTitle(s)} →</a>)}
+                {b.episodes.map((s) => <EpLink slug={s} arrow />)}
               </p>
             )}
           </div>
@@ -111,7 +118,10 @@ const late = battles.filter((b) => b.maki !== '首巻');
               <span class={`rs rs-${RESULT[b.result].rank}`}>{b.result}</span>
             </div>
             <p class="bt-meta">
-              <span class="bt-enemy">対 {b.enemy}</span>
+              <span class="bt-enemy">
+                {b.mon && <span class="bt-mon"><Mon name={b.mon} size={17} title={`${b.enemy}の家紋（図案）`} /></span>}
+                対 {b.enemy}
+              </span>
               <span class="bt-sep">／</span>
               <span>{b.place}</span>
               {b.self && <span class="bt-self">信長出陣</span>}
@@ -131,7 +141,7 @@ const late = battles.filter((b) => b.maki !== '首巻');
             {b.myth && <p class="bt-myth"><span class="c-label">通説</span>{b.myth}</p>}
             {b.episodes && (
               <p class="bt-eps">
-                {b.episodes.map((s) => <a href={`/episodes/${s}/`}>{shortTitle(s)} →</a>)}
+                {b.episodes.map((s) => <EpLink slug={s} arrow />)}
               </p>
             )}
           </div>
@@ -221,7 +231,8 @@ const late = battles.filter((b) => b.maki !== '首巻');
     margin: .2rem 0 .45rem; font-size: .76rem; color: var(--sumi-soft);
     font-family: var(--font-gothic); display: flex; align-items: center; gap: .3rem; flex-wrap: wrap;
   }
-  .bt-enemy { color: var(--sumi); }
+  .bt-enemy { color: var(--sumi); display: inline-flex; align-items: center; gap: .28em; }
+  .bt-mon { flex-shrink: 0; color: #8a6d1f; line-height: 0; }
   .bt-sep { color: var(--rule); }
   .bt-self {
     font-family: var(--font-mincho); font-size: .68rem; color: var(--shu);

@@ -78,6 +78,22 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 }
 .fm-group { margin-bottom: 1.05rem; }
 .fm-group:last-child { margin-bottom: 0; }
+.fm-sealed { color: var(--sumi-soft); opacity: .5; white-space: nowrap; }
+.fm-seal {
+  font-family: var(--font-mincho); font-size: .74em; color: var(--shu);
+  border: 1px solid var(--shu); border-radius: 2px; padding: 0 .16em;
+  margin-left: .28em; opacity: .8;
+}
+.sealed-page { padding: 5rem 0 6rem; text-align: center; }
+.sealed-mark {
+  display: inline-block; margin: 0 0 1.4rem;
+  font-family: var(--font-mincho); font-size: 3rem; line-height: 1;
+  color: var(--shu); border: 3px solid var(--shu); border-radius: 3px;
+  padding: .2em .14em .12em; opacity: .82;
+}
+.sealed-title { font-size: 1.3rem; margin: 0 0 .8rem; font-weight: 500; }
+.sealed-body { margin: 0 auto 1.6rem; max-width: 30rem; color: var(--sumi-soft); line-height: 1.9; }
+.sealed-back a { font-size: .9rem; }
 .fm-title {
   margin: 0 0 .5rem;
   font-family: var(--font-mincho);

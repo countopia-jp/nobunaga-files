@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import EpLink from '../components/EpLink.astro';
 import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
 import { premises, theories } from '../data/kuromaku.js';
@@ -94,7 +95,7 @@ const sorted = [...theories].sort((a, b) => b.rating - a.rating);
     </p>
 
     <p class="km-related">
-      関連：<a href="/episodes/honnoji/">本能寺の変（検証ファイル）</a>
+      関連：<EpLink slug="honnoji" label="本能寺の変（検証ファイル）" />
       <span class="km-sep">｜</span>
       <a href="/kashin/">家臣一覧</a>
       <span class="km-sep">｜</span>

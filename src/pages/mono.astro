@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { hrefOpen } from '../data/episodes.js';
 import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
 import { lead, cases, claims, closing } from '../data/mono.js';
@@ -36,7 +37,7 @@ import { lead, cases, claims, closing } from '../data/mono.js';
         <p class="is-lead">{i.lead}</p>
         {i.body.map((p) => <p class="is-para">{p}</p>)}
         {i.caution && <p class="is-note"><span class="is-note-label">限界</span>{i.caution}</p>}
-        {i.link && <p class="is-link"><a href={i.link.href}>{i.link.label} →</a></p>}
+        {i.link && hrefOpen(i.link.href) && <p class="is-link"><a href={i.link.href}>{i.link.label} →</a></p>}
       </section>
     ))}
 

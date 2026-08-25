@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { hrefOpen } from '../data/episodes.js';
+import EpLink from '../components/EpLink.astro';
 import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
 import { certain, theories, aftermath, closing } from '../data/yukue.js';
@@ -48,7 +50,7 @@ import { certain, theories, aftermath, closing } from '../data/yukue.js';
           <p class="th-desc">{t.desc}</p>
           {t.evidence && <p class="th-evidence"><span class="th-evidence-label">物証</span>{t.evidence}</p>}
           {t.note && <p class="th-note"><span class="th-note-label">注</span>{t.note}</p>}
-          {t.link && <p class="th-link"><a href={t.link.href}>{t.link.label} →</a></p>}
+          {t.link && hrefOpen(t.link.href) && <p class="th-link"><a href={t.link.href}>{t.link.label} →</a></p>}
         </div>
       ))}
     </section>
@@ -59,7 +61,7 @@ import { certain, theories, aftermath, closing } from '../data/yukue.js';
         <div class="af">
           <h3 class="af-title">{a.title}</h3>
           <p class="af-desc">{a.desc}</p>
-          <p class="af-link"><a href={a.link.href}>{a.link.label} →</a></p>
+          {hrefOpen(a.link.href) && <p class="af-link"><a href={a.link.href}>{a.link.label} →</a></p>}
         </div>
       ))}
     </section>
@@ -70,7 +72,7 @@ import { certain, theories, aftermath, closing } from '../data/yukue.js';
     </section>
 
     <p class="yk-related">
-      関連：<a href="/episodes/honnoji/">本能寺の変（検証ファイル）</a>
+      関連：<EpLink slug="honnoji" label="本能寺の変（検証ファイル）" />
       <span class="yk-sep">｜</span><a href="/kuromaku/">黒幕説</a>
       <span class="yk-sep">｜</span><a href="/atago/">愛宕百韻</a>
     </p>

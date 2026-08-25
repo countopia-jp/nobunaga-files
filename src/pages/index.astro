@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { episodesByYear, timelessEpisodes } from '../data/episodes.js';
+import { pageOpen } from '../data/pages.js';
+import { episodesByYear, timelessEpisodes, openCount } from '../data/episodes.js';
 
 const list = episodesByYear();
 const portraits = timelessEpisodes();
@@ -44,6 +45,7 @@ const portraits = timelessEpisodes();
       {list.map((ep) => {
         return (
           <li>
+            {ep.verified ? (
             <a class="ep-card" href={`/episodes/${ep.slug}/`}>
               <div class="ep-card-head">
                 <span class="ep-year">{ep.year}</span>
@@ -58,6 +60,16 @@ const portraits = timelessEpisodes();
                 <span class="ep-count">検証 {ep.points.length}件 →</span>
               </div>
             </a>
+            ) : (
+            <div class="ep-card ep-card--sealed" aria-label={`${ep.title}（未公開）`}>
+              <div class="ep-card-head">
+                <span class="ep-year">{ep.year}</span>
+                <span class="ep-wa">{ep.dateLabel}</span>
+              </div>
+              <h2 class="ep-card-title">{ep.title.split('——')[0].trim()}</h2>
+              <span class="ep-seal-mark" aria-hidden="true">封</span>
+            </div>
+            )}
           </li>
         );
       })}
@@ -75,6 +87,7 @@ const portraits = timelessEpisodes();
         {portraits.map((ep) => {
           return (
             <li>
+              {ep.verified ? (
               <a class="ep-card ep-card--portrait" href={`/episodes/${ep.slug}/`}>
                 <div class="ep-card-head">
                   <span class="ep-wa">{ep.dateLabel}</span>
@@ -88,6 +101,15 @@ const portraits = timelessEpisodes();
                   <span class="ep-count">検証 {ep.points.length}件 →</span>
                 </div>
               </a>
+              ) : (
+              <div class="ep-card ep-card--portrait ep-card--sealed" aria-label={`${ep.title}（未公開）`}>
+                <div class="ep-card-head">
+                  <span class="ep-wa">{ep.dateLabel}</span>
+                </div>
+                <h3 class="ep-card-title">{ep.title.split('——')[0].trim()}</h3>
+                <span class="ep-seal-mark" aria-hidden="true">封</span>
+              </div>
+              )}
             </li>
           );
         })}
@@ -105,6 +127,7 @@ const portraits = timelessEpisodes();
       </div>
 
     <div class="ex-features">
+      {pageOpen("/kuromaku/") ? (
       <a class="ex-feature" href="/kuromaku/">
         <span class="ex-badge">特集</span>
         <span class="ex-feature-title">本能寺の変 — 黒幕は、いたのか</span>
@@ -113,7 +136,15 @@ const portraits = timelessEpisodes();
           根拠となる史料の近さで並べる。それぞれの弱いところも併記。
         </span>
       </a>
+      ) : (
+      <div class="ex-feature ex-feature--sealed">
+        <span class="ex-badge">特集</span>
+        <span class="ex-feature-title">本能寺の変 — 黒幕は、いたのか</span>
+        <span class="ex-seal-mark" aria-hidden="true">封</span>
+      </div>
+      )}
 
+      {pageOpen("/monjo/") ? (
       <a class="ex-feature" href="/monjo/">
         <span class="ex-badge">特集</span>
         <span class="ex-feature-title">佐久間信盛折檻状 — 十九ヶ条を全文で</span>
@@ -122,7 +153,15 @@ const portraits = timelessEpisodes();
           『信長公記』巻十三の全文を、条ごとに原文と現代語訳で。
         </span>
       </a>
+      ) : (
+      <div class="ex-feature ex-feature--sealed">
+        <span class="ex-badge">特集</span>
+        <span class="ex-feature-title">佐久間信盛折檻状 — 十九ヶ条を全文で</span>
+        <span class="ex-seal-mark" aria-hidden="true">封</span>
+      </div>
+      )}
 
+      {pageOpen("/dedokoro/") ? (
       <a class="ex-feature" href="/dedokoro/">
         <span class="ex-badge">特集</span>
         <span class="ex-feature-title">出どころのない逸話 — 信長像はどう作られたか</span>
@@ -131,7 +170,15 @@ const portraits = timelessEpisodes();
           面白い話ほど、出どころが遠い。
         </span>
       </a>
+      ) : (
+      <div class="ex-feature ex-feature--sealed">
+        <span class="ex-badge">特集</span>
+        <span class="ex-feature-title">出どころのない逸話 — 信長像はどう作られたか</span>
+        <span class="ex-seal-mark" aria-hidden="true">封</span>
+      </div>
+      )}
 
+      {pageOpen("/meigen/") ? (
       <a class="ex-feature" href="/meigen/">
         <span class="ex-badge">特集</span>
         <span class="ex-feature-title">名言・名台詞 — その言葉は、どこから来たか</span>
@@ -140,6 +187,13 @@ const portraits = timelessEpisodes();
           有名さと出典の近さは、まったく比例しない。
         </span>
       </a>
+      ) : (
+      <div class="ex-feature ex-feature--sealed">
+        <span class="ex-badge">特集</span>
+        <span class="ex-feature-title">名言・名台詞 — その言葉は、どこから来たか</span>
+        <span class="ex-seal-mark" aria-hidden="true">封</span>
+      </div>
+      )}
     </div>
 
     
@@ -200,6 +254,33 @@ const portraits = timelessEpisodes();
     padding: 1.1rem 1.2rem 1rem; color: inherit;
     transition: transform .15s ease, box-shadow .15s ease;
   }
+  /* 検証が済んでいないカード。墨地に伏せ、朱の「封」を一字だけ置く。 */
+  .ep-card--sealed {
+    background: #2a251d;
+    border-color: rgba(233,227,214,.16);
+    border-left-color: #6b5518;
+    border-top-color: rgba(216,194,122,.22);
+    justify-content: flex-start;
+    cursor: default;
+    min-height: 132px;
+  }
+  .ep-card--sealed:hover { transform: none; box-shadow: none; }
+  .ep-card--sealed .ep-year,
+  .ep-card--sealed .ep-wa { color: rgba(233,227,214,.42); }
+  .ep-card--sealed .ep-card-title {
+    color: rgba(233,227,214,.62); font-weight: 400;
+  }
+  .ep-seal-mark {
+    position: absolute; right: 1.1rem; bottom: .8rem; z-index: 1;
+    font-family: var(--font-mincho); font-size: 1.9rem; line-height: 1;
+    color: #8c3b30; border: 2px solid #8c3b30; border-radius: 2px;
+    padding: .18em .1em .1em; opacity: .78;
+  }
+  @media (max-width: 640px) {
+    .ep-card--sealed { min-height: 108px; }
+    .ep-seal-mark { font-size: 1.5rem; right: .9rem; bottom: .7rem; }
+  }
+
   .ep-card::before {
     content: ''; position: absolute; z-index: 0; right: -24px; bottom: -24px;
     width: 132px; height: 132px; opacity: .05; pointer-events: none;
@@ -240,6 +321,22 @@ const portraits = timelessEpisodes();
   }
   .grid-note strong { color: var(--shu); }
 
+  .ex-feature--sealed {
+    position: relative;
+    background: #2a251d;
+    border-color: rgba(233,227,214,.16);
+    cursor: default;
+    min-height: 108px;
+  }
+  .ex-feature--sealed:hover { transform: none; box-shadow: none; }
+  .ex-feature--sealed .ex-badge { background: rgba(140,59,48,.5); color: rgba(233,227,214,.7); }
+  .ex-feature--sealed .ex-feature-title { color: rgba(233,227,214,.62); }
+  .ex-seal-mark {
+    position: absolute; right: 1.1rem; bottom: .9rem;
+    font-family: var(--font-mincho); font-size: 1.7rem; line-height: 1;
+    color: #8c3b30; border: 2px solid #8c3b30; border-radius: 2px;
+    padding: .18em .1em .1em; opacity: .78;
+  }
   .explore { margin-top: 2.6rem; padding-top: 2rem; border-top: 3px double var(--sumi); }
   .explore-head { margin-bottom: 1.2rem; }
   .explore-title { font-size: 1.5rem; margin: 0 0 .3rem; }

@@ -1,9 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import EpLink from '../components/EpLink.astro';
 import Ornament from '../components/Ornament.astro';
 import { bibliography, bibliographyStats, KIND } from '../data/bibliography.js';
 import SourceOrbit from '../components/SourceOrbit.astro';
-import { getEpisode } from '../data/episodes.js';
+import { getEpisode, isOpen } from '../data/episodes.js';
 
 const shortTitle = (slug) => {
   const ep = getEpisode(slug);
@@ -82,9 +83,7 @@ const kinds = Object.entries(KIND);
             {it.episodes && it.episodes.length > 0 && (
               <p class="src-eps">
                 <span class="src-eps-label">この文献が関わる検証</span>
-                {it.episodes.map((slug) => (
-                  <a class="src-ep" href={`/episodes/${slug}/`}>{shortTitle(slug)}</a>
-                ))}
+                {it.episodes.map((slug) => <EpLink slug={slug} />)}
               </p>
             )}
           </div>

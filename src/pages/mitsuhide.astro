@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import EpLink from '../components/EpLink.astro';
 import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
 import { known, unknown, claims, closing } from '../data/mitsuhide.js';
@@ -88,7 +89,7 @@ import { known, unknown, claims, closing } from '../data/mitsuhide.js';
     <p class="mt-related">
       関連：<a href="/kuromaku/">黒幕説</a>
       <span class="mt-sep">｜</span><a href="/atago/">愛宕百韻</a>
-      <span class="mt-sep">｜</span><a href="/episodes/honnoji/">本能寺の変</a>
+      <span class="mt-sep">｜</span><EpLink slug="honnoji" label="本能寺の変" />
     </p>
 
     <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>

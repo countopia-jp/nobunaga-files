@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import EpLink from '../components/EpLink.astro';
+import { hrefOpen } from '../data/episodes.js';
 import Ornament from '../components/Ornament.astro';
 import MapJP from '../components/MapJP.astro';
 
@@ -96,7 +98,7 @@ const routes = [
           </div>
           <p class="cs-why">{c.why}</p>
           <p class="cs-now"><span class="cs-label">現在</span>{c.now}</p>
-          <p class="cs-link"><a href={c.link}>関連ページ →</a></p>
+          {hrefOpen(c.link) && <p class="cs-link"><a href={c.link}>関連ページ →</a></p>}
         </div>
       ))}
     </section>
@@ -124,7 +126,7 @@ const routes = [
         本拠を移し続けたことは、家臣を土地から切り離す政策——いわゆる兵農分離——の証拠として
         語られてきた。しかし本拠の移転自体は他の大名にも例があり、
         制度としての兵農分離がどこまで成立していたかについては、近年慎重な見方が強い。
-        <a href="/episodes/kakushinsha/">革新者だったのか →</a>
+        <EpLink slug="kakushinsha" label="革新者だったのか" arrow />
       </p>
     </section>
 

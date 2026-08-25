@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import EpLink from '../components/EpLink.astro';
 import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
 import { dialogues, actions, kishomon, selfdeification, claims, legends, closing } from '../data/shinkou.js';
@@ -127,9 +128,9 @@ import { dialogues, actions, kishomon, selfdeification, claims, legends, closing
     </section>
 
     <p class="sk-related">
-      関連：<a href="/episodes/dairokuten/">第六天魔王</a>
+      関連：<EpLink slug="dairokuten" label="第六天魔王" />
       <span class="sk-sep">｜</span><a href="/namban/">南蛮との交流</a>
-      <span class="sk-sep">｜</span><a href="/episodes/hieizan/">比叡山焼き討ち</a>
+      <span class="sk-sep">｜</span><EpLink slug="hieizan" label="比叡山焼き討ち" />
     </p>
 
     <p class="ep-back ep-back-btm"><a href="/">← 一覧へ戻る</a></p>

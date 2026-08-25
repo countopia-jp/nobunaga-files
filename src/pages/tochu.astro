@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import EpLink from '../components/EpLink.astro';
 import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
 import { fronts, plans, claims, closing } from '../data/tochu.js';
@@ -96,7 +97,7 @@ import { fronts, plans, claims, closing } from '../data/tochu.js';
     </section>
 
     <p class="tc-related">
-      関連：<a href="/episodes/honnoji/">本能寺の変</a>
+      関連：<EpLink slug="honnoji" label="本能寺の変" />
       <span class="tc-sep">｜</span><a href="/kassen/">合戦データベース</a>
       <span class="tc-sep">｜</span><a href="/yukue/">遺体の行方</a>
     </p>

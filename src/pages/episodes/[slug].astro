@@ -1,12 +1,14 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { hrefOpen } from '../../data/episodes.js';
 import Seal from '../../components/Seal.astro';
 import Ornament from '../../components/Ornament.astro';
 import LocalMap from '../../components/LocalMap.astro';
 import { episodes, getEpisode } from '../../data/episodes.js';
 
 export function getStaticPaths() {
-  return episodes.map((ep) => ({ params: { slug: ep.slug } }));
+  // 検証が済んでいないエピソードはページ自体を作らない（sitemapにも載らない）
+  return episodes.filter((ep) => ep.verified).map((ep) => ({ params: { slug: ep.slug } }));
 }
 
 const { slug } = Astro.params;
@@ -100,7 +102,7 @@ const ogImage = new URL('/images/og-image.jpg', Astro.site);
     {ep.related && ep.related.length > 0 && (
       <p class="ep-related">
         <span class="ep-related-label">この件を掘り下げる</span>
-        {ep.related.map((r) => <a href={r.href}>{r.label}</a>)}
+        {ep.related.filter((r) => hrefOpen(r.href)).map((r) => <a href={r.href}>{r.label}</a>)}
       </p>
     )}
 

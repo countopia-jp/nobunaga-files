@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import EpLink from '../components/EpLink.astro';
 import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
 import { certain, oneword, readings, claims, closing } from '../data/hakudami.js';
@@ -94,8 +95,8 @@ import { certain, oneword, readings, claims, closing } from '../data/hakudami.js
     </section>
 
     <p class="hk-related">
-      関連：<a href="/episodes/zangyaku/">残虐だったのか</a>
-      <span class="hk-sep">｜</span><a href="/episodes/hieizan/">比叡山焼き討ち</a>
+      関連：<EpLink slug="zangyaku" label="残虐だったのか" />
+      <span class="hk-sep">｜</span><EpLink slug="hieizan" label="比叡山焼き討ち" />
       <span class="hk-sep">｜</span><a href="/dedokoro/">出どころのない逸話</a>
     </p>
 

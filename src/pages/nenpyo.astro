@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import EpLink from '../components/EpLink.astro';
+import { isOpen } from '../data/episodes.js';
 import Ornament from '../components/Ornament.astro';
 import { chronology, chronologyStats } from '../data/chronology.js';
 
@@ -58,12 +60,15 @@ const stats = chronologyStats();
                     : <span class="tag-sup">補足</span>}
                 </p>
                 {ev.note && <p class="ev-note">{ev.note}</p>}
-                {ev.page && (
+                {ev.page && !ev.page.startsWith('/episodes/') && (
                     <p class="ev-link"><a href={ev.page}>{ev.pageLabel} →</a></p>
                   )}
-                  {ev.slug && (
+                {ev.page && ev.page.startsWith('/episodes/') && (
+                    <p class="ev-link"><EpLink slug={ev.page.replace(/\/episodes\/|\//g, '')} label={ev.pageLabel} arrow /></p>
+                  )}
+                {ev.slug && (
                   <p class="ev-link">
-                    <a href={`/episodes/${ev.slug}/`}>この出来事を検証する →</a>
+                    <EpLink slug={ev.slug} label="この出来事を検証する" arrow />
                   </p>
                 )}
               </div>

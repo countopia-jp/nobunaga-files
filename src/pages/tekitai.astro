@@ -1,9 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import EpLink from '../components/EpLink.astro';
 import Ornament from '../components/Ornament.astro';
 import { enemies, enemyStats, OUTCOME, houimou } from '../data/enemies.js';
 import Mon from '../components/Mon.astro';
-import { getEpisode } from '../data/episodes.js';
+import { getEpisode, isOpen } from '../data/episodes.js';
 
 const shortTitle = (slug) => {
   const ep = getEpisode(slug);
@@ -140,9 +141,7 @@ const ticks = [1550, 1555, 1560, 1565, 1570, 1575, 1580, 1582];
               )}
               {((f.episodes && f.episodes.length > 0) || f.link) && (
                 <p class="fc-links">
-                  {f.episodes && f.episodes.map((slug) => (
-                    <a href={`/episodes/${slug}/`}>{shortTitle(slug)} →</a>
-                  ))}
+                  {f.episodes && f.episodes.map((slug) => <EpLink slug={slug} arrow />)}
                   {f.link && <a href={f.link.href}>{f.link.label} →</a>}
                 </p>
               )}

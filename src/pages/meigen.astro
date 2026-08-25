@@ -1,9 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import EpLink from '../components/EpLink.astro';
 import Ornament from '../components/Ornament.astro';
 import Seal from '../components/Seal.astro';
 import { groups, nicknames, around, misattributed, quoteStats } from '../data/quotes.js';
-import { getEpisode } from '../data/episodes.js';
+import { getEpisode, isOpen } from '../data/episodes.js';
 
 const shortTitle = (slug) => {
   const ep = getEpisode(slug);
@@ -57,9 +58,7 @@ const stats = quoteStats();
             )}
             {q.episodes && q.episodes.length > 0 && (
               <p class="qt-eps">
-                {q.episodes.map((slug) => (
-                  <a href={`/episodes/${slug}/`}>{shortTitle(slug)} →</a>
-                ))}
+                {q.episodes.map((slug) => <EpLink slug={slug} arrow />)}
               </p>
             )}
           </div>
