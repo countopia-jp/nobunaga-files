@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Ornament from '../components/Ornament.astro';
-import Seal from '../components/Seal.astro';
 import { intro, items, claims, closing } from '../data/meibutsu.js';
 ---
 <BaseLayout
@@ -33,7 +32,6 @@ import { intro, items, claims, closing } from '../data/meibutsu.js';
               <h2 class="sw-name">{s.name}</h2>
               <span class="sw-alias">{s.yomi}</span>
             </div>
-            <div class="sw-seal"><Seal rating={s.rating} size="sm" /></div>
           </div>
           <p class="sw-now"><span class="sw-now-label">いま</span>{s.now}</p>
           <p class="sw-story">{s.d}</p>
@@ -48,10 +46,9 @@ import { intro, items, claims, closing } from '../data/meibutsu.js';
         <div class="claim">
           <div class="claim-head">
             <div class="claim-headtext">
-              <h3 class="claim-title">{c.claim}</h3>
-              <p class="claim-verdict">{c.verdict}</p>
+              <h3 class="claim-title">{c.q ?? c.claim}</h3>
+              <p class="claim-verdict">史料では：{c.verdict}</p>
             </div>
-            <div class="claim-seal"><Seal rating={c.rating} size="sm" /></div>
           </div>
           <p class="claim-desc">{c.desc}</p>
           {c.sources && (

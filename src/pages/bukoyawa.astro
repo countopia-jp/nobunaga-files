@@ -2,7 +2,6 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { hrefOpen } from '../data/episodes.js';
 import Ornament from '../components/Ornament.astro';
-import Seal from '../components/Seal.astro';
 import { outline, products, doubts, defenses, claims, closing } from '../data/bukoyawa.js';
 ---
 <BaseLayout
@@ -82,10 +81,9 @@ import { outline, products, doubts, defenses, claims, closing } from '../data/bu
         <div class="claim">
           <div class="claim-head">
             <div class="claim-headtext">
-              <h3 class="claim-title">{c.claim}</h3>
-              <p class="claim-verdict">{c.verdict}</p>
+              <h3 class="claim-title">{c.q ?? c.claim}</h3>
+              <p class="claim-verdict">史料では：{c.verdict}</p>
             </div>
-            <div class="claim-seal"><Seal rating={c.rating} size="sm" /></div>
           </div>
           <p class="claim-desc">{c.desc}</p>
           {c.sources && (

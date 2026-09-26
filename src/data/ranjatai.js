@@ -77,6 +77,7 @@ export const claims = [
   },
   {
     claim: '勅許を得ずに、強引に截り取った',
+    q: '勅許を得ずに、強引に截り取ったのか',
     rating: 1,
     verdict: '正式な手続きを踏んでいる',
     sources: [
@@ -86,6 +87,7 @@ export const claims = [
   },
   {
     claim: '天皇の権威に挑戦する行為だった',
+    q: '天皇の権威に挑む行為だったのか',
     rating: 2,
     verdict: '手続きと噛み合わない',
     sources: [
@@ -97,6 +99,7 @@ export const claims = [
   },
   {
     claim: '截った香を諸大名に配り、外交に用いた',
+    q: '截った香を諸大名に配り、外交に使ったのか',
     rating: 3,
     verdict: '事例はあるが、全体像は分からない',
     sources: [

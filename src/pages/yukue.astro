@@ -3,12 +3,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { hrefOpen } from '../data/episodes.js';
 import EpLink from '../components/EpLink.astro';
 import Ornament from '../components/Ornament.astro';
-import Seal from '../components/Seal.astro';
 import { certain, theories, aftermath, closing } from '../data/yukue.js';
 ---
 <BaseLayout
   title="遺体の行方 — なぜ首は見つからなかったか｜ノブナガ・ファイル"
-  description="本能寺の変のあと、明智軍も秀吉も信長の遺体を探し続けたが、骨片ひとつ出なかった。火薬による焼失説から阿弥陀寺の寺伝、井戸や地下道の伝説まで、七つの説を信憑性度で並べ、遺体が確定しなかったことが何を引き起こしたかを考える。"
+  description="本能寺の変のあと、明智軍も秀吉も信長の遺体を探し続けたが、骨片ひとつ出なかった。火薬による焼失説から阿弥陀寺の寺伝、井戸や地下道の伝説まで、七つの説を支える史料の近い順に並べ、遺体が確定しなかったことが何を引き起こしたかを考える。"
 >
   <article class="wrap yukue">
    <Ornament kind="blade" />
@@ -35,17 +34,16 @@ import { certain, theories, aftermath, closing } from '../data/yukue.js';
     <section class="yk-sec">
       <h2 class="yk-sec-title">七つの説</h2>
       <p class="yk-sec-lead">
-        信憑性度の高い順に並べる。上へ行くほど説明として無理がなく、
+        支える史料の近い順に並べる。上へ行くほど説明として無理がなく、
         下へ行くほど話として面白い。この順番自体が、逸話の性質を示している。
       </p>
       {theories.map((t) => (
         <div class="th">
           <div class="th-head">
             <div class="th-headtext">
-              <h3 class="th-title">{t.title}</h3>
+              <h3 class="th-title">{t.q ?? t.title}</h3>
               <span class="th-kind">{t.kind}</span>
             </div>
-            <div class="th-seal"><Seal rating={t.rating} size="sm" /></div>
           </div>
           <p class="th-desc">{t.desc}</p>
           {t.evidence && <p class="th-evidence"><span class="th-evidence-label">物証</span>{t.evidence}</p>}

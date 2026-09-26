@@ -73,6 +73,7 @@ export const cases = [
 export const claims = [
   {
     claim: '信長の鉄砲は、輸入した鉛の弾を使っていた',
+    q: '信長の鉄砲は、輸入した鉛の弾を使っていたのか',
     rating: 3,
     verdict: '一部はそうだが、国産も相当ある',
     desc:
@@ -84,6 +85,7 @@ export const claims = [
   },
   {
     claim: '本能寺は、防御を備えた造りだった',
+    q: '本能寺は、守りを備えた造りだったのか',
     rating: 4,
     verdict: '堀と護岸の石積みが出土している',
     desc:
@@ -95,6 +97,7 @@ export const claims = [
   },
   {
     claim: '発掘によって、信長の最期の場所が特定された',
+    q: '発掘で、信長の最期の場所は突き止められたのか',
     rating: 1,
     verdict: '中心の建物の遺構は見つかっていない',
     desc:
@@ -105,6 +108,7 @@ export const claims = [
   },
   {
     claim: '物の証拠は、文字の記録より信頼できる',
+    q: '物の証拠は、文字の記録より信頼できるのか',
     rating: 2,
     verdict: '種類が違うだけで、上下ではない',
     desc:

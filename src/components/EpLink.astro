@@ -1,0 +1,43 @@
+---
+/*
+  検証ファイルへのリンク
+  ------------------------------------------------
+  verified が true のエピソードだけをリンクにする。
+  まだ開けていないものは、リンクにせず「封」を添えた
+  淡い文字として置く。リンクを丸ごと消さないのは、
+  区切り記号が宙に浮くのを避けるためと、これから
+  開くものがあることを読者に見せておくためである。
+*/
+import { getEpisode } from '../data/episodes.js';
+
+const { slug, label, arrow = false } = Astro.props;
+const ep = getEpisode(slug);
+const text = label || (ep ? ep.title.split('——')[0].trim() : slug);
+const open = !!(ep && ep.verified);
+---
+
+{open ? (
+  <a href={`/episodes/${slug}/`}>{text}{arrow ? ' →' : ''}</a>
+) : (
+  <span class="ep-link-sealed" title="この検証ファイルはまだ公開していません">
+    {text}<span class="ep-link-seal" aria-hidden="true">封</span>
+  </span>
+)}
+
+<style>
+  .ep-link-sealed {
+    color: var(--sumi-soft);
+    opacity: .55;
+    white-space: nowrap;
+  }
+  .ep-link-seal {
+    font-family: var(--font-mincho);
+    font-size: .72em;
+    color: var(--shu);
+    border: 1px solid var(--shu);
+    border-radius: 2px;
+    padding: 0 .18em;
+    margin-left: .3em;
+    opacity: .8;
+  }
+</style>

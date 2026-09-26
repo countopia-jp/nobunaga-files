@@ -1,14 +1,14 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { hrefOpen } from '../../data/episodes.js';
-import Seal from '../../components/Seal.astro';
 import Ornament from '../../components/Ornament.astro';
 import LocalMap from '../../components/LocalMap.astro';
 import { episodes, getEpisode } from '../../data/episodes.js';
+import { OPEN_ALL } from '../../data/pages.js';
 
 export function getStaticPaths() {
   // 検証が済んでいないエピソードはページ自体を作らない（sitemapにも載らない）
-  return episodes.filter((ep) => ep.verified).map((ep) => ({ params: { slug: ep.slug } }));
+  return episodes.filter((ep) => ep.verified || OPEN_ALL).map((ep) => ({ params: { slug: ep.slug } }));
 }
 
 const { slug } = Astro.params;
@@ -45,18 +45,14 @@ const ogImage = new URL('/images/og-image.jpg', Astro.site);
     </div>
 
     <h2 class="ep-h2">検証</h2>
-    <p class="ep-note">
-      信憑性度は「その主張を支える史料の近さ」の目安です（5＝同時代の一次史料、1＝史料に根拠なし）。
-    </p>
 
     <ol class="points">
       {ep.points.map((p, i) => (
         <li class="point">
-          <div class="point-seal"><Seal rating={p.rating} size="md" /></div>
           <div class="point-body">
             <p class="point-no">検証 {String(i + 1).padStart(2, '0')}</p>
-            <h3 class="point-claim">{p.claim}</h3>
-            <p class="point-verdict">見立て：{p.verdict}</p>
+            <h3 class="point-claim">{p.q ?? p.claim}</h3>
+            <p class="point-verdict">史料では：{p.verdict}</p>
             <ul class="src-list">
               {p.sources.map((s) => (
                 <li class="src">
@@ -150,7 +146,7 @@ const ogImage = new URL('/images/og-image.jpg', Astro.site);
 
   .points { list-style: none; margin: 0; padding: 0; }
   .point {
-    display: grid; grid-template-columns: 6rem 1fr; gap: 1.2rem;
+    display: grid; grid-template-columns: 1fr; gap: 1.2rem;
     padding: 1.4rem 0; border-top: 1px solid var(--rule);
   }
   .point-seal { display: flex; justify-content: center; padding-top: .4rem; }

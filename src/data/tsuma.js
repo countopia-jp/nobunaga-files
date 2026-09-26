@@ -52,6 +52,7 @@ export const women = [
 export const claims = [
   {
     claim: '信長の子は、生母がおおむね分かっている',
+    q: '信長の子は、生母がおおむね分かっているのか',
     rating: 1,
     verdict: '分からない子のほうが多い',
     desc:
@@ -63,6 +64,7 @@ export const claims = [
   },
   {
     claim: '生駒吉乃は、信長が最も愛した女性だった',
+    q: '生駒吉乃は、信長が最も愛した女性だったのか',
     rating: 1,
     verdict: '人物像の根拠が一冊に集中している',
     desc: '関係の描写はほぼ『武功夜話』から来ており、その書物の真贋が決着していない。',
@@ -73,6 +75,7 @@ export const claims = [
   },
   {
     claim: 'お鍋の方は、信長の死後も長く生きた',
+    q: 'お鍋の方は、信長の死後も長く生きたのか',
     rating: 3,
     verdict: '死後の動きが比較的追える',
     desc:
@@ -84,6 +87,7 @@ export const claims = [
   },
   {
     claim: '濃姫が慶長十七年まで生きた、という説がある',
+    q: '濃姫は、慶長十七年まで生きたのか',
     rating: 2,
     verdict: '同じ年に没した側室がいることに注意が要る',
     desc:

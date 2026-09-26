@@ -57,6 +57,7 @@ export const wobbles = [
 export const claims = [
   {
     claim: '光秀は本能寺の変の直前、愛宕山で連歌会を興行した',
+    q: '光秀は変の直前、愛宕山で連歌会を開いたのか',
     rating: 4,
     verdict: '連歌会の開催そのものは伝わっている',
     sources: [
@@ -68,6 +69,7 @@ export const claims = [
   },
   {
     claim: '発句の字句は「あめが下しる」で確定している',
+    q: '発句の字句は「あめが下しる」で決まっているのか',
     rating: 2,
     verdict: '写本により「下なる」とするものがある',
     sources: [
@@ -78,6 +80,7 @@ export const claims = [
   },
   {
     claim: '発句には謀反の決意が詠み込まれていた',
+    q: '発句に、謀反の決意が詠み込まれていたのか',
     rating: 2,
     verdict: '掛詞は読めるが、読まなくても成立する',
     sources: [
@@ -89,6 +92,7 @@ export const claims = [
   },
   {
     claim: 'この句によって、光秀の謀反は事前に予告されていた',
+    q: 'この句で、光秀の謀反は前もって予告されていたのか',
     rating: 1,
     verdict: '結果を知ってから遡って読まれたもの',
     sources: [

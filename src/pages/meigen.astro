@@ -2,7 +2,6 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import EpLink from '../components/EpLink.astro';
 import Ornament from '../components/Ornament.astro';
-import Seal from '../components/Seal.astro';
 import { groups, nicknames, around, misattributed, quoteStats } from '../data/quotes.js';
 import { getEpisode, isOpen } from '../data/episodes.js';
 
@@ -16,7 +15,7 @@ const stats = quoteStats();
 ---
 <BaseLayout
   title="信長の名言・名台詞の真贋 — その言葉は、どこから来たか｜ノブナガ・ファイル"
-  description="「是非に及ばず」「敵は本能寺にあり」「鳴かぬなら」「人間五十年」「であるか」。織田信長の言葉として広まっているものを、出典の近さで分類し、信憑性度を添えて検証する。"
+  description="「是非に及ばず」「敵は本能寺にあり」「鳴かぬなら」「人間五十年」「であるか」。織田信長の言葉として広まっているものを、出典の近さで分類し、それぞれの出どころを示す。"
 >
   <article class="wrap meigen">
    <Ornament kind="seal" />
@@ -41,9 +40,8 @@ const stats = quoteStats();
             <div class="qt-head">
               <div class="qt-headtext">
                 <p class="qt-text">{q.text}</p>
-                <p class="qt-verdict">{q.verdict}</p>
+                <p class="qt-verdict">史料では：{q.verdict}</p>
               </div>
-              <div class="qt-seal"><Seal rating={q.rating} size="sm" /></div>
             </div>
 
             <p class="qt-origin">
@@ -74,9 +72,8 @@ const stats = quoteStats();
           <div class="nk-head">
             <p class="nk-word">{n.word}</p>
             <span class="nk-who">{n.who}</span>
-            <div class="nk-seal"><Seal rating={n.rating} size="sm" /></div>
           </div>
-          <p class="nk-verdict">{n.verdict}</p>
+          <p class="nk-verdict">史料では：{n.verdict}</p>
           <p class="nk-desc">{n.desc}</p>
           {n.sources && (
             <ul class="q-sources">
@@ -110,9 +107,8 @@ const stats = quoteStats();
           <div class="ar-head">
             <p class="ar-text">{a.text}</p>
             <span class="ar-who">{a.who}</span>
-            <div class="ar-seal"><Seal rating={a.rating} size="sm" /></div>
           </div>
-          <p class="ar-verdict">{a.verdict}</p>
+          <p class="ar-verdict">史料では：{a.verdict}</p>
           <p class="ar-desc">{a.desc}</p>
           {a.sources && (
             <ul class="q-sources">

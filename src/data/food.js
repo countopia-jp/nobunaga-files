@@ -71,6 +71,7 @@ export const facts = [
 export const claims = [
   {
     claim: '薄味の京料理を「水くさい」と怒り、濃い味を好んだ',
+    q: '薄味の京料理を「水くさい」と怒り、濃い味を好んだのか',
     rating: 2,
     verdict: '江戸中期の逸話集が出どころ',
     desc:
@@ -83,6 +84,7 @@ export const claims = [
   },
   {
     claim: '甘いものに目がなかった',
+    q: '甘いものに目がなかったのか',
     rating: 2,
     verdict: '記録は贈答まで。嗜好は推測',
     desc:
@@ -95,6 +97,7 @@ export const claims = [
   },
   {
     claim: '光秀の饗応で魚が腐っており、信長が激怒した',
+    q: '光秀のもてなしで魚が腐っており、信長が激怒したのか',
     rating: 1,
     verdict: '後世の軍記と芝居が育てた話',
     desc:
@@ -108,6 +111,7 @@ export const claims = [
   },
   {
     claim: '干し柿や湯漬けを好んだ',
+    q: '干し柿や湯漬けを好んだのか',
     rating: 1,
     verdict: '出典をたどれない',
     sources: [

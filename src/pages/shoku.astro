@@ -2,7 +2,6 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import EpLink from '../components/EpLink.astro';
 import Ornament from '../components/Ornament.astro';
-import Seal from '../components/Seal.astro';
 import { facts, claims, context } from '../data/food.js';
 import { getEpisode, isOpen } from '../data/episodes.js';
 
@@ -14,7 +13,7 @@ const shortTitle = (slug) => {
 ---
 <BaseLayout
   title="信長の食事と好物 — 何を食べていたのか｜ノブナガ・ファイル"
-  description="織田信長の食事について、同時代の記録で確かめられることと、江戸期の逸話集が出どころの話を分けて示す。砂糖と金平糖の贈答、安土の家康饗応膳、そして「水くさい」の逸話まで、出典と信憑性度を添えて検証する。"
+  description="織田信長の食事について、同時代の記録で確かめられることと、江戸期の逸話集が出どころの話を分けて示す。砂糖と金平糖の贈答、安土の家康饗応膳、そして「水くさい」の逸話まで、出典を添えて示す。"
 >
   <article class="wrap shoku">
    <Ornament kind="wave" />
@@ -58,18 +57,14 @@ const shortTitle = (slug) => {
 
     <section class="f-sec">
       <h2 class="f-sec-title">語られている話と、その出どころ</h2>
-      <p class="f-sec-lead">
-        信憑性度は真偽の断定ではなく、その話を支える史料の近さを示す。
-      </p>
 
       {claims.map((c) => (
         <div class="claim">
           <div class="claim-head">
             <div class="claim-headtext">
-              <h3 class="claim-title">{c.claim}</h3>
-              <p class="claim-verdict">{c.verdict}</p>
+              <h3 class="claim-title">{c.q ?? c.claim}</h3>
+              <p class="claim-verdict">史料では：{c.verdict}</p>
             </div>
-            <div class="claim-seal"><Seal rating={c.rating} size="sm" /></div>
           </div>
           <p class="claim-desc">{c.desc}</p>
           {c.sources && (

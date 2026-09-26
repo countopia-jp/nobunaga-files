@@ -35,6 +35,9 @@ import { sekkanjo, neneShosoku, notYet } from '../data/documents.js';
         <p class="mj-cross-p">{sekkanjo.crosscheck.body}</p>
         <p class="mj-cross-p">{sekkanjo.crosscheck.body2}</p>
         <p class="mj-cross-detail">{sekkanjo.crosscheck.detail}</p>
+        {sekkanjo.crosscheck.detail2 && (
+          <p class="mj-cross-detail">{sekkanjo.crosscheck.detail2}</p>
+        )}
       </section>
     )}
 

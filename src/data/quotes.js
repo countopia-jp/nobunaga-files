@@ -83,7 +83,7 @@ export const groups = [
       {
         text: '人間五十年',
         rating: 1,
-        verdict: '信長の言葉ではない',
+        verdict: '幸若舞『敦盛』の詞章。舞ったことは公記首巻にある',
         origin: '幸若舞『敦盛』の詞章',
         kind: '後代',
         desc:

@@ -79,6 +79,7 @@ export const claims = [
   },
   {
     claim: 'その首を杯にして酒を飲んだ',
+    q: 'その首を杯にして、酒を飲んだのか',
     rating: 1,
     verdict: '公記に飲んだという記述はない',
     sources: [
@@ -91,6 +92,7 @@ export const claims = [
   },
   {
     claim: '敵将を侮辱するための行為だった',
+    q: '敵将を辱めるための行為だったのか',
     rating: 2,
     verdict: '装飾を施したことと噛み合わない',
     sources: [
@@ -101,8 +103,9 @@ export const claims = [
   },
   {
     claim: '信長の残虐さを示す代表的な事例である',
+    q: '信長の残虐さを示す、代表的な事例なのか',
     rating: 2,
-    verdict: '事例としては弱くなる',
+    verdict: '記録に残るのは、首を加工して見せたところまで',
     sources: [
       { label: '——', kind: '後代', note: '飲んでいないとすれば、残るのは「加工して家臣に見せた」という行為になる' },
     ],

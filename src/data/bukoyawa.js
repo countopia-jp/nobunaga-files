@@ -84,6 +84,7 @@ export const defenses = [
 export const claims = [
   {
     claim: '『武功夜話』は近代の完全な創作である',
+    q: '『武功夜話』は、近代に作られたまったくの創作なのか',
     rating: 2,
     verdict: '強い根拠はあるが、決着していない',
     sources: [
@@ -95,6 +96,7 @@ export const claims = [
   },
   {
     claim: '『武功夜話』は信頼できる史料である',
+    q: '『武功夜話』は、信頼できる史料なのか',
     rating: 1,
     verdict: 'この評価を採る研究者はほぼいない',
     sources: [
@@ -105,6 +107,7 @@ export const claims = [
   },
   {
     claim: '秀吉が墨俣に一夜で城を築いた',
+    q: '秀吉は墨俣に、一夜で城を築いたのか',
     rating: 1,
     verdict: '依拠する史料が限られる',
     sources: [
@@ -116,6 +119,7 @@ export const claims = [
   },
   {
     claim: '生駒吉乃は信長が最も愛した女性だった',
+    q: '生駒吉乃は、信長が最も愛した女性だったのか',
     rating: 1,
     verdict: '人物像の根拠がこの本に集中する',
     sources: [
